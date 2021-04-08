@@ -1,0 +1,102 @@
+/*==================*/
+/*FormataÃ§Ã£o do Menu*/
+/*==================*/
+
+
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul, li, span, a
+{
+	z-index: 2;
+	display: block;
+	overflow: hidden;
+}
+
+#menu ul
+{
+/*Borda do menu cantos arredondados e fundo cinza escuro*/
+	z-index: 2;
+	border: 1px solid black;
+	border-radius: 5px;
+	background: rgb(232, 232, 230);
+}
+
+#menu ul > li
+{
+/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
+	z-index: 2;
+	border-left: 1px solid black;
+	float: left;
+}
+
+
+#menu ul > li:hover
+{
+/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
+	z-index: 2;
+	background-image: linear-gradient(to down, white, silver, white);
+	transition: all .5s;
+}
+
+#menu ul > li:first-child
+{
+	z-index: 2;
+	border-left: none;
+	transition: all .5s;
+}
+
+#menu li a, li span
+{
+	z-index: 2;
+	padding: 5px 5px;
+	width: 185px;
+	cursor: pointer;
+	color: black;
+	text-decoration: none;
+	text-align: center;
+}
+
+#menu li:hover ol
+{
+	z-index: 2;
+	display: block;
+	background-image: linear-gradient(to down, white, silver, white);
+	transition: all .5s;
+}
+
+#menu li ol
+{
+	z-index: 2;
+	margin-left: -1px;
+	display: none;
+	border: 1px solid black;
+	border-radius: 0 0 3px 3px;
+	background: silver;
+	position: absolute;
+}
+
+#menu ol a
+{
+	z-index: 2;
+	padding: 5px 5px;
+	width: 185px;
+	text-align: center;
+}
+
+#menu ol a:hover
+{
+	z-index: 2;
+	background: gray;
+	color: black;
+	text-decoration: underline;
+	background-image: linear-gradient(to top, white, silver, white);
+}
+
+
+/*=========================*/
+/*Fim da formataÃ§Ã£o do Menu*/
+/*=========================*/

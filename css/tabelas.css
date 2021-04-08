@@ -1,0 +1,68 @@
+#dadosPatrimonio {
+	width: 800px;
+	border: 1px solid black; 
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: 100px;
+}
+
+#dadosDocente {
+	width: 850px;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: 70px;
+}
+
+#cabecalho {
+	height: 30px;
+	background-color: grey;
+	font-weight: bold;
+	text-align: center;
+}
+
+#dados {
+	height: 50px;
+	text-align: center;
+	padding: 100px;
+}
+
+#dados:hover {
+	background-color: yellow;
+}
+
+#tbCadNovoUsuario {
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 10px;
+	text-align: center;
+	width: 700px;
+	margin-left: 150px;
+	
+}
+
+#tbPesquisarPatrimonio {
+	width: 700px;
+	margin-left:170px;
+}
+
+#tbPesquisarDocente {
+	width: 700px;
+	margin-left:170px;
+}
+
+#search {
+	font-size: 15px;
+}
+
+#search input[type=text] {
+	padding: 2px;
+}
+
+#tbPesquisarPatrimonio input[type=submit] {
+	width: 30px;
+}
+
+#tbPesquisarDocente input[type=submit] {
+	width: 30px;
+}
