@@ -9,7 +9,8 @@ session_start();
 <link rel="stylesheet" href="css/formularios.css">
 <link rel="stylesheet" href="css/menu.css">
 <meta charset="utf-8">
-<title>.:: Sistema de Controle de Patrimônio e Docentes ::.</title>
+<title>.:: Sistema de Controle de Patrimônio e Docentes do CCSH ::.</title>
+<link rel="icon" href="favicon.png" type="image/x-icon" />
 </head>
 <body>
 <?php

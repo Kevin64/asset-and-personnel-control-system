@@ -21,12 +21,5 @@ function menosfalta() {
 	$query = mysql_query("update docente set faltas = '$faltas', data_ultima_falta = CURDATE() where id = '$maisfalta'") or die ("Erro ao atualizar os dados do docente! ".mysql_error());
 }
 
-
-
-//if (isset($maisfalta)) {
-//	$faltas++;
-//	$query = mysql_query("update docente set faltas = '$faltas', data_ultima_falta = CURDATE() where id = '$maisfalta'") or die ("Erro ao atualizar os dados do docente! ".mysql_error());
-//}
-
 header ("Location: consultarDocente.php");
 ?>

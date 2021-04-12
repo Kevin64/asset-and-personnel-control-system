@@ -7,6 +7,7 @@
 {
 	margin: 0;
 	padding: 0;
+	color: white;
 }
 
 #menu ul, li, span, a
@@ -20,7 +21,7 @@
 {
 /*Borda do menu cantos arredondados e fundo cinza escuro*/
 	z-index: 2;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 5px;
 	background: rgb(232, 232, 230);
 }
@@ -29,8 +30,9 @@
 {
 /*Borda do lado esquerdo do item e um ao lado do outro com o float*/
 	z-index: 2;
-	border-left: 1px solid black;
+	border-left: 1px solid white;
 	float: left;
+	background: grey;
 }
 
 
@@ -38,7 +40,7 @@
 {
 /*Este Ã© a cor do fundo quando o mouse passar por cima do item */
 	z-index: 2;
-	background-image: linear-gradient(to down, white, silver, white);
+	background-image: linear-gradient(to down, black, grey, black);
 	transition: all .5s;
 }
 
@@ -55,7 +57,7 @@
 	padding: 5px 5px;
 	width: 185px;
 	cursor: pointer;
-	color: black;
+	color: white;
 	text-decoration: none;
 	text-align: center;
 }
@@ -64,8 +66,9 @@
 {
 	z-index: 2;
 	display: block;
-	background-image: linear-gradient(to down, white, silver, white);
+	background-image: linear-gradient(to down, black, grey, black);
 	transition: all .5s;
+	color: white;
 }
 
 #menu li ol
@@ -73,10 +76,11 @@
 	z-index: 2;
 	margin-left: -1px;
 	display: none;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 0 0 3px 3px;
-	background: silver;
+	background: grey;
 	position: absolute;
+	color: white;
 }
 
 #menu ol a
@@ -85,15 +89,16 @@
 	padding: 5px 5px;
 	width: 185px;
 	text-align: center;
+	color: white;
 }
 
 #menu ol a:hover
 {
 	z-index: 2;
-	background: gray;
-	color: black;
+	background: silver;
+	color: white;
 	text-decoration: underline;
-	background-image: linear-gradient(to top, white, silver, white);
+	background-image: linear-gradient(to top, black, grey, black);
 }
 
 

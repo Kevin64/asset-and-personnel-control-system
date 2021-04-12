@@ -4,7 +4,6 @@ require_once ("verifica.php");
 require_once ("topo.php");
 
 ?>
-
 	<div id="meio">
 
 		<form action="cadDocente.php" method=post id=frmCadDocente>
@@ -17,20 +16,6 @@ require_once ("topo.php");
 		<td id="label">Siape</td>
 		<td><input type=text name=txtSiape></td>
 		</tr>
-<!--		<tr>
-		<td id="label">Prédio</td>
-		<td><select name=txtPredio>
-			<option value="74 - A">74 - A</option>
-			<option value="74 - B">74 - B</option>
-			<option value="74 - C">74 - C</option>
-			<option value="21">21</option>
-			<option value="67">67</option>
-			<option value="BIBLIOTECA SETORIAL">BIBLIOTECA SETORIAL</option>
-			<option value="ANTIGA REITORIA">ANTIGA REITORIA</option>
-			<option value="APOIO">APOIO</option>
-		    </select>
-		</td>
-		</tr>-->
 		<tr>
 		<td id="label">Nome</td>
 		<td><input type=text name=txtNome></td>
@@ -61,7 +46,6 @@ require_once ("topo.php");
 		</table>
 		</form>
 	</div>
-
 <?php
 require_once ("rodape.php");
 ?>

@@ -51,29 +51,7 @@ $totalDocentes = mysql_num_rows(mysql_query("select * from docente"));
 		$nome = $resultado["nome"];
 		$curso = $resultado["curso"];
 		$faltas = $resultado["faltas"];
-
-		//$emUsoOk = substr($emUso, 0, 1);
-
-		//if ($emUsoOk == "N") $emUso = "NÃO";
-
-		//if ($emUso == "NÃO") {
-//			$cor = "red";
-	//	} else {
-		//	$cor = "blue";
-		//}
-
-/*		if ($predio == "74 - A") {
-			$corPredio = "#2315589";
-		}
-
-		if ($predio == "74 - B") {
-			$corPredio = "#24118154";
-		}
-
-		if ($predio == "74 - C") {
-			$corPredio = "#10270108";
-		}
-*/
+		
 	?>
 
 	<tr id="dados" bgcolor="<?php echo $corPredio;?>">
@@ -88,7 +66,7 @@ $totalDocentes = mysql_num_rows(mysql_query("select * from docente"));
 	}
 	?>
 	<tr>
-	<td colspan=4 align="center"><br><input type="submit" value="Apagar selecionados" style="width: 300px;"></td>
+	<td colspan=7 align="center"><br><input type="submit" value="Apagar selecionados" style="width: 300px;"></td>
 	</tr>
 	</form>
 	</table>

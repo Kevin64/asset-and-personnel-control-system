@@ -4,6 +4,7 @@ body {
 	font-family: verdana;
 	font-size: 12px;
 	padding: 20px;
+	background: black;
 }
 
 #container {
@@ -16,7 +17,7 @@ body {
 	//margin-top: -300px;
 	//margin-left: -400px;
 	padding: 0px;
-	border: 0px solid black;
+	border: 0px solid white;
 	border-radius: 5px;
 	box-shadow: 0px 0px 0px;
 }
@@ -24,7 +25,7 @@ body {
 #topo {
 	width: 100%;
 	height: 100px;
-	background-color: silver;
+	background-color: rgb(44, 44, 44);
 	text-align: center;
 	border-radius: 5px 5px 0px 0px;
 }
@@ -32,7 +33,7 @@ body {
 #meio {
 	width: 100%;
 	height: auto;
-	background-color: silver;
+	background-color: rgb(44, 44, 44);
 	//opacity: 0.3;
 	text-align: center;
 	vertical-align: middle;
@@ -46,11 +47,12 @@ body {
 	background: gray;
 	text-align: center;
 	border-radius: 0 0 10px 10px;
-	border-top: 1px solid black;
+	border-top: 1px solid white;
 }
 
 #separador {
-	background-color: gray;
+	background-color: rgb(80, 80, 80);
 	font-weight: bold;
 	text-align: left;
+	color: white;
 }

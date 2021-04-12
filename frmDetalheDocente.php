@@ -129,8 +129,7 @@ if ($enviar != 1) {
 		</tr>
 		<tr>
 		<td colspan=2><?php echo "E-mail: " .$email; ?> </td>		
-		</tr>
-		
+		</tr>	
 
 		<?php
 		}

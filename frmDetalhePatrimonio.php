@@ -177,19 +177,20 @@ if ($enviar != 1) {
 		<td colspan=2 id=separador>Dados do equipamento</td>
 		</tr>
 		<tr>
-		<td id=label>Última formatação</td>
+		<td id=label>Última manutenção</td>
 		<td><input type=date name=txtUltimaFormatacao value="<?php echo $ultimaFormatacao;?>"></td>
 		</tr>
 		<tr>
-		<td id=label>Formatações Anteriores</td>
-		<td><textarea name=txtFormatacoesAnteriores cols=20 rows=10>
+		<td id=label>Manutenções Anteriores</td>
+		<td><textarea name=txtFormatacoesAnteriores cols=30 rows=10>
 		<?php
 		echo PHP_EOL;		
 		while ($resultadoFormatAnt = mysql_fetch_array($queryFormatAnt)) {					
 			$formatacoesAnteriores = $resultadoFormatAnt["dataFormatacoesAnteriores"];	
 			$dataFA = substr($formatacoesAnteriores, 0, 10);
+			$mode = substr($formatacoesAnteriores, 10, 30);
 			$dataExplodidaA = explode("-", $dataFA);
-			$formatacoesAnteriores = $dataExplodidaA[2]."/".$dataExplodidaA[1]."/".$dataExplodidaA[0];
+			$formatacoesAnteriores = $dataExplodidaA[2]."/".$dataExplodidaA[1]."/".$dataExplodidaA[0].$mode;
 			echo $formatacoesAnteriores.PHP_EOL;
 		}
 		?>

@@ -16,9 +16,6 @@ if ($total >= 1) {
 	$mensagem = "Operação concluída com êxito!";
 }
 
-//echo "<center><font size=3 color=blue>Dados Cadastrados!</center></font><br>";
-//echo "<font size=1>Patrimônio: ".$patrimonio."<br>Predio: ".$predio."<br>Sala: ".$sala."<br>Padrao: ".$padrao;
-
 ?>
 
 <!DOCTYPE html>

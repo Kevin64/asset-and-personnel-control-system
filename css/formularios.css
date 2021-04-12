@@ -3,10 +3,10 @@
 	margin-top: -75px;
 	width: 350px;
 	height: 150px;
-	border: 0px solid black;
+	border: 0px solid white;
 	border-radius: 10px;
 	padding: 10px;
-	background-color: white;
+	background-color: black;
 	text-align: center;
 	box-shadow: 0px 0px 10px;
 }
@@ -23,13 +23,13 @@
 
 #frmLogin input[type=text], input[type=password] {
 	//float: right;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
 }
 
 #frmLogin input[type=submit] {
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
 	width: 150px;
@@ -37,8 +37,8 @@
 }
 
 #frmLogin input[type=submit]:hover {
-	background-color: blue;
-	color: white;
+	background-color: green;
+	color: black;
 }
 
 #frmCadPatrimonio {
@@ -46,6 +46,7 @@
 	width: 700px;
 	height: auto;
 	margin-left: 150px;
+	color: white;
 }
 
 #frmCadDocente {
@@ -53,12 +54,13 @@
 	width: 700px;
 	height: auto;
 	margin-left: 150px;
+	color: white;
 }
 
 #frmCadPatrimonio table {
 	width: 700px;
 	height: auto;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 10px;
 	padding: 5px;
 	text-align: center;
@@ -67,7 +69,7 @@
 #frmCadDocente table {
 	width: 700px;
 	height: auto;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 10px;
 	padding: 5px;
 	text-align: center;
@@ -75,77 +77,85 @@
 
 #frmCadPatrimonio input[type=text], select, input[type=date], textarea {
 	width: 300px;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
+	background: rgb(44,44,44);
 }
 
 #frmCadDocente input[type=text], select, input[type=date], textarea {
 	width: 300px;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
+	background: rgb(44,44,44);
 }
 
 #frmCadPatrimonio input[type=submit] {
-	border: 1px solid black;
-	border-radius: 10px;
+	border: 1px solid white
 	padding: 5px;
 	width: 100px;
 	font-weight: bold;
+	background: black;
 }
 
 #frmCadDocente input[type=submit] {
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 10px;
 	padding: 5px;
 	width: 100px;
 	font-weight: bold;
+	background: black;
 }
 
 #frmCadPatrimonio input[type=submit]:hover {
-	background-color: blue;
-	color: white;
+	background-color: green;
+	color: black;
 }
 
 #frmCadDocente input[type=submit]:hover {
-	background-color: blue;
-	color: white;
+	background-color: green;
+	color: black;
 }
 
 #frmCadPatrimonio td#label {
 	font-size: 15px;
 	font-weight: bold;
 	text-align: right;
+	color: white
 }
 
 #frmCadDocente td#label {
 	font-size: 15px;
 	font-weight: bold;
 	text-align: right;
+	color: white;;
 }
 
 #label {
 	text-align: right;
 	font-weight: bold;
+	color: white;
 }
 
 input[type=password], input[type=text] {
 	width: 150px;
-	border: 1px solid black;
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
+	background: rgb(44,44,44);
 }
 
 input[type=submit] {
-	width: 20px;
-	border: 1px solid black;
+	width: 80px;
+	border: 1px solid white;
 	border-radius: 10px;
 	padding: 5px;
 	font-weight: bold;
+	background: black;
 }
 
 input[type=submit]:hover {
-	background-color: blue;
-	color: white;
+	background-color: green;
+	color: black;
 }

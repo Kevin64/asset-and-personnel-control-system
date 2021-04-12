@@ -16,7 +16,7 @@
 
 		<?php
 		} else {
-			echo "<h1>Sistema de controle de patrimônio e docentes</h1>";
+			echo "<h1>Sistema de controle de patrimônio e docentes do CCSH</h1>";
 			echo "<h2>Use o menu acima para navegar</h2>";
 		}
 		?>

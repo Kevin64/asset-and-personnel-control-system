@@ -22,9 +22,6 @@ $query = mysql_query("insert into docente (siape, nome, email, ramal, celular, c
 	$mensagem = "Dados Cadastrados!";
 }
 
-//echo "<center><font size=3 color=blue>Dados Cadastrados!</center></font><br>";
-//echo "<font size=1>Patrimônio: ".$patrimonio."<br>Predio: ".$predio."<br>Sala: ".$sala."<br>Padrao: ".$padrao;
-
 ?>
 
 <!DOCTYPE html>
