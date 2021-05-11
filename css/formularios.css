@@ -49,6 +49,14 @@
 	color: white;
 }
 
+#frmCadBIOS {
+	text-align: center;
+	width: 700px;
+	height: auto;
+	margin-left: 150px;
+	color: white;
+}
+
 #frmCadDocente {
 	text-align: center;
 	width: 700px;
@@ -58,6 +66,15 @@
 }
 
 #frmCadPatrimonio table {
+	width: 700px;
+	height: auto;
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 5px;
+	text-align: center;
+}
+
+#frmCadBIOS table {
 	width: 700px;
 	height: auto;
 	border: 1px solid white;
@@ -83,6 +100,14 @@
 	background: rgb(44,44,44);
 }
 
+#frmCadBIOS input[type=text], select, input[type=date], textarea {
+	width: 300px;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 5px;
+	background: rgb(44,44,44);
+}
+
 #frmCadDocente input[type=text], select, input[type=date], textarea {
 	width: 300px;
 	border: 1px solid white;
@@ -92,6 +117,14 @@
 }
 
 #frmCadPatrimonio input[type=submit] {
+	border: 1px solid white
+	padding: 5px;
+	width: 100px;
+	font-weight: bold;
+	background: black;
+}
+
+#frmCadBIOS input[type=submit] {
 	border: 1px solid white
 	padding: 5px;
 	width: 100px;
@@ -113,12 +146,24 @@
 	color: black;
 }
 
+#frmCadBIOS input[type=submit]:hover {
+	background-color: green;
+	color: black;
+}
+
 #frmCadDocente input[type=submit]:hover {
 	background-color: green;
 	color: black;
 }
 
 #frmCadPatrimonio td#label {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: right;
+	color: white
+}
+
+#frmCadBIOS td#label {
 	font-size: 15px;
 	font-weight: bold;
 	text-align: right;

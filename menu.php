@@ -8,6 +8,8 @@
 			<ol>
 				<li><a href="frmCadPatrimonio.php">Cadastrar Patrimônio</a></li>
 				<li><a href="consultarPatrimonio.php">Consultar Patrimônio</a></li>
+				<li><a href="frmCadBIOS.php">Cadastrar BIOS/UEFI</a></li>
+				<li><a href="consultarBIOS.php">Consultar BIOS/UEFI</a></li>
 			</ol>
 		</li>
 		<li>
