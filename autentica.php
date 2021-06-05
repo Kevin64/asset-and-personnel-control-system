@@ -1,5 +1,5 @@
 <?php
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $enviar = $_POST["txtEnviar"];
 $usuario = $_POST["txtUsuario"];

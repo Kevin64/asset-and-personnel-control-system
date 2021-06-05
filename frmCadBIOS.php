@@ -26,6 +26,10 @@ require_once ("topo.php");
 		<td><input type=text name=txtVersao></td>
 		</tr>
 		<tr>
+		<td id="label">Tipo</td>
+		<td><input type=text name=txtTipo></td>
+		</tr>
+		<tr>
 		<td colspan="2" align="center"><br>
 		<input type="submit" value="Cadastrar"></td>
 		</tr>

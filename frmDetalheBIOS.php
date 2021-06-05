@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once ("topo.php");
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 require_once ("verifica.php");
 
 $enviar = $_POST["txtEnviar"];
@@ -11,15 +11,17 @@ if ($enviar != 1) {
 	$marca = $_GET["marca"];
 	$modelo = $_GET["modelo"];
 	$versao = $_GET["versao"];
+	$tipo = $_GET["tipo"];
 	$query = mysql_query("select * from bios where id = '$idModelo'") or die ("Erro a selecionar modelo para exibir detalhes! ".mysql_error());
 } else {
 	$idModelo = $_POST["txtIdModelo"];
 	$marca = $_POST["txtMarca"];
 	$modelo = $_POST["txtModelo"];
 	$versao = $_POST["txtVersao"];
+	$tipo = $_POST["txtTipo"];
 
 	//Atualizando os dados do patrimônio
-	mysql_query("update bios set marca = '$marca', modelo = '$modelo', versao = '$versao' where id = '$idModelo'") or die ("Erro ao atualizar os dados da BIOS! ".mysql_error());
+	mysql_query("update bios set marca = '$marca', modelo = '$modelo', versao = '$versao', tipo = '$tipo' where id = '$idModelo'") or die ("Erro ao atualizar os dados da BIOS! ".mysql_error());
 
 	$query = mysql_query("select * from bios where id = '$idModelo'") or die ("Erro ao selecionar os dados da BIOS! ".mysql_error());
 }
@@ -45,6 +47,7 @@ if ($enviar != 1) {
 			$marca = $resultado["marca"];
 			$modelo = $resultado["modelo"];
 			$versao = $resultado["versao"];
+			$tipo = $resultado["tipo"];
 		?>
 
 		<tr>
@@ -62,6 +65,10 @@ if ($enviar != 1) {
 		<tr>
 		<td id="label">Versão da BIOS/UEFI</td>
 		<td><input type=text name=txtVersao value="<?php echo $versao;?>"></td>
+		</tr>		
+		<tr>
+		<td id="label">Tipo</td>
+		<td><input type=text name=txtTipo value="<?php echo $tipo;?>"></td>
 		</tr>		
 		</tr>
 

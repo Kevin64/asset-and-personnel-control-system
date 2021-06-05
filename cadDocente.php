@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once ("verifica.php");
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $siape = $_POST["txtSiape"];
 $nome = $_POST["txtNome"];

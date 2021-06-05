@@ -1,5 +1,5 @@
 <?php
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $maisfalta = $_POST["maisfalta"];
 $faltas = $_POST["faltas"];

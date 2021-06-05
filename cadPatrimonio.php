@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once ("verifica.php");
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $patrimonio = $_POST["txtPatrimonio"];
 $predio = $_POST["txtPredio"];

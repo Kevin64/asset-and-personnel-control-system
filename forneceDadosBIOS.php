@@ -1,9 +1,10 @@
 <?php
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $marca = $_GET["marca"];
 $modelo = $_GET["modelo"];
 $versao = $_GET["versao"];
+$tipo = $_GET["tipo"];
 
 $query = mysql_query("select * from bios") or die ("Erro na query! ".mysql_error());
 $return_arr = array();
@@ -12,6 +13,7 @@ while ($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
 	$row_array['marca'] = $row['marca'];
 	$row_array['modelo'] = $row['modelo'];
 	$row_array['versao'] = $row['versao'];
+	$row_array['tipo'] = $row['tipo'];
 	array_push($return_arr,$row_array);
 
 	$fp = fopen('bios.json', 'w');

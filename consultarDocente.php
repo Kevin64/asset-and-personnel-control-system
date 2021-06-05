@@ -1,7 +1,7 @@
 <?php
 require_once ("verifica.php");
 require_once ("topo.php");
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $enviar = $_POST["txtEnviar"];
 $ordenar = $_GET["ordenar"];

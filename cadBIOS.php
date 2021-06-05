@@ -1,11 +1,12 @@
 <?php
 session_start();
 require_once ("verifica.php");
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 
 $marca = $_POST["txtMarca"];
 $modelo = $_POST["txtModelo"];
 $versao = $_POST["txtVersao"];
+$tipo = $_POST["txtTipo"];
 
 $query = mysql_query("select usuario from usuarios where id = '$idUsuario'");
 $usuario = mysql_result($query, 0, "usuario");
@@ -15,7 +16,7 @@ $totalBIOS = mysql_num_rows($validaBIOS);
 
 if ($totalPatrimonio == 0) {
 //Inserir dados no banco
-mysql_query("insert into bios (marca, modelo, versao) values ('$marca', '$modelo', '$versao')") or die ("Erro ao tentar cadastrar BIOS! ".mysql_error());
+mysql_query("insert into bios (marca, modelo, versao, tipo) values ('$marca', '$modelo', '$versao', '$tipo')") or die ("Erro ao tentar cadastrar BIOS! ".mysql_error());
 
 header("Location: sucessoBIOS.php");
 } else {

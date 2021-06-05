@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once ("topo.php");
-require_once ("conexao.php");
+require_once __DIR__ . '/../conexao.php';
 require_once ("verifica.php");
 
 $enviar = $_POST["txtEnviar"];
