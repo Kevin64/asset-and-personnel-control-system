@@ -37,6 +37,7 @@ $tipoArmaz = $_POST["txtTipoArmaz"];
 $gpu = $_POST["txtGPU"];
 $modoArmaz = $_POST["txtModoArmaz"];
 $secBoot = $_POST["txtSecBoot"];
+$vt = $_POST["txtVT"];
 
 $query = mysql_query("select usuario from usuarios where id = '$idUsuario'");
 $usuario = mysql_result($query, 0, "usuario");
@@ -46,7 +47,7 @@ $totalPatrimonio = mysql_num_rows($validaPatrimonio);
 
 if ($totalPatrimonio == 0) {
 //Inserir dados no banco
-mysql_query("insert into patrimonio (patrimonio, predio, sala, descricao, nomeRecebedor, siapeRecebedor, ramal, dataEntrega, observacao, padrao, idUsuario, dataFormatacao, ad, marca, modelo, numSerie, processador, memoria, hd, sistemaOperacional, hostname, bios, mac, ip, emUso, lacre, etiqueta, tipo, tipoFW, tipoArmaz, gpu, modoArmaz, secBoot) values ('$patrimonio', '$predio', '$sala', '$descricao', '$recebedor', '$siapeRecebedor', '$ramal', '$dataEntrega', '$observacao', '$padrao', '$idUsuario', '$ultimaFormatacao', '$ad', '$marca', '$modelo', '$numSerie', '$processador', '$memoria', '$hd', '$sistemaOperacional', '$hostName', '$bios', '$mac', '$ip', '$emUso', '$lacre', '$etiqueta', '$tipo', '$tipoFW', '$tipoArmaz', '$gpu', '$modoArmaz', '$secBoot')") or die ("Erro ao tentar cadastrar patrimônio! ".mysql_error());
+mysql_query("insert into patrimonio (patrimonio, predio, sala, descricao, nomeRecebedor, siapeRecebedor, ramal, dataEntrega, observacao, padrao, idUsuario, dataFormatacao, ad, marca, modelo, numSerie, processador, memoria, hd, sistemaOperacional, hostname, bios, mac, ip, emUso, lacre, etiqueta, tipo, tipoFW, tipoArmaz, gpu, modoArmaz, secBoot, vt) values ('$patrimonio', '$predio', '$sala', '$descricao', '$recebedor', '$siapeRecebedor', '$ramal', '$dataEntrega', '$observacao', '$padrao', '$idUsuario', '$ultimaFormatacao', '$ad', '$marca', '$modelo', '$numSerie', '$processador', '$memoria', '$hd', '$sistemaOperacional', '$hostName', '$bios', '$mac', '$ip', '$emUso', '$lacre', '$etiqueta', '$tipo', '$tipoFW', '$tipoArmaz', '$gpu', '$modoArmaz', '$secBoot', '$vt')") or die ("Erro ao tentar cadastrar patrimônio! ".mysql_error());
 mysql_query("insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores) values ('$patrimonio', '$ultimaFormatacao')") or die ("Erro ao tentar cadastrar patrimônio2! ".mysql_error());
 
 header("Location: sucesso.php");

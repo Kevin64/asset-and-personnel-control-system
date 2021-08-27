@@ -28,6 +28,7 @@ $tipoArmaz = $_GET["tipoArmaz"];
 $gpu = $_GET["gpu"];
 $modoArmaz = $_GET["modoArmaz"];
 $secBoot = $_GET["secBoot"];
+$vt = $_GET["vt"];
 
 $dataF = substr($dataFormatacao, 0, 10);
 $dataExplodida = explode("/", $dataF);
@@ -38,11 +39,11 @@ $queryPegaPatrimonio = mysql_query("select * from patrimonio where patrimonio = 
 $total = mysql_num_rows($queryPegaPatrimonio);
 
 if ($total >= 1) {
-	$query = mysql_query ("update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot' where patrimonio = '$patrimonio'") or die ("Erro na query de atualização! ".mysql_error());
+	$query = mysql_query ("update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt' where patrimonio = '$patrimonio'") or die ("Erro na query de atualização! ".mysql_error());
 	$queryFormatAnt = mysql_query("insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores) values('$patrimonio', '$dataFormatacaoExpandida')") or die ("Erro ao incluir os dados! ".mysql_error());
 	$mensagem = "Computador já existente, dados atualizados com sucesso!";
 } else {
-	$query = mysql_query("insert into patrimonio (patrimonio, lacre, sala, predio, ad, padrao, dataFormatacao, marca, modelo, numSerie, processador, memoria, hd, sistemaOperacional, hostname, bios, mac, ip, emUso, etiqueta, tipo, tipoFW, tipoArmaz, gpu, modoArmaz, secBoot) values('$patrimonio', '$numeroLacre', '$sala', '$predio', '$ad', '$padrao', '$dataFormatacao', '$marca', '$modelo', '$numeroSerial', '$processador', '$memoria', '$hd', '$sistemaOperacional', '$nomeDoComputador', '$bios', '$mac', '$ip', '$emUso', '$etiqueta', '$tipo', '$tipoFW', '$tipoArmaz', '$gpu', '$modoArmaz', '$secBoot')") or die ("Erro ao incluir os dados! ".mysql_error());
+	$query = mysql_query("insert into patrimonio (patrimonio, lacre, sala, predio, ad, padrao, dataFormatacao, marca, modelo, numSerie, processador, memoria, hd, sistemaOperacional, hostname, bios, mac, ip, emUso, etiqueta, tipo, tipoFW, tipoArmaz, gpu, modoArmaz, secBoot, vt) values('$patrimonio', '$numeroLacre', '$sala', '$predio', '$ad', '$padrao', '$dataFormatacao', '$marca', '$modelo', '$numeroSerial', '$processador', '$memoria', '$hd', '$sistemaOperacional', '$nomeDoComputador', '$bios', '$mac', '$ip', '$emUso', '$etiqueta', '$tipo', '$tipoFW', '$tipoArmaz', '$gpu', '$modoArmaz', '$secBoot', '$vt')") or die ("Erro ao incluir os dados! ".mysql_error());
 	$queryFormatAnt = mysql_query("insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores) values('$patrimonio', '$dataFormatacaoExpandida')") or die ("Erro ao incluir os dados! ".mysql_error());
 	$mensagem = "Computador cadastrado com sucesso!";
 }
@@ -55,8 +56,8 @@ if ($total >= 1) {
 <title></title>
 </head>
 <body bgcolor=green>
-<center>
-<font size=3 color=white><b><?php echo $mensagem;?></b></font>
+<center><hr style="height:0pt; visibility:hidden;" />
+<font size=3 color=white><b><?php echo $mensagem;?></b></font></td>
 </center>
 </body>
 </html>

@@ -136,6 +136,10 @@ require_once ("topo.php");
 		<td><input type="text" name="txtSecBoot"></td>
 		</tr>
 		<tr>
+		<td id="label">Tecnologia de Virtualização</td>
+		<td><input type="text" name="txtVT"></td>
+		</tr>
+		<tr>
 		<td id="label">Número do lacre</td>
 		<td><input type="text" name="txtLacre"></td>
 		</tr>
