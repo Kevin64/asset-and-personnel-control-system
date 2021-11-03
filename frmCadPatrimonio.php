@@ -140,6 +140,10 @@ require_once ("topo.php");
 		<td><input type="text" name="txtVT"></td>
 		</tr>
 		<tr>
+		<td id="label">Versão do módulo TPM</td>
+		<td><input type="text" name="txtTPM"></td>
+		</tr>
+		<tr>
 		<td id="label">Número do lacre</td>
 		<td><input type="text" name="txtLacre"></td>
 		</tr>

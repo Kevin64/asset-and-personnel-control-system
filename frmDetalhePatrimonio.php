@@ -47,9 +47,10 @@ if ($enviar != 1) {
 	$modoArmaz = $_POST["txtModoArmaz"];
 	$secBoot = $_POST["txtSecBoot"];
 	$vt = $_POST["txtVT"];
+	$tpm = $_POST["txtTPM"];
 
 	//Atualizando os dados do patrimônio
-	mysql_query("update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', descricao = '$descricao', nomeRecebedor = '$recebedor', siapeRecebedor = '$siape', ramal = '$ramal', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt' where id = '$idPatrimonio'") or die ("Erro ao atualizar os dados do patrimônio! ".mysql_error());
+	mysql_query("update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', descricao = '$descricao', nomeRecebedor = '$recebedor', siapeRecebedor = '$siape', ramal = '$ramal', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die ("Erro ao atualizar os dados do patrimônio! ".mysql_error());
 
 	$query = mysql_query("select * from patrimonio where id = '$idPatrimonio'") or die ("Erro ao selecionar os dados do patrimônio! ".mysql_error());
 	$queryFormatAnt = mysql_query("select manutencoes.dataFormatacoesAnteriores from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die ("Erro ao selecionar os dados do patrimônio! ".mysql_error());
@@ -106,6 +107,7 @@ if ($enviar != 1) {
 			$modoArmaz = $resultado["modoArmaz"];
 			$secBoot = $resultado["secBoot"];
 			$vt = $resultado["vt"];
+			$tpm = $resultado["tpm"];
 
 			$adOk = substr($ad, 0, 1);
 			$padraoOk = substr($padrao, 0, 1);
@@ -262,8 +264,13 @@ if ($enviar != 1) {
 		<td id=label>Secure Boot</td>
 		<td><input type=text name=txtSecBoot value="<?php echo $secBoot;?>"></td>
 		</tr>
+		<tr>
 		<td id=label>Tecnologia de Virtualização</td>
 		<td><input type=text name=txtVT value="<?php echo $vt;?>"></td>
+		</tr>
+		<tr>
+		<td id=label>Versão do módulo TPM</td>
+		<td><input type=text name=txtTPM value="<?php echo $tpm;?>"></td>
 		</tr>
 		<tr>
 		<td id="label">Endereço MAC</td>
