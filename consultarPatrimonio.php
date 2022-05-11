@@ -60,9 +60,9 @@ $totalSalas = mysql_num_rows(mysql_query("select * from patrimonio"));
 
 		$emUsoOk = substr($emUso, 0, 1);
 
-		if ($emUsoOk == "N") $emUso = "NÃO";
+		if ($emUsoOk == "N") $emUso = "Não";
 
-		if ($emUso == "NÃO") {
+		if ($emUso == "Não") {
 			$cor = "red";
 		} else {
 			$cor = "green";

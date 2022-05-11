@@ -3,6 +3,7 @@ require_once __DIR__ . '/../conexao.php';
 
 $patrimonio = $_GET["patrimonio"];
 $dataEntrega = $_GET["dataEntrega"];
+$siape = $_GET["siapeRecebedor"];
 
 $dataE = substr($dataEntrega, 0, 10);
 $dataExplodida = explode("/", $dataE);
@@ -12,7 +13,7 @@ $queryPegaPatrimonio = mysql_query("select * from patrimonio where patrimonio = 
 $total = mysql_num_rows($queryPegaPatrimonio);
 
 if ($total >= 1) {
-	$query = mysql_query ("update patrimonio set dataEntrega = '$dataEntrega' where patrimonio = '$patrimonio'") or die ("Erro na query de atualização! ".mysql_error());
+	$query = mysql_query ("update patrimonio set dataEntrega = '$dataEntrega', siapeRecebedor = '$siape' where patrimonio = '$patrimonio'") or die ("Erro na query de atualização! ".mysql_error());
 	$mensagem = "Operação concluída com êxito!";
 }
 

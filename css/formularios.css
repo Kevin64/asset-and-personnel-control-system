@@ -43,9 +43,9 @@
 
 #frmCadPatrimonio {
 	text-align: center;
-	width: 700px;
+	width: 1000;
 	height: auto;
-	margin-left: 150px;
+	margin-left: 0px;
 	color: white;
 }
 
@@ -59,14 +59,14 @@
 
 #frmCadDocente {
 	text-align: center;
-	width: 700px;
+	width: 800px;
 	height: auto;
-	margin-left: 150px;
+	margin-left: 100px;
 	color: white;
 }
 
 #frmCadPatrimonio table {
-	width: 700px;
+	width: 1000px;
 	height: auto;
 	border: 1px solid white;
 	border-radius: 10px;
@@ -84,7 +84,7 @@
 }
 
 #frmCadDocente table {
-	width: 700px;
+	width: 800px;
 	height: auto;
 	border: 1px solid white;
 	border-radius: 10px;
@@ -93,11 +93,12 @@
 }
 
 #frmCadPatrimonio input[type=text], select, input[type=date], textarea {
-	width: 300px;
+	width: 550;
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
 	background: rgb(44,44,44);
+	text-align: center;
 }
 
 #frmCadBIOS input[type=text], select, input[type=date], textarea {
@@ -106,14 +107,16 @@
 	border-radius: 5px;
 	padding: 5px;
 	background: rgb(44,44,44);
+	text-align: center;
 }
 
 #frmCadDocente input[type=text], select, input[type=date], textarea {
-	width: 300px;
+	width: 550;
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
 	background: rgb(44,44,44);
+	text-align: center;
 }
 
 #frmCadPatrimonio input[type=submit] {

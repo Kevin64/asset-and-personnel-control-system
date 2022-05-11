@@ -10,7 +10,7 @@ if ($enviar != 1) {
 	$idPatrimonio = $_GET["id"];
 	$patrimonioFK = $_GET["patrimonioFK"];
 	$query = mysql_query("select * from patrimonio where id = '$idPatrimonio'") or die ("Erro a selecionar patrimônio para exibir detalhes! ".mysql_error());
-	$queryFormatAnt = mysql_query("select manutencoes.dataFormatacoesAnteriores from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die ("Erro a selecionar patrimônio para exibir detalhes! ".mysql_error());
+	$queryFormatAnt = mysql_query("select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die ("Erro a selecionar patrimônio para exibir detalhes! ".mysql_error());
 } else {
 	$idPatrimonio = $_POST["txtIdPatrimonio"];
 	$patrimonio = $_POST["txtPatrimonio"];
@@ -25,6 +25,7 @@ if ($enviar != 1) {
 	$observacao = $_POST["txtObservacao"];
 	$ultimaFormatacao = $_POST["txtUltimaFormatacao"];
 	$formatacoesAnteriores = $_POST["txtFormatacoesAnteriores"];
+	$modoServico = $_POST["txtModoServico"];
 	$ad = $_POST["txtAd"];
 	$marca = $_POST["txtMarca"];
 	$modelo = $_POST["txtModelo"];
@@ -48,12 +49,14 @@ if ($enviar != 1) {
 	$secBoot = $_POST["txtSecBoot"];
 	$vt = $_POST["txtVT"];
 	$tpm = $_POST["txtTPM"];
+	$trocaPilha = $_POST["txtTrocaPilha"];
+	$ticketNum = $_POST["txtTicketNum"];
 
 	//Atualizando os dados do patrimônio
 	mysql_query("update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', descricao = '$descricao', nomeRecebedor = '$recebedor', siapeRecebedor = '$siape', ramal = '$ramal', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die ("Erro ao atualizar os dados do patrimônio! ".mysql_error());
 
 	$query = mysql_query("select * from patrimonio where id = '$idPatrimonio'") or die ("Erro ao selecionar os dados do patrimônio! ".mysql_error());
-	$queryFormatAnt = mysql_query("select manutencoes.dataFormatacoesAnteriores from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die ("Erro ao selecionar os dados do patrimônio! ".mysql_error());
+	$queryFormatAnt = mysql_query("select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die ("Erro ao selecionar os dados do patrimônio! ".mysql_error());
 }
 ?>
 
@@ -108,16 +111,18 @@ if ($enviar != 1) {
 			$secBoot = $resultado["secBoot"];
 			$vt = $resultado["vt"];
 			$tpm = $resultado["tpm"];
+			$trocaPilha = $resultado["trocaPilha"];
+			$ticketNum = $resultado["ticketNum"];
 
 			$adOk = substr($ad, 0, 1);
 			$padraoOk = substr($padrao, 0, 1);
 			$emUsoOk = substr($emUso, 0, 1);
 			$etiquetaOk = substr($etiqueta, 0, 1);
 
-			if ($adOk == "N") $ad = "NAO";
-			if ($padraoOk == "N") $padrao = "NAO";
-			if ($emUsoOk == "N") $emUso = "NAO";
-			if ($etiquetaOk == "N") $etiqueta = "NAO";
+			if ($adOk == "N") $ad = "Não";
+			if ($padraoOk == "N") $padrao = "Não";
+			if ($emUsoOk == "N") $emUso = "Não";
+			if ($etiquetaOk == "N") $etiqueta = "Não";
 	
 		?>
 
@@ -133,14 +138,13 @@ if ($enviar != 1) {
 		<td id="label">Prédio</td>
 		<td>
 			<select name="txtPredio">
-			<option value="74 - A" <?php if ($predio == "74 - A") echo "selected";?>>74 - A</font></option>
-			<option value="74 - B" <?php if ($predio == "74 - B") echo "selected";?>>74 - B</option>
-			<option value="74 - C" <?php if ($predio == "74 - C") echo "selected";?>>74 - C</option>
 			<option value="21" <?php if ($predio == "21") echo "selected";?>>21</option>
 			<option value="67" <?php if ($predio == "67") echo "selected";?>>67</option>
-			<option value="BIBLIOTECA SETORIAL" <?php if ($predio == "BIBLIOTECA SETORIAL") echo "selected";?>>BIBLIOTECA SETORIAL</option>
-			<option value="ANTIGA REITORIA" <?php if ($predio == "ANTIGA REITORIA") echo "selected";?>>ANTIGA REITORIA</option>
-			<option value="APOIO" <?php if ($predio == "APOIO") echo "selected";?>>APOIO</option>
+			<option value="74A" <?php if ($predio == "74A") echo "selected";?>>74A</option>
+			<option value="74B" <?php if ($predio == "74B") echo "selected";?>>74B</option>
+			<option value="74C" <?php if ($predio == "74C") echo "selected";?>>74C</option>
+			<option value="74D" <?php if ($predio == "74D") echo "selected";?>>74D</option>
+			<option value="AR" <?php if ($predio == "AR") echo "selected";?>>AR</option>
 		</td>
 		</tr>
 		<tr>
@@ -168,8 +172,8 @@ if ($enviar != 1) {
 		<td id="label">Padrão</td>
 		<td>
 			<select name="txtPadrao">
-			<option value="AD" <?php if ($padrao == "AD") echo "selected";?>>AD</option>
-			<option value="PCCLI" <?php if ($padrao == "PCCLI") echo "selected";?>>PCCLI</option>
+			<option value="Aluno" <?php if ($padrao == "Aluno") echo "selected";?>>Aluno</option>
+			<option value="Funcionário" <?php if ($padrao == "Funcionário") echo "selected";?>>Funcionário</option>
 			</select>
 		</td>
 		</tr>
@@ -191,21 +195,32 @@ if ($enviar != 1) {
 		echo PHP_EOL;		
 		while ($resultadoFormatAnt = mysql_fetch_array($queryFormatAnt)) {					
 			$formatacoesAnteriores = $resultadoFormatAnt["dataFormatacoesAnteriores"];	
+			$modoServico = $resultadoFormatAnt["modoServico"];	
+			$pilhaAnteriores = $resultadoFormatAnt["trocaPilha"];	
+			$ticketAnteriores = $resultadoFormatAnt["ticketNum"];	
 			$dataFA = substr($formatacoesAnteriores, 0, 10);
 			$mode = substr($formatacoesAnteriores, 10, 30);
 			$dataExplodidaA = explode("-", $dataFA);
-			$formatacoesAnteriores = $dataExplodidaA[2]."/".$dataExplodidaA[1]."/".$dataExplodidaA[0].$mode;
+			if($pilhaAnteriores != NULL || $ticketAnteriores != NULL){
+				$formatacoesAnteriores = $dataExplodidaA[2]."/".$dataExplodidaA[1]."/".$dataExplodidaA[0]." - ".$modoServico. " - ".$pilhaAnteriores." - Chamado nº ".$ticketAnteriores;
+			}
+			else if($modoServico != NULL){
+				$formatacoesAnteriores = $dataExplodidaA[2]."/".$dataExplodidaA[1]."/".$dataExplodidaA[0]." - ".$modoServico;
+			}
+			else{
+				$formatacoesAnteriores = $dataExplodidaA[2]."/".$dataExplodidaA[1]."/".$dataExplodidaA[0];
+			}
 			echo $formatacoesAnteriores.PHP_EOL;
 		}
 		?>
 		</textarea></td>
 		</tr>
 		<tr>
-		<td id=label>Cadastrado no AD</td>
+		<td id=label>Cadastrado no Active Directory</td>
 		<td>
 			<select name="txtAd">
-			<option value="SIM" <?php if ($ad === "SIM") echo "selected";?>>SIM</option>
-			<option value="NÃO" <?php if ($ad === "NAO") echo "selected";?>>NAO</option>
+			<option value="Sim" <?php if ($ad === "Sim") echo "selected";?>>Sim</option>
+			<option value="Não" <?php if ($ad === "Não") echo "selected";?>>Não</option>
 			</select>
 		</tr>
 		<tr>
@@ -284,8 +299,8 @@ if ($enviar != 1) {
 		<td id=label>Em uso</td>
 		<td>
 			<select name="txtEmUso">
-			<option value="SIM" <?php if ($emUso === "SIM") echo "selected";?>>SIM</option>
-			<option value="NÃO" <?php if ($emUso === "NAO") echo "selected";?>>NAO</option>
+			<option value="Sim" <?php if ($emUso === "Sim") echo "selected";?>>Sim</option>
+			<option value="Não" <?php if ($emUso === "Não") echo "selected";?>>Não</option>
 			</select>
 		</tr>
 		<tr>
@@ -294,16 +309,16 @@ if ($enviar != 1) {
 		</tr>
 		<td id="label">Etiqueta</td>
 		<td><select name="txtEtiqueta">
-			<option value="SIM" <?php if ($etiqueta === "SIM") echo "selected";?>>SIM</option>
-			<option value="NÃO" <?php if ($etiqueta === "NAO" || $etiqueta == "não" || $etiqueta == "Não") echo "selected";?>>NAO</option>
+			<option value="Sim" <?php if ($etiqueta === "Sim") echo "selected";?>>Sim</option>
+			<option value="Não" <?php if ($etiqueta === "Não") echo "selected";?>>Não</option>
 		    </select>
 		</td>
 		<tr>
 		<td id="label">Tipo</td>
 		<td><select name="txtTipo">
-			<option value="DESKTOP" <?php if ($tipo === "DESKTOP") echo "selected";?>>DESKTOP</option>
-			<option value="NOTEBOOK" <?php if ($tipo === "NOTEBOOK") echo "selected";?>>NOTEBOOK</option>
-			<option value="TABLET" <?php if ($tipo === "TABLET") echo "selected";?>>TABLET</option>
+			<option value="Desktop" <?php if ($tipo === "Desktop") echo "selected";?>>Desktop</option>
+			<option value="Notebook" <?php if ($tipo === "Notebook") echo "selected";?>>Notebook</option>
+			<option value="Tablet" <?php if ($tipo === "Tablet") echo "selected";?>>Tablet</option>
 		    </select>
 		</td>
 		</tr>

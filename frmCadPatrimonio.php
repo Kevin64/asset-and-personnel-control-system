@@ -20,14 +20,13 @@ require_once ("topo.php");
 		<tr>
 		<td id="label">Prédio</td>
 		<td><select name=txtPredio>
-			<option value="74 - A">74 - A</option>
-			<option value="74 - B">74 - B</option>
-			<option value="74 - C">74 - C</option>
 			<option value="21">21</option>
-			<option value="67">67</option>
-			<option value="BIBLIOTECA SETORIAL">BIBLIOTECA SETORIAL</option>
-			<option value="ANTIGA REITORIA">ANTIGA REITORIA</option>
-			<option value="APOIO">APOIO</option>
+			<option value="67">67</option>	
+			<option value="74A">74A</option>
+			<option value="74B">74B</option>
+			<option value="74C">74C</option>			
+			<option value="74D">74D</option>
+			<option value="AR">AR</option>
 		    </select>
 		</td>
 		</tr>
@@ -55,8 +54,8 @@ require_once ("topo.php");
 		</tr>
 		<td id="label">Padrão</td>
 		<td><select name=txtPadrao>
-		    <option value="SIM">AD</option>
-		    <option value="NAO">PCCLI</option>
+		    <option value="Sim">Aluno</option>
+		    <option value="Não">Funcionário</option>
 		    </select>
 		</td>
 		</tr>
@@ -72,10 +71,10 @@ require_once ("topo.php");
 		<td><input type="date" name="txtUltimaFormatacao"></td>
 		</tr>
 		<tr>
-		<td id="label">Cadastrado no AD</td>
+		<td id="label">Cadastrado no Active Directory</td>
 		<td><select name="txtAd">
-		    <option value="SIM">SIM</option>
-		    <option value="NAO">NAO</option>
+		    <option value="Sim">Sim</option>
+		    <option value="Não">Não</option>
 		    </select>
 		</td>
 		</tr>
@@ -150,25 +149,25 @@ require_once ("topo.php");
 		<tr>
 		<td id="label">Etiqueta</td>
 		<td><select name="txtEtiqueta">
-		    <option value="SIM">SIM</option>
-		    <option value="NAO">NAO</option>
+		    <option value="Sim">Sim</option>
+		    <option value="Não">Não</option>
 		    </select>
 		</td>
 		</tr>
 		<tr>
 		<td id="label">Em uso</td>
 		<td><select name="txtEmUso">
-		    <option value="SIM">SIM</option>
-		    <option value="NAO">NAO</option>
+		    <option value="Sim">Sim</option>
+		    <option value="Não">Não</option>
 		    </select>
 		</td>
 		</tr>
 		<tr>
 		<td id="label">Tipo</td>
 		<td><select name="txtTipo">
-		    <option value="DESKTOP">DESKTOP</option>
-		    <option value="NOTEBOOK">NOTEBOOK</option>
-			<option value="TABLET">TABLET</option>
+		    <option value="Desktop">Desktop</option>
+		    <option value="Notebook">Notebook</option>
+			<option value="Tablet">Tablet</option>
 		    </select>
 		</td>
 		</tr>

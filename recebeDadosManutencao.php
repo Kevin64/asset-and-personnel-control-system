@@ -15,7 +15,7 @@ $numeroSerial = $_GET["numeroSerial"];
 $processador = $_GET["processador"];
 $memoria = $_GET["memoria"];
 $hd = $_GET["hd"];
-//$sistemaOperacional = $_GET["sistemaOperacional"];
+$sistemaOperacional = $_GET["sistemaOperacional"];
 $nomeDoComputador = $_GET["nomeDoComputador"];
 $mac = $_GET["mac"];
 $ip = $_GET["ip"];
@@ -30,18 +30,22 @@ $modoArmaz = $_GET["modoArmaz"];
 $secBoot = $_GET["secBoot"];
 $vt = $_GET["vt"];
 $tpm = $_GET["tpm"];
+$trocaPilha = $_GET["trocaPilha"];
+$ticketNum = $_GET["ticketNum"];
 
 $dataF = substr($dataFormatacao, 0, 10);
 $dataExplodida = explode("/", $dataF);
 $dataFormatacao = $dataExplodida[2]."-".$dataExplodida[1]."-".$dataExplodida[0];
-$dataFormatacaoExpandida = $dataFormatacao." - "."Manutenção";
+//$dataFormatacaoExpandida = $dataFormatacao." - "."Manutenção";
+$dataFormatacaoExpandida = $dataFormatacao;
+$modoServico = "Manutenção";
 
 $queryPegaPatrimonio = mysql_query("select * from patrimonio where patrimonio = '$patrimonio'") or die ("Erro na query! ".mysql_error());
 $total = mysql_num_rows($queryPegaPatrimonio);
 
 if ($total >= 1) {
-	$query = mysql_query ("update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where patrimonio = '$patrimonio'") or die ("Erro na query de atualização! ".mysql_error());
-	$queryFormatAnt = mysql_query("insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores) values('$patrimonio', '$dataFormatacaoExpandida')") or die ("Erro ao incluir os dados! ".mysql_error());
+	$query = mysql_query ("update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm', trocaPilha = '$trocaPilha', ticketNum = '$ticketNum' where patrimonio = '$patrimonio'") or die ("Erro na query de atualização! ".mysql_error());
+	$queryFormatAnt = mysql_query("insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum')") or die ("Erro ao incluir os dados! ".mysql_error());
 	$mensagem = "Computador já existente, dados atualizados com sucesso!";
 }
 
