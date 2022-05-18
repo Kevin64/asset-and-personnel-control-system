@@ -55,6 +55,7 @@
 					{
 				?>
 
+				<li><a href="consultarUsuario.php">Listar Usuários</a></li>
 				<li><a href="frmAddUsuario.php">Adicionar Usuário</a></li>
 				<li><a href="frmTrocarSenha.php">Alterar senha</a></li>
 				<li><a href="logout.php">Sair</a></li>

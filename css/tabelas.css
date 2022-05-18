@@ -25,6 +25,15 @@
 	color: white;
 }
 
+#dadosUsuario {
+	width: 500px;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: 250px;
+	color: white;
+}
+
 #cabecalho {
 	height: 30px;
 	background-color: rgb(80,80,80);

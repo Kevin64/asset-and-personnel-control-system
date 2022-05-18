@@ -9,6 +9,7 @@ $nivel = $_POST["txtNivel"];
 $status = $_POST["txtStatus"];
 
 $query = mysql_query("insert into usuarios (usuario, senha, nivel, status) values ('$usuario', '$senha', '$nivel', '$status')") or die ("Erro ao cadastrar novo usuário! ".mysql_error());
+
 ?>
 
 <div id="meio">
