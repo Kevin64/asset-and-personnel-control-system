@@ -3,32 +3,31 @@
 /*==================*/
 
 
-*
-{
+* {
 	margin: 0;
 	padding: 0;
 	color: white;
 }
 
-#menu ul, li, span, a
-{
+#menu ul,
+li,
+span,
+a {
 	z-index: 2;
 	display: block;
 	overflow: hidden;
 }
 
-#menu ul
-{
-/*Borda do menu cantos arredondados e fundo cinza escuro*/
+#menu ul {
+	/*Borda do menu cantos arredondados e fundo cinza escuro*/
 	z-index: 2;
 	border: 1px solid white;
 	border-radius: 5px;
 	background: rgb(232, 232, 230);
 }
 
-#menu ul > li
-{
-/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
+#menu ul>li {
+	/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
 	z-index: 2;
 	border-left: 1px solid white;
 	float: left;
@@ -36,23 +35,21 @@
 }
 
 
-#menu ul > li:hover
-{
-/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
+#menu ul>li:hover {
+	/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
 	z-index: 2;
 	background-image: linear-gradient(to down, black, grey, black);
 	transition: all .5s;
 }
 
-#menu ul > li:first-child
-{
+#menu ul>li:first-child {
 	z-index: 2;
 	border-left: none;
 	transition: all .5s;
 }
 
-#menu li a, li span
-{
+#menu li a,
+li span {
 	z-index: 2;
 	padding: 5px 5px;
 	width: 185px;
@@ -62,8 +59,7 @@
 	text-align: center;
 }
 
-#menu li:hover ol
-{
+#menu li:hover ol {
 	z-index: 2;
 	display: block;
 	background-image: linear-gradient(to down, black, grey, black);
@@ -71,8 +67,7 @@
 	color: white;
 }
 
-#menu li ol
-{
+#menu li ol {
 	z-index: 2;
 	margin-left: -1px;
 	display: none;
@@ -83,8 +78,7 @@
 	color: white;
 }
 
-#menu ol a
-{
+#menu ol a {
 	z-index: 2;
 	padding: 5px 5px;
 	width: 185px;
@@ -92,8 +86,7 @@
 	color: white;
 }
 
-#menu ol a:hover
-{
+#menu ol a:hover {
 	z-index: 2;
 	background: silver;
 	color: white;

@@ -18,11 +18,9 @@
 	padding: 5px;
 	vertical-align: middle;
 	text-align: center;
-	//float: left;
 }
 
-#frmLogin input[type=text], input[type=password] {
-	//float: right;
+#frmLogin input {
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
@@ -92,35 +90,50 @@
 	text-align: center;
 }
 
-#frmCadPatrimonio input[type=text], select, input[type=date], textarea {
-	width: 550;
+#frmCadPatrimonio input,
+select,
+textarea {
+	width: 450;
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
-	background: rgb(44,44,44);
+	background: rgb(44, 44, 44);
 	text-align: center;
 }
 
-#frmCadBIOS input[type=text], select, input[type=date], textarea {
+#frmCadBIOS input,
+select,
+textarea {
 	width: 300px;
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
-	background: rgb(44,44,44);
+	background: rgb(44, 44, 44);
 	text-align: center;
 }
 
-#frmCadDocente input[type=text], select, input[type=date], textarea {
-	width: 550;
+#frmCadBIOSTable select {
+	width: 300px;
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
-	background: rgb(44,44,44);
+	background: rgb(44, 44, 44);
+	text-align: center;
+}
+
+#frmCadDocente input,
+select,
+textarea {
+	width: 350;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 5px;
+	background: rgb(44, 44, 44);
 	text-align: center;
 }
 
 #frmCadPatrimonio input[type=submit] {
-	border: 1px solid white
+	border: 1px solid white;
 	padding: 5px;
 	width: 100px;
 	font-weight: bold;
@@ -128,7 +141,7 @@
 }
 
 #frmCadBIOS input[type=submit] {
-	border: 1px solid white
+	border: 1px solid white;
 	padding: 5px;
 	width: 100px;
 	font-weight: bold;
@@ -177,7 +190,8 @@
 	font-size: 15px;
 	font-weight: bold;
 	text-align: right;
-	color: white;;
+	color: white;
+	;
 }
 
 #label {
@@ -186,12 +200,13 @@
 	color: white;
 }
 
-input[type=password], input[type=text] {
+input[type=password],
+input[type=text] {
 	width: 150px;
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
-	background: rgb(44,44,44);
+	background: rgb(44, 44, 44);
 }
 
 input[type=submit] {

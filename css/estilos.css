@@ -1,6 +1,4 @@
 body {
-	topmargin: 0;
-	marginwidth: 0;
 	font-family: verdana;
 	font-size: 12px;
 	padding: 20px;
@@ -12,10 +10,6 @@ body {
 	height: auto;
 	position: relative;
 	margin: 0 auto;
-	//top: 50%;
-	//left: 50%;
-	//margin-top: -300px;
-	//margin-left: -400px;
 	padding: 0px;
 	border: 0px solid white;
 	border-radius: 5px;
@@ -34,7 +28,6 @@ body {
 	width: 100%;
 	height: auto;
 	background-color: rgb(44, 44, 44);
-	//opacity: 0.3;
 	text-align: center;
 	vertical-align: middle;
 	padding-bottom: 20px;
@@ -43,7 +36,6 @@ body {
 #rodape {
 	width: 100%;
 	height: auto;
-	//background: rgb(232, 232, 230);
 	background: gray;
 	text-align: center;
 	border-radius: 0 0 10px 10px;

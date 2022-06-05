@@ -1,19 +1,17 @@
 #dadosPatrimonio {
 	width: 1000px;
-	border: 1px solid white; 
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 0px;
-	color: white;
 }
 
 #dadosBIOS {
-	width: 500px;
-	border: 1px solid white; 
+	width: 700px;
+	border: 1px solid white;
 	border-radius: 5px;
 	padding: 10px;
-	margin-left: 250px;
-	color: white;
+	margin-left: 150px;
 }
 
 #dadosDocente {
@@ -22,7 +20,6 @@
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 70px;
-	color: white;
 }
 
 #dadosUsuario {
@@ -31,12 +28,11 @@
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 250px;
-	color: white;
 }
 
 #cabecalho {
 	height: 30px;
-	background-color: rgb(80,80,80);
+	background-color: rgb(80, 80, 80);
 	font-weight: bold;
 	text-align: center;
 }
@@ -49,7 +45,7 @@
 }
 
 #dados:hover {
-	background-color: blue;
+	background-color: rgb(0, 52, 95);
 }
 
 #tbCadNovoUsuario {
@@ -59,33 +55,21 @@
 	text-align: center;
 	width: 700px;
 	margin-left: 150px;
-	color: white;	
 }
 
 #tbPesquisarPatrimonio {
 	width: 1000px;
-	margin-left:0px;
-	color: white;
+	margin-left: 0px;
 }
 
 #tbPesquisarBIOS {
 	width: 500px;
-	margin-left:250px;
-	color: white;
+	margin-left: 250px;
 }
 
 #tbPesquisarDocente {
 	width: 700px;
-	margin-left:170px;
-	color: white;
-}
-
-#search {
-	font-size: 15px;
-}
-
-#search input[type=text] {
-	padding: 2px;
+	margin-left: 170px;
 }
 
 #tbPesquisarPatrimonio input[type=submit] {
@@ -98,4 +82,24 @@
 
 #tbPesquisarDocente input[type=submit] {
 	width: 30px;
+}
+
+#filterPatrimonio {
+	width: 250px;
+}
+
+#filterBIOS {
+	width: 100px;
+}
+
+#filterDocente {
+	width: 100px;
+} 
+
+#search {
+	font-size: 15px;
+}
+
+#search input[type=text] {
+	padding: 2px;
 }

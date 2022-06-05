@@ -14,53 +14,17 @@ require_once ("menu.php");
 		<p style="font-weight: normal; font-size: 12px;">
 		<b>Nome:</b> Marcos Roberto da Silva.<br>
 		<b>Técnico Administrativo em Educação</b><br>
-		<b>Coloboração:</b> Programação da interface Web para o gerenciamento dos dados, Planejamento de desenvolvimento do banco de dados, interligação da interface Web com o Banco de dados.<br>
+		<b>Coloboração:</b> Programação inicial da interface Web para o gerenciamento dos dados, Planejamento inicial de desenvolvimento do banco de dados, interligação inicial da interface Web com o Banco de dados.<br>
 		<b>Recursos utilizados:</b> Linguagem de programação PHP5, Banco de dados mySQL, HTML5, JAVASCRIPT, CSS3.<br>
 		<b>Siape:</b> 2152076<br>
 		<b>Contato:</b> marcossilva@redes.ufsm.br<br><br>
 
 		<b>Nome:</b> Kevin Costa<br>
 		<b>Técnico Administrativo em Educação</b><br>
-		<b>Colaboração:</b> Manutenção do banco de dados e da interface web, desenvolvimento da interface de cadastro rápido de patrimônio, testes e sugestões de melhorias.<br>
-		<b>Recursos utilizados:</b> Linguagem de programação C#.<br>
+		<b>Colaboração:</b> Desenvolvimento das atualizações subsequentes (migração para PHP7), manutenção do banco de dados e da interface web, desenvolvimento da interface de cadastro rápido de patrimônio, testes e sugestões de melhorias.<br>
+		<b>Recursos utilizados:</b> Linguagem de programação C#, PHP7.<br>
 		<b>Siape:</b> 1971957<br>
 		<b>Contato:</b> kevinvtc@outlook.com<br><br>
-
-		<b>Nome:</b> Matheus Smidt<br>
-		<b>Técnico Administrativo em Educação</b><br>
-		<b>Colaboração:</b> Manutenção do banco de dados e da interface web, testes e sugestões de melhorias.<br>
-		<b>Matrícula:</b> 3152380<br>
-		<b>Contato:</b> mattsmidt@gmail.com<br><br>
-
-		<b>Nome:</b> Patricia Mattos<br>
-		<b>Técnica Administrativa em Educação</b><br>
-		<b>Colaboração:</b> Testes e sugestões de melhorias.<br>
-		<b>Matrícula:</b> 1859659<br>
-		<b>Contato:</b> p.maraschim@hotmail.com<br><br>	
-
-		<b>Nome:</b> Anderson Luan Maia Flores<br>
-		<b>Bolsista</b><br>
-		<b>Colaboração:</b> Testes e sugestões de melhorias.<br>
-		<b>Matrícula:</b> 201312014<br>
-		<b>Contato:</b> publicidade1478@hotmail.com<br><br>
-
-		<b>Nome:</b> Adonai Gabriel Loreto Peres Gonçalves<br>
-		<b>Bolsista</b><br>
-		<b>Colaboração:</b> Testes e sugestões de melhorias.<br>
-		<b>Matrícula:</b> 201410139<br>
-		<b>Contato:</b> agoncalves@inf.ufsm.br<br><br>
-
-		<b>Nome:</b> Airton Sbruzzi Watte<br>
-		<b>Bolsista</b><br>
-		<b>Colaboração:</b> Testes e sugestões de melhorias.<br>
-		<b>Matrícula:</b> 201510608<br>
-		<b>Contato:</b> asw1997@hotmail.com<br><br>
-
-		<b>Nome:</b> Oberdan Lopes Ramos<br>
-		<b>Bolsista</b><br>
-		<b>Colaboração:</b> Testes e sugestões de melhorias.<br>
-		<b>Matrícula:</b> 2814209<br>
-		<b>Contato:</b> oberdan_lopes@hotmail.com<br><br>
 
 		</p>
 		</fieldset>

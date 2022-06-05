@@ -1,14 +1,15 @@
 <?php
-require_once ("verifica.php");
+session_start();
+require_once("topo.php");
+require_once("verifica.php");
 require_once __DIR__ . '/../conexao.php';
-require_once ("topo.php");
 
 $usuario = $_POST["txtUsuario"];
 $senha = md5($_POST["txtSenha"]);
 $nivel = $_POST["txtNivel"];
 $status = $_POST["txtStatus"];
 
-$query = mysql_query("insert into usuarios (usuario, senha, nivel, status) values ('$usuario', '$senha', '$nivel', '$status')") or die ("Erro ao cadastrar novo usuário! ".mysql_error());
+$query = mysqli_query($conexao, "insert into usuarios (usuario, senha, nivel, status) values ('$usuario', '$senha', '$nivel', '$status')") or die("Erro ao cadastrar novo usuário! " . mysqli_error($conexao));
 
 ?>
 
