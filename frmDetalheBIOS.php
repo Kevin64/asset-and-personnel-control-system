@@ -46,19 +46,15 @@ if ($enviar != 1) {
 ?>
 
 <div id="meio">
-	<form action="frmDetalheBIOS.php" method="post" id="frmCadBIOS">
+	<form action="frmDetalheBIOS.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes da BIOS</h2><br>
-
 		<?php
 		if ($enviar == 1)
 			echo "<font color=blue>Dados da BIOS atualizados com sucesso!</font><br><br>";
 		?>
-
-		<table>
+		<table id="frmFields">
 			<?php
-
-
 			while ($resultado = mysqli_fetch_array($query)) {
 				$idModelo = $resultado["id"];
 				$marca = $resultado["marca"];
@@ -66,7 +62,6 @@ if ($enviar != 1) {
 				$versao = $resultado["versao"];
 				$tipo = $resultado["tipo"];
 			?>
-
 				<tr>
 					<td colspan=2 id=separador>Dados da BIOS</td>
 				</tr>
@@ -88,34 +83,15 @@ if ($enviar != 1) {
 					<td><input type=text name=txtTipo value="<?php echo $tipo; ?>"></td>
 				</tr>
 				</tr>
-
 			<?php
 			}
 			?>
-			<!--
-<select Emp Name='NEW'>  
-		<option value="">--- Selecione ---</option>    
-            <?php
-			$list = mysqli_query($conexao, "select * from bios order by modelo asc");
-			while ($row_list = mysqli_fetch_assoc($list)) {
-			?>  
-					<option value="<?php echo $row_list['modelo']; ?>"<?php if ($row_list['modelo'] == $select) {
-																			echo "selected";
-																		} ?>>
-						<?php echo $row_list['modelo']; ?>  
-					</option>  
-                <?php
-			}
-				?>  
-	</select>  -->
-
 			<tr>
-				<td colspan=2 align=center><br><input type=submit value=Atualizar></td>
+				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
 			</tr>
 		</table>
 	</form>
 </div>
-
 <?php
 require_once("rodape.php");
 ?>

@@ -23,21 +23,18 @@
 		</li>
 		<li>
 			<?php
-			if (!isset($_SESSION["id"]))
-			{
+			if (!isset($_SESSION["id"])) {
 			?>
 				<span>Usuário desconectado</span>
 			<?php
-			}
-			else
-			{
-				?>
+			} else {
+			?>
 				<span>
 					<?php
-				echo "Logado como: ".$_SESSION["usuario"];
+					echo "Logado como: " . $_SESSION["usuario"];
 					?>
 				</span>
-				<?php
+			<?php
 			}
 			?>
 
@@ -54,28 +51,26 @@
 				}
 				else
 				{ */
-					if(isset($_SESSION['nivel'])){
-					if ($_SESSION["nivel"] == "adm")
-					{
+				if (isset($_SESSION['nivel'])) {
+					if ($_SESSION["nivel"] == "adm") {
 				?>
 
-				<li><a href="consultarUsuario.php">Listar Usuários</a></li>
-				<li><a href="frmAddUsuario.php">Adicionar Usuário</a></li>
-				<li><a href="frmTrocarSenha.php">Alterar senha</a></li>
-				<li><a href="logout.php">Sair</a></li>
+						<li><a href="consultarUsuario.php">Listar Usuários</a></li>
+						<li><a href="frmAddUsuario.php">Adicionar Usuário</a></li>
+						<li><a href="frmTrocarSenha.php">Alterar senha</a></li>
+						<li><a href="logout.php">Sair</a></li>
 
-				<?php
+					<?php
 					} else {
-				?>
+					?>
 
-				<li><a href="frmTrocarSenha.php">Alterar senha</a></li>
-				<li><a href="logout.php">Sair</a></li>
+						<li><a href="frmTrocarSenha.php">Alterar senha</a></li>
+						<li><a href="logout.php">Sair</a></li>
 				<?php
+					}
 				}
-			}
 				?>
 			</ol>
 		</li>
 	</ul>
 </div>
-

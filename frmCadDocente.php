@@ -5,10 +5,9 @@ require_once("topo.php");
 ?>
 
 <div id="meio">
-
-	<form action="cadDocente.php" method=post id=frmCadDocente>
+	<form action="cadDocente.php" method=post id=frmGeneral>
 		<h2>Formulário de cadastro de docente</h2><br>
-		<table>
+		<table id="frmFields">
 			<tr>
 				<td colspan=2 id=separador>Dados do docente</td>
 			</tr>
@@ -41,7 +40,7 @@ require_once("topo.php");
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><br>
-					<input type="submit" value="Cadastrar">
+					<input id="registerButton" type="submit" value="Cadastrar">
 				</td>
 			</tr>
 		</table>

@@ -1,6 +1,65 @@
+@media (prefers-color-scheme: light) {
+
+	#dadosPatrimonio,
+	#dadosBIOS,
+	#dadosDocente,
+	#dadosUsuario {
+		border-color: black;
+	}
+
+	#dados:hover {
+		background-color: rgb(249, 202, 20);
+		border: 10px solid red;
+	}
+
+	#tbCadNovoUsuario {
+		border-color: black;
+	}
+
+	#cabecalho {
+		background-color: gainsboro;
+	}
+
+	#filterPatrimonio,
+	#filterDocente,
+	#filterBIOS {
+		background-color: white;
+		color: black;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+
+	#dadosPatrimonio,
+	#dadosBIOS,
+	#dadosDocente,
+	#dadosUsuario {
+		border-color: white;
+	}
+
+	#dados:hover {
+		background-color: rgb(0, 52, 95);
+	}
+
+	#tbCadNovoUsuario {
+		border-color: white;
+	}
+
+	#cabecalho {
+		background-color: rgb(80, 80, 80);
+	}
+
+	#filterPatrimonio,
+	#filterDocente,
+	#filterBIOS {
+		background-color: black;
+		color: white;
+	}
+}
+
 #dadosPatrimonio {
 	width: 1000px;
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 0px;
@@ -8,7 +67,7 @@
 
 #dadosBIOS {
 	width: 700px;
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 150px;
@@ -16,7 +75,7 @@
 
 #dadosDocente {
 	width: 850px;
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 70px;
@@ -24,7 +83,7 @@
 
 #dadosUsuario {
 	width: 500px;
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 5px;
 	padding: 10px;
 	margin-left: 250px;
@@ -32,24 +91,22 @@
 
 #cabecalho {
 	height: 30px;
-	background-color: rgb(80, 80, 80);
 	font-weight: bold;
 	text-align: center;
+	color: steelblue;
+}
+
+a {
+	color: steelblue;
 }
 
 #dados {
-	height: 50px;
+	height: 30px;
 	text-align: center;
-	padding: 100px;
-	color: white;
-}
-
-#dados:hover {
-	background-color: rgb(0, 52, 95);
 }
 
 #tbCadNovoUsuario {
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 10px;
 	padding: 10px;
 	text-align: center;
@@ -57,49 +114,17 @@
 	margin-left: 150px;
 }
 
-#tbPesquisarPatrimonio {
+#tbPesquisar {
 	width: 1000px;
 	margin-left: 0px;
 }
 
-#tbPesquisarBIOS {
-	width: 500px;
-	margin-left: 250px;
+input[type=text] {
+	border: 1px solid;
 }
 
-#tbPesquisarDocente {
-	width: 700px;
-	margin-left: 170px;
-}
-
-#tbPesquisarPatrimonio input[type=submit] {
-	width: 30px;
-}
-
-#tbPesquisarBIOS input[type=submit] {
-	width: 30px;
-}
-
-#tbPesquisarDocente input[type=submit] {
-	width: 30px;
-}
-
-#filterPatrimonio {
-	width: 250px;
-}
-
-#filterBIOS {
-	width: 100px;
-}
-
+#filterPatrimonio,
+#filterBIOS,
 #filterDocente {
-	width: 100px;
-} 
-
-#search {
-	font-size: 15px;
-}
-
-#search input[type=text] {
-	padding: 2px;
+	width: auto;
 }

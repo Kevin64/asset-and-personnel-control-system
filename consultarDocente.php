@@ -27,36 +27,34 @@ $totalDocentes = mysqli_num_rows($query);
 ?>
 
 <div id="meio">
-	<h2>Lista de docentes (<?php echo $totalDocentes; ?>)</h2><br>
-	<table id="tbPesquisarDocente">
+	<table id="tbPesquisar">
 		<form action=consultarDocente.php method=post>
 			<input type=hidden name=txtEnviar value=1>
 			<tr>
-				<td align=center id=search>Pesquisar por:
+				<td align=center>Pesquisar por:
 					<select id=filterDocente name=rdCriterio>
 						<option value="siape">SIAPE</option>
 						<option value="nome">Nome</option>
 						<option value="curso">Curso</option>
 					</select>
-					<input type=text name=txtPesquisar> <input type=submit value="OK">
+					<input type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
-
 	</table>
 	<br><br>
+	<h2>Lista de docentes (<?php echo $totalDocentes; ?>)</h2><br>
 	<table id="dadosDocente" cellspacing=0>
 		<form action="apagaSelecionadosDocente.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=siape">Siape</a></td>
+				<td><a href="?ordenar=siape">SIAPE</a></td>
 				<td><a href="?ordenar=nome">Nome</a></td>
 				<td><a href="?ordenar=curso">Curso</a></td>
 				<td><a href="?ordenar=faltas">Faltas</a></td>
-				<td><a href="?ordenar=excluir">Excluir</a></td>
+				<td>Excluir</td>
 				<td>
 					<!-- Espaço para checkbox -->
 			</tr>
-
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
 				$id = $resultado["id"];
@@ -64,27 +62,23 @@ $totalDocentes = mysqli_num_rows($query);
 				$nome = $resultado["nome"];
 				$curso = $resultado["curso"];
 				$faltas = $resultado["faltas"];
-
 			?>
-
 				<tr id="dados">
 					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
 					<td><?php echo $nome; ?></td>
 					<td><?php echo $curso; ?></td>
-					<td><input type="submit" class="button" name="menosfalta" value="<?php echo '-' ?>"><?php echo $faltas; ?><input type="submit" class="button" name="maisfalta" value="<?php echo '+' ?>"></td>
+					<td width=120><input id="missMinusButton" type="submit" class="button" name="menosfalta" value="<?php echo '-' ?>"><?php echo " " . $faltas . " "; ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" value="<?php echo '+' ?>"></td>
 					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
 				</tr>
-
 			<?php
 			}
 			?>
 			<tr>
-				<td colspan=7 align="center"><br><input type="submit" value="Apagar selecionados" style="width: 300px;"></td>
+				<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" style="width: 300px;"></td>
 			</tr>
 		</form>
 	</table>
 </div>
-
 <?php
 require_once("rodape.php");
 ?>

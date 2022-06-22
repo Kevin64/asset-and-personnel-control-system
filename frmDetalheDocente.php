@@ -32,17 +32,15 @@ if ($enviar != 1) {
 ?>
 
 <div id="meio">
-	<form action="frmDetalheDocente.php" method="post" id="frmCadDocente">
+	<form action="frmDetalheDocente.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do docente</h2><br>
-
 		<?php
 		if ($enviar == 1) {
 			echo "<font color=blue>Dados do docente atualizados com sucesso!</font><br><br>";
 		}
 		?>
-
-		<table>
+		<table id="frmFields">
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
 				$idDocente = $resultado["id"];
@@ -55,9 +53,7 @@ if ($enviar != 1) {
 				$sala = $resultado["sala"];
 				$faltas = $resultado["faltas"];
 				$data_ultima_falta = $resultado["data_ultima_falta"];
-
 			?>
-
 				<tr>
 					<td colspan=2 id=separador>Dados do docente</td>
 				</tr>
@@ -119,18 +115,15 @@ if ($enviar != 1) {
 				<tr>
 					<td colspan=2><?php echo "E-mail: " . $email; ?> </td>
 				</tr>
-
 			<?php
 			}
 			?>
-
 			<tr>
-				<td colspan=2 align=center><br><input type=submit value=Atualizar></td>
+				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
 			</tr>
 		</table>
 	</form>
 </div>
-
 <?php
 require_once("rodape.php");
 ?>

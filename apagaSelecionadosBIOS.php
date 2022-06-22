@@ -5,9 +5,8 @@ $deletar = $_POST["chkDeletar"];
 
 if (isset($deletar)) {
 	for ($i = 0; $i < count($deletar); $i++) {
-		$query = mysql_query ("delete from bios where id = '$deletar[$i]'") or die ("Erro ao deletar BIOS! ".mysql_error());
+		$query = mysqli_query($conexao, "delete from bios where id = '$deletar[$i]'") or die("Erro ao deletar BIOS! " . mysqli_error($conexao));
 	}
 }
 
-header ("Location: consultarBIOS.php?del=ok");
-?>
+header("Location: consultarBIOS.php?del=ok");

@@ -34,9 +34,9 @@ if ($enviar != 1) {
 	$observacao = $_POST["txtObservacao"];
 	$ultimaFormatacao = $_POST["txtUltimaFormatacao"];
 	$formatacoesAnteriores = $_POST["txtFormatacoesAnteriores"];
-	if(isset($_POST["txtModoServico"])){
+	if (isset($_POST["txtModoServico"])) {
 		$modoServico = $_POST["txtModoServico"];
-	}	
+	}
 	$ad = $_POST["txtAd"];
 	$marca = $_POST["txtMarca"];
 	$modelo = $_POST["txtModelo"];
@@ -60,12 +60,12 @@ if ($enviar != 1) {
 	$secBoot = $_POST["txtSecBoot"];
 	$vt = $_POST["txtVT"];
 	$tpm = $_POST["txtTPM"];
-	if(isset($_POST["txtTrocaPilha"])){
+	if (isset($_POST["txtTrocaPilha"])) {
 		$trocaPilha = $_POST["txtTrocaPilha"];
 	}
-	if(isset($_POST["txtTicketNum"])){
+	if (isset($_POST["txtTicketNum"])) {
 		$ticketNum = $_POST["txtTicketNum"];
-	}	
+	}
 
 	//Atualizando os dados do patrimônio
 	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', descricao = '$descricao', nomeRecebedor = '$recebedor', siapeRecebedor = '$siape', ramal = '$ramal', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
@@ -75,19 +75,15 @@ if ($enviar != 1) {
 }
 ?>
 <div id="meio">
-	<form action="frmDetalhePatrimonio.php" method="post" id="frmCadPatrimonio">
+	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do patrimônio</h2><br>
-
 		<?php
 		if ($enviar == 1)
 			echo "<font color=blue>Dados do patrimônio atualizados com sucesso!</font><br><br>";
 		?>
-
-		<table>
+		<table id="frmFields">
 			<?php
-
-
 			while ($resultado = mysqli_fetch_array($query)) {
 				$idPatrimonio = $resultado["id"];
 				$patrimonio = $resultado["patrimonio"];
@@ -136,9 +132,7 @@ if ($enviar != 1) {
 				if ($padraoOk == "N") $padrao = "Não";
 				if ($emUsoOk == "N") $emUso = "Não";
 				if ($etiquetaOk == "N") $etiqueta = "Não";
-
 			?>
-
 				<tr>
 					<td colspan=2 id=separador>Dados do patrimônio</td>
 				</tr>
@@ -150,7 +144,7 @@ if ($enviar != 1) {
 				<tr>
 					<td id="label">Prédio</td>
 					<td>
-						<select name="txtPredio">
+						<select id="frmFields" name="txtPredio">
 							<option value="21" <?php if ($predio == "21") echo "selected"; ?>>21</option>
 							<option value="67" <?php if ($predio == "67") echo "selected"; ?>>67</option>
 							<option value="74A" <?php if ($predio == "74A") echo "selected"; ?>>74A</option>
@@ -162,11 +156,11 @@ if ($enviar != 1) {
 				</tr>
 				<tr>
 					<td id="label">Sala</td>
-					<td><input type=text name=txtSala value="<?php echo $sala; ?>"></td>
+					<td><input id="frmFields" type=text name=txtSala value="<?php echo $sala; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Descrição</td>
-					<td><input type=text name=txtDescricao value="<?php echo $descricao; ?>"></td>
+					<td><input id="frmFields" type=text name=txtDescricao value="<?php echo $descricao; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Nome do recebedor</td>
@@ -334,18 +328,15 @@ if ($enviar != 1) {
 					</td>
 				</tr>
 				</tr>
-
 			<?php
 			}
 			?>
-
 			<tr>
-				<td colspan=2 align=center><br><input type=submit value=Atualizar></td>
+				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
 			</tr>
 		</table>
 	</form>
 </div>
-
 <?php
 require_once("rodape.php");
 ?>

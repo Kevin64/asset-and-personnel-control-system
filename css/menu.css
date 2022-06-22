@@ -2,11 +2,95 @@
 /*FormataÃ§Ã£o do Menu*/
 /*==================*/
 
+@media (prefers-color-scheme: light) {
+	#menu ul {
+		/*Borda do menu cantos arredondados e fundo cinza escuro*/
+		border-color: black;
+		background-color: rgb(25, 81, 133);
+	}
+
+	#menu li a,
+	li span {
+		color: white;
+	}
+
+	#menu ul>li {
+		/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
+		border-color: white;
+		background-color: rgb(25, 81, 133);
+	}
+
+	#menu ul>li:hover {
+		/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
+		background-color: cadetblue;
+	}
+
+	#menu li:hover ol {
+		background-color: rgb(25, 81, 133);
+		color: black;
+	}
+
+	#menu ol a:hover {
+		background-color: cadetblue;
+	}
+
+	#menu li ol {
+		border-color: white;
+		background: grey;
+		color: white;
+	}
+
+	#menu ol a {
+		color: white;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	#menu ul {
+		/*Borda do menu cantos arredondados e fundo cinza escuro*/
+		border-color: white;
+		background-color: grey;
+	}
+
+	#menu li a,
+	li span {
+		color: white;
+	}
+
+	#menu ul>li {
+		/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
+		border-color: white;
+		background-color: grey;
+	}
+
+	#menu ul>li:hover {
+		/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
+		background-color: black;
+	}
+
+	#menu li:hover ol {
+		background-color: grey;
+		color: white;
+	}
+
+	#menu ol a:hover {
+		background-color: black;
+	}
+
+	#menu li ol {
+		border-color: white;
+		background-color: grey;
+		color: white;
+	}
+
+	#menu ol a {
+		color: white;
+	}
+}
 
 * {
 	margin: 0;
 	padding: 0;
-	color: white;
 }
 
 #menu ul,
@@ -19,26 +103,20 @@ a {
 }
 
 #menu ul {
-	/*Borda do menu cantos arredondados e fundo cinza escuro*/
 	z-index: 2;
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 5px;
-	background: rgb(232, 232, 230);
 }
 
 #menu ul>li {
-	/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
 	z-index: 2;
-	border-left: 1px solid white;
+	border-left: 1px solid;
 	float: left;
-	background: grey;
 }
 
 
 #menu ul>li:hover {
-	/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
 	z-index: 2;
-	background-image: linear-gradient(to down, black, grey, black);
 	transition: all .5s;
 }
 
@@ -54,7 +132,6 @@ li span {
 	padding: 5px 5px;
 	width: 185px;
 	cursor: pointer;
-	color: white;
 	text-decoration: none;
 	text-align: center;
 }
@@ -62,20 +139,16 @@ li span {
 #menu li:hover ol {
 	z-index: 2;
 	display: block;
-	background-image: linear-gradient(to down, black, grey, black);
 	transition: all .5s;
-	color: white;
 }
 
 #menu li ol {
 	z-index: 2;
 	margin-left: -1px;
 	display: none;
-	border: 1px solid white;
+	border: 1px solid;
 	border-radius: 0 0 3px 3px;
-	background: grey;
 	position: absolute;
-	color: white;
 }
 
 #menu ol a {
@@ -83,15 +156,11 @@ li span {
 	padding: 5px 5px;
 	width: 185px;
 	text-align: center;
-	color: white;
 }
 
 #menu ol a:hover {
 	z-index: 2;
-	background: silver;
-	color: white;
 	text-decoration: underline;
-	background-image: linear-gradient(to top, black, grey, black);
 }
 
 

@@ -5,12 +5,11 @@ require_once("topo.php");
 ?>
 
 <div id="meio">
-
-	<form action=cadNovoUsuario.php method=post id="frmCadNovoUsuario">
+	<form action=cadNovoUsuario.php method=post id="frmGeneral">
 		<h2>Formulário de cadastro de usuário</h2><br>
 		<input type=hidden name=txtNivel value="user">
 		<input type=hidden name=txtStatus value="0">
-		<table id="tbCadNovoUsuario">
+		<table id="frmFields">
 			<tr>
 				<td id=label>Usuário</td>
 				<td><input type=text name=txtUsuario></td>
@@ -21,13 +20,12 @@ require_once("topo.php");
 			</tr>
 			<tr>
 				<td colspan=2><br>
-					<input type=submit value="Cadastrar">
+					<input id="registerButton" type=submit value="Cadastrar">
 				</td>
 			</tr>
 		</table>
 	</form>
 </div>
-
 <?php
 require_once("rodape.php");
 ?>

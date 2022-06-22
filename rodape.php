@@ -1,12 +1,12 @@
 	<div id="rodape">
-		<font style="font-size: 10px;">
-		<b>Controle de Patrimônio e Docentes</b><br>
-		Versão: 3.0.0.0-alpha<br>
-		Sistema de desenvolvido pela Unidade de Tecnologia da Informação do CCSH<Br>
-		E-mail: uti.ccsh@ufsm.br<br>
-		Telefone: 3220-9625<br>		
+		<font style="font-size: 14px;">
+			<b>Sistema de controle de patrimônio e docentes do CCSH</b><br>
+			Versão: 3.0.0.10-alpha2<br>
+			Sistema de desenvolvido pela Subdivisão de Tecnologia da Informação do CCSH<Br>
+			E-mail: uti.ccsh@ufsm.br<br>
+			Telefone: 3220-9625<br>
 		</font>
 	</div>
-</div>
-</body>
-</html>
+	</div>
+
+	</html>

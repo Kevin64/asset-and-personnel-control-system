@@ -15,7 +15,6 @@ $validaDocente = mysqli_query($conexao, "select * from docente where siape = '$s
 $totalDocente = mysqli_num_rows($validaDocente);
 
 if ($totalDocente == 0) {
-	//Inserir dados no banco
 	mysqli_query($conexao, "insert into docente (siape, nome, email, ramal, celular, curso, sala) values ('$siape', '$nome', '$email', '$ramal', '$celular', '$curso', '$sala')") or die("Erro ao tentar cadastrar docente! " . mysqli_error($conexao));
 
 	header("Location: sucessoDocente.php");

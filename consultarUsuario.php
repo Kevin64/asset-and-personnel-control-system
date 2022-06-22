@@ -27,24 +27,21 @@ $totalUsuarios = mysqli_num_rows($query);
 ?>
 
 <div id="meio">
-	<h2>Lista de usuários (<?php echo $totalUsuarios; ?>)</h2><br>
 	<table>
 		<form action=consultarUsuario.php method=post>
 			<input type=hidden name=txtEnviar value=1>
 		</form>
-
 	</table>
 	<br><br>
+	<h2>Lista de usuários (<?php echo $totalUsuarios; ?>)</h2><br>
 	<table id="dadosUsuario" cellspacing=0>
 		<form action="apagaSelecionadosUsuario.php" method="post">
 			<tr id="cabecalho">
 				<td><a href="?ordenar=usuario">Usuário</a></td>
 				<td><a href="?ordenar=nivel">Privilégio</a></td>
-				<td><a href="?ordenar=excluir">Excluir</a></td>
+				<td>Excluir</td>
 				<td>
-					<!-- Espaço para checkbox -->
 			</tr>
-
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
 				$id = $resultado["id"];
@@ -57,17 +54,15 @@ $totalUsuarios = mysqli_num_rows($query);
 					<td><?php echo $nivel; ?></td>
 					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
 				</tr>
-
 			<?php
 			}
 			?>
 			<tr>
-				<td colspan=7 align="center"><br><input type="submit" value="Apagar selecionados" style="width: 300px;"></td>
+				<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados"></td>
 			</tr>
 		</form>
 	</table>
 </div>
-
 <?php
 require_once("rodape.php");
 ?>

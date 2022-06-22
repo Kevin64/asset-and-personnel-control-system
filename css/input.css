@@ -1,0 +1,203 @@
+@media (prefers-color-scheme: light) {
+	input {
+		background-color: white;
+		border-color: black;
+		color: black;
+	}
+
+	#registerButton {
+		border-color: black;
+		background-color: white;
+	}
+
+	#registerButton:hover {
+		color: black;
+		border-color: black;
+	}
+
+	#eraseButton {
+		border-color: black;
+		background-color: white;
+	}
+
+	#eraseButton:hover {
+		border-color: black;
+	}
+
+	#updateButton {
+		border-color: black;
+		background-color: white;
+	}
+
+	#updateButton:hover {
+		color: black;
+	}
+
+	#searchButton {
+		border-color: black;
+		background-color: white;
+	}
+
+	#searchButton:hover {
+		color: black;
+	}
+
+	select,
+	option,
+	textarea {
+		background-color: white;
+		color: black;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	input {
+		background-color: black;
+		border-color: white;
+		color: white;
+	}
+
+	#registerButton {
+		border-color: white;
+		background-color: black;
+	}
+
+	#registerButton:hover {
+		color: white;
+		border-color: white;
+	}
+
+	#eraseButton {
+		border-color: white;
+		background-color: black;
+	}
+
+	#eraseButton:hover {
+		border-color: white;
+	}
+
+	#updateButton {
+		border-color: white;
+		background-color: black;
+	}
+
+	#updateButton:hover {
+		color: white;
+	}
+
+	#searchButton {
+		border-color: white;
+		background-color: black;
+	}
+
+	#searchButton:hover {
+		color: white;
+	}
+
+	select,
+	option,
+	textarea {
+		background-color: black;
+		color: white;
+	}
+}
+
+input[type=text],
+input[type=date],
+input[type=email],
+input[type=password],
+input[type=submit],
+select,
+textarea {
+	border: 2px;
+	border-style: solid;
+	text-align: center;
+	width: 300px;
+	border-radius: 8px;
+	padding: 7px;
+}
+
+input[type=submit] {
+	border-radius: 30px;
+}
+
+input[type=submit] {
+	width: auto;
+}
+
+input[type=submit]:hover {
+	background-color: gray;
+}
+
+#frmFields input[type=text],
+#frmFields input[type=date],
+#frmFields input[type=email],
+#frmFields input[type=password],
+#frmFields select,
+#frmFields textarea {
+	width: 500px;
+}
+
+#eraseButton {
+	width: auto;
+	color: red;
+}
+
+#eraseButton:hover {
+	background-color: darkred;
+	color: white;
+}
+
+#registerButton {
+	width: auto;
+	color: green;
+}
+
+#registerButton:hover {
+	background-color: darkgreen;
+}
+
+#updateButton {
+	color: green;
+}
+
+#updateButton:hover {
+	background-color: darkgreen;
+}
+
+#searchButton {
+	width: auto;
+	color: orange;
+}
+
+#searchButton:hover {
+	background-color: darkorange;
+}
+
+#missPlusButton {
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+	border-radius: 0px;
+	color: darkgreen;
+}
+
+#missPlusButton:hover {
+	background-color: darkgreen;
+	color: white;
+	border-color: darkgreen;
+}
+
+#missMinusButton {
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+	border-radius: 0px;
+	color: firebrick;
+}
+
+#missMinusButton:hover {
+	background-color: darkred;
+	color: white;
+	border-color: darkred;
+}

@@ -24,5 +24,3 @@ if ($total > 0) {
 } else {
 	header("Location: negado.php");
 }
-
-?>

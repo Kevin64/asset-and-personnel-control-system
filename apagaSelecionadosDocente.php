@@ -5,9 +5,8 @@ $deletar = $_POST["chkDeletar"];
 
 if (isset($deletar)) {
 	for ($i = 0; $i < count($deletar); $i++) {
-		$query = mysql_query ("delete from docente where id = '$deletar[$i]'") or die ("Erro ao deletar docente! ".mysql_error());
+		$query = mysqli_query($conexao, "delete from docente where id = '$deletar[$i]'") or die("Erro ao deletar docente! " . mysqli_error($conexao));
 	}
 }
 
-header ("Location: consultarDocente.php?del=ok");
-?>
+header("Location: consultarDocente.php?del=ok");
