@@ -13,19 +13,29 @@ if ($enviar != 1) {
 	$idDocente = $_GET["id"];
 	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die("Erro a selecionar docente para exibir detalhes! " . mysqli_error($conexao));
 } else {
-	$idDocente = $_POST["txtIdDocente"];
-	$siape = $_POST["txtSiape"];
-	$nome = $_POST["txtNome"];
-	$email = $_POST["txtEmail"];
-	$ramal = $_POST["txtRamal"];
-	$celular = $_POST["txtCelular"];
-	$curso = $_POST["txtCurso"];
-	$sala = $_POST["txtSala"];
-	$faltas = $_POST["txtFaltas"];
-	$data_ultima_falta = $_POST["txtDataUltimaFalta"];
+	if (isset($_POST["txtIdDocente"]))
+		$idDocente = $_POST["txtIdDocente"];
+	if (isset($_POST["txtSiape"]))
+		$siape = $_POST["txtSiape"];
+	if (isset($_POST["txtNome"]))
+		$nome = $_POST["txtNome"];
+	if (isset($_POST["txtEmail"]))
+		$email = $_POST["txtEmail"];
+	if (isset($_POST["txtRamal"]))
+		$ramal = $_POST["txtRamal"];
+	if (isset($_POST["txtCelular"]))
+		$celular = $_POST["txtCelular"];
+	if (isset($_POST["txtCurso"]))
+		$curso = $_POST["txtCurso"];
+	if (isset($_POST["txtSala"]))
+		$sala = $_POST["txtSala"];
+	if (isset($_POST["txtFaltas"]))
+		$faltas = $_POST["txtFaltas"];
+	if (isset($_POST["txtDataUltimaFalta"]))
+		$data_ultima_falta = $_POST["txtDataUltimaFalta"];
 
 	//Atualizando os dados do docente
-	mysqli_query($conexao, "update docente set siape = '$siape', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala', faltas = '$faltas', data_ultima_falta = '$data_ultima_falta' where id = '$idDocente'") or die("Erro ao atualizar os dados do docente! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update docente set siape = '$siape', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala' where id = '$idDocente'") or die("Erro ao atualizar os dados do docente! " . mysqli_error($conexao));
 
 	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die("Erro ao selecionar os dados do docente! " . mysqli_error($conexao));
 }
@@ -58,9 +68,9 @@ if ($enviar != 1) {
 					<td colspan=2 id=separador>Dados do docente</td>
 				</tr>
 				<tr>
-					<td id="label">Siape</td>
+					<td id="label">SIAPE</td>
 					<input type=hidden name=txtIdDocente value="<?php echo $idDocente; ?>">
-					<td><input type=text name=txtSiape value="<?php echo $siape; ?>"></td>
+					<td><input type=text name=txtSiape value="<?php echo $siape; ?>" maxLength=8></td>
 				</tr>
 				<tr>
 					<td id="label">Nome</td>
@@ -72,11 +82,11 @@ if ($enviar != 1) {
 				</tr>
 				<tr>
 					<td id="label">Ramal</td>
-					<td><input type=text name=txtRamal value="<?php echo $ramal; ?>"></td>
+					<td><input type=text name=txtRamal value="<?php echo $ramal; ?>" maxLength=4></td>
 				</tr>
 				<tr>
 					<td id="label">Celular (com DDD)</td>
-					<td><input type=text name=txtCelular value="<?php echo $celular; ?>"></td>
+					<td><input type=text name=txtCelular value="<?php echo $celular; ?>" minLength=11 maxLength=11></td>
 				</tr>
 				<tr>
 					<td id="label">Curso</td>
@@ -84,15 +94,15 @@ if ($enviar != 1) {
 				</tr>
 				<tr>
 					<td id="label">Sala</td>
-					<td><input type=text name=txtSala value="<?php echo $sala; ?>"></td>
+					<td><input type=text name=txtSala value="<?php echo $sala; ?>" maxLength=4></td>
 				</tr>
 				<tr>
 					<td id="label">Faltas</td>
-					<td><input type=text name=txtFaltas value="<?php echo $faltas; ?>"></td>
+					<td><?php echo $faltas; ?></td>
 				</tr>
 				<tr>
 					<td id="label">Data da ultima falta</td>
-					<td><input type=date name=txtDataUltimaFalta value="<?php echo $data_ultima_falta; ?>"></td>
+					<td><?php echo $data_ultima_falta; ?></td>
 				</tr>
 				<tr>
 					<td colspan=2 id=separador>Modelo para Reserva de Salas (Copiar e Colar)</td>

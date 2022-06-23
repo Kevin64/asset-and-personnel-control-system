@@ -5,22 +5,26 @@ require_once("topo.php");
 ?>
 
 <div id="meio">
-	<h2>Alterar Senha do usuário <?php echo strtoupper($_SESSION["usuario"]); ?></h2><br>
+	<h2>Alterar senha do usuário</h2><br>
 	<form action="alteraSenha.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtNivel value="user">
 		<input type=hidden name=txtStatus value="0">
-		<table id="tbCadNovoUsuario">
+		<table id="frmFields">
+			<tr>
+				<td id=label>Usuário</td>
+				<td><input type=text name=txtUsuario required></td>
+			</tr>
 			<tr>
 				<td id=label>Senha atual</td>
-				<td><input type=password name=txtSenhaAtual></td>
+				<td><input type=password name=txtSenhaAtual required></td>
 			</tr>
 			<tr>
 				<td id=label>Nova senha</td>
-				<td><input type=password name=txtSenha1></td>
+				<td><input type=password name=txtSenha1 required></td>
 			</tr>
 			<tr>
 				<td id=label>Repita a nova senha</td>
-				<td><input type=password name=txtSenha2></td>
+				<td><input type=password name=txtSenha2 required></td>
 			</tr>
 			<tr>
 				<td colspan=2><br>

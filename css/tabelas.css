@@ -60,7 +60,7 @@
 #dadosPatrimonio {
 	width: 1000px;
 	border: 1px solid;
-	border-radius: 5px;
+	border-radius: 15px;
 	padding: 10px;
 	margin-left: 0px;
 }
@@ -68,7 +68,7 @@
 #dadosBIOS {
 	width: 700px;
 	border: 1px solid;
-	border-radius: 5px;
+	border-radius: 15px;
 	padding: 10px;
 	margin-left: 150px;
 }
@@ -76,7 +76,7 @@
 #dadosDocente {
 	width: 850px;
 	border: 1px solid;
-	border-radius: 5px;
+	border-radius: 15px;
 	padding: 10px;
 	margin-left: 70px;
 }
@@ -84,7 +84,7 @@
 #dadosUsuario {
 	width: 500px;
 	border: 1px solid;
-	border-radius: 5px;
+	border-radius: 15px;
 	padding: 10px;
 	margin-left: 250px;
 }

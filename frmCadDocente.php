@@ -21,14 +21,14 @@ require_once("topo.php");
 			</tr>
 			<tr>
 				<td id="label">E-mail</td>
-				<td><input type=email name=txtEmail placeholder=fulano@email.com></td>
+				<td><input type=email name=txtEmail placeholder=fulano@email.com required></td>
 			</tr>
 			<tr>
 				<td id="label">Ramal</td>
 				<td><input type=text name=txtRamal placeholder=9876 maxLength=4></td>
 			</tr>
 			<td id="label">Celular (com DDD)</td>
-			<td><input type=text name=txtCelular placeholder=55998765432 maxLength=11 required></td>
+			<td><input type=text name=txtCelular placeholder=55998765432 minLength=11 maxLength=11 required></td>
 			</tr>
 			<tr>
 				<td id="label">Curso</td>

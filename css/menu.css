@@ -43,6 +43,12 @@
 	#menu ol a {
 		color: white;
 	}
+
+	#menu ol a:hover {		
+		border-left: 5px solid;
+		border-right: 5px solid;
+		border-color: rgb(249, 202, 20);
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,6 +92,12 @@
 	#menu ol a {
 		color: white;
 	}
+
+	#menu ol a:hover {
+		border-left: 5px solid;
+		border-right: 5px solid;
+		border-color: white;
+	}
 }
 
 * {
@@ -105,7 +117,7 @@ a {
 #menu ul {
 	z-index: 2;
 	border: 1px solid;
-	border-radius: 5px;
+	border-radius: 15px 15px 0 0;
 }
 
 #menu ul>li {
@@ -120,7 +132,7 @@ a {
 	transition: all .5s;
 }
 
-#menu ul>li:first-child {
+#menu ul>li {
 	z-index: 2;
 	border-left: none;
 	transition: all .5s;
@@ -130,7 +142,7 @@ a {
 li span {
 	z-index: 2;
 	padding: 5px 5px;
-	width: 185px;
+	width: 188px;
 	cursor: pointer;
 	text-decoration: none;
 	text-align: center;
@@ -147,20 +159,20 @@ li span {
 	margin-left: -1px;
 	display: none;
 	border: 1px solid;
-	border-radius: 0 0 3px 3px;
 	position: absolute;
 }
 
 #menu ol a {
 	z-index: 2;
 	padding: 5px 5px;
-	width: 185px;
+	width: 188px;
 	text-align: center;
 }
 
 #menu ol a:hover {
 	z-index: 2;
 	text-decoration: underline;
+	margin-right: -10px;
 }
 
 

@@ -13,6 +13,7 @@ if (!isset($_SESSION)) {
 	<link rel="stylesheet" href="css/formularios.css">
 	<link rel="stylesheet" href="css/menu.css">
 	<link rel="stylesheet" href="css/input.css">
+	<link rel="stylesheet" href="css/anim.css">
 	<meta charset="utf-8">
 	<title>.:: Sistema de Controle de Patrimônio e Docentes do CCSH ::.</title>
 	<link rel="icon" href="favicon.png" type="image/x-icon" />

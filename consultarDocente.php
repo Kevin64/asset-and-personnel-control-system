@@ -53,7 +53,6 @@ $totalDocentes = mysqli_num_rows($query);
 				<td><a href="?ordenar=faltas">Faltas</a></td>
 				<td>Excluir</td>
 				<td>
-					<!-- Espaço para checkbox -->
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -67,7 +66,7 @@ $totalDocentes = mysqli_num_rows($query);
 					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
 					<td><?php echo $nome; ?></td>
 					<td><?php echo $curso; ?></td>
-					<td width=120><input id="missMinusButton" type="submit" class="button" name="menosfalta" value="<?php echo '-' ?>"><?php echo " " . $faltas . " "; ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" value="<?php echo '+' ?>"></td>
+					<td width=120><input id="missMinusButton" type="submit" class="button" name="menosfalta" formaction="faltasDocente.php" value="<?php echo '-' ?>"><?php echo " " . $faltas . " "; ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" formaction="faltasDocente.php" value="<?php echo '+' ?>"></td>
 					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
 				</tr>
 			<?php

@@ -5,23 +5,28 @@ require_once("verifica.php");
 
 $mensagem = "";
 
+$id = null;
+$usuario = $_POST["txtUsuario"];
 $senhaAtual = md5($_POST["txtSenhaAtual"]);
 $senhaNova = md5($_POST["txtSenha1"]);
 $senhaNova2 = md5($_POST["txtSenha2"]);
 
-$query = mysqli_query($conexao, "select * from usuarios where senha = '$senhaAtual'") or die("erro ao procurar Senha! " . mysqli_error($conexao));
-$total = mysqli_num_rows($query);
-$id = mysqli_result($query, 0, "id");
+$query = mysqli_query($conexao, "select * from usuarios where usuario = '$usuario'") or die("Erro ao procurar usuário! " . mysqli_error($conexao));
+
+while ($row = mysqli_fetch_array($query)) {
+	$id = $row['id'];
+	$senha = $row['senha'];
+}
 
 if ($senhaNova == $senhaNova2) {
-	if ($total >= 1) {
-		$queryTrocaSenha = mysqli_query($conexao, "update usuarios set senha = '$senhaNova' where id = '$id'") or die("Erro ao alterar as senhas! " . mysqli_error($conexao));
-		$mensagem = "<font size=2 color=blue face=verdana>Senha alterada com sucesso!</font>";
+	if ($senha == $senhaAtual) {
+		$queryTrocaSenha = mysqli_query($conexao, "update usuarios set senha = '$senhaNova' where id = '$id'") or die("Erro ao alterar senha! " . mysqli_error($conexao));
+		$mensagem = "<font color=blue>Senha alterada com sucesso!</font>";
 	} else {
-		$mensagem = "<font size=2 color=red face=verdana>Senha atual não confere!</font>";
+		$mensagem = "<font color=red>Senha atual não confere!</font>";
 	}
 } else {
-	$mensagem = "<font size=2 color=red face=verdana>As senhas digitadas são diferentes!</font>";
+	$mensagem = "<font color=red>As senhas digitadas são diferentes!</font>";
 }
 
 ?>
