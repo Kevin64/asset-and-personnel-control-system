@@ -129,10 +129,6 @@ input[type=submit]:hover {
 	background-color: gray;
 }
 
-#frmFields {
-	border-radius: 15px;
-}
-
 #frmFields input[type=text],
 #frmFields input[type=date],
 #frmFields input[type=email],

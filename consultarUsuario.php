@@ -15,8 +15,17 @@ if (isset($_GET["ordenar"]))
 if ($ordenar == "")
 	$ordenar = "usuario";
 
+if (isset($_GET['sort']))
+	$sort = $_GET['sort'];
+
+if (isset($sort) and $sort == "desc") {
+	$sort = "asc";
+} else {
+	$sort = "desc";
+}
+
 if ($enviar != 1)
-	$query = mysqli_query($conexao, "select * from usuarios order by $ordenar") or die("Erro ao selecionar dados do usuario! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from usuarios order by $ordenar $sort") or die("Erro ao selecionar dados do usuario! " . mysqli_error($conexao));
 else {
 	$rdCriterio = $_POST["rdCriterio"];
 	$pesquisar = $_POST["txtPesquisar"];
@@ -37,8 +46,8 @@ $totalUsuarios = mysqli_num_rows($query);
 	<table id="dadosUsuario" cellspacing=0>
 		<form action="apagaSelecionadosUsuario.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=usuario">Usuário</a></td>
-				<td><a href="?ordenar=nivel">Privilégio</a></td>
+				<td><a href="?ordenar=usuario&sort=<?php echo $sort; ?>">Usuário</a></td>
+				<td><a href="?ordenar=nivel&sort=<?php echo $sort; ?>">Privilégio</a></td>
 				<td>Excluir</td>
 				<td>
 			</tr>

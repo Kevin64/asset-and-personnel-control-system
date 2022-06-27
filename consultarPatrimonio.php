@@ -5,6 +5,8 @@ require_once __DIR__ . '/../conexao.php';
 
 $enviar = null;
 $ordenar = null;
+$rdCriterio = null;
+$pesquisar = null;
 
 if (isset($_POST["txtEnviar"]))
 	$enviar = $_POST["txtEnviar"];
@@ -12,15 +14,28 @@ if (isset($_POST["txtEnviar"]))
 if (isset($_GET["ordenar"]))
 	$ordenar = $_GET["ordenar"];
 
+if (isset($_GET['sort']))
+	$sort = $_GET['sort'];
+
+if (isset($_POST["rdCriterio"]))
+	$rdCriterio = $_POST["rdCriterio"];
+
+if (isset($_POST["txtPesquisar"]))
+	$pesquisar = $_POST["txtPesquisar"];
+
 if ($ordenar == "")
 	$ordenar = "dataFormatacao";
 
-if ($enviar != 1)
-	$query = mysqli_query($conexao, "select * from patrimonio order by $ordenar desc") or die("Erro ao selecionar dados do patrimônio! " . mysqli_error($conexao,));
-else {
-	$rdCriterio = $_POST["rdCriterio"];
-	$pesquisar = $_POST["txtPesquisar"];
-	$query = mysqli_query($conexao, "select * from patrimonio where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao,));
+if (isset($sort) and $sort == "desc") {
+	$sort = "asc";
+} else {
+	$sort = "desc";
+}
+
+if ($enviar != 1) {
+	$query = mysqli_query($conexao, "select * from patrimonio order by $ordenar $sort") or die("Erro ao selecionar dados do patrimônio! " . mysqli_error($conexao));
+} else {
+	$query = mysqli_query($conexao, "select * from patrimonio where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
 }
 
 $totalSalas = mysqli_num_rows($query);
@@ -70,11 +85,11 @@ $totalSalas = mysqli_num_rows($query);
 	<table id="dadosPatrimonio" cellspacing=0>
 		<form action="apagaSelecionados.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=patrimonio">Patrimônio</a></td>
-				<td><a href="?ordenar=sala">Sala</a></td>
-				<td><a href="?ordenar=marca">Modelo</a></td>
-				<td><a href="?ordenar=dataFormatacao">Última manutenção</a></td>
-				<td><a href="?ordenar=ip">Endereço IP</a></td>
+				<td><a href="?ordenar=patrimonio&sort=<?php echo $sort; ?>">Patrimônio</a></td>
+				<td><a href="?ordenar=sala&sort=<?php echo $sort; ?>">Sala</a></td>
+				<td><a href="?ordenar=modelo&sort=<?php echo $sort; ?>">Modelo</a></td>
+				<td><a href="?ordenar=dataFormatacao&sort=<?php echo $sort; ?>">Última manutenção</a></td>
+				<td><a href="?ordenar=ip&sort=<?php echo $sort; ?>">Endereço IP</a></td>
 				<td>Excluir</td>
 				<td>
 			</tr>

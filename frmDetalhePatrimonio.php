@@ -197,28 +197,30 @@ if ($enviar != 1) {
 				</tr>
 				<tr>
 					<td id=label>Manutenções Anteriores</td>
-					<td><textarea name=txtFormatacoesAnteriores cols=30 rows=10>
-		<?php
-				echo PHP_EOL;
-				while ($resultadoFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
-					$formatacoesAnteriores = $resultadoFormatAnt["dataFormatacoesAnteriores"];
-					$modoServico = $resultadoFormatAnt["modoServico"];
-					$pilhaAnteriores = $resultadoFormatAnt["trocaPilha"];
-					$ticketAnteriores = $resultadoFormatAnt["ticketNum"];
-					$dataFA = substr($formatacoesAnteriores, 0, 10);
-					$mode = substr($formatacoesAnteriores, 10, 30);
-					$dataExplodidaA = explode("-", $dataFA);
-					if ($pilhaAnteriores != NULL || $ticketAnteriores != NULL) {
-						$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico . " - " . $pilhaAnteriores . " - Chamado nº " . $ticketAnteriores;
-					} else if ($modoServico != NULL) {
-						$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico;
-					} else {
-						$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0];
-					}
-					echo $formatacoesAnteriores . PHP_EOL;
-				}
-		?>
-		</textarea></td>
+					<td>
+						<label name=txtFormatacoesAnteriores style=color:green><br>
+							<?php
+							while ($resultadoFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
+								$formatacoesAnteriores = $resultadoFormatAnt["dataFormatacoesAnteriores"];
+								$modoServico = $resultadoFormatAnt["modoServico"];
+								$pilhaAnteriores = $resultadoFormatAnt["trocaPilha"];
+								$ticketAnteriores = $resultadoFormatAnt["ticketNum"];
+								$dataFA = substr($formatacoesAnteriores, 0, 10);
+								$mode = substr($formatacoesAnteriores, 10, 30);
+								$dataExplodidaA = explode("-", $dataFA);
+								if ($pilhaAnteriores != NULL || $ticketAnteriores != NULL) {
+									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico . " - " . $pilhaAnteriores . " - Chamado nº " . $ticketAnteriores;
+								} else if ($modoServico != NULL) {
+									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico;
+								} else {
+									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0];
+								}
+								echo $formatacoesAnteriores . PHP_EOL;
+								echo "<br>";
+							}
+							?>
+						</label><br>
+					</td>
 				</tr>
 				<tr>
 					<td id=label>Cadastrado no Active Directory</td>

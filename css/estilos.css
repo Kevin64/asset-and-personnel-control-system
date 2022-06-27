@@ -58,15 +58,23 @@
 	src: url("../fonts/ZHUM601N.TTF");
 }
 
-body,
-input {
+html {
+	overflow-y: scroll;
+}
+
+* {
 	font-family: ZapfHumnst;
+}
+
+body,
+input,
+textarea,
+select {
 	font-size: 16px;
 	padding: 5px;
 }
 
 table {
-	font-family: ZapfHumnst;
 	font-size: 18px;
 }
 

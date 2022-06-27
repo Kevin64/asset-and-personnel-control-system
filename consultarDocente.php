@@ -15,8 +15,17 @@ if (isset($_GET["ordenar"]))
 if ($ordenar == "")
 	$ordenar = "nome";
 
+if (isset($_GET['sort']))
+	$sort = $_GET['sort'];
+
+if (isset($sort) and $sort == "asc") {
+	$sort = "desc";
+} else {
+	$sort = "asc";
+}
+
 if ($enviar != 1)
-	$query = mysqli_query($conexao, "select * from docente order by $ordenar") or die("Erro ao selecionar dados do docente! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from docente order by $ordenar $sort") or die("Erro ao selecionar dados do docente! " . mysqli_error($conexao));
 else {
 	$rdCriterio = $_POST["rdCriterio"];
 	$pesquisar = $_POST["txtPesquisar"];
@@ -47,10 +56,10 @@ $totalDocentes = mysqli_num_rows($query);
 	<table id="dadosDocente" cellspacing=0>
 		<form action="apagaSelecionadosDocente.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=siape">SIAPE</a></td>
-				<td><a href="?ordenar=nome">Nome</a></td>
-				<td><a href="?ordenar=curso">Curso</a></td>
-				<td><a href="?ordenar=faltas">Faltas</a></td>
+				<td><a href="?ordenar=siape&sort=<?php echo $sort; ?>">SIAPE</a></td>
+				<td><a href="?ordenar=nome&sort=<?php echo $sort; ?>">Nome</a></td>
+				<td><a href="?ordenar=curso&sort=<?php echo $sort; ?>">Curso</a></td>
+				<td><a href="?ordenar=faltas&sort=<?php echo $sort; ?>">Faltas</a></td>
 				<td>Excluir</td>
 				<td>
 			</tr>

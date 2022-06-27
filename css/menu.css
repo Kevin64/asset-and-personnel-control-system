@@ -36,7 +36,7 @@
 
 	#menu li ol {
 		border-color: white;
-		background: grey;
+		background: rgb(25, 81, 133);
 		color: white;
 	}
 
@@ -44,9 +44,7 @@
 		color: white;
 	}
 
-	#menu ol a:hover {		
-		border-left: 5px solid;
-		border-right: 5px solid;
+	#menu ol a:hover {
 		border-color: rgb(249, 202, 20);
 	}
 }
@@ -94,8 +92,6 @@
 	}
 
 	#menu ol a:hover {
-		border-left: 5px solid;
-		border-right: 5px solid;
 		border-color: white;
 	}
 }
@@ -141,40 +137,29 @@ a {
 #menu li a,
 li span {
 	z-index: 2;
-	padding: 5px 5px;
+	padding: 10px 5px;
 	width: 188px;
 	cursor: pointer;
 	text-decoration: none;
 	text-align: center;
 }
 
-#menu li:hover ol {
-	z-index: 2;
-	display: block;
-	transition: all .5s;
-}
-
 #menu li ol {
 	z-index: 2;
-	margin-left: -1px;
-	display: none;
-	border: 1px solid;
+	width: 198px;
 	position: absolute;
 }
 
 #menu ol a {
-	z-index: 2;
-	padding: 5px 5px;
-	width: 188px;
-	text-align: center;
+	padding: 10px 1px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
 }
 
 #menu ol a:hover {
-	z-index: 2;
-	text-decoration: underline;
-	margin-right: -10px;
+	transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
 }
-
 
 /*=========================*/
 /*Fim da formataÃ§Ã£o do Menu*/

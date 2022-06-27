@@ -12,8 +12,20 @@ if (isset($_POST["txtEnviar"]))
 if (isset($_GET["ordenar"]))
 	$ordenar = $_GET["ordenar"];
 
+if (isset($_GET['sort']))
+	$sort = $_GET['sort'];
+
+if ($ordenar == "")
+	$ordenar = "marca";
+
+if (isset($sort) and $sort == "asc") {
+	$sort = "desc";
+} else {
+	$sort = "asc";
+}
+
 if ($enviar != 1)
-	$query = mysqli_query($conexao, "select * from bios") or die("Erro ao selecionar dados de BIOS! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from bios order by $ordenar $sort") or die("Erro ao selecionar dados de BIOS! " . mysqli_error($conexao));
 else {
 	$rdCriterio = $_POST["rdCriterio"];
 	$pesquisar = $_POST["txtPesquisar"];
@@ -45,10 +57,10 @@ $totalSalas = mysqli_num_rows($query);
 	<table id="dadosBIOS" cellspacing=0>
 		<form action="apagaSelecionadosBIOS.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=modelo">Modelo</a></td>
-				<td><a href="?ordenar=marca">Marca</a></td>
-				<td><a href="?ordenar=versao">Versão</a></td>
-				<td><a href="?ordenar=tipo">Tipo</a></td>
+				<td><a href="?ordenar=modelo&sort=<?php echo $sort; ?>">Modelo</a></td>
+				<td><a href="?ordenar=marca&sort=<?php echo $sort; ?>">Marca</a></td>
+				<td><a href="?ordenar=versao&sort=<?php echo $sort; ?>">Versão</a></td>
+				<td><a href="?ordenar=tipo&sort=<?php echo $sort; ?>">Tipo</a></td>
 				<td>Excluir</td>
 				<td>
 					<!-- Espaço para checkbox -->
