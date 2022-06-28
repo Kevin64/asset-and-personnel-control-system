@@ -84,18 +84,22 @@ if ($enviar != 1) {
 						<?php
 						?>
 						<select name=txtTipo required>
-							<option value=BIOS <?php if($tipo=="BIOS") echo 'selected="selected"'; ?>>BIOS</option>
-							<option value=UEFI <?php if($tipo=="UEFI") echo 'selected="selected"'; ?>>UEFI</option>
+							<option value=BIOS <?php if ($tipo == "BIOS") echo 'selected="selected"'; ?>>BIOS</option>
+							<option value=UEFI <?php if ($tipo == "UEFI") echo 'selected="selected"'; ?>>UEFI</option>
 						</select>
 					</td>
 				</tr>
 				</tr>
 			<?php
 			}
+			if ($_SESSION["nivel"] != "limit") {
 			?>
-			<tr>
-				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
-			</tr>
+				<tr>
+					<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
+				</tr>
+			<?php
+			}
+			?>
 		</table>
 	</form>
 </div>

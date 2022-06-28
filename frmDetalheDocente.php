@@ -127,10 +127,14 @@ if ($enviar != 1) {
 				</tr>
 			<?php
 			}
+			if ($_SESSION["nivel"] != "limit") {
 			?>
-			<tr>
-				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
-			</tr>
+				<tr>
+					<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
+				</tr>
+			<?php
+			}
+			?>
 		</table>
 	</form>
 </div>

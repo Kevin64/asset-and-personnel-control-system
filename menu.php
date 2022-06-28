@@ -8,14 +8,26 @@
 				<label id="hov"><span>Patrimônio</span></label>
 				<ol class=slide>
 					<li><a href="consultarPatrimonio.php">Consultar Patrimônio</a></li>
-					<li><a href="frmCadBIOS.php">Cadastrar Modelo de Hardware</a></li>
+					<?php
+					if ($_SESSION["nivel"] == "adm") {
+					?>
+						<li><a href="frmCadBIOS.php">Cadastrar Modelo de Hardware</a></li>
+					<?php
+					}
+					?>
 					<li><a href="consultarBIOS.php">Consultar Modelo de Hardware</a></li>
 				</ol>
 			</li>
 			<li>
 				<label id="hov"><span>Docentes</span></label>
 				<ol class=slide>
-					<a href="frmCadDocente.php">Cadastrar Docentes</a>
+					<?php
+					if ($_SESSION["nivel"] != "limit") {
+					?>
+						<a href="frmCadDocente.php">Cadastrar Docentes</a>
+					<?php
+					}
+					?>
 					<a href="consultarDocente.php">Consultar Docentes</a>
 				</ol>
 			</li>

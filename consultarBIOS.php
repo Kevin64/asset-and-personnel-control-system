@@ -61,9 +61,16 @@ $totalSalas = mysqli_num_rows($query);
 				<td><a href="?ordenar=marca&sort=<?php echo $sort; ?>">Marca</a></td>
 				<td><a href="?ordenar=versao&sort=<?php echo $sort; ?>">Versão</a></td>
 				<td><a href="?ordenar=tipo&sort=<?php echo $sort; ?>">Tipo</a></td>
-				<td>Excluir</td>
+				<?php
+				if (isset($_SESSION['nivel'])) {
+					if ($_SESSION["nivel"] == "adm") {
+				?>
+						<td>Excluir</td>
+				<?php
+					}
+				}
+				?>
 				<td>
-					<!-- Espaço para checkbox -->
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -78,14 +85,28 @@ $totalSalas = mysqli_num_rows($query);
 					<td><?php echo $marca; ?></td>
 					<td><?php echo $versao; ?></td>
 					<td><?php echo $tipo; ?></td>
-					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
+					<?php
+					if (isset($_SESSION['nivel'])) {
+						if ($_SESSION["nivel"] == "adm") {
+					?>
+							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
+					<?php
+						}
+					}
+					?>
 				</tr>
+				<?php
+			}
+			if (isset($_SESSION['nivel'])) {
+				if ($_SESSION["nivel"] == "adm") {
+				?>
+					<tr>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" style="width: 300px;"></td>
+					</tr>
 			<?php
+				}
 			}
 			?>
-			<tr>
-				<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" style="width: 300px;"></td>
-			</tr>
 		</form>
 	</table>
 </div>

@@ -60,7 +60,15 @@ $totalDocentes = mysqli_num_rows($query);
 				<td><a href="?ordenar=nome&sort=<?php echo $sort; ?>">Nome</a></td>
 				<td><a href="?ordenar=curso&sort=<?php echo $sort; ?>">Curso</a></td>
 				<td><a href="?ordenar=faltas&sort=<?php echo $sort; ?>">Faltas</a></td>
-				<td>Excluir</td>
+				<?php
+				if (isset($_SESSION['nivel'])) {
+					if ($_SESSION["nivel"] == "adm") {
+				?>
+						<td>Excluir</td>
+				<?php
+					}
+				}
+				?>
 				<td>
 			</tr>
 			<?php
@@ -76,14 +84,28 @@ $totalDocentes = mysqli_num_rows($query);
 					<td><?php echo $nome; ?></td>
 					<td><?php echo $curso; ?></td>
 					<td width=120><input id="missMinusButton" type="submit" class="button" name="menosfalta" formaction="faltasDocente.php" value="<?php echo '-' ?>"><?php echo " " . $faltas . " "; ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" formaction="faltasDocente.php" value="<?php echo '+' ?>"></td>
-					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
+					<?php
+					if (isset($_SESSION['nivel'])) {
+						if ($_SESSION["nivel"] == "adm") {
+					?>
+							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
+					<?php
+						}
+					}
+					?>
 				</tr>
+				<?php
+			}
+			if (isset($_SESSION['nivel'])) {
+				if ($_SESSION["nivel"] == "adm") {
+				?>
+					<tr>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" style="width: 300px;"></td>
+					</tr>
 			<?php
+				}
 			}
 			?>
-			<tr>
-				<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" style="width: 300px;"></td>
-			</tr>
 		</form>
 	</table>
 </div>

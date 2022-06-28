@@ -330,12 +330,18 @@ if ($enviar != 1) {
 					</td>
 				</tr>
 				</tr>
+				<?php
+			}
+			if (isset($_SESSION['nivel'])) {
+				if ($_SESSION["nivel"] == "adm" or $_SESSION["nivel"] == "user") {
+				?>
+					<tr>
+						<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
+					</tr>
 			<?php
+				}
 			}
 			?>
-			<tr>
-				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
-			</tr>
 		</table>
 	</form>
 </div>
