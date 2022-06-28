@@ -137,7 +137,7 @@ $totalSalas = mysqli_num_rows($query);
 					if (isset($_SESSION['nivel'])) {
 						if ($_SESSION["nivel"] == "adm") {
 					?>
-							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
+							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 					<?php
 						}
 					}
@@ -149,7 +149,7 @@ $totalSalas = mysqli_num_rows($query);
 				if ($_SESSION["nivel"] == "adm") {
 				?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados"></td>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" disabled></td>
 					</tr>
 			<?php
 				}

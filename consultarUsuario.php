@@ -61,13 +61,13 @@ $totalUsuarios = mysqli_num_rows($query);
 				<tr id="dados">
 					<td><?php echo $usuario; ?></td>
 					<td><?php echo $nivel; ?></td>
-					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>"></td>
+					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 				</tr>
 			<?php
 			}
 			?>
 			<tr>
-				<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados"></td>
+				<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" disabled></td>
 			</tr>
 		</form>
 	</table>
