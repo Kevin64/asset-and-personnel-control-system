@@ -38,6 +38,7 @@
 		border-color: white;
 		background: rgb(25, 81, 133);
 		color: white;
+		box-shadow: 0px 10px 30px black;
 	}
 
 	#menu ol a {
@@ -85,6 +86,7 @@
 		border-color: white;
 		background-color: grey;
 		color: white;
+		box-shadow: 0px 10px 30px black;
 	}
 
 	#menu ol a {
