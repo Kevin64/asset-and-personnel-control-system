@@ -7,7 +7,6 @@ require_once("topo.php");
 <div id="meio">
 	<h2>Alterar senha do usuário</h2><br>
 	<form action="alteraSenha.php" method="post" id="frmGeneral">
-
 		<input type=hidden name=txtStatus value="0">
 		<table id="frmFields">
 			<tr>
@@ -24,10 +23,16 @@ require_once("topo.php");
 				}
 				?>
 			</tr>
-			<tr>
-				<td id=label>Senha atual</td>
-				<td><input type=password name=txtSenhaAtual required></td>
-			</tr>
+			<?php
+			if ($_SESSION["nivel"] != "adm") {
+			?>
+				<tr>
+					<td id=label>Senha atual</td>
+					<td><input type=password name=txtSenhaAtual required></td>
+				</tr>
+			<?php
+			}
+			?>
 			<tr>
 				<td id=label>Nova senha</td>
 				<td><input type=password name=txtSenha1 required></td>

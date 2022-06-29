@@ -83,8 +83,13 @@ $totalDocentes = mysqli_num_rows($query);
 					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
 					<td><?php echo $nome; ?></td>
 					<td><?php echo $curso; ?></td>
-					<td width=120><input id="missMinusButton" type="submit" class="button" name="menosfalta" formaction="faltasDocente.php" value="<?php echo '-' ?>"><?php echo " " . $faltas . " "; ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" formaction="faltasDocente.php" value="<?php echo '+' ?>"></td>
+					<td width=120>
 					<?php
+					if($_SESSION["nivel"] != "limit") {
+						?>
+						<input id="missMinusButton" type="submit" class="button" name="menosfalta" formaction="faltasDocente.php" value="<?php echo '-' ?>"><?php } echo " " . $faltas . " "; if($_SESSION["nivel"] != "limit") { ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" formaction="faltasDocente.php" value="<?php echo '+' ?>"></td>
+						<?php 
+					}
 					if (isset($_SESSION['nivel'])) {
 						if ($_SESSION["nivel"] == "adm") {
 					?>
