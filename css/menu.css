@@ -127,6 +127,9 @@ a {
 	display: list-item;
 }
 
+#menu ul>li>a {
+	font-variant: small-caps;
+}
 
 #menu ul>li:hover {
 	z-index: 2;
