@@ -16,7 +16,6 @@ if ($total >= 1) {
 	$query = mysqli_query($conexao, "update patrimonio set dataEntrega = '$dataEntrega', siapeRecebedor = '$siape' where patrimonio = '$patrimonio'") or die("Erro na query de atualização! " . mysqli_error($conexao));
 	$mensagem = "Operação concluída com êxito!";
 }
-
 ?>
 
 <!DOCTYPE html>

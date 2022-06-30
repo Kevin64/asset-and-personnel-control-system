@@ -32,6 +32,7 @@ $vt = $_GET["vt"];
 $tpm = $_GET["tpm"];
 $trocaPilha = $_GET["trocaPilha"];
 $ticketNum = $_GET["ticketNum"];
+$agent = $_GET["agent"];
 
 $dataF = substr($dataFormatacao, 0, 10);
 $dataExplodida = explode("/", $dataF);
@@ -44,11 +45,11 @@ $total = mysqli_num_rows($queryPegaPatrimonio);
 
 if ($total >= 1) {
 	$query = mysqli_query($conexao, "update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm', trocaPilha = '$trocaPilha', ticketNum = '$ticketNum' where patrimonio = '$patrimonio'") or die("Erro na query de atualização! " . mysqli_error($conexao));
-	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum')") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
+	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum, agent) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum', '$agent')") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
 	$mensagem = "Computador já existente, dados atualizados com sucesso!";
 } else {
 	$query = mysqli_query($conexao, "insert into patrimonio (patrimonio, lacre, sala, predio, ad, padrao, dataFormatacao, marca, modelo, numSerie, processador, memoria, hd, sistemaOperacional, hostname, bios, mac, ip, emUso, etiqueta, tipo, tipoFW, tipoArmaz, gpu, modoArmaz, secBoot, vt, tpm, trocaPilha, ticketNum) values('$patrimonio', '$numeroLacre', '$sala', '$predio', '$ad', '$padrao', '$dataFormatacao', '$marca', '$modelo', '$numeroSerial', '$processador', '$memoria', '$hd', '$sistemaOperacional', '$nomeDoComputador', '$bios', '$mac', '$ip', '$emUso', '$etiqueta', '$tipo', '$tipoFW', '$tipoArmaz', '$gpu', '$modoArmaz', '$secBoot', '$vt', '$tpm', '$trocaPilha', '$ticketNum')") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
-	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum')") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
+	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum, agent) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum', '$agent')") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
 	$mensagem = "Computador cadastrado com sucesso!";
 }
 

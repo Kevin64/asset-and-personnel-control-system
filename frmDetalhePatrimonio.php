@@ -19,7 +19,7 @@ if ($enviar != 1) {
 		$patrimonioFK = $_GET["patrimonioFK"];
 
 	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro a selecionar patrimônio para exibir detalhes! " . mysqli_error($conexao));
-	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro a selecionar patrimônio para exibir detalhes! " . mysqli_error($conexao));
+	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro a selecionar patrimônio para exibir detalhes! " . mysqli_error($conexao));
 } else {
 	$idPatrimonio = $_POST["txtIdPatrimonio"];
 	$patrimonio = $_POST["txtPatrimonio"];
@@ -71,7 +71,7 @@ if ($enviar != 1) {
 	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', descricao = '$descricao', nomeRecebedor = '$recebedor', siapeRecebedor = '$siape', ramal = '$ramal', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
 
 	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
-	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
+	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
 }
 ?>
 <div id="meio">
@@ -198,25 +198,26 @@ if ($enviar != 1) {
 				<tr>
 					<td id=label>Manutenções Anteriores</td>
 					<td>
-						<label name=txtFormatacoesAnteriores style=color:green><br>
+						<label name=txtFormatacoesAnteriores style="color:green; font-size:12pt"><br>
 							<?php
 							while ($resultadoFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
 								$formatacoesAnteriores = $resultadoFormatAnt["dataFormatacoesAnteriores"];
 								$modoServico = $resultadoFormatAnt["modoServico"];
 								$pilhaAnteriores = $resultadoFormatAnt["trocaPilha"];
 								$ticketAnteriores = $resultadoFormatAnt["ticketNum"];
+								$agent = $resultadoFormatAnt["agent"];
 								$dataFA = substr($formatacoesAnteriores, 0, 10);
 								$mode = substr($formatacoesAnteriores, 10, 30);
 								$dataExplodidaA = explode("-", $dataFA);
-								if ($pilhaAnteriores != NULL || $ticketAnteriores != NULL) {
-									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico . " - " . $pilhaAnteriores . " - Chamado nº " . $ticketAnteriores;
+								if ($pilhaAnteriores != NULL || $ticketAnteriores != NULL || $agent != NULL) {
+									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico . " - " . $pilhaAnteriores . " - <br>Chamado nº: " . $ticketAnteriores . " - Agente responsável: " . $agent;
 								} else if ($modoServico != NULL) {
 									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0] . " - " . $modoServico;
 								} else {
 									$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0];
 								}
 								echo $formatacoesAnteriores . PHP_EOL;
-								echo "<br>";
+								echo "<br><br>";
 							}
 							?>
 						</label><br>
