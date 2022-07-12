@@ -66,6 +66,10 @@ html {
 	font-family: ZapfHumnst;
 }
 
+textarea {
+	resize: vertical;
+}
+
 body,
 input,
 textarea,

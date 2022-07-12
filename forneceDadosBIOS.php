@@ -1,10 +1,16 @@
 <?php
 require_once __DIR__ . '/../conexao.php';
 
-$marca = $_GET["marca"];
-$modelo = $_GET["modelo"];
-$versao = $_GET["versao"];
-$tipo = $_GET["tipo"];
+$mensagem = null;
+
+if(isset($_GET["marca"]))
+	$marca = $_GET["marca"];
+if(isset($_GET["modelo"]))
+	$modelo = $_GET["modelo"];
+if(isset($_GET["versao"]))
+	$versao = $_GET["versao"];
+if(isset($_GET["tipo"]))
+	$tipo = $_GET["tipo"];
 
 $biosFile = 'bios.json';
 $biosChecksum = 'bios-checksum.txt';

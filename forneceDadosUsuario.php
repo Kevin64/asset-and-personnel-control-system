@@ -1,10 +1,16 @@
 <?php
 require_once __DIR__ . '/../conexao.php';
 
-$usuario = $_GET["usuario"];
-$senha = $_GET["senha"];
-$nivel = $_GET["nivel"];
-$status = $_GET["status"];
+$mensagem = null;
+
+if(isset($_GET["usuario"]))
+	$usuario = $_GET["usuario"];
+if(isset($_GET["senha"]))
+	$senha = $_GET["senha"];
+if(isset($_GET["nivel"]))
+	$nivel = $_GET["nivel"];
+if(isset($_GET["status"]))
+	$status = $_GET["status"];
 
 $loginFile = 'login.json';
 $loginChecksum = 'login-checksum.txt';
