@@ -6,7 +6,7 @@ require_once("topo.php");
 
 <div id="meio">
 	<form action="cadDocente.php" method=post id=frmGeneral>
-		<h2>Formulário de cadastro de docente</h2><br>
+		<h2>Formulário de cadastro de servidor</h2><br>
 		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="frmFields">
 			<tr>
@@ -15,6 +15,16 @@ require_once("topo.php");
 			<tr>
 				<td id="label">SIAPE<mark id=asterisk>*</mark></td>
 				<td><input type=text name=txtSiape placeholder="Ex.: 1234567" maxLength=8 required></td>
+			</tr>
+			<tr>
+				<td id="label">Tipo de servidor<mark id=asterisk>*</mark></td>
+				<td>
+					<select name=txtTipoServidor required>
+						<option disabled selected value> -- Selecione uma opção -- </option>
+						<option value=Professor>Professor</option>
+						<option value="Técnico Administrativo em Educação">Técnico Administrativo em Educação</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td id="label">Nome<mark id=asterisk>*</mark></td>

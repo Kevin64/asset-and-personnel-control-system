@@ -17,6 +17,8 @@ if ($enviar != 1) {
 		$idDocente = $_POST["txtIdDocente"];
 	if (isset($_POST["txtSiape"]))
 		$siape = $_POST["txtSiape"];
+	if (isset($_POST["txtTipoServidor"]))
+		$tipoServidor = $_POST["txtTipoServidor"];
 	if (isset($_POST["txtNome"]))
 		$nome = $_POST["txtNome"];
 	if (isset($_POST["txtEmail"]))
@@ -35,7 +37,7 @@ if ($enviar != 1) {
 		$data_ultima_falta = $_POST["txtDataUltimaFalta"];
 
 	//Atualizando os dados do docente
-	mysqli_query($conexao, "update docente set siape = '$siape', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala' where id = '$idDocente'") or die("Erro ao atualizar os dados do docente! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update docente set siape = '$siape', tipoServidor = '$tipoServidor', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala' where id = '$idDocente'") or die("Erro ao atualizar os dados do docente! " . mysqli_error($conexao));
 
 	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die("Erro ao selecionar os dados do docente! " . mysqli_error($conexao));
 }
@@ -45,17 +47,18 @@ if ($enviar != 1) {
 	<form action="frmDetalheDocente.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do docente</h2><br>
-		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<?php
 		if ($enviar == 1) {
 			echo "<font color=blue>Dados do docente atualizados com sucesso!</font><br><br>";
 		}
 		?>
+		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="frmFields">
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
 				$idDocente = $resultado["id"];
 				$siape = $resultado["siape"];
+				$tipoServidor = $resultado["tipoServidor"];
 				$nome = $resultado["nome"];
 				$email = $resultado["email"];
 				$ramal = $resultado["ramal"];
@@ -71,15 +74,25 @@ if ($enviar != 1) {
 				<tr>
 					<td id="label">SIAPE<mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdDocente value="<?php echo $idDocente; ?>">
-					<td><input type=text name=txtSiape placeholder="Ex.: 1234567" maxlength="8" required value="<?php echo $siape; ?>"></td>
+					<td><input type=text name=txtSiape maxlength="8" required value="<?php echo $siape; ?>"></td>
+				</tr>
+				<tr>
+					<td id="label">Tipo de servidor<mark id=asterisk>*</mark></td>
+					<td>
+						<select name=txtTipoServidor required>
+							<option disabled selected value> -- Selecione uma opção -- </option>
+							<option value="Prof." <?php if ($tipoServidor == "Prof.") echo 'selected="selected"'; ?>>Professor</option>
+							<option value=TAE <?php if ($tipoServidor == "TAE") echo 'selected="selected"'; ?>>Técnico Administrativo em Educação</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td id="label">Nome<mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtNome placeholder="Ex.: Fulano de Tal" required value="<?php echo $nome; ?>"></td>
+					<td><input type=text name=txtNome required value="<?php echo $nome; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">E-mail<mark id=asterisk>*</mark></td>
-					<td><input type=email name=txtEmail placeholder="Ex.: fulano@email.com" required value="<?php echo $email; ?>"></td>
+					<td><input type=email name=txtEmail required value="<?php echo $email; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Ramal</td>
@@ -87,11 +100,11 @@ if ($enviar != 1) {
 				</tr>
 				<tr>
 					<td id="label">Celular (com DDD)<mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtCelular placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required value="<?php echo $celular; ?>"></td>
+					<td><input type=text name=txtCelular minLength=11 maxLength=11 required value="<?php echo $celular; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Curso<mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtCurso placeholder="Ex.: Curso de Humanas" required value="<?php echo $curso; ?>"></td>
+					<td><input type=text name=txtCurso required value="<?php echo $curso; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Sala</td>
@@ -109,7 +122,7 @@ if ($enviar != 1) {
 					<td colspan=2 id=separador>Modelo para Reserva de Salas (Copiar e Colar)</td>
 				</tr>
 				<tr>
-					<td colspan=2><br><?php echo "<h4>Prof. " . $nome . " - Curso de " . $curso; ?></br></td>
+					<td colspan=2><br><?php echo "<h4>" . $tipoServidor . " " . $nome . " - Curso de " . $curso; ?></br></td>
 				</tr>
 				<tr>
 					<td colspan=2><br><?php echo "SIAPE: " . $siape; ?></br></td>

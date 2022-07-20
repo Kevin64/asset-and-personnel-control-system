@@ -67,11 +67,11 @@ if ($enviar != 1) {
 	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do patrimônio</h2><br>
-		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<?php
 		if ($enviar == 1)
 			echo "<font color=blue>Dados do patrimônio atualizados com sucesso!</font><br><br>";
 		?>
+		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>		
 		<table id="frmFields">
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
