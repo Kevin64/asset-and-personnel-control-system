@@ -45,6 +45,7 @@ if ($enviar != 1) {
 	<form action="frmDetalheDocente.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do docente</h2><br>
+		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<?php
 		if ($enviar == 1) {
 			echo "<font color=blue>Dados do docente atualizados com sucesso!</font><br><br>";
@@ -68,33 +69,33 @@ if ($enviar != 1) {
 					<td colspan=2 id=separador>Dados do docente</td>
 				</tr>
 				<tr>
-					<td id="label">SIAPE</td>
+					<td id="label">SIAPE<mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdDocente value="<?php echo $idDocente; ?>">
-					<td><input type=text name=txtSiape value="<?php echo $siape; ?>" maxLength=8></td>
+					<td><input type=text name=txtSiape placeholder="Ex.: 1234567" maxlength="8" required value="<?php echo $siape; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Nome</td>
-					<td><input type=text name=txtNome value="<?php echo $nome; ?>"></td>
+					<td id="label">Nome<mark id=asterisk>*</mark></td>
+					<td><input type=text name=txtNome placeholder="Ex.: Fulano de Tal" required value="<?php echo $nome; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">E-mail</td>
-					<td><input type=email name=txtEmail value="<?php echo $email; ?>"></td>
+					<td id="label">E-mail<mark id=asterisk>*</mark></td>
+					<td><input type=email name=txtEmail placeholder="Ex.: fulano@email.com" required value="<?php echo $email; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Ramal</td>
-					<td><input type=text name=txtRamal value="<?php echo $ramal; ?>" maxLength=4></td>
+					<td><input type=text name=txtRamal maxLength=4 value="<?php echo $ramal; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Celular (com DDD)</td>
-					<td><input type=text name=txtCelular value="<?php echo $celular; ?>" minLength=11 maxLength=11></td>
+					<td id="label">Celular (com DDD)<mark id=asterisk>*</mark></td>
+					<td><input type=text name=txtCelular placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required value="<?php echo $celular; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Curso</td>
-					<td><input type=text name=txtCurso value="<?php echo $curso; ?>"></td>
+					<td id="label">Curso<mark id=asterisk>*</mark></td>
+					<td><input type=text name=txtCurso placeholder="Ex.: Curso de Humanas" required value="<?php echo $curso; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Sala</td>
-					<td><input type=text name=txtSala value="<?php echo $sala; ?>" maxLength=4></td>
+					<td><input type=text name=txtSala maxLength=4 value="<?php echo $sala; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Faltas</td>
@@ -115,9 +116,6 @@ if ($enviar != 1) {
 				</tr>
 				<tr>
 					<td colspan=2><?php echo "Curso: " . $curso; ?> </td>
-				</tr>
-				<tr>
-					<td colspan=2><?php echo "Ramal: " . $ramal; ?> </td>
 				</tr>
 				<tr>
 					<td colspan=2><?php echo "Celular: " . $celular; ?> </td>

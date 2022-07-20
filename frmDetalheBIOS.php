@@ -49,6 +49,7 @@ if ($enviar != 1) {
 	<form action="frmDetalheBIOS.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes da BIOS</h2><br>
+		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<?php
 		if ($enviar == 1)
 			echo "<font color=blue>Dados da BIOS atualizados com sucesso!</font><br><br>";
@@ -63,23 +64,23 @@ if ($enviar != 1) {
 				$tipo = $resultado["tipo"];
 			?>
 				<tr>
-					<td colspan=2 id=separador>Dados da BIOS</td>
+					<td colspan=2 id=separador>Dados do modelo</td>
 				</tr>
 				<tr>
-					<td id="label">Modelo</td>
+					<td id="label">Marca<mark id=asterisk>*</mark></td>
+					<td><input type=text name=txtMarca placeholder="Ex.: Dell, Hewlett-Packard, LENOVO, etc" required value="<?php echo $marca; ?>"></td>
+				</tr>
+				<tr>
+					<td id="label">Modelo<mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdModelo value="<?php echo $idModelo; ?>">
-					<td><input type=text name=txtModelo value="<?php echo $modelo; ?>"></td>
+					<td><input type=text name=txtModelo placeholder="Ex.: 9010, 6005, etc" required value="<?php echo $modelo; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Marca</td>
-					<td><input type=text name=txtMarca value="<?php echo $marca; ?>"></td>
+					<td id="label">Versão da BIOS/UEFI<mark id=asterisk>*</mark></td>
+					<td><input type=text name=txtVersao placeholder="Ex.: A30, 1.17, etc" required value="<?php echo $versao; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Versão da BIOS/UEFI</td>
-					<td><input type=text name=txtVersao value="<?php echo $versao; ?>"></td>
-				</tr>
-				<tr>
-					<td id="label">Tipo</td>
+					<td id="label">Tipo de firmware<mark id=asterisk>*</mark></td>
 					<td>
 						<?php
 						?>

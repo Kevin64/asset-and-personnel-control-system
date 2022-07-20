@@ -25,16 +25,13 @@ if ($enviar != 1) {
 	$patrimonio = $_POST["txtPatrimonio"];
 	$predio = $_POST["txtPredio"];
 	$sala = $_POST["txtSala"];
-	$descricao = $_POST["txtDescricao"];
-	$recebedor = $_POST["txtRecebedor"];
 	$siape = $_POST["txtSiapeRecebedor"];
-	$entregador = $_POST["txtEntregador"];
-	$ramal = $_POST["txtRamal"];
+	if (isset($_POST["txtEntregador"]))
+		$entregador = $_POST["txtEntregador"];
 	$dataEntrega = $_POST["txtDataEntrega"];
 	$padrao = $_POST["txtPadrao"];
 	$observacao = $_POST["txtObservacao"];
 	$ultimaFormatacao = $_POST["txtUltimaFormatacao"];
-	$modoServico = $_POST["txtModoServico"];
 	$ad = $_POST["txtAd"];
 	$marca = $_POST["txtMarca"];
 	$modelo = $_POST["txtModelo"];
@@ -58,11 +55,9 @@ if ($enviar != 1) {
 	$secBoot = $_POST["txtSecBoot"];
 	$vt = $_POST["txtVT"];
 	$tpm = $_POST["txtTPM"];
-	$trocaPilha = $_POST["txtTrocaPilha"];
-	$ticketNum = $_POST["txtTicketNum"];
 
 	//Atualizando os dados do patrimônio
-	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', descricao = '$descricao', nomeRecebedor = '$recebedor', siapeRecebedor = '$siape', ramal = '$ramal', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', siapeRecebedor = '$siape', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
 
 	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
 	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
@@ -72,6 +67,7 @@ if ($enviar != 1) {
 	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do patrimônio</h2><br>
+		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<?php
 		if ($enviar == 1)
 			echo "<font color=blue>Dados do patrimônio atualizados com sucesso!</font><br><br>";
@@ -83,15 +79,12 @@ if ($enviar != 1) {
 				$patrimonio = $resultado["patrimonio"];
 				$predio = $resultado["predio"];
 				$sala = $resultado["sala"];
-				$descricao = $resultado["descricao"];
-				$recebedor = $resultado["nomeRecebedor"];
 				$siape = $resultado["siapeRecebedor"];
-				$entregador = $resultado["entregador"];
-				$ramal = $resultado["ramal"];
 				$dataEntrega = $resultado["dataEntrega"];
-				$padrao = $resultado["padrao"];
+				$entregador = $resultado["entregador"];				
 				$observacao = $resultado["observacao"];
 				$ultimaFormatacao = $resultado["dataFormatacao"];
+				$padrao = $resultado["padrao"];
 				$ad = $resultado["ad"];
 				$marca = $resultado["marca"];
 				$modelo = $resultado["modelo"];
@@ -132,14 +125,14 @@ if ($enviar != 1) {
 					<td colspan=7 id=separador>Dados do patrimônio</td>
 				</tr>
 				<tr>
-					<td id="label">Patrimônio</td>
+					<td id="label">Patrimônio<mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdPatrimonio value="<?php echo $idPatrimonio; ?>">
-					<td colspan=5><input type=text name=txtPatrimonio value="<?php echo $patrimonio; ?>"></td>
+					<td colspan=5><input type=text name=txtPatrimonio placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $patrimonio; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Prédio</td>
+					<td id="label">Prédio<mark id=asterisk>*</mark></td>
 					<td colspan=5>
-						<select id="frmFields" name="txtPredio">
+						<select id="frmFields" name="txtPredio" required>
 							<option value="21" <?php if ($predio == "21") echo "selected"; ?>>21</option>
 							<option value="67" <?php if ($predio == "67") echo "selected"; ?>>67</option>
 							<option value="74A" <?php if ($predio == "74A") echo "selected"; ?>>74A</option>
@@ -150,12 +143,12 @@ if ($enviar != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id="label">Sala</td>
-					<td colspan=5><input id="frmFields" type=text name=txtSala value="<?php echo $sala; ?>"></td>
+					<td id="label">Sala<mark id=asterisk>*</mark></td>
+					<td colspan=5><input id="frmFields" type=text name=txtSala placeholder="Ex.: 4413" maxlength="4" required value="<?php echo $sala; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Siape do recebedor da última entrega</td>
-					<td colspan=5><input type=text name=txtSiapeRecebedor value="<?php echo $siape; ?>"></td>
+					<td colspan=5><input type=text name=txtSiapeRecebedor maxlength="8" value="<?php echo $siape; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">Data da última entrega</td>
@@ -236,6 +229,10 @@ if ($enviar != 1) {
 		<table id="frmFields">
 			<tr>
 				<td colspan="2" id=separador>Dados do equipamento</td>
+			</tr>
+			<tr>
+					<!-- <td id=label>Última manutenção</td> -->
+					<td><input type=hidden name=txtUltimaFormatacao value="<?php echo $ultimaFormatacao; ?>"></td>					
 			</tr>
 			<tr>
 				<td id="label">Padrão</td>

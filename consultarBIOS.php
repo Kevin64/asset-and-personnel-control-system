@@ -53,7 +53,7 @@ $totalSalas = mysqli_num_rows($query);
 		</form>
 	</table>
 	<br><br>
-	<h2>Lista de BIOS (<?php echo $totalSalas; ?>)</h2><br>
+	<h2>Lista de modelos (<?php echo $totalSalas; ?>)</h2><br>
 	<table id="dadosBIOS" cellspacing=0>
 		<form action="apagaSelecionadosBIOS.php" method="post">
 			<tr id="cabecalho">
