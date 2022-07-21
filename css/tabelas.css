@@ -26,6 +26,18 @@
 		background-color: white;
 		color: black;
 	}
+
+	#bodyPreviousMaintenance {
+		background-color:aliceblue;
+	}
+
+	#bodyPreviousMaintenance label {
+		color: darkblue;
+	}
+
+	#headerPreviousMaintenance {
+		background-color:powderblue;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,6 +66,18 @@
 	#filterBIOS {
 		background-color: black;
 		color: white;
+	}
+
+	#bodyPreviousMaintenance {
+		background-color: black;
+	}
+
+	#bodyPreviousMaintenance label {
+		color: lime;
+	}
+
+	#headerPreviousMaintenance {
+		background-color:darkslategray;
 	}
 }
 
@@ -127,4 +151,9 @@ input[type=text] {
 #filterBIOS,
 #filterDocente {
 	width: auto;
+}
+
+#bodyPreviousMaintenance td,
+#headerPreviousMaintenance td {
+	border: 1px solid;
 }

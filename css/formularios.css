@@ -21,6 +21,10 @@
 	#label {
 		color: black;
 	}
+
+	#asteriskWarning {
+		color: darkblue;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,6 +49,10 @@
 
 	#label {
 		color: white;
+	}
+
+	#asteriskWarning {
+		color: lightblue;
 	}
 }
 

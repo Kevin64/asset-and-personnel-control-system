@@ -7,7 +7,7 @@ require_once("topo.php");
 <div id="meio">
 	<form action="cadBIOS.php" method=post id=frmGeneral>
 		<h2>Formulário de cadastro de modelo de hardware</h2><br>
-		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="frmFields">
 			<tr>
 				<td colspan=2 id=separador>Dados do modelo</td>

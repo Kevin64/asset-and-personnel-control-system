@@ -119,4 +119,5 @@ table {
 #separador {
 	font-weight: bold;
 	text-align: center;
+	border: 1px solid;
 }

@@ -32,6 +32,11 @@ if ($enviar != 1) {
 	$padrao = $_POST["txtPadrao"];
 	$observacao = $_POST["txtObservacao"];
 	$ultimaFormatacao = $_POST["txtUltimaFormatacao"];
+	$manutencoesAnterioresData = $_POST["txtFormatacoesAnterioresData"];
+	$manutencoesAnterioresModo = $_POST["txtFormatacoesAnterioresModo"];
+	$manutencoesAnterioresPilha = $_POST["txtFormatacoesAnterioresPilha"];
+	$manutencoesAnterioresTicket = $_POST["txtFormatacoesAnterioresTicket"];
+	$manutencoesAnterioresAgente = $_POST["txtFormatacoesAnterioresAgente"];
 	$ad = $_POST["txtAd"];
 	$marca = $_POST["txtMarca"];
 	$modelo = $_POST["txtModelo"];
@@ -59,6 +64,8 @@ if ($enviar != 1) {
 	//Atualizando os dados do patrimônio
 	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', siapeRecebedor = '$siape', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
 
+	// mysqli_query($conexao, "update manutencoes inner join patrimonio P on (patrimonioFK = P.patrimonio and dataFormatacoesAnteriores = P.dataFormatacao) set manutencoes.dataFormatacoesAnteriores = '$manutencoesAnterioresData', manutencoes.modoServico = '$manutencoesAnterioresModo', manutencoes.trocaPilha = '$manutencoesAnterioresPilha', manutencoes.ticketNum = '$manutencoesAnterioresTicket', manutencoes.agent = '$manutencoesAnterioresAgente'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
+
 	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
 	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
 }
@@ -71,7 +78,7 @@ if ($enviar != 1) {
 		if ($enviar == 1)
 			echo "<font color=blue>Dados do patrimônio atualizados com sucesso!</font><br><br>";
 		?>
-		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>		
+		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="frmFields">
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -81,7 +88,7 @@ if ($enviar != 1) {
 				$sala = $resultado["sala"];
 				$siape = $resultado["siapeRecebedor"];
 				$dataEntrega = $resultado["dataEntrega"];
-				$entregador = $resultado["entregador"];				
+				$entregador = $resultado["entregador"];
 				$observacao = $resultado["observacao"];
 				$ultimaFormatacao = $resultado["dataFormatacao"];
 				$padrao = $resultado["padrao"];
@@ -163,10 +170,10 @@ if ($enviar != 1) {
 					<td colspan=5><textarea name=txtObservacao cols=20 rows=2 placeholder="Opcional: Campo dedicado para observações e notas referente ao bem patrimonial"><?php echo $observacao; ?></textarea></td>
 				</tr>
 		</table>
-		<table id="frmFields">
+		<table>
 			<tr>
 				<td colspan=5 id=separador>Manutenções realizadas</td>
-			<tr>
+			<tr id=headerPreviousMaintenance>
 				<td>Data</td>
 				<td>Serviço</td>
 				<td>Troca de pilha</td>
@@ -176,47 +183,53 @@ if ($enviar != 1) {
 			<?php
 				while ($resultadoFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
 			?>
-				<tr>
+				<tr id=bodyPreviousMaintenance>
 					<td>
-						<label name=txtFormatacoesAnteriores style="color:green; font-size:12pt">
-							<?php
-							$formatacoesAnteriores = $resultadoFormatAnt["dataFormatacoesAnteriores"];
-							$dataFA = substr($formatacoesAnteriores, 0, 10);
+						<label name=txtFormatacoesAnterioresData>
+							<?php $manutencoesAnterioresData = $resultadoFormatAnt["dataFormatacoesAnteriores"];
+							$dataFA = substr($manutencoesAnterioresData, 0, 10);
 							$dataExplodidaA = explode("-", $dataFA);
-							$formatacoesAnteriores = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0];
-							echo $formatacoesAnteriores;
+							$manutencoesAnterioresData = $dataExplodidaA[2] . "/" . $dataExplodidaA[1] . "/" . $dataExplodidaA[0];
+							echo $manutencoesAnterioresData;
+							?></label>
+					</td>
+					<td>
+						<label name=txtFormatacoesAnterioresModo>
+							<?php $manutencoesAnterioresModo = $resultadoFormatAnt["modoServico"];
+							if ($manutencoesAnterioresModo != "")
+								echo $manutencoesAnterioresModo;
+							else
+								echo "-";
 							?>
 						</label>
 					</td>
 					<td>
-						<label name=txtFormatacoesAnteriores style="color:green; font-size:12pt">
-							<?php
-							$modoServico = $resultadoFormatAnt["modoServico"];
-							echo $modoServico;
+						<label name=txtFormatacoesAnterioresPilha>
+							<?php $manutencoesAnterioresPilha = $resultadoFormatAnt["trocaPilha"];
+							if ($manutencoesAnterioresPilha != "")
+								echo $manutencoesAnterioresPilha;
+							else
+								echo "-";
 							?>
 						</label>
 					</td>
 					<td>
-						<label name=txtFormatacoesAnteriores style="color:green; font-size:12pt">
-							<?php
-							$pilhaAnteriores = $resultadoFormatAnt["trocaPilha"];
-							echo $pilhaAnteriores;
+						<label type=text name=txtFormatacoesAnterioresTicket>
+							<?php $manutencoesAnterioresTicket = $resultadoFormatAnt["ticketNum"];
+							if ($manutencoesAnterioresTicket != "")
+								echo $manutencoesAnterioresTicket;
+							else
+								echo "-";
 							?>
 						</label>
 					</td>
 					<td>
-						<label name=txtFormatacoesAnteriores style="color:green; font-size:12pt">
-							<?php
-							$ticketAnteriores = $resultadoFormatAnt["ticketNum"];
-							echo $ticketAnteriores;
-							?>
-						</label>
-					</td>
-					<td>
-						<label name=txtFormatacoesAnteriores style="color:green; font-size:12pt">
-							<?php
-							$agent = $resultadoFormatAnt["agent"];
-							echo $agent;
+						<label type=text name=txtFormatacoesAnterioresAgente>
+							<?php $manutencoesAnterioresAgente = $resultadoFormatAnt["agent"];
+							if ($manutencoesAnterioresAgente != "")
+								echo $manutencoesAnterioresAgente;
+							else
+								echo "-";
 							?>
 						</label>
 					</td>
@@ -231,8 +244,8 @@ if ($enviar != 1) {
 				<td colspan="2" id=separador>Dados do equipamento</td>
 			</tr>
 			<tr>
-					<!-- <td id=label>Última manutenção</td> -->
-					<td><input type=hidden name=txtUltimaFormatacao value="<?php echo $ultimaFormatacao; ?>"></td>					
+				<!-- <td id=label>Última manutenção</td> -->
+				<td><input type=hidden name=txtUltimaFormatacao value="<?php echo $ultimaFormatacao; ?>"></td>
 			</tr>
 			<tr>
 				<td id="label">Padrão</td>

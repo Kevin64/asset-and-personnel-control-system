@@ -52,7 +52,7 @@ if ($enviar != 1) {
 			echo "<font color=blue>Dados do docente atualizados com sucesso!</font><br><br>";
 		}
 		?>
-		<label style="color:darkblue">Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="frmFields">
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
