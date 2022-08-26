@@ -1,0 +1,174 @@
+/*==================*/
+/*FormataÃ§Ã£o do Menu*/
+/*==================*/
+
+@media (prefers-color-scheme: light) {
+	#menu ul {
+		/*Borda do menu cantos arredondados e fundo cinza escuro*/
+		border-color: black;
+		background-color: rgb(25, 81, 133);
+	}
+
+	#menu li a,
+	li span {
+		color: white;
+	}
+
+	#menu ul>li {
+		/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
+		border-color: white;
+		background-color: rgb(25, 81, 133);
+	}
+
+	#menu ul>li:hover {
+		/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
+		background-color: cadetblue;
+	}
+
+	#menu li:hover ol {
+		background-color: rgb(25, 81, 133);
+		color: black;
+	}
+
+	#menu ol a:hover {
+		background-color: cadetblue;
+	}
+
+	#menu li ol {
+		border-color: white;
+		background: rgb(25, 81, 133);
+		color: white;
+		box-shadow: 0px 10px 30px black;
+	}
+
+	#menu ol a {
+		color: white;
+	}
+
+	#menu ol a:hover {
+		border-color: rgb(249, 202, 20);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	#menu ul {
+		/*Borda do menu cantos arredondados e fundo cinza escuro*/
+		border-color: white;
+		background-color: grey;
+	}
+
+	#menu li a,
+	li span {
+		color: white;
+	}
+
+	#menu ul>li {
+		/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
+		border-color: white;
+		background-color: grey;
+	}
+
+	#menu ul>li:hover {
+		/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
+		background-color: black;
+	}
+
+	#menu li:hover ol {
+		background-color: grey;
+		color: white;
+	}
+
+	#menu ol a:hover {
+		background-color: black;
+	}
+
+	#menu li ol {
+		border-color: white;
+		background-color: grey;
+		color: white;
+		box-shadow: 0px 10px 30px black;
+	}
+
+	#menu ol a {
+		color: white;
+	}
+
+	#menu ol a:hover {
+		border-color: white;
+	}
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul,
+li,
+span,
+a {
+	z-index: 2;
+	display: block;
+	overflow: hidden;
+}
+
+#menu ul {
+	z-index: 2;
+	border: 1px solid;
+	border-radius: 15px 15px 0 0;
+	list-style-type: none;
+	display: flex;
+	justify-content: center;	
+}
+
+#menu ul>li {
+	z-index: 2;
+	border-left: 1px solid;
+	display: list-item;
+}
+
+#menu ul>li>a {
+	font-variant: small-caps;
+}
+
+#menu ul>li:hover {
+	z-index: 2;
+	transition: all .5s;
+}
+
+#menu ul>li {
+	z-index: 2;
+	border-left: none;
+	transition: all .5s;
+}
+
+#menu li a,
+li span {
+	z-index: 2;
+	padding: 10px 5px;
+	width: auto;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+}
+
+#menu li ol {
+	z-index: 2;
+	width: 90px;
+	position: fixed;
+}
+
+#menu ol a {
+	padding: 10px 1px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+
+#menu ol a:hover {
+	transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
+}
+
+/*=========================*/
+/*Fim da formataÃ§Ã£o do Menu*/
+/*=========================*/

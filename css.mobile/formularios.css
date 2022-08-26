@@ -57,59 +57,60 @@
 }
 
 #frmLogin {
-	margin-left: 300px;
+	margin-left: 25px;
+	margin-right: 25px;
 	margin-top: -75px;
-	width: 350px;
 	height: 225px;
 	border: 2px solid;
 	border-radius: 20px;
 	padding: 20px;
 	text-align: center;
-	box-shadow: 0px 0px 40px;
+	box-shadow: 0px 0px 25px;
 }
 
 #frmCadBIOS {
 	text-align: center;
-	width: 700px;
+	width: auto;
 	height: auto;
 	margin-left: 150px;
 }
 
 #frmCadDocente {
 	text-align: center;
-	width: 800px;
+	width: auto;
 	height: auto;
 	margin-left: 100px;
 }
 
 #frmCadBIOS table {
-	width: 700px;
+	width: auto;
 	height: auto;
-	border: 1px solid;
+	border: 0px solid;
 	padding: 5px;
 	text-align: center;
 }
 
 #frmCadDocente table {
-	width: 800px;
+	width: auto;
 	height: auto;
-	border: 1px solid;
+	border: 0px solid;
 	padding: 5px;
 	text-align: center;
 }
 
 #frmGeneral table {
-	margin-left: 100px;
-	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
 	height: auto;
-	border: 1px solid;
+	border: 0px solid;
 	padding: 5px;
 	text-align: center;
 }
 
 #frmCadBIOS select,
 textarea {
-	width: 300px;
+	width: auto;
 	border: 1px solid;
 	padding: 5px;
 	text-align: center;
@@ -123,15 +124,15 @@ textarea {
 
 #frmCadDocente select,
 textarea {
-	width: 350;
+	width: auto;
 	border: 1px solid;
 	padding: 5px;
 	text-align: center;
 }
 
 #frmGeneral td#label {
-	text-align: right;
-	width: 200px;
+	text-align: center;
+	width: 25%;
 }
 
 #asterisk {

@@ -74,16 +74,16 @@ body,
 input,
 textarea,
 select {
-	font-size: 16px;
-	padding: 5px;
+    font-size: 11pt;
+	padding-top: 5px;
 }
 
 table {
-	font-size: 18px;
+	font-size: 10pt;
 }
 
 #container {
-	width: 1000px;
+	width: auto;
 	height: 200px;
 	position: relative;
 	margin: 0 auto;
@@ -94,13 +94,13 @@ table {
 }
 
 #topo {
-	width: 1002px;
+	width: auto;
 	text-align: center;
 	border-radius: 15px;
 }
 
 #meio {
-	width: 1000px;
+	width: auto;
 	height: auto;
 	text-align: center;
 	vertical-align: middle;
@@ -109,7 +109,7 @@ table {
 }
 
 #rodape {
-	width: 1000px;
+	width: auto;
 	height: auto;
 	text-align: center;
 	border-radius: 0 0 15px 15px;

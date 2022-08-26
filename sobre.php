@@ -20,8 +20,8 @@ require_once("menu.php");
 
 				<b>Nome:</b> Kevin Costa<br>
 				<b>Técnico Administrativo em Educação</b><br>
-				<b>Colaboração:</b> Desenvolvimento das atualizações subsequentes (migração para PHP7), manutenção do banco de dados e da interface web, desenvolvimento do software de cadastro de patrimônio, testes e melhorias.<br>
-				<b>Recursos utilizados:</b> Linguagem de programação C#, PHP7, Banco de dados mySQL, HTML5, Javascript, CSS3.<br>
+				<b>Colaboração:</b> Desenvolvimento das atualizações subsequentes (migração para PHP8), manutenção do banco de dados e da interface web, desenvolvimento do software de cadastro de patrimônio, testes e melhorias.<br>
+				<b>Recursos utilizados:</b> Linguagem de programação C#, PHP8, Banco de dados mySQL, HTML5, Javascript, CSS3.<br>
 				<b>Siape:</b> 1971957<br>
 				<b>Contato:</b> kevinvtc@outlook.com<br>
 			</p>

@@ -40,14 +40,17 @@ $totalSalas = mysqli_num_rows($query);
 		<form action=consultarBIOS.php method=post>
 			<input type=hidden name=txtEnviar value=1>
 			<tr>
-				<td align="center">Pesquisar por:
+				<td align=center>Pesquisar por:</td>
+			</tr>
+			<tr>
+				<td align=center>
 					<select id=filterBIOS name=rdCriterio>
 						<option value="modelo">Modelo</option>
 						<option value="marca">Marca</option>
 						<option value="versao">Versão</option>
 						<option value="tipo">Tipo</option>
 					</select>
-					<input type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
+					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
@@ -57,20 +60,19 @@ $totalSalas = mysqli_num_rows($query);
 	<table id="dadosBIOS" cellspacing=0>
 		<form action="apagaSelecionadosBIOS.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=modelo&sort=<?php echo $sort; ?>">Modelo</a></td>
-				<td><a href="?ordenar=marca&sort=<?php echo $sort; ?>">Marca</a></td>
-				<td><a href="?ordenar=versao&sort=<?php echo $sort; ?>">Versão</a></td>
-				<td><a href="?ordenar=tipo&sort=<?php echo $sort; ?>">Tipo</a></td>
 				<?php
 				if (isset($_SESSION['nivel'])) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
-						<td>Excluir</td>
+						<td><img src="trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td>
+				<td><a href="?ordenar=modelo&sort=<?php echo $sort; ?>">Modelo</a></td>
+				<td><a href="?ordenar=marca&sort=<?php echo $sort; ?>">Marca</a></td>
+				<td><a href="?ordenar=versao&sort=<?php echo $sort; ?>">Versão</a></td>
+				<td><a href="?ordenar=tipo&sort=<?php echo $sort; ?>">Tipo</a></td>
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -81,10 +83,6 @@ $totalSalas = mysqli_num_rows($query);
 				$tipo = $resultado["tipo"];
 			?>
 				<tr id="dados">
-					<td><a href="frmDetalheBIOS.php?id=<?php echo $id; ?>"><?php echo $modelo; ?></style></a></td>
-					<td><?php echo $marca; ?></td>
-					<td><?php echo $versao; ?></td>
-					<td><?php echo $tipo; ?></td>
 					<?php
 					if (isset($_SESSION['nivel'])) {
 						if ($_SESSION["nivel"] == "adm") {
@@ -94,6 +92,10 @@ $totalSalas = mysqli_num_rows($query);
 						}
 					}
 					?>
+					<td><a href="frmDetalheBIOS.php?id=<?php echo $id; ?>"><?php echo $modelo; ?></style></a></td>
+					<td><?php echo $marca; ?></td>
+					<td><?php echo $versao; ?></td>
+					<td><?php echo $tipo; ?></td>
 				</tr>
 				<?php
 			}

@@ -111,14 +111,6 @@ if ($enviar != 1) {
 					<td><input type=text name=txtSala maxLength=4 value="<?php echo $sala; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Faltas</td>
-					<td><?php echo $faltas; ?></td>
-				</tr>
-				<tr>
-					<td id="label">Data da ultima falta</td>
-					<td><?php echo $data_ultima_falta; ?></td>
-				</tr>
-				<tr>
 					<td colspan=2 id=separador>Modelo para Reserva de Salas (Copiar e Colar)</td>
 				</tr>
 				<tr>

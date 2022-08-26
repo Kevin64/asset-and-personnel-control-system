@@ -46,10 +46,9 @@ $totalUsuarios = mysqli_num_rows($query);
 	<table id="dadosUsuario" cellspacing=0>
 		<form action="apagaSelecionadosUsuario.php" method="post">
 			<tr id="cabecalho">
+				<td><img src="trash.png" width="22" height="29"></td>
 				<td><a href="?ordenar=usuario&sort=<?php echo $sort; ?>">Usuário</a></td>
 				<td><a href="?ordenar=nivel&sort=<?php echo $sort; ?>">Privilégio</a></td>
-				<td>Excluir</td>
-				<td>
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -59,9 +58,9 @@ $totalUsuarios = mysqli_num_rows($query);
 			?>
 
 				<tr id="dados">
+					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 					<td><?php echo $usuario; ?></td>
 					<td><?php echo $nivel; ?></td>
-					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 				</tr>
 			<?php
 			}

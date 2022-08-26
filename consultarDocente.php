@@ -40,13 +40,16 @@ $totalDocentes = mysqli_num_rows($query);
 		<form action=consultarDocente.php method=post>
 			<input type=hidden name=txtEnviar value=1>
 			<tr>
-				<td align=center>Pesquisar por:
+				<td align=center>Pesquisar por:</td>
+			</tr>
+			<tr>
+				<td align=center>
 					<select id=filterDocente name=rdCriterio>
 						<option value="siape">SIAPE</option>
 						<option value="nome">Nome</option>
 						<option value="curso">Curso</option>
 					</select>
-					<input type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
+					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
@@ -56,20 +59,25 @@ $totalDocentes = mysqli_num_rows($query);
 	<table id="dadosDocente" cellspacing=0>
 		<form action="apagaSelecionadosDocente.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=siape&sort=<?php echo $sort; ?>">SIAPE</a></td>
-				<td><a href="?ordenar=nome&sort=<?php echo $sort; ?>">Nome</a></td>
-				<td><a href="?ordenar=curso&sort=<?php echo $sort; ?>">Curso</a></td>
-				<td><a href="?ordenar=faltas&sort=<?php echo $sort; ?>">Faltas</a></td>
 				<?php
 				if (isset($_SESSION['nivel'])) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
-						<td>Excluir</td>
+						<td><img src="trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td>
+				<td><a href="?ordenar=siape&sort=<?php echo $sort; ?>">SIAPE</a></td>
+				<td><a href="?ordenar=nome&sort=<?php echo $sort; ?>">Nome</a></td>
+				<td><a href="?ordenar=curso&sort=<?php echo $sort; ?>">Curso</a></td>
+				<?php
+				if (!in_array(true, $devices)) {
+				?>
+					<td><a href="?ordenar=tipoServidor&sort=<?php echo $sort; ?>">Tipo de servidor</a></td>
+				<?php
+				}
+				?>
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -77,19 +85,10 @@ $totalDocentes = mysqli_num_rows($query);
 				$siape = $resultado["siape"];
 				$nome = $resultado["nome"];
 				$curso = $resultado["curso"];
-				$faltas = $resultado["faltas"];
+				$tipo = $resultado["tipoServidor"];
 			?>
 				<tr id="dados">
-					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
-					<td><?php echo $nome; ?></td>
-					<td><?php echo $curso; ?></td>
-					<td width=120>
 					<?php
-					if($_SESSION["nivel"] != "limit") {
-						?>
-						<input id="missMinusButton" type="submit" class="button" name="menosfalta" formaction="faltasDocente.php" value="<?php echo '-' ?>"><?php } echo " " . $faltas . " "; if($_SESSION["nivel"] != "limit") { ?><input id="missPlusButton" type="submit" class="button" name="maisfalta" formaction="faltasDocente.php" value="<?php echo '+' ?>"></td>
-						<?php 
-					}
 					if (isset($_SESSION['nivel'])) {
 						if ($_SESSION["nivel"] == "adm") {
 					?>
@@ -98,6 +97,21 @@ $totalDocentes = mysqli_num_rows($query);
 						}
 					}
 					?>
+					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
+					<td><?php echo $nome; ?></td>
+					<td><?php echo $curso; ?></td>
+					<?php
+					if (!in_array(true, $devices)) {
+					?>
+						<td>
+							<?php if ($tipo == "Prof.") { ?>Professor
+							<?php } else if ($tipo == "TAE") { ?>Técnico Administrativo em Educação
+						</td>
+				<?php
+							}
+						}
+				?>
+
 				</tr>
 				<?php
 			}

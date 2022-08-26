@@ -46,7 +46,10 @@ $totalSalas = mysqli_num_rows($query);
 		<form action=consultarPatrimonio.php method=post>
 			<input type=hidden name=txtEnviar value=1>
 			<tr>
-				<td align=center>Pesquisar por:
+				<td align=center>Pesquisar por:</td>
+			</tr>
+			<tr>
+				<td align=center>
 					<select id=filterPatrimonio name=rdCriterio>
 						<option value="patrimonio">Patrimônio</option>
 						<option value="lacre">Lacre</option>
@@ -75,7 +78,7 @@ $totalSalas = mysqli_num_rows($query);
 						<option value="vt">Tecnologia de Virtualização</option>
 						<option value="tpm">Versão do Módulo TPM</option>
 					</select>
-					<input type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
+					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
@@ -85,27 +88,49 @@ $totalSalas = mysqli_num_rows($query);
 	<table id="dadosPatrimonio" cellspacing=0>
 		<form action="apagaSelecionados.php" method="post">
 			<tr id="cabecalho">
-				<td><a href="?ordenar=patrimonio&sort=<?php echo $sort; ?>">Patrimônio</a></td>
-				<td><a href="?ordenar=sala&sort=<?php echo $sort; ?>">Sala</a></td>
-				<td><a href="?ordenar=modelo&sort=<?php echo $sort; ?>">Modelo</a></td>
-				<td><a href="?ordenar=dataFormatacao&sort=<?php echo $sort; ?>">Última manutenção</a></td>
-				<td><a href="?ordenar=ip&sort=<?php echo $sort; ?>">Endereço IP</a></td>
 				<?php
 				if (isset($_SESSION['nivel'])) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
-						<td>Excluir</td>
+						<td><img src="trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td>
+				<td><a href="?ordenar=patrimonio&sort=<?php echo $sort; ?>">Patrim.</a></td>
+				<?php
+				if (!in_array(true, $devices)) {
+				?>
+					<td><a href="?ordenar=predio&sort=<?php echo $sort; ?>">Prédio</a></td>
+				<?php
+				}
+				?>
+				<td><a href="?ordenar=sala&sort=<?php echo $sort; ?>">Sala</a></td>
+				<?php
+				if (!in_array(true, $devices)) {
+				?>
+					<td><a href="?ordenar=padrao&sort=<?php echo $sort; ?>">Padrão</a></td>
+					<td><a href="?ordenar=marca&sort=<?php echo $sort; ?>">Marca</a></td>
+				<?php
+				}
+				?>
+				<td><a href="?ordenar=modelo&sort=<?php echo $sort; ?>">Modelo</a></td>
+				<?php
+				if (!in_array(true, $devices)) {
+				?>
+					<td><a href="?ordenar=ip&sort=<?php echo $sort; ?>">Endereço IP</a></td>
+				<?php
+				}
+				?>
+				<td><a href="?ordenar=dataFormatacao&sort=<?php echo $sort; ?>">Últ. manut.</a></td>
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
 				$id = $resultado["id"];
 				$patrimonio = $resultado["patrimonio"];
+				$predio = $resultado["predio"];
 				$sala = $resultado["sala"];
+				$padrao = $resultado["padrao"];
 				$marca = $resultado["marca"];
 				$modelo = $resultado["modelo"];
 				$emUso = $resultado["emUso"];
@@ -128,11 +153,6 @@ $totalSalas = mysqli_num_rows($query);
 					$dataFormatacao = $dataExplodida[2] . "/" . $dataExplodida[1] . "/" . $dataExplodida[0];
 			?>
 				<tr id="dados">
-					<td><a href="frmDetalhePatrimonio.php?id=<?php echo $id; ?>" style="color: <?php echo $cor; ?>"><?php echo $patrimonio; ?></style></a></td>
-					<td><?php echo $sala; ?></td>
-					<td><?php echo $marca . " " . $modelo; ?></td>
-					<td><?php echo $dataFormatacao; ?></td>
-					<td><?php echo $ip; ?></td>
 					<?php
 					if (isset($_SESSION['nivel'])) {
 						if ($_SESSION["nivel"] == "adm") {
@@ -142,6 +162,32 @@ $totalSalas = mysqli_num_rows($query);
 						}
 					}
 					?>
+					<td><a href="frmDetalhePatrimonio.php?id=<?php echo $id; ?>" style="color: <?php echo $cor; ?>"><?php echo $patrimonio; ?></style></a></td>
+					<?php
+					if (!in_array(true, $devices)) {
+					?>
+						<td><?php echo $predio; ?></td>
+					<?php
+					}
+					?>
+					<td><?php echo $sala; ?></td>
+					<?php
+					if (!in_array(true, $devices)) {
+					?>
+						<td><?php echo $padrao; ?></td>
+						<td><?php echo $marca; ?></td>
+					<?php
+					}
+					?>
+					<td><?php echo $modelo;	?></td>
+					<?php
+					if (!in_array(true, $devices)) {
+					?>
+						<td><?php echo $ip; ?></td>
+					<?php
+					}
+					?>
+					<td><?php echo $dataFormatacao; ?></td>
 				</tr>
 				<?php
 			}

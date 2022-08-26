@@ -5,6 +5,10 @@
 		color: black;
 	}
 
+	#frmFields td {
+		border: 1px solid gainsboro;
+	}
+
 	#registerButton {
 		border-color: black;
 		background-color: white;
@@ -69,6 +73,10 @@
 		background-color: black;
 		border-color: white;
 		color: white;
+	}
+
+	#frmFields td {
+		border: 1px solid rgb(80, 80, 80);
 	}
 
 	#registerButton {
@@ -140,7 +148,7 @@ textarea {
 	border: 2px;
 	border-style: solid;
 	text-align: center;
-	width: 300px;
+	width: 100%;
 	border-radius: 8px;
 	padding: 7px;
 }
@@ -163,7 +171,7 @@ input[type=submit]:hover {
 #frmFields input[type=password],
 #frmFields select,
 #frmFields textarea {
-	width: 500px;
+	width: 100%;
 }
 
 #eraseButton {
@@ -203,8 +211,8 @@ input[type=submit]:hover {
 }
 
 #missPlusButton {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	vertical-align: middle;
 	border-radius: 0px;
 	color: darkgreen;
@@ -217,8 +225,8 @@ input[type=submit]:hover {
 }
 
 #missMinusButton {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	vertical-align: middle;
 	border-radius: 0px;
 	color: firebrick;

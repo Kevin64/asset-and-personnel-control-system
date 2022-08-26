@@ -37,20 +37,17 @@
 			}
 			?>
 			<li>
-				<a href="sobre.php">Sobre</a>
-			</li>
-			<li>
 				<?php
 				if (!isset($_SESSION["id"])) {
 				?>
-					<span>Usuário desconectado</span>
+					<!-- <span>Usuário desconectado</span> -->
 				<?php
 				} else {
 				?>
 					<label id="hov">
 						<span>
 							<?php
-							echo "Logado como: " . $_SESSION["usuario"];
+							echo "" . $_SESSION["usuario"];
 							?>
 						</span>
 					</label>
@@ -77,6 +74,9 @@
 					?>
 				</ol>
 			</li>
+			<li>
+				<a href="sobre.php">Sobre</a>
+			</li>			
 		</ul>
 	</nav>
 </div>
