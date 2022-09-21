@@ -64,7 +64,7 @@ $totalSalas = mysqli_num_rows($query);
 				if (isset($_SESSION['nivel'])) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
-						<td><img src="trash.png" width="22" height="29"></td>
+						<td><img src="img/trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}

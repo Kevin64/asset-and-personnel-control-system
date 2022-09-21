@@ -42,7 +42,7 @@ if (!isset($_SESSION)) {
 	?>
 	<meta charset="utf-8">
 	<title>.:: Sistema de Controle de Patrimônio e Docentes do CCSH ::.</title>
-	<link rel="icon" href="favicon.png" type="image/x-icon" />
+	<link rel="icon" href="img/favicon.png" type="image/x-icon" />
 </head>
 
 <body>

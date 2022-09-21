@@ -92,7 +92,7 @@ $totalSalas = mysqli_num_rows($query);
 				if (isset($_SESSION['nivel'])) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
-						<td><img src="trash.png" width="22" height="29"></td>
+						<td><img src="img/trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}
@@ -195,7 +195,7 @@ $totalSalas = mysqli_num_rows($query);
 				if ($_SESSION["nivel"] == "adm") {
 				?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" disabled></td>
+						<td colspan=9 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" disabled></td>
 					</tr>
 			<?php
 				}
