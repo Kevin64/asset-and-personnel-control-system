@@ -30,6 +30,12 @@ if ($enviar != 1) {
 	if (isset($_GET["tipo"]))
 		$tipo = $_GET["tipo"];
 
+	if (isset($_GET["tpm"]))
+		$tpm = $_GET["tpm"];
+
+	if (isset($_GET["mediaOp"]))
+		$mediaOp = $_GET["mediaOp"];
+
 	$query = mysqli_query($conexao, "select * from bios where id = '$idModelo'") or die("Erro a selecionar modelo para exibir detalhes! " . mysqli_error($conexao));
 } else {
 	$idModelo = $_POST["txtIdModelo"];
@@ -37,9 +43,11 @@ if ($enviar != 1) {
 	$modelo = $_POST["txtModelo"];
 	$versao = $_POST["txtVersao"];
 	$tipo = $_POST["txtTipo"];
+	$tpm = $_POST["txtTPM"];
+	$mediaOp = $_POST["txtMediaOp"];
 
 	//Atualizando os dados do patrimônio
-	mysqli_query($conexao, "update bios set marca = '$marca', modelo = '$modelo', versao = '$versao', tipo = '$tipo' where id = '$idModelo'") or die("Erro ao atualizar os dados da BIOS! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update bios set marca = '$marca', modelo = '$modelo', versao = '$versao', tipo = '$tipo', tpm = '$tpm', mediaOp = '$mediaOp' where id = '$idModelo'") or die("Erro ao atualizar os dados da BIOS! " . mysqli_error($conexao));
 
 	$query = mysqli_query($conexao, "select * from bios where id = '$idModelo'") or die("Erro ao selecionar os dados da BIOS! " . mysqli_error($conexao));
 }
@@ -62,6 +70,8 @@ if ($enviar != 1) {
 				$modelo = $resultado["modelo"];
 				$versao = $resultado["versao"];
 				$tipo = $resultado["tipo"];
+				$tpm = $resultado["tpm"];
+				$mediaOp = $resultado["mediaOp"];
 			?>
 				<tr>
 					<td colspan=2 id=separador>Dados do modelo</td>
@@ -87,6 +97,30 @@ if ($enviar != 1) {
 						<select name=txtTipo required>
 							<option value=BIOS <?php if ($tipo == "BIOS") echo 'selected="selected"'; ?>>BIOS</option>
 							<option value=UEFI <?php if ($tipo == "UEFI") echo 'selected="selected"'; ?>>UEFI</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td id="label">Versão TPM<mark id=asterisk>*</mark></td>
+					<td>
+						<?php
+						?>
+						<select name=txtTPM required>
+							<option value=Nenhum <?php if ($tpm == "Nenhum") echo 'selected="selected"'; ?>>Nenhum</option>
+							<option value=1.2 <?php if ($tpm == "1.2") echo 'selected="selected"'; ?>>1.2</option>
+							<option value=2.0 <?php if ($tpm == "2.0") echo 'selected="selected"'; ?>>2.0</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td id="label">Modo Armaz.<mark id=asterisk>*</mark></td>
+					<td>
+						<?php
+						?>
+						<select name=txtMediaOp required>
+							<option value=IDE/RAID <?php if ($mediaOp == "IDE/RAID") echo 'selected="selected"'; ?>>IDE/RAID</option>
+							<option value=AHCI <?php if ($mediaOp == "AHCI") echo 'selected="selected"'; ?>>AHCI</option>
+							<option value=NVMe <?php if ($mediaOp == "NVMe") echo 'selected="selected"'; ?>>NVMe</option>
 						</select>
 					</td>
 				</tr>

@@ -11,6 +11,10 @@ if(isset($_GET["versao"]))
 	$versao = $_GET["versao"];
 if(isset($_GET["tipo"]))
 	$tipo = $_GET["tipo"];
+if(isset($_GET["tpm"]))
+	$tpm = $_GET["tpm"];
+if(isset($_GET["mediaOp"]))
+	$mediaOp = $_GET["mediaOp"];
 
 $biosFile = 'bios.json';
 $biosChecksum = 'bios-checksum.txt';
@@ -29,6 +33,8 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array['modelo'] = $row['modelo'];
 	$row_array['versao'] = $row['versao'];
 	$row_array['tipo'] = $row['tipo'];
+	$row_array['tpm'] = $row['tpm'];
+	$row_array['mediaOp'] = $row['mediaOp'];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($biosFile, 'w');

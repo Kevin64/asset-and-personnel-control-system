@@ -35,6 +35,28 @@ require_once("topo.php");
 				</td>
 			</tr>
 			<tr>
+				<td id="label">Versão TPM<mark id=asterisk>*</mark></td>
+				<td>
+					<select name=txtTPM required>
+						<option disabled selected value> -- Selecione uma opção -- </option>
+						<option value=Nenhum>Nenhum</option>
+						<option value=1.2>1.2</option>
+						<option value=2.0>2.0</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td id="label">Modo Armaz.<mark id=asterisk>*</mark></td>
+				<td>
+					<select name=txtMediaOp required>
+						<option disabled selected value> -- Selecione uma opção -- </option>
+						<option value=IDE/RAID>IDE/RAID</option>
+						<option value=AHCI>AHCI</option>
+						<option value=NVMe>NVMe</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" align="center"><br>
 					<input id="registerButton" type="submit" value="Cadastrar">
 				</td>

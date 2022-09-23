@@ -49,6 +49,8 @@ $totalSalas = mysqli_num_rows($query);
 						<option value="marca">Marca</option>
 						<option value="versao">Versão</option>
 						<option value="tipo">Tipo</option>
+						<option value="tpm">Versão TPM</option>
+						<option value="mediaOp">Modo Armaz.</option>
 					</select>
 					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
@@ -73,6 +75,8 @@ $totalSalas = mysqli_num_rows($query);
 				<td><a href="?ordenar=marca&sort=<?php echo $sort; ?>">Marca</a></td>
 				<td><a href="?ordenar=versao&sort=<?php echo $sort; ?>">Versão</a></td>
 				<td><a href="?ordenar=tipo&sort=<?php echo $sort; ?>">Tipo</a></td>
+				<td><a href="?ordenar=tpm&sort=<?php echo $sort; ?>">Versão TPM</a></td>
+				<td><a href="?ordenar=mediaOp&sort=<?php echo $sort; ?>">Modo Armaz.</a></td>
 			</tr>
 			<?php
 			while ($resultado = mysqli_fetch_array($query)) {
@@ -81,6 +85,8 @@ $totalSalas = mysqli_num_rows($query);
 				$modelo = $resultado["modelo"];
 				$versao = $resultado["versao"];
 				$tipo = $resultado["tipo"];
+				$tpm = $resultado["tpm"];
+				$mediaOp = $resultado["mediaOp"];
 			?>
 				<tr id="dados">
 					<?php
@@ -96,6 +102,8 @@ $totalSalas = mysqli_num_rows($query);
 					<td><?php echo $marca; ?></td>
 					<td><?php echo $versao; ?></td>
 					<td><?php echo $tipo; ?></td>
+					<td><?php echo $tpm; ?></td>
+					<td><?php echo $mediaOp; ?></td>
 				</tr>
 				<?php
 			}
