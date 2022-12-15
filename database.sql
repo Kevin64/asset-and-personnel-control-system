@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `patrimonio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `patrimonio`;
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: patrimonio
 -- ------------------------------------------------------
@@ -30,10 +28,10 @@ CREATE TABLE `bios` (
   `modelo` varchar(45) DEFAULT NULL,
   `versao` varchar(45) DEFAULT NULL,
   `tipo` varchar(10) DEFAULT NULL,
-  `tpm` varchar(10) DEFAULT NULL,
+  `tpm` varchar(15) DEFAULT NULL,
   `mediaOp` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +44,6 @@ DROP TABLE IF EXISTS `docente`;
 CREATE TABLE `docente` (
   `id` int NOT NULL AUTO_INCREMENT,
   `siape` varchar(45) DEFAULT NULL,
-  `tipoServidor` varchar(45) DEFAULT NULL,
   `nome` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `ramal` varchar(45) DEFAULT NULL,
@@ -55,8 +52,9 @@ CREATE TABLE `docente` (
   `sala` varchar(45) DEFAULT NULL,
   `faltas` int DEFAULT '0',
   `data_ultima_falta` varchar(10) DEFAULT NULL,
+  `tipoServidor` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=422 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=432 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +73,7 @@ CREATE TABLE `manutencoes` (
   `ticketNum` int DEFAULT NULL,
   `agent` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1685 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1987 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +95,7 @@ CREATE TABLE `patrimonio` (
   `entregador` varchar(45) DEFAULT NULL,
   `dataEntrega` varchar(10) DEFAULT NULL,
   `observacao` text,
-  `padrao` varchar(15) DEFAULT 'SIM',
+  `padrao` varchar(15) DEFAULT 'Funcionário',
   `dataFormatacao` varchar(10) DEFAULT NULL,
   `ad` varchar(5) DEFAULT NULL,
   `marca` varchar(30) DEFAULT NULL,
@@ -126,7 +124,7 @@ CREATE TABLE `patrimonio` (
   `trocaPilha` varchar(30) DEFAULT NULL,
   `ticketNum` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1963 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2041 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +141,7 @@ CREATE TABLE `usuarios` (
   `nivel` varchar(5) DEFAULT NULL,
   `status` int DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -155,4 +153,4 @@ CREATE TABLE `usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-22 12:30:54
+-- Dump completed on 2022-12-15  9:51:16
