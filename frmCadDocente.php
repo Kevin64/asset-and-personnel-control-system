@@ -21,8 +21,8 @@ require_once("topo.php");
 				<td>
 					<select name=txtTipoServidor required>
 						<option disabled selected value> -- Selecione uma opção -- </option>
-						<option value="Prof.">Professor</option>
-						<option value=TAE>Técnico Administrativo em Educação</option>
+						<option value="Docente">Docente</option>
+						<option value="Técnico Administrativo em Educação">Técnico Administrativo em Educação</option>
 					</select>
 				</td>
 			</tr>

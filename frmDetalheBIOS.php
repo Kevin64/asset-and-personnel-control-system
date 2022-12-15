@@ -106,7 +106,7 @@ if ($enviar != 1) {
 						<?php
 						?>
 						<select name=txtTPM required>
-							<option value=Nenhum <?php if ($tpm == "Nenhum") echo 'selected="selected"'; ?>>Nenhum</option>
+							<option value="Não existente" <?php if ($tpm == "Não existente") echo 'selected="selected"'; ?>>Não existente</option>
 							<option value=1.2 <?php if ($tpm == "1.2") echo 'selected="selected"'; ?>>1.2</option>
 							<option value=2.0 <?php if ($tpm == "2.0") echo 'selected="selected"'; ?>>2.0</option>
 						</select>

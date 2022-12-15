@@ -45,17 +45,24 @@ $totalSalas = mysqli_num_rows($query);
 			<tr>
 				<td align=center>
 					<select id=filterBIOS name=rdCriterio>
-						<option value="modelo">Modelo</option>
-						<option value="marca">Marca</option>
-						<option value="versao">Versão</option>
-						<option value="tipo">Tipo</option>
-						<option value="tpm">Versão TPM</option>
-						<option value="mediaOp">Modo Armaz.</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'modelo') echo "selected='selected'"; ?>value="modelo">Modelo</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'marca') echo "selected='selected'"; ?>value="marca">Marca</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'versao') echo "selected='selected'"; ?>value="versao">Versão</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'tipo') echo "selected='selected'"; ?>value="tipo">Tipo</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'tpm') echo "selected='selected'"; ?>value="tpm">Versão TPM</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'mediaOp') echo "selected='selected'"; ?>value="mediaOp">Modo Armaz.</option>
 					</select>
 					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
+		<?php
+			if(isset($_POST['txtPesquisar'])){
+				if(isset($_POST['rdCriterio'])){
+					$value = $_POST['rdCriterio'];
+				}
+			}
+		?>
 	</table>
 	<br><br>
 	<h2>Lista de modelos (<?php echo $totalSalas; ?>)</h2><br>

@@ -39,7 +39,7 @@ require_once("topo.php");
 				<td>
 					<select name=txtTPM required>
 						<option disabled selected value> -- Selecione uma opção -- </option>
-						<option value=Nenhum>Nenhum</option>
+						<option value=Nenhum>Não existente</option>
 						<option value=1.2>1.2</option>
 						<option value=2.0>2.0</option>
 					</select>

@@ -45,14 +45,22 @@ $totalDocentes = mysqli_num_rows($query);
 			<tr>
 				<td align=center>
 					<select id=filterDocente name=rdCriterio>
-						<option value="siape">SIAPE</option>
-						<option value="nome">Nome</option>
-						<option value="curso">Curso</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'siape') echo "selected='selected'"; ?>value="siape">SIAPE</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'curso') echo "selected='selected'"; ?>value="curso">Tipo de servidor</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'nome') echo "selected='selected'"; ?>value="nome">Nome</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'tipoServidor') echo "selected='selected'"; ?>value="tipoServidor">Tipo de Servidor</option>
 					</select>
 					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
+		<?php
+			if(isset($_POST['txtPesquisar'])){
+				if(isset($_POST['rdCriterio'])){
+					$value = $_POST['rdCriterio'];
+				}
+			}
+		?>
 	</table>
 	<br><br>
 	<h2>Lista de docentes (<?php echo $totalDocentes; ?>)</h2><br>
@@ -98,17 +106,24 @@ $totalDocentes = mysqli_num_rows($query);
 					}
 					?>
 					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
-					<td><?php echo $nome; ?></td>
-					<td><?php echo $curso; ?></td>
+					<td class="unselectable"><?php echo $nome; ?></td>
+					<td class="unselectable"><?php echo $curso; ?></td>
 					<?php
 					if (!in_array(true, $devices)) {
+						if($tipo == null){
 					?>
-						<td>
-							<?php if ($tipo == "Prof.") { ?>Professor
-							<?php } else if ($tipo == "TAE") { ?>Técnico Administrativo em Educação
+						<td class="unselectable" style="background-color:darkred;">
+							<?php echo "Dados cadastrais incompletos" ?>
 						</td>
 				<?php
-							}
+						}
+						else{
+							?>
+							<td class="unselectable">
+							<?php echo $tipo; ?>
+						</td>
+						<?php
+						}
 						}
 				?>
 
