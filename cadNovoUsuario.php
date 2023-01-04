@@ -6,7 +6,7 @@ require_once __DIR__ . '/../conexao.php';
 
 $usuario = $_POST["txtUsuario"];
 if($_POST["txtSenha"] != "") {
-	$senha = md5($_POST["txtSenha"]);
+	$senha = password_hash($_POST["txtSenha"], PASSWORD_BCRYPT);
 }
 else {
 	$senha = null;
