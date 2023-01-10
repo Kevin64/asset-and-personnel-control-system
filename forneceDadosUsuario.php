@@ -40,6 +40,16 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	fclose($fp2);
 }
 
+if(!isset($row_array)) {
+	$fp = fopen($loginFile, 'w');
+	fwrite($fp, json_encode($return_arr));
+	$checksum = hash('sha256', json_encode($return_arr));
+	$fp2 = fopen($loginChecksum, 'w');
+	fwrite($fp2, $checksum);
+	fclose($fp);
+	fclose($fp2);
+}
+
 ?>
 
 <!DOCTYPE html>
