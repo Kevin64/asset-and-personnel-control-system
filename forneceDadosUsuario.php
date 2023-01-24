@@ -32,8 +32,9 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($loginFile, 'w');
-	fwrite($fp, json_encode($return_arr));
-	$checksum = hash('sha256', json_encode($return_arr));
+	$jsonCmd = json_encode($return_arr, JSON_UNESCAPED_UNICODE);
+	fwrite($fp, $jsonCmd);
+	$checksum = hash('sha256', $jsonCmd);
 	$fp2 = fopen($loginChecksum, 'w');
 	fwrite($fp2, $checksum);
 	fclose($fp);
