@@ -1,5 +1,5 @@
 	<?php
-	if ($file = fopen("version.txt", "r")) {
+	if ($file = fopen("etc/version.txt", "r")) {
 		while(!feof($file)) {
 			$line = fgets($file);
 		}
