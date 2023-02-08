@@ -21,6 +21,8 @@ if(isset($_GET["etiqueta"]))
 	$etiqueta = $_GET["etiqueta"];
 if(isset($_GET["tipo"]))
 	$tipo = $_GET["tipo"];
+if(isset($_GET["descarte"]))
+	$descarte = $_GET["descarte"];
 
 $pcFile = 'pc.json';
 $pcChecksum = 'pc-checksum.txt';
@@ -43,6 +45,7 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array['lacre'] = $row['lacre'];
 	$row_array['etiqueta'] = $row['etiqueta'];
 	$row_array['tipo'] = $row['tipo'];
+	$row_array['descarte'] = $row['descarte'];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($pcFile, 'w');

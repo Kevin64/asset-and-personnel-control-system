@@ -186,3 +186,8 @@ input[type=text] {
 #headerPreviousMaintenance td {
 	border: 1px solid;
 }
+
+#discarded {
+	font-style: italic;
+	opacity: 0.4;
+}

@@ -23,6 +23,8 @@ if ($enviar != 1) {
 } else {
 	$idPatrimonio = $_POST["txtIdPatrimonio"];
 	$patrimonio = $_POST["txtPatrimonio"];
+	if(isset($_POST["chkBoxDescarte"]))
+		$descarte = $_POST["chkBoxDescarte"];
 	$predio = $_POST["txtPredio"];
 	$sala = $_POST["txtSala"];
 	$siape = $_POST["txtSiapeRecebedor"];
@@ -32,10 +34,15 @@ if ($enviar != 1) {
 	$padrao = $_POST["txtPadrao"];
 	$observacao = $_POST["txtObservacao"];
 	$ultimaFormatacao = $_POST["txtUltimaFormatacao"];
+	if (isset($_POST["txtFormatacoesAnterioresData"]))
 	$manutencoesAnterioresData = $_POST["txtFormatacoesAnterioresData"];
+	if (isset($_POST["txtFormatacoesAnterioresModo"]))
 	$manutencoesAnterioresModo = $_POST["txtFormatacoesAnterioresModo"];
+	if (isset($_POST["txtFormatacoesAnterioresPilha"]))
 	$manutencoesAnterioresPilha = $_POST["txtFormatacoesAnterioresPilha"];
+	if (isset($_POST["txtFormatacoesAnterioresTicket"]))
 	$manutencoesAnterioresTicket = $_POST["txtFormatacoesAnterioresTicket"];
+	if (isset($_POST["txtFormatacoesAnterioresAgente"]))
 	$manutencoesAnterioresAgente = $_POST["txtFormatacoesAnterioresAgente"];
 	$ad = $_POST["txtAd"];
 	$marca = $_POST["txtMarca"];
@@ -62,16 +69,16 @@ if ($enviar != 1) {
 	$tpm = $_POST["txtTPM"];
 
 	//Atualizando os dados do patrimônio
-	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', predio = '$predio', sala = '$sala', siapeRecebedor = '$siape', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
-
-	// mysqli_query($conexao, "update manutencoes inner join patrimonio P on (patrimonioFK = P.patrimonio and dataFormatacoesAnteriores = P.dataFormatacao) set manutencoes.dataFormatacoesAnteriores = '$manutencoesAnterioresData', manutencoes.modoServico = '$manutencoesAnterioresModo', manutencoes.trocaPilha = '$manutencoesAnterioresPilha', manutencoes.ticketNum = '$manutencoesAnterioresTicket', manutencoes.agent = '$manutencoesAnterioresAgente'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', descarte = '$descarte', predio = '$predio', sala = '$sala', siapeRecebedor = '$siape', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
 
 	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
 	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
 }
 ?>
 <div id="meio">
-	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="js/disable-controls.js"></script>
+	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">	
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do patrimônio</h2><br>
 		<?php
@@ -84,6 +91,7 @@ if ($enviar != 1) {
 			while ($resultado = mysqli_fetch_array($query)) {
 				$idPatrimonio = $resultado["id"];
 				$patrimonio = $resultado["patrimonio"];
+				$descarte = $resultado["descarte"];
 				$predio = $resultado["predio"];
 				$sala = $resultado["sala"];
 				$siape = $resultado["siapeRecebedor"];
@@ -128,6 +136,18 @@ if ($enviar != 1) {
 				if ($emUsoOk == "N") $emUso = "Não";
 				if ($etiquetaOk == "N") $etiqueta = "Não";
 			?>
+				<?php
+				if (isset($_SESSION['nivel'])) {
+					if ($_SESSION["nivel"] == "adm") {
+				?>
+				<tr>
+					<td id="label">Patrimônio baixado?</td>
+					<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado['descarte'] == 1 ? 'checked' : '');?> ></td>
+				</tr>
+				<?php
+				}
+			}
+				?>
 				<tr>
 					<td colspan=7 id=separador>Dados do patrimônio</td>
 				</tr>
@@ -136,6 +156,7 @@ if ($enviar != 1) {
 					<input type=hidden name=txtIdPatrimonio value="<?php echo $idPatrimonio; ?>">
 					<td colspan=5><input type=text name=txtPatrimonio placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $patrimonio; ?>"></td>
 				</tr>
+				
 				<tr>
 					<td id="label">Prédio<mark id=asterisk>*</mark></td>
 					<td colspan=5>

@@ -33,12 +33,16 @@ if (isset($sort) and $sort == "desc") {
 }
 
 if ($enviar != 1) {
-	$query = mysqli_query($conexao, "select * from patrimonio order by $ordenar $sort") or die("Erro ao selecionar dados do patrimônio! " . mysqli_error($conexao));
+	$queryAtivo = mysqli_query($conexao, "select * from (select * from patrimonio order by $ordenar $sort) T where descarte = 0") or die("Erro ao selecionar dados do patrimônio! " . mysqli_error($conexao));
+	$queryDescarte = mysqli_query($conexao, "select * from (select * from patrimonio order by $ordenar $sort) T where descarte = 1") or die("Erro ao selecionar dados do patrimônio! " . mysqli_error($conexao));
+
+	$totalAtivo = mysqli_num_rows($queryAtivo);
+	$totalDescarte = mysqli_num_rows($queryDescarte);
 } else {
-	$query = mysqli_query($conexao, "select * from patrimonio where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+	$queryPesquisa = mysqli_query($conexao, "select * from patrimonio where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+	$totalPesquisa = mysqli_num_rows($queryPesquisa);
 }
 
-$totalSalas = mysqli_num_rows($query);
 ?>
 
 <div id="meio">
@@ -52,6 +56,7 @@ $totalSalas = mysqli_num_rows($query);
 				<td align=center>
 					<select id=filterPatrimonio name=rdCriterio>
 						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'patrimonio') echo "selected='selected'"; ?>value="patrimonio">Patrimônio</option>
+						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'descarte') echo "selected='selected'"; ?>value="descarte">Patrimônio baixado</option>
 						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'lacre') echo "selected='selected'"; ?>value="lacre">Lacre</option>
 						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'sala') echo "selected='selected'"; ?>value="sala">Sala</option>
 						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'predio') echo "selected='selected'"; ?>value="predio">Prédio</option>
@@ -91,7 +96,20 @@ $totalSalas = mysqli_num_rows($query);
 		?>
 	</table>
 	<br><br>
-	<h2>Lista de patrimônios (<?php echo $totalSalas; ?>)</h2><br>
+	<?php
+	if(!isset($totalPesquisa)) {
+	?>
+		<h3>Patrimônios ativos (<?php echo $totalAtivo; ?>)</h3>
+		<h3>Patrimônios baixados (<?php echo $totalDescarte; ?>)</h3><br>
+	<?php
+	}
+	else {
+		$queryAtivo = $queryPesquisa;
+	?>
+		<h3>Patrimônios resultantes (<?php echo $totalPesquisa; ?>)</h3><br>
+	<?php
+	}
+	?>
 	<table id="dadosPatrimonio" cellspacing=0>
 		<form action="apagaSelecionados.php" method="post">
 			<tr id="cabecalho">
@@ -132,9 +150,10 @@ $totalSalas = mysqli_num_rows($query);
 				<td><a href="?ordenar=dataFormatacao&sort=<?php echo $sort; ?>">Últ. manut.</a></td>
 			</tr>
 			<?php
-			while ($resultado = mysqli_fetch_array($query)) {
+			while ($resultado = mysqli_fetch_array($queryAtivo)) {
 				$id = $resultado["id"];
 				$patrimonio = $resultado["patrimonio"];
+				$descarte = $resultado["descarte"];
 				$predio = $resultado["predio"];
 				$sala = $resultado["sala"];
 				$padrao = $resultado["padrao"];
@@ -164,39 +183,108 @@ $totalSalas = mysqli_num_rows($query);
 					if (isset($_SESSION['nivel'])) {
 						if ($_SESSION["nivel"] == "adm") {
 					?>
-							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
+							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if($descarte == 1) { ?> disabled <?php } ?>></td>
 					<?php
 						}
 					}
 					?>
-					<td><a href="frmDetalhePatrimonio.php?id=<?php echo $id; ?>" style="color: <?php echo $cor; ?>"><?php echo $patrimonio; ?></style></a></td>
+					<td><a href="frmDetalhePatrimonio.php?id=<?php echo $id; ?>" <?php if($descarte == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor; }?>"><?php echo $patrimonio; ?></a></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><?php echo $predio; ?></td>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $predio; ?></label></td>
 					<?php
 					}
 					?>
-					<td><?php echo $sala; ?></td>
+					<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $sala; ?></label></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><?php echo $padrao; ?></td>
-						<td><?php echo $marca; ?></td>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $padrao; ?></label></td>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $marca; ?></label></td>
 					<?php
 					}
 					?>
-					<td><?php echo $modelo;	?></td>
+					<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $modelo; ?></label></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><?php echo $ip; ?></td>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $ip; ?></label></td>
 					<?php
 					}
 					?>
-					<td><?php echo $dataFormatacao; ?></td>
+					<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $dataFormatacao; ?></label></td>
 				</tr>
 				<?php
+			}
+			if(!isset($totalPesquisa)) {
+				while ($resultado = mysqli_fetch_array($queryDescarte)) {
+					$id = $resultado["id"];
+					$patrimonio = $resultado["patrimonio"];
+					$descarte = $resultado["descarte"];
+					$predio = $resultado["predio"];
+					$sala = $resultado["sala"];
+					$padrao = $resultado["padrao"];
+					$marca = $resultado["marca"];
+					$modelo = $resultado["modelo"];
+					$emUso = $resultado["emUso"];
+					$formatacao = $resultado["dataFormatacao"];
+					$ip = $resultado["ip"];
+
+					$emUsoOk = substr($emUso, 0, 1);
+
+					if ($emUsoOk == "N") $emUso = "Não";
+
+					if ($emUso == "Não") {
+						$cor = "red";
+					} else {
+						$cor = "green";
+					}
+
+					$dataF = substr($formatacao, 0, 10);
+					$dataExplodida = explode("-", $dataF);
+					if ($dataExplodida[0] != "")
+						$dataFormatacao = $dataExplodida[2] . "/" . $dataExplodida[1] . "/" . $dataExplodida[0];
+				?>
+					<tr id="dados">
+						<?php
+						if (isset($_SESSION['nivel'])) {
+							if ($_SESSION["nivel"] == "adm") {
+						?>
+								<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if($descarte == 1) { ?> disabled <?php } ?>></td>
+						<?php
+							}
+						}
+						?>
+						<td><a href="frmDetalhePatrimonio.php?id=<?php echo $id; ?>" <?php if($descarte == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor; }?>"><?php echo $patrimonio; ?></a></td>
+						<?php
+						if (!in_array(true, $devices)) {
+						?>
+							<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $predio; ?></label></td>
+						<?php
+						}
+						?>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $sala; ?></label></td>
+						<?php
+						if (!in_array(true, $devices)) {
+						?>
+							<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $padrao; ?></label></td>
+							<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $marca; ?></label></td>
+						<?php
+						}
+						?>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $modelo; ?></label></td>
+						<?php
+						if (!in_array(true, $devices)) {
+						?>
+							<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $ip; ?></label></td>
+						<?php
+						}
+						?>
+						<td><label <?php if($descarte == 1) { ?> id=discarded <?php } ?>><?php echo $dataFormatacao; ?></label></td>
+					</tr>
+					<?php
+				}
 			}
 			if (isset($_SESSION['nivel'])) {
 				if ($_SESSION["nivel"] == "adm") {
