@@ -23,8 +23,12 @@ if ($enviar != 1) {
 } else {
 	$idPatrimonio = $_POST["txtIdPatrimonio"];
 	$patrimonio = $_POST["txtPatrimonio"];
-	if(isset($_POST["chkBoxDescarte"]))
+	if(isset($_POST["chkBoxDescarte"])) {
 		$descarte = $_POST["chkBoxDescarte"];
+	}
+	else {
+		$descarte = "0";
+	}
 	$predio = $_POST["txtPredio"];
 	$sala = $_POST["txtSala"];
 	$siape = $_POST["txtSiapeRecebedor"];
@@ -35,15 +39,15 @@ if ($enviar != 1) {
 	$observacao = $_POST["txtObservacao"];
 	$ultimaFormatacao = $_POST["txtUltimaFormatacao"];
 	if (isset($_POST["txtFormatacoesAnterioresData"]))
-	$manutencoesAnterioresData = $_POST["txtFormatacoesAnterioresData"];
+		$manutencoesAnterioresData = $_POST["txtFormatacoesAnterioresData"];
 	if (isset($_POST["txtFormatacoesAnterioresModo"]))
-	$manutencoesAnterioresModo = $_POST["txtFormatacoesAnterioresModo"];
+		$manutencoesAnterioresModo = $_POST["txtFormatacoesAnterioresModo"];
 	if (isset($_POST["txtFormatacoesAnterioresPilha"]))
-	$manutencoesAnterioresPilha = $_POST["txtFormatacoesAnterioresPilha"];
+		$manutencoesAnterioresPilha = $_POST["txtFormatacoesAnterioresPilha"];
 	if (isset($_POST["txtFormatacoesAnterioresTicket"]))
-	$manutencoesAnterioresTicket = $_POST["txtFormatacoesAnterioresTicket"];
+		$manutencoesAnterioresTicket = $_POST["txtFormatacoesAnterioresTicket"];
 	if (isset($_POST["txtFormatacoesAnterioresAgente"]))
-	$manutencoesAnterioresAgente = $_POST["txtFormatacoesAnterioresAgente"];
+		$manutencoesAnterioresAgente = $_POST["txtFormatacoesAnterioresAgente"];
 	$ad = $_POST["txtAd"];
 	$marca = $_POST["txtMarca"];
 	$modelo = $_POST["txtModelo"];
@@ -141,7 +145,7 @@ if ($enviar != 1) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
 				<tr>
-					<td id="label">Patrimônio baixado?</td>
+					<td id="label">Patrimônio enviado para baixa?</td>
 					<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado['descarte'] == 1 ? 'checked' : '');?> ></td>
 				</tr>
 				<?php
