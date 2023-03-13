@@ -2,7 +2,7 @@
 
 <?php
 
-$userAgent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+$userAgent = !empty($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
 
 $android = str_contains($userAgent, "Android");
 $iphone = str_contains($userAgent, "iPhone");
@@ -22,12 +22,12 @@ if (!isset($_SESSION)) {
 	<?php
 	if (in_array(true, $devices)) {
 	?>
-	<link rel="stylesheet" href="css.mobile/tabelas.css">
+		<link rel="stylesheet" href="css.mobile/tabelas.css">
 		<link rel="stylesheet" href="css.mobile/estilos.css">
 		<link rel="stylesheet" href="css.mobile/formularios.css">
 		<link rel="stylesheet" href="css.mobile/menu.css">
 		<link rel="stylesheet" href="css.mobile/input.css">
-		<link rel="stylesheet" href="css.mobile/anim.css">		
+		<link rel="stylesheet" href="css.mobile/anim.css">
 	<?php
 	} else {
 	?>

@@ -2,7 +2,7 @@
 session_start();
 require_once("topo.php");
 require_once("verifica.php");
-require_once __DIR__ . '/../conexao.php';
+require_once __DIR__ . '/conexao.php';
 
 $enviar = null;
 $idPatrimonio = null;
@@ -23,10 +23,9 @@ if ($enviar != 1) {
 } else {
 	$idPatrimonio = $_POST["txtIdPatrimonio"];
 	$patrimonio = $_POST["txtPatrimonio"];
-	if(isset($_POST["chkBoxDescarte"])) {
+	if (isset($_POST["chkBoxDescarte"])) {
 		$descarte = $_POST["chkBoxDescarte"];
-	}
-	else {
+	} else {
 		$descarte = "0";
 	}
 	$predio = $_POST["txtPredio"];
@@ -82,7 +81,7 @@ if ($enviar != 1) {
 <div id="meio">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/disable-controls.js"></script>
-	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">	
+	<form action="frmDetalhePatrimonio.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
 		<h2>Detalhes do patrimônio</h2><br>
 		<?php
@@ -144,13 +143,13 @@ if ($enviar != 1) {
 				if (isset($_SESSION['nivel'])) {
 					if ($_SESSION["nivel"] == "adm") {
 				?>
-				<tr>
-					<td id="label">Patrimônio enviado para baixa?</td>
-					<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado['descarte'] == 1 ? 'checked' : '');?> ></td>
-				</tr>
+						<tr>
+							<td id="label">Patrimônio enviado para baixa?</td>
+							<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado['descarte'] == 1 ? 'checked' : ''); ?>></td>
+						</tr>
 				<?php
+					}
 				}
-			}
 				?>
 				<tr>
 					<td colspan=7 id=separador>Dados do patrimônio</td>
@@ -160,18 +159,18 @@ if ($enviar != 1) {
 					<input type=hidden name=txtIdPatrimonio value="<?php echo $idPatrimonio; ?>">
 					<td colspan=5><input type=text name=txtPatrimonio placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $patrimonio; ?>"></td>
 				</tr>
-				
 				<tr>
 					<td id="label">Prédio<mark id=asterisk>*</mark></td>
 					<td colspan=5>
 						<select id="frmFields" name="txtPredio" required>
-							<option value="21" <?php if ($predio == "21") echo "selected"; ?>>21</option>
-							<option value="67" <?php if ($predio == "67") echo "selected"; ?>>67</option>
-							<option value="74A" <?php if ($predio == "74A") echo "selected"; ?>>74A</option>
-							<option value="74B" <?php if ($predio == "74B") echo "selected"; ?>>74B</option>
-							<option value="74C" <?php if ($predio == "74C") echo "selected"; ?>>74C</option>
-							<option value="74D" <?php if ($predio == "74D") echo "selected"; ?>>74D</option>
-							<option value="AR" <?php if ($predio == "AR") echo "selected"; ?>>AR</option>
+							<?php
+							foreach ($building_array as $str) {
+							?>
+								<option value=<?php echo $str ?> <?php if ($predio == $str) echo "selected"; ?>><?php echo $str ?></option>
+							<?php
+							}
+							?>
+						</select>
 					</td>
 				</tr>
 				<tr>
@@ -269,7 +268,6 @@ if ($enviar != 1) {
 				<td colspan="2" id=separador>Dados do equipamento</td>
 			</tr>
 			<tr>
-				<!-- <td id=label>Última manutenção</td> -->
 				<td><input type=hidden name=txtUltimaFormatacao value="<?php echo $ultimaFormatacao; ?>"></td>
 			</tr>
 			<tr>
@@ -381,10 +379,15 @@ if ($enviar != 1) {
 			</td>
 			<tr>
 				<td id="label">Tipo</td>
-				<td><select name="txtTipo">
-						<option value="Desktop" <?php if ($tipo === "Desktop") echo "selected"; ?>>Desktop</option>
-						<option value="Notebook" <?php if ($tipo === "Notebook") echo "selected"; ?>>Notebook</option>
-						<option value="Tablet" <?php if ($tipo === "Tablet") echo "selected"; ?>>Tablet</option>
+				<td>
+					<select name="txtTipo">
+						<?php
+						foreach ($hwtype_array as $str) {
+						?>
+							<option value=<?php echo $str ?> <?php if ($tipo == $str) echo "selected"; ?>><?php echo $str ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</td>
 			</tr>

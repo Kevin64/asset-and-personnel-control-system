@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("verifica.php");
-require_once __DIR__ . '/../conexao.php';
+require_once __DIR__ . '/conexao.php';
 
 if (isset($_POST["txtMarca"]))
 	$marca = $_POST["txtMarca"];

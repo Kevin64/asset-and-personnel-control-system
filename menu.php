@@ -56,7 +56,7 @@
 				?>
 				<ol class=slide>
 					<?php
-					if (isset($_SESSION['nivel'])) {
+					if (isset($_SESSION["nivel"])) {
 						if ($_SESSION["nivel"] == "adm") {
 					?>
 							<li><a href="consultarUsuario.php">Listar Usuários</a></li>

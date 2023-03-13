@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['someAction'])) {
 
 function maisfalta()
 {
-	require_once __DIR__ . '/../conexao.php';
+	require_once __DIR__ . '/conexao.php';
 	$maisfalta = $_POST["maisfalta"];
 	$faltas = $_POST["faltas"];
 
@@ -16,7 +16,7 @@ function maisfalta()
 
 function menosfalta()
 {
-	require_once __DIR__ . '/../conexao.php';
+	require_once __DIR__ . '/conexao.php';
 	$menosfalta = $_POST["menosfalta"];
 	$faltas = $_POST["faltas"];
 

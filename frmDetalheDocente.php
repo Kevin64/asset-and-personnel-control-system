@@ -2,7 +2,7 @@
 session_start();
 require_once("topo.php");
 require_once("verifica.php");
-require_once __DIR__ . '/../conexao.php';
+require_once __DIR__ . '/conexao.php';
 
 $enviar = null;
 

@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
 require_once("topo.php");
-require_once __DIR__ . '/../conexao.php';
+require_once __DIR__ . "/conexao.php";
 
 $enviar = null;
 $ordenar = null;
@@ -15,8 +15,8 @@ if (isset($_GET["ordenar"]))
 if ($ordenar == "")
 	$ordenar = "usuario";
 
-if (isset($_GET['sort']))
-	$sort = $_GET['sort'];
+if (isset($_GET["sort"]))
+	$sort = $_GET["sort"];
 
 if (isset($sort) and $sort == "desc") {
 	$sort = "asc";
@@ -29,7 +29,7 @@ if ($enviar != 1)
 else {
 	$rdCriterio = $_POST["rdCriterio"];
 	$pesquisar = $_POST["txtPesquisar"];
-	$query = mysqli_query($conexao, "select * from usuarios where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from usuarios where $rdCriterio like "%$pesquisar%"") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
 }
 
 $totalUsuarios = mysqli_num_rows($query);
@@ -58,7 +58,7 @@ $totalUsuarios = mysqli_num_rows($query);
 			?>
 
 				<tr id="dados">
-					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
+					<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById("eraseButton"); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 					<td><?php echo $usuario; ?></td>
 					<td><?php echo $nivel; ?></td>
 				</tr>

@@ -9,10 +9,10 @@
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40103 SET TIME_ZONE="+00:00" */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE="NO_AUTO_VALUE_ON_ZERO" */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `docente` (
   `celular` varchar(45) DEFAULT NULL,
   `curso` varchar(45) DEFAULT NULL,
   `sala` varchar(45) DEFAULT NULL,
-  `faltas` int DEFAULT '0',
+  `faltas` int DEFAULT "0",
   `data_ultima_falta` varchar(10) DEFAULT NULL,
   `tipoServidor` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -95,7 +95,7 @@ CREATE TABLE `patrimonio` (
   `entregador` varchar(45) DEFAULT NULL,
   `dataEntrega` varchar(10) DEFAULT NULL,
   `observacao` text,
-  `padrao` varchar(15) DEFAULT 'Funcionário',
+  `padrao` varchar(15) DEFAULT "Funcionário",
   `dataFormatacao` varchar(10) DEFAULT NULL,
   `ad` varchar(5) DEFAULT NULL,
   `marca` varchar(30) DEFAULT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(50) DEFAULT NULL,
   `senha` varchar(255) DEFAULT NULL,
   `nivel` varchar(5) DEFAULT NULL,
-  `status` int DEFAULT '0',
+  `status` int DEFAULT "0",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
