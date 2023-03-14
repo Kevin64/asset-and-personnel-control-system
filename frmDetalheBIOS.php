@@ -1,8 +1,7 @@
 <?php
-session_start();
-require_once("topo.php");
 require_once("verifica.php");
-require_once __DIR__ . '/conexao.php';
+require_once("topo.php");
+require_once __DIR__ . "/conexao.php";
 
 $enviar = null;
 $idModelo = null;
@@ -95,8 +94,8 @@ if ($enviar != 1) {
 						<?php
 						?>
 						<select name=txtTipo required>
-							<option value=BIOS <?php if ($tipo == "BIOS") echo 'selected="selected"'; ?>>BIOS</option>
-							<option value=UEFI <?php if ($tipo == "UEFI") echo 'selected="selected"'; ?>>UEFI</option>
+							<option value=BIOS <?php if ($tipo == "BIOS") echo "selected='selected'"; ?>>BIOS</option>
+							<option value=UEFI <?php if ($tipo == "UEFI") echo "selected='selected'"; ?>>UEFI</option>
 						</select>
 					</td>
 				</tr>
@@ -106,9 +105,9 @@ if ($enviar != 1) {
 						<?php
 						?>
 						<select name=txtTPM required>
-							<option value="Não existente" <?php if ($tpm == "Não existente") echo 'selected="selected"'; ?>>Não existente</option>
-							<option value=1.2 <?php if ($tpm == "1.2") echo 'selected="selected"'; ?>>1.2</option>
-							<option value=2.0 <?php if ($tpm == "2.0") echo 'selected="selected"'; ?>>2.0</option>
+							<option value="Não existente" <?php if ($tpm == "Não existente") echo "selected='selected'"; ?>>Não existente</option>
+							<option value=1.2 <?php if ($tpm == "1.2") echo "selected='selected'"; ?>>1.2</option>
+							<option value=2.0 <?php if ($tpm == "2.0") echo "selected='selected'"; ?>>2.0</option>
 						</select>
 					</td>
 				</tr>
@@ -118,16 +117,16 @@ if ($enviar != 1) {
 						<?php
 						?>
 						<select name=txtMediaOp required>
-							<option value=IDE/RAID <?php if ($mediaOp == "IDE/RAID") echo 'selected="selected"'; ?>>IDE/RAID</option>
-							<option value=AHCI <?php if ($mediaOp == "AHCI") echo 'selected="selected"'; ?>>AHCI</option>
-							<option value=NVMe <?php if ($mediaOp == "NVMe") echo 'selected="selected"'; ?>>NVMe</option>
+							<option value=IDE/RAID <?php if ($mediaOp == "IDE/RAID") echo "selected='selected'"; ?>>IDE/RAID</option>
+							<option value=AHCI <?php if ($mediaOp == "AHCI") echo "selected='selected'"; ?>>AHCI</option>
+							<option value=NVMe <?php if ($mediaOp == "NVMe") echo "selected='selected'"; ?>>NVMe</option>
 						</select>
 					</td>
 				</tr>
 				</tr>
 			<?php
 			}
-			if ($_SESSION["nivel"] != "limit") {
+			if ($_SESSION["nivel"] != "Limitado") {
 			?>
 				<tr>
 					<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>

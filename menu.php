@@ -11,7 +11,7 @@
 					<ol class=slide>
 						<li><a href="consultarPatrimonio.php">Consultar Patrimônio</a></li>
 						<?php
-						if ($_SESSION["nivel"] == "adm") {
+						if ($_SESSION["nivel"] == "Administrador") {
 						?>
 							<li><a href="frmCadBIOS.php">Cadastrar Modelo de Hardware</a></li>
 						<?php
@@ -24,7 +24,7 @@
 					<label id="hov"><span>Docentes</span></label>
 					<ol class=slide>
 						<?php
-						if ($_SESSION["nivel"] != "limit") {
+						if ($_SESSION["nivel"] != "Limitado") {
 						?>
 							<a href="frmCadDocente.php">Cadastrar Docentes</a>
 						<?php
@@ -57,7 +57,7 @@
 				<ol class=slide>
 					<?php
 					if (isset($_SESSION["nivel"])) {
-						if ($_SESSION["nivel"] == "adm") {
+						if ($_SESSION["nivel"] == "Administrador") {
 					?>
 							<li><a href="consultarUsuario.php">Listar Usuários</a></li>
 							<li><a href="frmAddUsuario.php">Adicionar Usuário</a></li>

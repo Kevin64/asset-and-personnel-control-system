@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/conexao.php";
 
-$mensagem = null;
+$mensagem = "Dados de modelo exportados com sucesso!";
 
 if(isset($_GET["marca"]))
 	$marca = $_GET["marca"];
@@ -16,8 +16,8 @@ if(isset($_GET["tpm"]))
 if(isset($_GET["mediaOp"]))
 	$mediaOp = $_GET["mediaOp"];
 
-$biosFile = "bios.json";
-$biosChecksum = "bios-checksum.txt";
+$biosFile = __DIR__."/output/bios.json";
+$biosChecksum = __DIR__."/output/bios-checksum.txt";
 
 $query = mysqli_query($conexao, "select * from bios") or die("Erro na query! " . mysqli_error($conexao));
 $return_arr = array();
@@ -66,7 +66,7 @@ if(!isset($row_array)) {
 	<title></title>
 </head>
 
-<body bgcolor=green>
+<body bgcolor=blue>
 	<center>
 		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
 	</center>

@@ -1,8 +1,7 @@
 <?php
-session_start();
-require_once("topo.php");
 require_once("verifica.php");
-require_once __DIR__ . '/conexao.php';
+require_once("topo.php");
+require_once __DIR__ . "/conexao.php";
 
 $enviar = null;
 $idPatrimonio = null;
@@ -140,12 +139,12 @@ if ($enviar != 1) {
 				if ($etiquetaOk == "N") $etiqueta = "Não";
 			?>
 				<?php
-				if (isset($_SESSION['nivel'])) {
-					if ($_SESSION["nivel"] == "adm") {
+				if (isset($_SESSION["nivel"])) {
+					if ($_SESSION["nivel"] == "Administrador") {
 				?>
 						<tr>
 							<td id="label">Patrimônio enviado para baixa?</td>
-							<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado['descarte'] == 1 ? 'checked' : ''); ?>></td>
+							<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado["descarte"] == 1 ? "checked" : ""); ?>></td>
 						</tr>
 				<?php
 					}
@@ -394,8 +393,8 @@ if ($enviar != 1) {
 			</tr>
 			<?php
 			}
-			if (isset($_SESSION['nivel'])) {
-				if ($_SESSION["nivel"] == "adm" or $_SESSION["nivel"] == "user") {
+			if (isset($_SESSION["nivel"])) {
+				if ($_SESSION["nivel"] == "Administrador" or $_SESSION["nivel"] == "Padrão") {
 			?>
 				<tr>
 					<td colspan=7 align=center><br><input id="updateButton" type=submit value=Atualizar></td>

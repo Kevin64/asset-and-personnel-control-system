@@ -1,14 +1,12 @@
 <?php
-session_start();
-require_once("topo.php");
 require_once("verifica.php");
-require_once __DIR__ . '/conexao.php';
+require_once("topo.php");
+require_once __DIR__ . "/conexao.php";
 
 $usuario = $_POST["txtUsuario"];
-if($_POST["txtSenha"] != "") {
+if ($_POST["txtSenha"] != "") {
 	$senha = password_hash($_POST["txtSenha"], PASSWORD_BCRYPT);
-}
-else {
+} else {
 	$senha = null;
 }
 $nivel = $_POST["txtNivel"];

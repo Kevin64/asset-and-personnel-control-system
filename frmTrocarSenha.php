@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
 require_once("topo.php");
-
+require_once __DIR__ . "/conexao.php";
 ?>
 
 <div id="meio">
@@ -12,7 +12,7 @@ require_once("topo.php");
 			<tr>
 				<td id=label>Usuário</td>
 				<?php
-				if ($_SESSION["nivel"] == "adm") {
+				if ($_SESSION["nivel"] == "Administrador") {
 				?>
 					<td><input type=text name=txtUsuario value=<?php echo $_SESSION["usuario"] ?> required></td>
 				<?php
@@ -24,7 +24,7 @@ require_once("topo.php");
 				?>
 			</tr>
 			<?php
-			if ($_SESSION["nivel"] != "adm") {
+			if ($_SESSION["nivel"] != "Administrador") {
 			?>
 				<tr>
 					<td id=label>Senha atual</td>

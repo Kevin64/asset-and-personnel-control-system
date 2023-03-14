@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/conexao.php";
 
-$mensagem = null;
+$mensagem = "Dados de usuário exportados com sucesso!";
 
 if(isset($_GET["usuario"]))
 	$usuario = $_GET["usuario"];
@@ -12,8 +12,8 @@ if(isset($_GET["nivel"]))
 if(isset($_GET["status"]))
 	$status = $_GET["status"];
 
-$loginFile = "login.json";
-$loginChecksum = "login-checksum.txt";
+$loginFile = __DIR__."/output/login.json";
+$loginChecksum = __DIR__."/output/login-checksum.txt";
 
 $query = mysqli_query($conexao, "select * from usuarios") or die("Erro na query! " . mysqli_error($conexao));
 $return_arr = array();
@@ -60,7 +60,7 @@ if(!isset($row_array)) {
 	<title></title>
 </head>
 
-<body bgcolor=green>
+<body bgcolor=blue>
 	<center>
 		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
 	</center>

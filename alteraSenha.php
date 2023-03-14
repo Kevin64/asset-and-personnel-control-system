@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/conexao.php';
-require_once("topo.php");
 require_once("verifica.php");
+require_once("topo.php");
+require_once __DIR__ . "/conexao.php";
 
 $mensagem = "";
 
@@ -13,14 +13,14 @@ $verificaSenhaAlt = password_verify($_POST["txtSenha2"], $senhaNova);
 $query = mysqli_query($conexao, "select * from usuarios where usuario = '$usuario'") or die("Erro ao procurar usuário! " . mysqli_error($conexao));
 
 while ($row = mysqli_fetch_array($query)) {
-	$id = $row['id'];
-	$senha = $row['senha'];
+	$id = $row["id"];
+	$senha = $row["senha"];
 }
 
 if (mysqli_num_rows($query) == 0) {
 	$mensagem = "<font color=red>Usuário não existe!</font>";
 } else {
-	if ($_SESSION["nivel"] != "adm") {
+	if ($_SESSION["nivel"] != "Administrador") {
 		$senhaAtual = password_verify($_POST["txtSenhaAtual"], $senha);
 		if ($verificaSenhaAlt) {
 			if ($senha == $senhaAtual) {

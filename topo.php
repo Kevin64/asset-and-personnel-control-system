@@ -46,10 +46,6 @@ if (!isset($_SESSION)) {
 </head>
 
 <body>
-	<?php
-	//require_once ("menu.php");
-	?>
-
 	<div id="container">
 		<div id="topo">
 			<?php

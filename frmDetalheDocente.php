@@ -1,8 +1,7 @@
 <?php
-session_start();
-require_once("topo.php");
 require_once("verifica.php");
-require_once __DIR__ . '/conexao.php';
+require_once("topo.php");
+require_once __DIR__ . "/conexao.php";
 
 $enviar = null;
 
@@ -81,8 +80,8 @@ if ($enviar != 1) {
 					<td>
 						<select name=txtTipoServidor required>
 							<option disabled selected value> -- Selecione uma opção -- </option>
-							<option value="Docente" <?php if ($tipoServidor == "Docente") echo 'selected="selected"'; ?>>Docente</option>
-							<option value="Técnico Administrativo em Educação" <?php if ($tipoServidor == "Técnico Administrativo em Educação") echo 'selected="selected"'; ?>>Técnico Administrativo em Educação</option>
+							<option value="Docente" <?php if ($tipoServidor == "Docente") echo "selected='selected'"; ?>>Docente</option>
+							<option value="Técnico Administrativo em Educação" <?php if ($tipoServidor == "Técnico Administrativo em Educação") echo "selected='selected'"; ?>>Técnico Administrativo em Educação</option>
 						</select>
 					</td>
 				</tr>
@@ -116,22 +115,20 @@ if ($enviar != 1) {
 				<tr>
 					<?php
 					if ($siape == "" || $tipoServidor == null || $nome == "" || $email == "" || $celular == "" || $curso == "") {
-						?>
-						<td colspan=2 style="color:red;"><br><?php echo "<h4> Completar dados cadastrais antes de continuar! "?></br></td>
+					?>
+						<td colspan=2 style="color:red;"><br><?php echo "<h4> Completar dados cadastrais antes de continuar! " ?></br></td>
 						<?php
-					}
-					else{
-						if($tipoServidor == "Técnico Administrativo em Educação"){
+					} else {
+						if ($tipoServidor == "Técnico Administrativo em Educação") {
 						?>
-						<td colspan=2><br><?php echo "<h4>" . "TAE" . " " . $nome . " - Curso de " . $curso; ?></br></td>
-						<?php						
-						}
-						else{
+							<td colspan=2><br><?php echo "<h4>" . "TAE" . " " . $nome . " - Curso de " . $curso; ?></br></td>
+						<?php
+						} else {
 						?>
-						<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $nome . " - Curso de " . $curso; ?></br></td>
+							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $nome . " - Curso de " . $curso; ?></br></td>
 						<?php
 						}
-					?>					
+						?>
 				</tr>
 				<tr>
 					<td colspan=2><br><?php echo "SIAPE: " . $siape; ?></br></td>
@@ -147,15 +144,15 @@ if ($enviar != 1) {
 				</tr>
 			<?php
 					}
-			}
-			if ($_SESSION["nivel"] != "limit") {
+				}
+				if ($_SESSION["nivel"] != "Limitado") {
 			?>
-				<tr>
-					<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
-				</tr>
-			<?php
-			}
-			?>
+			<tr>
+				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
+			</tr>
+		<?php
+				}
+		?>
 		</table>
 	</form>
 </div>

@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
 require_once("topo.php");
-require_once __DIR__ . '/conexao.php';
+require_once __DIR__ . "/conexao.php";
 
 $enviar = null;
 $ordenar = null;
@@ -15,8 +15,8 @@ if (isset($_GET["ordenar"]))
 if ($ordenar == "")
 	$ordenar = "nome";
 
-if (isset($_GET['sort']))
-	$sort = $_GET['sort'];
+if (isset($_GET["sort"]))
+	$sort = $_GET["sort"];
 
 if (isset($sort) and $sort == "asc") {
 	$sort = "desc";
@@ -29,7 +29,7 @@ if ($enviar != 1)
 else {
 	$rdCriterio = $_POST["rdCriterio"];
 	$pesquisar = $_POST["txtPesquisar"];
-	$query = mysqli_query($conexao, "select * from docente where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from docente where $rdCriterio like " % $pesquisar % "") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
 }
 
 $totalDocentes = mysqli_num_rows($query);
@@ -45,21 +45,21 @@ $totalDocentes = mysqli_num_rows($query);
 			<tr>
 				<td align=center>
 					<select id=filterDocente name=rdCriterio>
-						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'siape') echo "selected='selected'"; ?>value="siape">SIAPE</option>
-						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'curso') echo "selected='selected'"; ?>value="curso">Tipo de servidor</option>
-						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'nome') echo "selected='selected'"; ?>value="nome">Nome</option>
-						<option <?php if(isset($_POST['rdCriterio']) && $_POST['rdCriterio'] == 'tipoServidor') echo "selected='selected'"; ?>value="tipoServidor">Tipo de Servidor</option>
+						<option <?php if (isset($_POST["rdCriterio"]) && $_POST["rdCriterio"] == "siape") echo "selected='selected'"; ?>value="siape">SIAPE</option>
+						<option <?php if (isset($_POST["rdCriterio"]) && $_POST["rdCriterio"] == "curso") echo "selected='selected'"; ?>value="curso">Tipo de servidor</option>
+						<option <?php if (isset($_POST["rdCriterio"]) && $_POST["rdCriterio"] == "nome") echo "selected='selected'"; ?>value="nome">Nome</option>
+						<option <?php if (isset($_POST["rdCriterio"]) && $_POST["rdCriterio"] == "tipoServidor") echo "selected='selected'"; ?>value="tipoServidor">Tipo de Servidor</option>
 					</select>
 					<input style="width:300px" type=text name=txtPesquisar> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
 		<?php
-			if(isset($_POST['txtPesquisar'])){
-				if(isset($_POST['rdCriterio'])){
-					$value = $_POST['rdCriterio'];
-				}
+		if (isset($_POST["txtPesquisar"])) {
+			if (isset($_POST["rdCriterio"])) {
+				$value = $_POST["rdCriterio"];
 			}
+		}
 		?>
 	</table>
 	<br><br>
@@ -68,8 +68,8 @@ $totalDocentes = mysqli_num_rows($query);
 		<form action="apagaSelecionadosDocente.php" method="post">
 			<tr id="cabecalho">
 				<?php
-				if (isset($_SESSION['nivel'])) {
-					if ($_SESSION["nivel"] == "adm") {
+				if (isset($_SESSION["nivel"])) {
+					if ($_SESSION["nivel"] == "Administrador") {
 				?>
 						<td><img src="img/trash.png" width="22" height="29"></td>
 				<?php
@@ -97,41 +97,40 @@ $totalDocentes = mysqli_num_rows($query);
 			?>
 				<tr id="dados">
 					<?php
-					if (isset($_SESSION['nivel'])) {
-						if ($_SESSION["nivel"] == "adm") {
+					if (isset($_SESSION["nivel"])) {
+						if ($_SESSION["nivel"] == "Administrador") {
 					?>
-							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
+							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
 					<?php
 						}
 					}
 					?>
-					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></style></a></td>
+					<td><a href="frmDetalheDocente.php?id=<?php echo $id; ?>"><?php echo $siape; ?></a></td>
 					<td class="unselectable"><?php echo $nome; ?></td>
 					<td class="unselectable"><?php echo $curso; ?></td>
 					<?php
 					if (!in_array(true, $devices)) {
-						if($tipo == null){
+						if ($tipo == null) {
 					?>
-						<td class="unselectable" style="background-color:darkred;">
-							<?php echo "Dados cadastrais incompletos" ?>
-						</td>
-				<?php
-						}
-						else{
-							?>
-							<td class="unselectable">
-							<?php echo $tipo; ?>
-						</td>
+							<td class="unselectable" style="background-color:darkred;">
+								<?php echo "Dados cadastrais incompletos" ?>
+							</td>
 						<?php
+						} else {
+						?>
+							<td class="unselectable">
+								<?php echo $tipo; ?>
+							</td>
+					<?php
 						}
-						}
-				?>
+					}
+					?>
 
 				</tr>
 				<?php
 			}
-			if (isset($_SESSION['nivel'])) {
-				if ($_SESSION["nivel"] == "adm") {
+			if (isset($_SESSION["nivel"])) {
+				if ($_SESSION["nivel"] == "Administrador") {
 				?>
 					<tr>
 						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" disabled></td>

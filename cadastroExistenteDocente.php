@@ -1,5 +1,7 @@
 <?php
+require_once("verifica.php");
 require_once("topo.php");
+require_once __DIR__ . "/conexao.php";
 
 $siape = $_GET["siape"];
 ?>
