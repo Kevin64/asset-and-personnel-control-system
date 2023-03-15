@@ -32,7 +32,7 @@ if (isset($_SESSION["nivel"])) {
 		else {
 			$rdCriterio = $_POST["rdCriterio"];
 			$pesquisar = $_POST["txtPesquisar"];
-			$query = mysqli_query($conexao, "select * from usuarios where $rdCriterio like " % $pesquisar % "") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+			$query = mysqli_query($conexao, "select * from usuarios where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
 		}
 
 		$totalUsuarios = mysqli_num_rows($query);

@@ -29,7 +29,7 @@ if ($enviar != 1)
 else {
 	$rdCriterio = $_POST["rdCriterio"];
 	$pesquisar = $_POST["txtPesquisar"];
-	$query = mysqli_query($conexao, "select * from docente where $rdCriterio like " % $pesquisar % "") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from docente where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
 }
 
 $totalDocentes = mysqli_num_rows($query);

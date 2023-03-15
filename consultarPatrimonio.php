@@ -39,7 +39,7 @@ if ($enviar != 1) {
 	$totalAtivo = mysqli_num_rows($queryAtivo);
 	$totalDescarte = mysqli_num_rows($queryDescarte);
 } else {
-	$queryPesquisa = mysqli_query($conexao, "select * from patrimonio where $rdCriterio like "%$pesquisar%"") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+	$queryPesquisa = mysqli_query($conexao, "select * from patrimonio where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
 	$totalPesquisa = mysqli_num_rows($queryPesquisa);
 }
 
