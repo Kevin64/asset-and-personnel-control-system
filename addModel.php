@@ -1,5 +1,5 @@
 <?php
-require_once("verifica.php");
+require_once("checkSession.php");
 require_once __DIR__ . "/connection.php";
 
 if (isset($_POST["txtMarca"]))
