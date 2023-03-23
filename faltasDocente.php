@@ -24,4 +24,4 @@ function menosfalta()
 	$query = mysqli_query($conexao, "update docente set faltas = '$faltas', data_ultima_falta = CURDATE() where id = '$menosfalta'") or die("Erro ao atualizar os dados do docente! " . mysqli_error($conexao));
 }
 
-header("Location: consultarDocente.php");
+header("Location: queryTeacher.php");

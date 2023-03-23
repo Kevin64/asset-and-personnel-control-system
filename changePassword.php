@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
 require_once("topo.php");
-require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/connection.php";
 
 $mensagem = "";
 
@@ -51,5 +51,5 @@ if (mysqli_num_rows($query) == 0) {
 </div>
 
 <?php
-require_once("rodape.php");
+require_once("foot.php");
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once("verifica.php");
-require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/connection.php";
 
 $siape = $_POST["txtSiape"];
 $tipoServidor = $_POST["txtTipoServidor"];
@@ -17,6 +17,6 @@ $totalDocente = mysqli_num_rows($validaDocente);
 if ($totalDocente == 0) {
 	mysqli_query($conexao, "insert into docente (siape, tipoServidor, nome, email, ramal, celular, curso, sala) values ('$siape', '$tipoServidor', '$nome', '$email', '$ramal', '$celular', '$curso', '$sala')") or die("Erro ao tentar cadastrar docente! " . mysqli_error($conexao));
 
-	header("Location: sucessoDocente.php");
+	header("Location: successTeacher.php");
 } else
 	header("Location: cadastroExistenteDocente.php?siape='$siape'");

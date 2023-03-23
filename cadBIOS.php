@@ -1,6 +1,6 @@
 <?php
 require_once("verifica.php");
-require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/connection.php";
 
 if (isset($_POST["txtMarca"]))
 	$marca = $_POST["txtMarca"];
@@ -27,6 +27,6 @@ if ($totalPatrimonio == 0) {
 	//Inserir dados no banco
 	mysqli_query($conexao, "insert into bios (marca, modelo, versao, tipo, tpm, mediaOp) values ('$marca', '$modelo', '$versao', '$tipo', '$tpm', '$mediaOp')") or die("Erro ao tentar cadastrar BIOS! " . mysqli_error($conexao));
 
-	header("Location: sucessoBIOS.php");
+	header("Location: successModel.php");
 } else
 	header("Location: cadastroExistenteBIOS.php?modelo='$modelo'");

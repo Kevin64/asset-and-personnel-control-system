@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
-require_once("topo.php");
-require_once __DIR__ . "/conexao.php";
+require_once("top.php");
+require_once __DIR__ . "/connection.php";
 
 $usuario = $_POST["txtUsuario"];
 if ($_POST["txtSenha"] != "") {
@@ -40,5 +40,5 @@ if ($total > 0) {
 <?php
 	}
 }
-require_once("rodape.php");
+require_once("foot.php");
 ?>

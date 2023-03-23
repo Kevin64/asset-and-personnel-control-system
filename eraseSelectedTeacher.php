@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
 require_once("topo.php");
-require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/connection.php";
 
 $deletar = $_POST["chkDeletar"];
 
@@ -11,4 +11,4 @@ if (isset($deletar)) {
 	}
 }
 
-header("Location: consultarDocente.php?del=ok");
+header("Location: queryTeacher.php?del=ok");

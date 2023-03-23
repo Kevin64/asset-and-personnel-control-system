@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
-require_once("topo.php");
-require_once __DIR__ . "/conexao.php";
+require_once("top.php");
+require_once __DIR__ . "/connection.php";
 
 if (isset($_SESSION["nivel"])) {
 	if ($_SESSION["nivel"] == "Administrador") {
@@ -74,9 +74,9 @@ if (isset($_SESSION["nivel"])) {
 			</table>
 		</div>
 <?php
-		require_once("rodape.php");
+		require_once("foot.php");
 	} else {
-		header("Location: negado.php");
+		header("Location: deny.php");
 	}
 }
 ?>

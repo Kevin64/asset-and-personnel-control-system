@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/connection.php";
 
 $enviar = $_POST["txtEnviar"];
 $usuario = $_POST["txtUsuario"];
@@ -26,8 +26,8 @@ if ($verificaSenha) {
 
 		header("Location: index.php");
 	} else {
-		header("Location: negado.php");
+		header("Location: deny.php");
 	}
 } else {
-	header("Location: negado.php");
+	header("Location: deny.php");
 }

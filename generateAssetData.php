@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/connection.php";
 
 $mensagem = "Dados de patrimônio exportados com sucesso!";
 

@@ -1,5 +1,5 @@
 <?php
-require_once("topo.php");
+require_once("top.php");
 ?>
 
 <div id="meio">
@@ -8,5 +8,5 @@ require_once("topo.php");
 </div>
 
 <?php
-require_once("rodape.php");
+require_once("foot.php");
 ?>

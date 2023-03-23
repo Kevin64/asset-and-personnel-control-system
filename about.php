@@ -1,5 +1,5 @@
 <?php
-require_once("topo.php");
+require_once("top.php");
 require_once("menu.php");
 ?>
 
@@ -28,5 +28,5 @@ require_once("menu.php");
 		</fieldset>
 	</div>
 	<?php
-	require_once("rodape.php");
+	require_once("foot.php");
 	?>

@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
-require_once("topo.php");
-require_once __DIR__ . "/conexao.php";
+require_once("top.php");
+require_once __DIR__ . "/connection.php";
 
 $modelo = $_GET["modelo"];
 ?>
@@ -14,5 +14,5 @@ $modelo = $_GET["modelo"];
 </div>
 
 <?php
-require_once("rodape.php");
+require_once("foot.php");
 ?>

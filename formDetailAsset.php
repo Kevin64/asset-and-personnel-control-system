@@ -1,7 +1,7 @@
 <?php
 require_once("verifica.php");
-require_once("topo.php");
-require_once __DIR__ . "/conexao.php";
+require_once("top.php");
+require_once __DIR__ . "/connection.php";
 
 $enviar = null;
 $idPatrimonio = null;
@@ -407,5 +407,5 @@ if ($enviar != 1) {
 	</form>
 </div>
 <?php
-require_once("rodape.php");
+require_once("deny.php");
 ?>
