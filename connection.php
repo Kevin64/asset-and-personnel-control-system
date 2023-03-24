@@ -1,4 +1,9 @@
 <?php
+$language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
+$lang_file = '/lang/' . $language . '.json';
+$lang_file_content = file_get_contents(__DIR__ . $lang_file);
+$translations = json_decode($lang_file_content, true);
+
 $jsonFile = file_get_contents(__DIR__ . "/etc/config.json");
 $json_config_array = json_decode($jsonFile, true);
 

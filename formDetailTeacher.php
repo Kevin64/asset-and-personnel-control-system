@@ -1,7 +1,7 @@
 <?php
 require_once("checkSession.php");
 require_once("top.php");
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
 $enviar = null;
 
@@ -10,7 +10,7 @@ if (isset($_POST["txtEnviar"]))
 
 if ($enviar != 1) {
 	$idDocente = $_GET["id"];
-	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die("Erro a selecionar docente para exibir detalhes! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die($translations["ERROR_SHOW_DETAIL_TEACHER"] . mysqli_error($conexao));
 } else {
 	if (isset($_POST["txtIdDocente"]))
 		$idDocente = $_POST["txtIdDocente"];
@@ -36,19 +36,19 @@ if ($enviar != 1) {
 		$data_ultima_falta = $_POST["txtDataUltimaFalta"];
 
 	//Atualizando os dados do docente
-	mysqli_query($conexao, "update docente set siape = '$siape', tipoServidor = '$tipoServidor', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala' where id = '$idDocente'") or die("Erro ao atualizar os dados do docente! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update docente set siape = '$siape', tipoServidor = '$tipoServidor', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala' where id = '$idDocente'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($conexao));
 
-	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die("Erro ao selecionar os dados do docente! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from docente where id = '$idDocente'") or die($translations["ERROR_SHOW_DETAIL_TEACHER"] . mysqli_error($conexao));
 }
 ?>
 
 <div id="meio">
-	<form action="frmDetalheDocente.php" method="post" id="frmGeneral">
+	<form action="formDetailTeacher.php" method="post" id="frmGeneral">
 		<input type=hidden name=txtEnviar value="1">
-		<h2>Detalhes do docente</h2><br>
+		<h2><?php echo $translations["TEACHER_DETAIL"] ?></h2><br>
 		<?php
 		if ($enviar == 1) {
-			echo "<font color=blue>Dados do docente atualizados com sucesso!</font><br><br>";
+			echo "<font color=blue>" . $translations["SUCCESS_UPDATE_TEACHER_DATA"] . "</font><br><br>";
 		}
 		?>
 		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
@@ -68,20 +68,20 @@ if ($enviar != 1) {
 				$data_ultima_falta = $resultado["data_ultima_falta"];
 			?>
 				<tr>
-					<td colspan=2 id=separador>Dados do docente</td>
+					<td colspan=2 id=separador><?php echo $translations["TEACHER_DATA"] ?></td>
 				</tr>
 				<tr>
-					<td id="label">SIAPE<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdDocente value="<?php echo $idDocente; ?>">
 					<td><input type=text name=txtSiape maxlength="8" required value="<?php echo $siape; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Tipo de servidor<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["EMPLOYEE_TYPE"] ?><mark id=asterisk>*</mark></td>
 					<td>
 						<select name=txtTipoServidor required>
-							<option disabled selected value> -- Selecione uma opção -- </option>
-							<option value="Docente" <?php if ($tipoServidor == "Docente") echo "selected='selected'"; ?>>Docente</option>
-							<option value="Técnico Administrativo em Educação" <?php if ($tipoServidor == "Técnico Administrativo em Educação") echo "selected='selected'"; ?>>Técnico Administrativo em Educação</option>
+							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?></option>
+							<option value="Docente" <?php if ($tipoServidor == "Docente") echo "selected='selected'"; ?>><?php echo $translations["TEACHER_TYPE_1"] ?></option>
+							<option value="Técnico Administrativo em Educação" <?php if ($tipoServidor == "Técnico Administrativo em Educação") echo "selected='selected'"; ?>><?php echo $translations["TEACHER_TYPE_2"] ?></option>
 						</select>
 					</td>
 				</tr>
@@ -90,27 +90,27 @@ if ($enviar != 1) {
 					<td><input type=text name=txtNome required value="<?php echo $nome; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">E-mail<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["TEACHER_EMAIL"] ?><mark id=asterisk>*</mark></td>
 					<td><input type=email name=txtEmail required value="<?php echo $email; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Ramal</td>
+					<td id="label"><?php echo $translations["TEACHER_PHONE_EXTENSION"] ?></td>
 					<td><input type=text name=txtRamal maxLength=4 value="<?php echo $ramal; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Celular (com DDD)<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["TEACHER_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<td><input type=text name=txtCelular minLength=11 maxLength=11 required value="<?php echo $celular; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Curso<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["TEACHER_COURSE"] ?><mark id=asterisk>*</mark></td>
 					<td><input type=text name=txtCurso required value="<?php echo $curso; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Sala</td>
+					<td id="label"><?php echo $translations["TEACHER_ROOM"] ?></td>
 					<td><input type=text name=txtSala maxLength=4 value="<?php echo $sala; ?>"></td>
 				</tr>
 				<tr>
-					<td colspan=2 id=separador>Modelo para Reserva de Salas (Copiar e Colar)</td>
+					<td colspan=2 id=separador><?php echo $translations["MRBS_TEMPLATE"] ?></td>
 				</tr>
 				<tr>
 					<?php
@@ -125,27 +125,27 @@ if ($enviar != 1) {
 						<?php
 						} else {
 						?>
-							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $nome . " - Curso de " . $curso; ?></br></td>
+							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $nome . $translations["COURSE_OF"] . $curso; ?></br></td>
 						<?php
 						}
 						?>
 				</tr>
 				<tr>
-					<td colspan=2><br><?php echo "SIAPE: " . $siape; ?></br></td>
+					<td colspan=2><br><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] . $siape; ?></br></td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo "Curso: " . $curso; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_COURSE"] . $curso; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo "Celular: " . $celular; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_PHONE_NUMBER_SHORT"] . $celular; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo "E-mail: " . $email; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_EMAIL"] . $email; ?> </td>
 				</tr>
 			<?php
 					}
 				}
-				if ($_SESSION["nivel"] != "Limitado") {
+				if ($_SESSION["nivel"] != $json_config_array["LIMITED_LEVEL"]) {
 			?>
 			<tr>
 				<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>

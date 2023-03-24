@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
 $patrimonio = $_GET["patrimonio"];
 $numeroLacre = $_GET["lacre"];
@@ -40,14 +40,14 @@ $dataFormatacao = $dataExplodida[2] . "-" . $dataExplodida[1] . "-" . $dataExplo
 $dataFormatacaoExpandida = $dataFormatacao;
 $modoServico = "Manutenção";
 
-$queryPegaPatrimonio = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die("Erro na query! " . mysqli_error($conexao));
+$queryPegaPatrimonio = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
 $total = mysqli_num_rows($queryPegaPatrimonio);
 
 if ($total >= 1) {
-	$query = mysqli_query($conexao, "update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm', trocaPilha = '$trocaPilha', ticketNum = '$ticketNum' where patrimonio = '$patrimonio';") or die("Erro na query de atualização! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm', trocaPilha = '$trocaPilha', ticketNum = '$ticketNum' where patrimonio = '$patrimonio';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($conexao));
 	
-	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum, agent) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum', '$agent');") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
-	$mensagem = "Computador já existente, dados atualizados com sucesso!";
+	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum, agent) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum', '$agent');") or die($translations["ERORR_ADD_DATA"] . mysqli_error($conexao));
+	$mensagem = $translations["EXISTING_ASSET_UPDATING_DATA"];
 }
 ?>
 

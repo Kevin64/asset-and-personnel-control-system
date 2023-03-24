@@ -4,17 +4,17 @@
 		if (!isset($_SESSION["id"])) {
 		?>
 			<form action="autentica.php" method="post" id="frmLogin">
-				<h2>Acesso restrito</h2>
+				<h2><?php echo $translations["RESTRICTED_ACCESS"] ?></h2>
 				<br>
 				<input type="hidden" name="txtEnviar" value="1">
-				<label for="txtUsuario">Usuário<br><input type="text" name="txtUsuario"></label><br><br>
-				<label for="txtSenha">Senha<br><input type="password" name="txtSenha"></label><br><br>
+				<label for="txtUsuario"><?php echo $translations["USERNAME"] ?><br><input type="text" name="txtUsuario"></label><br><br>
+				<label for="txtSenha"><?php echo $translations["PASSWORD"] ?><br><input type="password" name="txtSenha"></label><br><br>
 				<input type="submit" value="Entrar">
 			</form>
 		<?php
 		} else {
-			echo "<h1>Sistema de controle de patrimônio e docentes do CCSH</h1>";
-			echo "<h2>Use o menu acima para navegar</h2>";
+			echo "<h1>" . $translations["ATCS"] . "</h1>";
+			echo "<h2>" . $translations["USE_NAVIGATION_MENU"] . "</h2>";
 		}
 		?>
 	</div>

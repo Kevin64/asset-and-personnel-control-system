@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
 if ($file = fopen("etc/version", "r")) {
 	while (!feof($file)) {
@@ -10,11 +10,11 @@ if ($file = fopen("etc/version", "r")) {
 ?>
 <div id="rodape">
 	<font style="font-size: 14px;">
-		<b>Sistema de controle de patrimônio e docentes do CCSH</b><br>
-		Versão: <?php echo $line ?><br>
+		<b><?php echo $translations["ATCS"] ?></b><br>
+		<?php echo $translations["ATCS_VERSION"] ?><?php echo $line ?><br>
 		Sistema de desenvolvido pela Subdivisão de Tecnologia da Informação do CCSH<Br>
-		E-mail: <?php echo $email ?><br>
-		Telefone: <?php echo $phone ?>
+		<?php echo $translations["ATCS_EMAIL"] ?><?php echo $email ?><br>
+		<?php echo $translations["ATCS_PHONE"] ?><?php echo $phone ?>
 	</font>
 </div>
 </div>

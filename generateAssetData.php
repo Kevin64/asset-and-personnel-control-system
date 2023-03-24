@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
-$mensagem = "Dados de patrimônio exportados com sucesso!";
+$mensagem = $translations["SUCCESS_ASSET_DATA_EXPORT"];
 
 if(isset($_GET["patrimonio"]))
 	$patrimonio = $_GET["patrimonio"];
@@ -29,7 +29,7 @@ if(isset($_GET["dataFormatacao"]))
 $pcFile = __DIR__."/output/pc.json";
 $pcChecksum = __DIR__."/output/pc-checksum.txt";
 
-$query = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die("Erro na query! " . mysqli_error($conexao));
+$query = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
 $return_arr = array();
 
 if (file_exists($pcFile) || file_exists($pcChecksum)) {

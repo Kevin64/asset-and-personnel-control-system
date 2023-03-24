@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
-$mensagem = "Dados de usuário exportados com sucesso!";
+$mensagem = $translations["SUCCESS_USER_DATA_EXPORT"];
 
 if(isset($_GET["usuario"]))
 	$usuario = $_GET["usuario"];
@@ -15,7 +15,7 @@ if(isset($_GET["status"]))
 $loginFile = __DIR__."/output/login.json";
 $loginChecksum = __DIR__."/output/login-checksum.txt";
 
-$query = mysqli_query($conexao, "select * from usuarios") or die("Erro na query! " . mysqli_error($conexao));
+$query = mysqli_query($conexao, "select * from usuarios") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
 $return_arr = array();
 
 if (file_exists($loginFile) || file_exists($loginChecksum)) {

@@ -1,7 +1,7 @@
 <?php
 require_once("checkSession.php");
 require_once("top.php");
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
 $enviar = null;
 $idPatrimonio = null;
@@ -17,8 +17,8 @@ if ($enviar != 1) {
 	if (isset($_GET["patrimonioFK"]))
 		$patrimonioFK = $_GET["patrimonioFK"];
 
-	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro a selecionar patrimônio para exibir detalhes! " . mysqli_error($conexao));
-	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro a selecionar patrimônio para exibir detalhes! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($conexao));
+	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($conexao));
 } else {
 	$idPatrimonio = $_POST["txtIdPatrimonio"];
 	$patrimonio = $_POST["txtPatrimonio"];
@@ -71,10 +71,10 @@ if ($enviar != 1) {
 	$tpm = $_POST["txtTPM"];
 
 	//Atualizando os dados do patrimônio
-	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', descarte = '$descarte', predio = '$predio', sala = '$sala', siapeRecebedor = '$siape', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die("Erro ao atualizar os dados do patrimônio! " . mysqli_error($conexao));
+	mysqli_query($conexao, "update patrimonio set patrimonio = '$patrimonio', descarte = '$descarte', predio = '$predio', sala = '$sala', siapeRecebedor = '$siape', dataEntrega = '$dataEntrega', padrao = '$padrao', observacao = '$observacao', dataFormatacao = '$ultimaFormatacao', ad = '$ad', marca = '$marca', modelo = '$modelo', numSerie = '$numSerie', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$hostname', bios = '$bios', emUso = '$emUso', lacre = '$lacre', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', mac = '$mac', ip = '$ip', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm' where id = '$idPatrimonio'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($conexao));
 
-	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
-	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die("Erro ao selecionar os dados do patrimônio! " . mysqli_error($conexao));
+	$query = mysqli_query($conexao, "select * from patrimonio where id = '$idPatrimonio'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($conexao));
+	$queryFormatAnt = mysqli_query($conexao, "select manutencoes.dataFormatacoesAnteriores, manutencoes.modoServico, manutencoes.trocaPilha, manutencoes.ticketNum, manutencoes.agent from (select * from patrimonio where id = '$idPatrimonio') as p inner join manutencoes on p.patrimonio = manutencoes.patrimonioFK") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($conexao));
 }
 ?>
 <div id="meio">
@@ -85,7 +85,7 @@ if ($enviar != 1) {
 		<h2>Detalhes do patrimônio</h2><br>
 		<?php
 		if ($enviar == 1)
-			echo "<font color=blue>Dados do patrimônio atualizados com sucesso!</font><br><br>";
+			echo "<font color=blue>" . $translations["SUCCESS_UPDATE_ASSET_DATA"] . "</font><br><br>";
 		?>
 		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="frmFields">
@@ -140,10 +140,10 @@ if ($enviar != 1) {
 			?>
 				<?php
 				if (isset($_SESSION["nivel"])) {
-					if ($_SESSION["nivel"] == "Administrador") {
+					if ($_SESSION["nivel"] == $json_config_array["ADMIN_LEVEL"]) {
 				?>
 						<tr>
-							<td id="label">Patrimônio enviado para baixa?</td>
+							<td id="label"><?php echo $translations["DISCARDED_ASSET_QUESTION"] ?></td>
 							<td colspan=5><input type=checkbox class=chkBox name=chkBoxDescarte value="1" <?php echo ($resultado["descarte"] == 1 ? "checked" : ""); ?>></td>
 						</tr>
 				<?php
@@ -151,15 +151,15 @@ if ($enviar != 1) {
 				}
 				?>
 				<tr>
-					<td colspan=7 id=separador>Dados do patrimônio</td>
+					<td colspan=7 id=separador><?php echo $translations["ASSET_DATA"] ?></td>
 				</tr>
 				<tr>
-					<td id="label">Patrimônio<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["ASSET_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdPatrimonio value="<?php echo $idPatrimonio; ?>">
 					<td colspan=5><input type=text name=txtPatrimonio placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $patrimonio; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Prédio<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["BUILDING"] ?><mark id=asterisk>*</mark></td>
 					<td colspan=5>
 						<select id="frmFields" name="txtPredio" required>
 							<?php
@@ -173,35 +173,35 @@ if ($enviar != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id="label">Sala<mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark></td>
 					<td colspan=5><input id="frmFields" type=text name=txtSala placeholder="Ex.: 4413" maxlength="4" required value="<?php echo $sala; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Siape do recebedor da última entrega</td>
+					<td id="label"><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
 					<td colspan=5><input type=text name=txtSiapeRecebedor maxlength="8" value="<?php echo $siape; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Data da última entrega</td>
+					<td id="label"><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
 					<td colspan=5><input type=date name=txtDataEntrega value="<?php echo $dataEntrega; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label">Última entrega feita por</td>
+					<td id="label"><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
 					<td colspan=5><label name=txtEntregador style=line-height:40px;color:green;font-size:12pt><?php echo $entregador; ?></label></td>
 				</tr>
 				<tr>
-					<td id="label">Observação</td>
+					<td id="label"><?php echo $translations["NOTE"] ?></td>
 					<td colspan=5><textarea name=txtObservacao cols=20 rows=2 placeholder="Opcional: Campo dedicado para observações e notas referente ao bem patrimonial"><?php echo $observacao; ?></textarea></td>
 				</tr>
 		</table>
 		<table>
 			<tr>
-				<td colspan=5 id=separador>Manutenções realizadas</td>
+				<td colspan=5 id=separador><?php echo $translations["PERFORMED_MAINTENANCES_TITLE"] ?></td>
 			<tr id=headerPreviousMaintenance>
-				<td>Data</td>
-				<td>Serviço</td>
-				<td>Troca de pilha</td>
-				<td>Nº chamado</td>
-				<td>Agente responsável</td>
+				<td><?php echo $translations["PERFORMED_MAINTENANCES_DATE"] ?></td>
+				<td><?php echo $translations["PERFORMED_MAINTENANCES_SERVICE"] ?></td>
+				<td><?php echo $translations["PERFORMED_MAINTENANCES_BATTERY"] ?></td>
+				<td><?php echo $translations["PERFORMED_MAINTENANCES_TICKET"] ?></td>
+				<td><?php echo $translations["PERFORMED_MAINTENANCES_USER"] ?></td>
 			</tr>
 			<?php
 				while ($resultadoFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
@@ -264,13 +264,13 @@ if ($enviar != 1) {
 		</table>
 		<table id="frmFields">
 			<tr>
-				<td colspan="2" id=separador>Dados do equipamento</td>
+				<td colspan="2" id=separador><?php echo $translations["COMPUTER_DATA"] ?></td>
 			</tr>
 			<tr>
 				<td><input type=hidden name=txtUltimaFormatacao value="<?php echo $ultimaFormatacao; ?>"></td>
 			</tr>
 			<tr>
-				<td id="label">Padrão</td>
+				<td id="label"><?php echo $translations["STANDARD"] ?></td>
 				<td colspan=5>
 					<select name="txtPadrao">
 						<option value="Aluno" <?php if ($padrao == "Aluno") echo "selected"; ?>>Aluno</option>
@@ -279,7 +279,7 @@ if ($enviar != 1) {
 				</td>
 			</tr>
 			<tr>
-				<td id=label>Cadastrado no Active Directory</td>
+				<td id=label><?php echo $translations["AD_REGISTERED"] ?></td>
 				<td>
 					<select name="txtAd">
 						<option value="Sim" <?php if ($ad === "Sim") echo "selected"; ?>>Sim</option>
@@ -287,79 +287,79 @@ if ($enviar != 1) {
 					</select>
 			</tr>
 			<tr>
-				<td id=label>Marca</td>
+				<td id=label><?php echo $translations["BRAND"] ?></td>
 				<td><input type=text name=txtMarca value="<?php echo $marca; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Modelo</td>
+				<td id=label><?php echo $translations["MODEL"] ?></td>
 				<td><input type=text name=txtModelo value="<?php echo $modelo; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Número de série</td>
+				<td id=label><?php echo $translations["SERIAL_NUMBER"] ?></td>
 				<td><input type=text name=txtNumSerie value="<?php echo $numSerie; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Processador</td>
+				<td id=label><?php echo $translations["PROCESSOR"] ?></td>
 				<td><input type=text name=txtProcessador value="<?php echo $processador; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Memória</td>
+				<td id=label><?php echo $translations["RAM"] ?></td>
 				<td><input type=text name=txtMemoria value="<?php echo $memoria; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Disco rígido (tamanho total)</td>
+				<td id=label><?php echo $translations["STORAGE_SIZE"] ?></td>
 				<td><input type=text name=txtHd value="<?php echo $hd; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Tipo de Armazenamento</td>
+				<td id=label><?php echo $translations["STORAGE_TYPE"] ?></td>
 				<td><input type=text name=txtTipoArmaz value="<?php echo $tipoArmaz; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Modo de operação SATA/M.2</td>
+				<td id=label><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
 				<td><input type=text name=txtModoArmaz value="<?php echo $modoArmaz; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Placa de Vídeo</td>
+				<td id=label><?php echo $translations["VIDEO_CARD"] ?></td>
 				<td><input type=text name=txtGPU value="<?php echo $gpu; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Sistema Operacional</td>
+				<td id=label><?php echo $translations["OPERATING_SYSTEM"] ?></td>
 				<td><input type=text name=txtSistemaOperacional value="<?php echo $sistemaOperacional; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Nome do computador</td>
+				<td id=label><?php echo $translations["HOSTNAME"] ?></td>
 				<td><input type=text name=txtHostName value="<?php echo $hostname; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Tipo de Firmware</td>
+				<td id=label><?php echo $translations["FW_TYPE"] ?></td>
 				<td><input type=text name=txtTipoFW value="<?php echo $tipoFW; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Versão da BIOS/UEFI</td>
+				<td id=label><?php echo $translations["FW_VERSION"] ?></td>
 				<td><input type=text name=txtBIOS value="<?php echo $bios; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Secure Boot</td>
+				<td id=label><?php echo $translations["SECURE_BOOT"] ?></td>
 				<td><input type=text name=txtSecBoot value="<?php echo $secBoot; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Tecnologia de Virtualização</td>
+				<td id=label><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"] ?></td>
 				<td><input type=text name=txtVT value="<?php echo $vt; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Versão do módulo TPM</td>
+				<td id=label><?php echo $translations["TPM_VERSION"] ?></td>
 				<td><input type=text name=txtTPM value="<?php echo $tpm; ?>"></td>
 			</tr>
 			<tr>
-				<td id="label">Endereço MAC</td>
+				<td id="label"><?php echo $translations["MAC_ADDRESS"] ?></td>
 				<td><input type="text" name="txtMac" value="<?php echo $mac; ?>"></td>
 			</tr>
 			<tr>
-				<td id="label">Endereço IP</td>
+				<td id="label"><?php echo $translations["IP_ADDRESS"] ?></td>
 				<td><input type="text" name="txtIp" value="<?php echo $ip; ?>"></td>
 			</tr>
 			<tr>
-				<td id=label>Em uso</td>
+				<td id=label><?php echo $translations["IN_USE"] ?></td>
 				<td>
 					<select name="txtEmUso">
 						<option value="Sim" <?php if ($emUso === "Sim") echo "selected"; ?>>Sim</option>
@@ -367,17 +367,17 @@ if ($enviar != 1) {
 					</select>
 			</tr>
 			<tr>
-				<td id="label">Lacre</td>
+				<td id="label"><?php echo $translations["SEAL_NUMBER"] ?></td>
 				<td><input type="text" name="txtLacre" value="<?php echo $lacre; ?>"></td>
 			</tr>
-			<td id="label">Etiqueta</td>
+			<td id="label"><?php echo $translations["TAG"] ?></td>
 			<td><select name="txtEtiqueta">
 					<option value="Sim" <?php if ($etiqueta === "Sim") echo "selected"; ?>>Sim</option>
 					<option value="Não" <?php if ($etiqueta === "Não") echo "selected"; ?>>Não</option>
 				</select>
 			</td>
 			<tr>
-				<td id="label">Tipo</td>
+				<td id="label"><?php echo $translations["HW_TYPE"] ?></td>
 				<td>
 					<select name="txtTipo">
 						<?php
@@ -394,7 +394,7 @@ if ($enviar != 1) {
 			<?php
 			}
 			if (isset($_SESSION["nivel"])) {
-				if ($_SESSION["nivel"] == "Administrador" or $_SESSION["nivel"] == "Padrão") {
+				if ($_SESSION["nivel"] == $json_config_array["ADMIN_LEVEL"] or $_SESSION["nivel"] == $json_config_array["STANDARD_LEVEL"]) {
 			?>
 				<tr>
 					<td colspan=7 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
@@ -407,5 +407,5 @@ if ($enviar != 1) {
 	</form>
 </div>
 <?php
-require_once("deny.php");
+require_once("foot.php");
 ?>

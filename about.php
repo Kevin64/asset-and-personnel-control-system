@@ -5,25 +5,13 @@ require_once("menu.php");
 
 <div id="container">
 	<div id="meio">
-		<font size=5><b>Sistema de controle de patrimônio e docentes do CCSH</b></font><br><br>
+		<font size=5><b><?php echo $translations["ATCS"] ?></b></font><br><br>
 		<p align=justify style="padding: 10px; text-indent: 30px;">
-			O sistema de controle de patrimônio e docentes foi desenvolvido com o intuito de gerenciar de forma mais eficiente o registro patrimonial e de manutenção dos computadores destinados aos setores do Centro de Ciências Sociais e Humanas (CCSH) da Universidade Federal de Santa Maria, bem como manter um cadastro dos docentes do Centro, para utilização do laboratórios.<br><br>
+		<?php echo $translations["ABOUT_TEXT"] ?><br><br>
 		<fieldset style="text-align: left; font-weight: bold; font-size: 15px; border-radius: 20px; padding: 15px; width: 90%; margin: 0 auto;">
-			<legend>Colaboradores</legend>
+			<legend><?php echo $translations["COLLABORATORS"] ?></legend>
 			<p style="font-weight: normal; font-size: 14px;">
-				<b>Nome:</b> Marcos Roberto da Silva.<br>
-				<b>Técnico Administrativo em Educação</b><br>
-				<b>Coloboração:</b> Programação inicial da interface Web para o gerenciamento dos dados, Planejamento inicial de desenvolvimento do banco de dados, interligação inicial da interface Web com o Banco de dados.<br>
-				<b>Recursos utilizados:</b> Linguagem de programação PHP5, Banco de dados mySQL, HTML5, Javascript, CSS3.<br>
-				<b>Siape:</b> 2152076<br>
-				<b>Contato:</b> marcossilva@redes.ufsm.br<br><br>
-
-				<b>Nome:</b> Kevin Costa<br>
-				<b>Técnico Administrativo em Educação</b><br>
-				<b>Colaboração:</b> Desenvolvimento das atualizações subsequentes (migração para PHP8), manutenção do banco de dados e da interface web, desenvolvimento do software de cadastro de patrimônio, testes e melhorias.<br>
-				<b>Recursos utilizados:</b> Linguagem de programação C#, PHP8, Banco de dados mySQL, HTML5, Javascript, CSS3.<br>
-				<b>Siape:</b> 1971957<br>
-				<b>Contato:</b> kevinvtc@outlook.com<br>
+			<?php echo $translations["DEVELOPERS_TEXT"] ?>
 			</p>
 		</fieldset>
 	</div>

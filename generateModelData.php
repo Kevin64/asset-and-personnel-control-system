@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
-$mensagem = "Dados de modelo exportados com sucesso!";
+$mensagem = $translations["SUCCESS_MODEL_DATA_EXPORT"];
 
 if(isset($_GET["marca"]))
 	$marca = $_GET["marca"];
@@ -19,7 +19,7 @@ if(isset($_GET["mediaOp"]))
 $biosFile = __DIR__."/output/bios.json";
 $biosChecksum = __DIR__."/output/bios-checksum.txt";
 
-$query = mysqli_query($conexao, "select * from bios") or die("Erro na query! " . mysqli_error($conexao));
+$query = mysqli_query($conexao, "select * from bios") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
 $return_arr = array();
 
 if (file_exists($biosFile) || file_exists($biosChecksum)) {

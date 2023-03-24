@@ -2,6 +2,8 @@
 
 <?php
 
+require_once("connection.php");
+
 $userAgent = !empty($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
 
 $android = str_contains($userAgent, "Android");
@@ -41,7 +43,7 @@ if (!isset($_SESSION)) {
 	}
 	?>
 	<meta charset="utf-8">
-	<title>.:: Sistema de Controle de Patrimônio e Docentes do CCSH ::.</title>
+	<title>.:: <?php echo $translations["ATCS"] ?> ::.</title>
 	<link rel="icon" href="img/favicon.png" type="image/x-icon" />
 </head>
 

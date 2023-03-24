@@ -1,10 +1,10 @@
 <?php
 require_once("checkSession.php");
 require_once("top.php");
-require_once __DIR__ . "/connection.php";
+require_once("connection.php");
 
 if (isset($_SESSION["nivel"])) {
-	if ($_SESSION["nivel"] == "Administrador") {
+	if ($_SESSION["nivel"] == $json_config_array["ADMIN_LEVEL"]) {
 
 		$enviar = null;
 		$ordenar = null;
@@ -28,11 +28,11 @@ if (isset($_SESSION["nivel"])) {
 		}
 
 		if ($enviar != 1)
-			$query = mysqli_query($conexao, "select * from usuarios order by $ordenar $sort") or die("Erro ao selecionar dados do usuario! " . mysqli_error($conexao));
+			$query = mysqli_query($conexao, "select * from usuarios order by $ordenar $sort") or die($translations["ERROR_QUERY_USER"] . mysqli_error($conexao));
 		else {
 			$rdCriterio = $_POST["rdCriterio"];
 			$pesquisar = $_POST["txtPesquisar"];
-			$query = mysqli_query($conexao, "select * from usuarios where $rdCriterio like '%$pesquisar%'") or die("Erro ao efetuar a pesquisa! " . mysqli_error($conexao));
+			$query = mysqli_query($conexao, "select * from usuarios where $rdCriterio like '%$pesquisar%'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
 		}
 
 		$totalUsuarios = mysqli_num_rows($query);
@@ -47,11 +47,11 @@ if (isset($_SESSION["nivel"])) {
 			<br><br>
 			<h2>Lista de usuários (<?php echo $totalUsuarios; ?>)</h2><br>
 			<table id="dadosUsuario" cellspacing=0>
-				<form action="apagaSelecionadosUsuario.php" method="post">
+				<form action="eraseSelectedUser.php" method="post">
 					<tr id="cabecalho">
 						<td><img src="img/trash.png" width="22" height="29"></td>
-						<td><a href="?ordenar=usuario&sort=<?php echo $sort; ?>">Usuário</a></td>
-						<td><a href="?ordenar=nivel&sort=<?php echo $sort; ?>">Privilégio</a></td>
+						<td><a href="?ordenar=usuario&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a></td>
+						<td><a href="?ordenar=nivel&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"] ?></a></td>
 					</tr>
 					<?php
 					while ($resultado = mysqli_fetch_array($query)) {
@@ -61,14 +61,14 @@ if (isset($_SESSION["nivel"])) {
 					?>
 						<tr id="dados">
 							<td><input type="checkbox" name="chkDeletar[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
-							<td><a href="frmDetalheUsuario.php?id=<?php echo $id; ?>"><?php echo $usuario; ?></a></td>
+							<td><a href="formDetailUser.php?id=<?php echo $id; ?>"><?php echo $usuario; ?></a></td>
 							<td><?php echo $nivel; ?></td>
 						</tr>
 					<?php
 					}
 					?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="Apagar selecionados" disabled></td>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTOn"] ?>" disabled></td>
 					</tr>
 				</form>
 			</table>
@@ -76,7 +76,7 @@ if (isset($_SESSION["nivel"])) {
 <?php
 		require_once("foot.php");
 	} else {
-		header("Location: deny.php");
+		header("Location: denied.php");
 	}
 }
 ?>
