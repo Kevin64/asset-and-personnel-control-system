@@ -9,17 +9,17 @@
 		border: black;
 	}
 
-	#topo,
-	#meio {
+	#top,
+	#middle {
 		background-color: #f2f2f2;
 	}
 
-	#separador {
+	#spacer {
 		background-color: gainsboro;
 		color: black;
 	}
 
-	#rodape {
+	#foot {
 		border: 1px solid black;
 		background-color: rgb(25, 81, 133);
 		color: white;
@@ -37,17 +37,17 @@
 		border: white;
 	}
 
-	#topo,
-	#meio {
+	#top,
+	#middle {
 		background-color: rgb(44, 44, 44);
 	}
 
-	#separador {
+	#spacer {
 		background-color: rgb(80, 80, 80);
 		color: white;
 	}
 
-	#rodape {
+	#foot {
 		border: 1px solid white;
 		background: gray;
 	}
@@ -93,13 +93,13 @@ table {
 	box-shadow: 0px 0px 0px;
 }
 
-#topo {
+#top {
 	width: 1202px;
 	text-align: center;
 	border-radius: 15px;
 }
 
-#meio {
+#middle {
 	width: 1200px;
 	height: auto;
 	text-align: center;
@@ -108,7 +108,7 @@ table {
 	padding-top: 20px;
 }
 
-#rodape {
+#foot {
 	width: 1200px;
 	height: auto;
 	text-align: center;
@@ -116,7 +116,7 @@ table {
 	margin-bottom: 5px;
 }
 
-#separador {
+#spacer {
 	font-weight: bold;
 	text-align: center;
 	border: 1px solid;

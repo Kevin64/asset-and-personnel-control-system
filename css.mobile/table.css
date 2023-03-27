@@ -1,35 +1,35 @@
 @media (prefers-color-scheme: light) {
 
-	#dadosPatrimonio,
-	#dadosBIOS,
-	#dadosDocente,
-	#dadosUsuario {
+	#assetData,
+	#modelData,
+	#teacherData,
+	#userData {
 		border-color: black;
 	}
 
-	#dadosPatrimonio td,
-	#dadosBIOS td,
-	#dadosDocente td,
-	#dadosUsuario td {
+	#assetData td,
+	#modelData td,
+	#teacherData td,
+	#userData td {
 		border: 1px solid gainsboro;
 	}
 
-	#dados:hover {
+	#data:hover {
 		background-color: rgb(249, 202, 20);
 		border: 10px solid red;
 	}
 
-	#tbCadNovoUsuario {
+	#tbAddNewUser {
 		border-color: black;
 	}
 
-	#cabecalho {
+	#header_ {
 		background-color: gainsboro;
 	}
 
-	#filterPatrimonio,
-	#filterDocente,
-	#filterBIOS {
+	#filterAsset,
+	#filterTeacher,
+	#filterModel {
 		background-color: white;
 		color: black;
 	}
@@ -49,35 +49,35 @@
 
 @media (prefers-color-scheme: dark) {
 
-	#dadosPatrimonio,
-	#dadosBIOS,
-	#dadosDocente,
-	#dadosUsuario {
+	#assetData,
+	#modelData,
+	#teacherData,
+	#userData {
 		border-color: white;
 	}
 
-	#dadosPatrimonio td,
-	#dadosBIOS td,
-	#dadosDocente td,
-	#dadosUsuario td {
+	#assetData td,
+	#modelData td,
+	#teacherData td,
+	#userData td {
 		border: 1px solid rgb(80, 80, 80);
 	}
 
-	#dados:hover {
+	#data:hover {
 		background-color: rgb(0, 87, 158);
 	}
 
-	#tbCadNovoUsuario {
+	#tbAddNewUser {
 		border-color: white;
 	}
 
-	#cabecalho {
+	#header_ {
 		background-color: rgb(80, 80, 80);
 	}
 
-	#filterPatrimonio,
-	#filterDocente,
-	#filterBIOS {
+	#filterAsset,
+	#filterTeacher,
+	#filterModel {
 		background-color: black;
 		color: white;
 	}
@@ -104,39 +104,43 @@
     user-select: none;
 }
 
-#dadosPatrimonio {
-	width: 1200px;
-	border: 1px solid;
+#assetData {
+	width: 100%;
+	border: 0px solid;
 	border-radius: 15px;
-	padding: 10px;
-	margin-left: 0px;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#dadosBIOS {
-	width: 900px;
-	border: 1px solid;
+#modelData {
+	width: 100%;
+	border: 0px solid;
 	border-radius: 15px;
-	padding: 10px;
-	margin-left: 150px;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#dadosDocente {
-	width: 1050px;
-	border: 1px solid;
+#teacherData {
+	width: 100%;
+	border: 0px solid;
 	border-radius: 15px;
-	padding: 10px;
-	margin-left: 70px;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#dadosUsuario {
-	width: 700px;
-	border: 1px solid;
+#userData {
+	width: 100%;
+	border: 0px solid;
 	border-radius: 15px;
-	padding: 10px;
-	margin-left: 250px;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#cabecalho {
+#header_ {
 	height: 30px;
 	font-weight: bold;
 	text-align: center;
@@ -147,33 +151,35 @@ a {
 	color: steelblue;
 }
 
-#dados {
+#data {
 	height: 30px;
 	text-align: center;
 }
 
-#tbCadNovoUsuario {
-	border: 1px solid;
+#tbAddNewUser {
+	border: 0px solid;
 	border-radius: 10px;
-	padding: 10px;
+	padding: 0px;
 	text-align: center;
 	width: 700px;
 	margin-left: 150px;
 }
 
-#tbPesquisar {
-	width: 100%;
-	margin-left: 0px;
+#tbSearch {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 input[type=text] {
 	border: 1px solid;
 }
 
-#filterPatrimonio,
-#filterBIOS,
-#filterDocente {
-	width: 300px;
+#filterAsset,
+#filterModel,
+#filterTeacher {
+	margin-left: 0px;
+	width: 100px;
 }
 
 #bodyPreviousMaintenance td,

@@ -14,7 +14,7 @@ require_once("connection.php");
 					<ol class=slide>
 						<li><a href="queryAsset.php"><?php echo $translations["QUERY_ASSET"] ?></a></li>
 						<?php
-						if ($_SESSION["nivel"] == $json_config_array["ADMIN_LEVEL"]) {
+						if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
 						?>
 							<li><a href="formAddModel.php"><?php echo $translations["ADD_MODEL"] ?></a></li>
 						<?php
@@ -27,7 +27,7 @@ require_once("connection.php");
 					<label id="hov"><span><?php echo $translations["TEACHER_TYPE_1"] ?></span></label>
 					<ol class=slide>
 						<?php
-						if ($_SESSION["nivel"] != $json_config_array["LIMITED_LEVEL"]) {
+						if ($_SESSION["privilegeLevel"] != $json_config_array["PrivilegeLevels"]["LIMITED_LEVEL"]) {
 						?>
 							<a href="formAddTeacher.php"><?php echo $translations["ADD_TEACHER"] ?></a>
 						<?php
@@ -50,7 +50,7 @@ require_once("connection.php");
 					<label id="hov">
 						<span>
 							<?php
-							echo "" . $_SESSION["usuario"];
+							echo "" . $_SESSION["username"];
 							?>
 						</span>
 					</label>
@@ -59,8 +59,8 @@ require_once("connection.php");
 				?>
 				<ol class=slide>
 					<?php
-					if (isset($_SESSION["nivel"])) {
-						if ($_SESSION["nivel"] == $json_config_array["ADMIN_LEVEL"]) {
+					if (isset($_SESSION["privilegeLevel"])) {
+						if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
 					?>
 							<li><a href="queryUser.php"><?php echo $translations["QUERY_USERS"] ?></a></li>
 							<li><a href="formAddUser.php"><?php echo $translations["ADD_USER"] ?></a></li>

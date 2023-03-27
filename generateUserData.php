@@ -1,21 +1,21 @@
 <?php
 require_once("connection.php");
 
-$mensagem = $translations["SUCCESS_USER_DATA_EXPORT"];
+$message = $translations["SUCCESS_USER_DATA_EXPORT"];
 
-if(isset($_GET["usuario"]))
-	$usuario = $_GET["usuario"];
-if(isset($_GET["senha"]))
-	$senha = $_GET["senha"];
-if(isset($_GET["nivel"]))
-	$nivel = $_GET["nivel"];
+if(isset($_GET["user"]))
+	$username = $_GET["user"];
+if(isset($_GET["password"]))
+	$password = $_GET["password"];
 if(isset($_GET["status"]))
-	$status = $_GET["status"];
+	$privilegeLevel = $_GET["status"];
+if(isset($_GET["status"]))
+	$privilegeLevel = $_GET["status"];
 
 $loginFile = __DIR__."/output/login.json";
 $loginChecksum = __DIR__."/output/login-checksum.txt";
 
-$query = mysqli_query($conexao, "select * from usuarios") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
+$query = mysqli_query($connection, "select * from users") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
 if (file_exists($loginFile) || file_exists($loginChecksum)) {
@@ -25,9 +25,9 @@ if (file_exists($loginFile) || file_exists($loginChecksum)) {
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["id"] = $row["id"];
-	$row_array["usuario"] = $row["usuario"];
-	$row_array["senha"] = $row["senha"];
-	$row_array["nivel"] = $row["nivel"];
+	$row_array["user"] = $row["user"];
+	$row_array["password"] = $row["password"];
+	$row_array["status"] = $row["status"];
 	$row_array["status"] = $row["status"];
 	array_push($return_arr, $row_array);
 
@@ -62,7 +62,7 @@ if(!isset($row_array)) {
 
 <body bgcolor=blue>
 	<center>
-		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
+		<font size=3 color=white><b><?php echo $message; ?></b></font>
 	</center>
 </body>
 

@@ -4,7 +4,7 @@ require_once("menu.php");
 ?>
 
 <div id="container">
-	<div id="meio">
+	<div id="middle">
 		<font size=5><b><?php echo $translations["ATCS"] ?></b></font><br><br>
 		<p align=justify style="padding: 10px; text-indent: 30px;">
 		<?php echo $translations["ABOUT_TEXT"] ?><br><br>

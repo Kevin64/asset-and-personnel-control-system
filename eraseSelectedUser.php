@@ -2,11 +2,11 @@
 
 require_once("connection.php");
 
-$deletar = $_POST["chkDeletar"];
+$delete = $_POST["chkDelete"];
 
-if (isset($deletar)) {
-	for ($i = 0; $i < count($deletar); $i++) {
-		$query = mysqli_query($conexao, "delete from usuarios where id = '$deletar[$i]'") or die($translations["ERROR_DELETE_USER"] . mysqli_error($conexao));
+if (isset($delete)) {
+	for ($i = 0; $i < count($delete); $i++) {
+		$query = mysqli_query($connection, "delete from users where id = '$delete[$i]'") or die($translations["ERROR_DELETE_USER"] . mysqli_error($connection));
 	}
 }
 

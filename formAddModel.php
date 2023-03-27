@@ -3,37 +3,37 @@ require_once("checkSession.php");
 require_once("top.php");
 require_once("connection.php");
 
-if (isset($_SESSION["nivel"])) {
-	if ($_SESSION["nivel"] == $json_config_array["ADMIN_LEVEL"]) {
+if (isset($_SESSION["privilegeLevel"])) {
+	if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
 
 ?>
 
-		<div id="meio">
-			<form action="addModel.php" method=post id=frmGeneral>
+		<div id="middle">
+			<form action="addModel.php" method=post id=formGeneral>
 				<h2><?php echo $translations["ADD_MODEL_FORM"] ?></h2><br>
-				<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
-				<table id="frmFields">
+				<label id=asteriskWarning>Os campos branddos com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+				<table id="formFields">
 					<tr>
-						<td colspan=2 id=separador><?php echo $translations["MODEL_DATA"] ?></td>
+						<td colspan=2 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtMarca placeholder="Ex.: Dell, Hewlett-Packard, LENOVO, etc" required></td>
+						<td><input type=text name=txtBrand placeholder="Ex.: Dell, Hewlett-Packard, LENOVO, etc" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtModelo placeholder="Ex.: 9010, 6005, etc" required></td>
+						<td><input type=text name=txtModel placeholder="Ex.: 9010, 6005, etc" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtVersao placeholder="Ex.: A30, 1.17, etc" required></td>
+						<td><input type=text name=txtVersion placeholder="Ex.: A30, 1.17, etc" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>
 						<td>
-							<select name=txtTipo required>
+							<select name=txtType required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=BIOS><?php echo $json_config_array["FW_BIOS"] ?></option>
+								<option value=model><?php echo $json_config_array["FW_model"] ?></option>
 								<option value=UEFI><?php echo $json_config_array["FW_UEFI"] ?></option>
 							</select>
 						</td>

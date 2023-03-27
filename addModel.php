@@ -2,31 +2,31 @@
 require_once("checkSession.php");
 require_once("connection.php");
 
-if (isset($_POST["txtMarca"]))
-	$marca = $_POST["txtMarca"];
+if (isset($_POST["txtBrand"]))
+	$brand = $_POST["txtBrand"];
 
-if (isset($_POST["txtModelo"]))
-	$modelo = $_POST["txtModelo"];
+if (isset($_POST["txtModel"]))
+	$model = $_POST["txtModel"];
 
-if (isset($_POST["txtVersao"]))
-	$versao = $_POST["txtVersao"];
+if (isset($_POST["txtVersion"]))
+	$fwVersion = $_POST["txtVersion"];
 
-if (isset($_POST["txtTipo"]))
-	$tipo = $_POST["txtTipo"];
+if (isset($_POST["txtType"]))
+	$hwType = $_POST["txtType"];
 
 if (isset($_POST["txtTPM"]))
-	$tpm = $_POST["txtTPM"];
+	$tpmVersion = $_POST["txtTPM"];
 
 if (isset($_POST["txtMediaOp"]))
-	$mediaOp = $_POST["txtMediaOp"];
+	$mediaOperationMode = $_POST["txtMediaOp"];
 
-$validaBIOS = mysqli_query($conexao, "select * from bios where modelo = '$modelo'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
-$totalBIOS = mysqli_num_rows($validaBIOS);
+$validateModel = mysqli_query($connection, "select * from model where model = '$model'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$totalModel = mysqli_num_rows($validateModel);
 
-if ($totalPatrimonio == 0) {
+if ($totalAsset == 0) {
 	//Inserir dados no banco
-	mysqli_query($conexao, "insert into bios (marca, modelo, versao, tipo, tpm, mediaOp) values ('$marca', '$modelo', '$versao', '$tipo', '$tpm', '$mediaOp')") or die($translations["ERRO_ADD_MODEL"] . mysqli_error($conexao));
+	mysqli_query($connection, "insert into model (brand, model, version, type, tpm, mediaOp) values ('$brand', '$model', '$fwVersion', '$hwType', '$tpmVersion', '$mediaOperationMode')") or die($translations["ERRO_ADD_MODEL"] . mysqli_error($connection));
 
 	header("Location: successModel.php");
 } else
-	header("Location: modelAlreadyExists.php?modelo='$modelo'");
+	header("Location: modelAlreadyExists.php?model='$model'");

@@ -1,14 +1,14 @@
 <?php
-require_once("verifica.php");
-require_once("topo.php");
+require_once("verify.php");
+require_once("top.php");
 require_once("connection.php");
 
-$deletar = $_POST["chkDeletar"];
+$delete = $_POST["chkDelete"];
 
-if (isset($deletar)) {
-	for ($i = 0; $i < count($deletar); $i++) {
-		$query2 = mysqli_query($conexao, "delete from manutencoes where id in (select man from (select manutencoes.id as man from manutencoes inner join (select patrimonio from patrimonio where id = '$deletar[$i]') as p on p.patrimonio = manutencoes.patrimonioFK) as m)") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($conexao));
-		$query = mysqli_query($conexao, "delete from patrimonio where id = '$deletar[$i]'") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($conexao));
+if (isset($delete)) {
+	for ($i = 0; $i < count($delete); $i++) {
+		$query2 = mysqli_query($connection, "delete from maintenances where id in (select main from (select maintenances.id as main from maintenances inner join (select asset from asset where id = '$delete[$i]') as a on a.asset = maintenances.assetNumberFK) as m)") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "delete from asset where id = '$delete[$i]'") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
 	}
 }
 

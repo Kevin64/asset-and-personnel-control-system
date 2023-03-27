@@ -16,18 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bios`
+-- Table structure for table `model`
 --
 
-DROP TABLE IF EXISTS `bios`;
+DROP TABLE IF EXISTS `model`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bios` (
+CREATE TABLE `model` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `marca` varchar(45) DEFAULT NULL,
-  `modelo` varchar(45) DEFAULT NULL,
-  `versao` varchar(45) DEFAULT NULL,
-  `tipo` varchar(10) DEFAULT NULL,
+  `brand` varchar(45) DEFAULT NULL,
+  `model` varchar(45) DEFAULT NULL,
+  `version` varchar(45) DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
   `tpm` varchar(15) DEFAULT NULL,
   `mediaOp` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -43,33 +43,33 @@ DROP TABLE IF EXISTS `docente`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `docente` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `siape` varchar(45) DEFAULT NULL,
-  `nome` varchar(45) DEFAULT NULL,
+  `regNum` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `ramal` varchar(45) DEFAULT NULL,
-  `celular` varchar(45) DEFAULT NULL,
-  `curso` varchar(45) DEFAULT NULL,
-  `sala` varchar(45) DEFAULT NULL,
+  `extNum` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `course` varchar(45) DEFAULT NULL,
+  `room` varchar(45) DEFAULT NULL,
   `faltas` int DEFAULT "0",
   `data_ultima_falta` varchar(10) DEFAULT NULL,
-  `tipoServidor` varchar(45) DEFAULT NULL,
+  `typeemployee` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=432 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `manutencoes`
+-- Table structure for table `maintenances`
 --
 
-DROP TABLE IF EXISTS `manutencoes`;
+DROP TABLE IF EXISTS `maintenances`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `manutencoes` (
+CREATE TABLE `maintenances` (
   `id` int NOT NULL AUTO_INCREMENT,
   `patrimonioFK` int DEFAULT NULL,
   `dataFormatacoesAnteriores` varchar(30) DEFAULT NULL,
   `modoServico` varchar(30) DEFAULT NULL,
-  `trocaPilha` varchar(30) DEFAULT NULL,
+  `changePilha` varchar(30) DEFAULT NULL,
   `ticketNum` int DEFAULT NULL,
   `agent` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -86,59 +86,59 @@ DROP TABLE IF EXISTS `patrimonio`;
 CREATE TABLE `patrimonio` (
   `id` int NOT NULL AUTO_INCREMENT,
   `patrimonio` int DEFAULT NULL,
-  `predio` varchar(20) DEFAULT NULL,
-  `sala` varchar(10) DEFAULT NULL,
+  `building` varchar(20) DEFAULT NULL,
+  `room` varchar(10) DEFAULT NULL,
   `descricao` text,
-  `nomeRecebedor` varchar(50) DEFAULT NULL,
-  `siapeRecebedor` varchar(50) DEFAULT NULL,
-  `ramal` varchar(15) DEFAULT NULL,
-  `entregador` varchar(45) DEFAULT NULL,
-  `dataEntrega` varchar(10) DEFAULT NULL,
-  `observacao` text,
-  `padrao` varchar(15) DEFAULT "Funcionário",
-  `dataFormatacao` varchar(10) DEFAULT NULL,
+  `namereceiver` varchar(50) DEFAULT NULL,
+  `regNumreceiver` varchar(50) DEFAULT NULL,
+  `extNum` varchar(15) DEFAULT NULL,
+  `deliveryman` varchar(45) DEFAULT NULL,
+  `deliveryDate` varchar(10) DEFAULT NULL,
+  `note` text,
+  `standard` varchar(15) DEFAULT "Funcionário",
+  `serviceDate` varchar(10) DEFAULT NULL,
   `ad` varchar(5) DEFAULT NULL,
-  `marca` varchar(30) DEFAULT NULL,
-  `modelo` varchar(50) DEFAULT NULL,
-  `numSerie` varchar(50) DEFAULT NULL,
-  `processador` varchar(100) DEFAULT NULL,
-  `memoria` varchar(50) DEFAULT NULL,
+  `brand` varchar(30) DEFAULT NULL,
+  `model` varchar(50) DEFAULT NULL,
+  `serialNumber` varchar(50) DEFAULT NULL,
+  `processor` varchar(100) DEFAULT NULL,
+  `ram` varchar(50) DEFAULT NULL,
   `hd` varchar(30) DEFAULT NULL,
-  `idUsuario` int DEFAULT NULL,
-  `sistemaOperacional` varchar(70) DEFAULT NULL,
+  `iduser` int DEFAULT NULL,
+  `operatingSystem` varchar(70) DEFAULT NULL,
   `hostname` varchar(30) DEFAULT NULL,
-  `emUso` varchar(10) DEFAULT NULL,
-  `lacre` varchar(30) DEFAULT NULL,
-  `etiqueta` varchar(10) DEFAULT NULL,
+  `inUse` varchar(10) DEFAULT NULL,
+  `sealNumber` varchar(30) DEFAULT NULL,
+  `tag` varchar(10) DEFAULT NULL,
   `mac` varchar(30) DEFAULT NULL,
-  `ip` varchar(30) DEFAULT NULL,
-  `tipo` varchar(10) DEFAULT NULL,
-  `bios` varchar(40) DEFAULT NULL,
-  `tipoFW` varchar(10) DEFAULT NULL,
-  `tipoArmaz` varchar(45) DEFAULT NULL,
+  `ipAddress` varchar(30) DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
+  `model` varchar(40) DEFAULT NULL,
+  `typeFW` varchar(10) DEFAULT NULL,
+  `typeStorage` varchar(45) DEFAULT NULL,
   `gpu` varchar(100) DEFAULT NULL,
-  `modoArmaz` varchar(45) DEFAULT NULL,
+  `mediaOperationMode` varchar(45) DEFAULT NULL,
   `secBoot` varchar(45) DEFAULT NULL,
   `vt` varchar(45) DEFAULT NULL,
   `tpm` varchar(45) DEFAULT NULL,
-  `trocaPilha` varchar(30) DEFAULT NULL,
+  `changePilha` varchar(30) DEFAULT NULL,
   `ticketNum` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2041 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
+CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(50) DEFAULT NULL,
-  `senha` varchar(255) DEFAULT NULL,
-  `nivel` varchar(5) DEFAULT NULL,
+  `user` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `status` varchar(5) DEFAULT NULL,
   `status` int DEFAULT "0",
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb3;

@@ -1,52 +1,52 @@
 <?php
-require_once("verifica.php");
-require_once("topo.php");
+require_once("verify.php");
+require_once("top.php");
 require_once("connection.php");
 
-$mensagem = "";
+$message = "";
 
 $id = null;
-$usuario = $_POST["txtUsuario"];
-$senhaNova = password_hash($_POST["txtSenha1"], PASSWORD_BCRYPT);
-$verificaSenhaAlt = password_verify($_POST["txtSenha2"], $senhaNova);
+$username = $_POST["txtuser"];
+$newPassword = password_hash($_POST["txtPassword1"], PASSWORD_BCRYPT);
+$verifyPasswordAlt = password_verify($_POST["txtPassword2"], $newPassword);
 
-$query = mysqli_query($conexao, "select * from usuarios where usuario = '$usuario'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
+$query = mysqli_query($connection, "select * from users where user = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 while ($row = mysqli_fetch_array($query)) {
 	$id = $row["id"];
-	$senha = $row["senha"];
+	$password = $row["password"];
 }
 
 if (mysqli_num_rows($query) == 0) {
-	$mensagem = "<font color=red>" . $translations["USER_NOT_EXIST"] . "</font>";
+	$message = "<font color=red>" . $translations["USER_NOT_EXIST"] . "</font>";
 } else {
-	if ($_SESSION["nivel"] != $json_config_array["ADMIN_LEVEL"]) {
-		$senhaAtual = password_verify($_POST["txtSenhaAtual"], $senha);
-		if ($verificaSenhaAlt) {
-			if ($senha == $senhaAtual) {
-				$queryTrocaSenha = mysqli_query($conexao, "update usuarios set senha = '$senhaNova' where id = '$id'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($conexao));
-				$mensagem = "<font color=blue>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
+	if ($_SESSION["privilegeLevel"] != $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+		$currentPassword = password_verify($_POST["txtCurrentPassword"], $password);
+		if ($verifyPasswordAlt) {
+			if ($password == $currentPassword) {
+				$queryChangePassword = mysqli_query($connection, "update users set password = '$newPassword' where id = '$id'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
+				$message = "<font color=blue>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
 			} else {
-				$mensagem = "<font color=red>" . $translations["OLD_PASSWORD_NOT_MATCH"] . "</font>";
+				$message = "<font color=red>" . $translations["OLD_PASSWORD_NOT_MATCH"] . "</font>";
 			}
 		} else {
-			$mensagem = "<font color=red>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
+			$message = "<font color=red>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
 		}
 	} else {
-		if ($verificaSenhaAlt) {
-			$queryTrocaSenha = mysqli_query($conexao, "update usuarios set senha = '$senhaNova' where id = '$id'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($conexao));
-			$mensagem = "<font color=blue>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
+		if ($verifyPasswordAlt) {
+			$queryChangePassword = mysqli_query($connection, "update users set password = '$newPassword' where id = '$id'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
+			$message = "<font color=blue>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
 		} else {
-			$mensagem = "<font color=red>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
+			$message = "<font color=red>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
 		}
 	}
 }
 ?>
 
-<div id="meio">
+<div id="middle">
 	<h2><?php echo $translations["CHANGE_PASSWORD"] ?></h2><br><br>
-	<?php echo $mensagem; ?><Br><Br>
-	<a href=frmTrocarSenha.php>[<?php echo $translations["BACK"] ?>]</a>
+	<?php echo $message; ?><Br><Br>
+	<a href=formChangePassword.php>[<?php echo $translations["BACK"] ?>]</a>
 
 </div>
 

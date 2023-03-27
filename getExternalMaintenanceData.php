@@ -1,53 +1,53 @@
 <?php
 require_once("connection.php");
 
-$patrimonio = $_GET["patrimonio"];
-$numeroLacre = $_GET["lacre"];
-$sala = $_GET["sala"];
-$predio = $_GET["predio"];
-$ad = $_GET["ad"];
-$padrao = $_GET["padrao"];
-$dataFormatacao = $_GET["formatacao"];
+$assetNumber = $_GET["asset"];
+$numerosealNumber = $_GET["sealNumber"];
+$room = $_GET["room"];
+$building = $_GET["building"];
+$adRegistered = $_GET["ad"];
+$standard = $_GET["standard"];
+$serviceDate = $_GET["formatacao"];
 $formatacoesAnteriores = $_GET["formatacoesAnteriores"];
-$marca = $_GET["marca"];
-$modelo = $_GET["modelo"];
+$brand = $_GET["brand"];
+$model = $_GET["model"];
 $numeroSerial = $_GET["numeroSerial"];
-$processador = $_GET["processador"];
-$memoria = $_GET["memoria"];
-$hd = $_GET["hd"];
-$sistemaOperacional = $_GET["sistemaOperacional"];
-$nomeDoComputador = $_GET["nomeDoComputador"];
-$mac = $_GET["mac"];
-$ip = $_GET["ip"];
-$bios = $_GET["bios"];
-$emUso = $_GET["emUso"];
-$etiqueta = $_GET["etiqueta"];
-$tipo = $_GET["tipo"];
-$tipoFW = $_GET["tipoFW"];
-$tipoArmaz = $_GET["tipoArmaz"];
-$gpu = $_GET["gpu"];
-$modoArmaz = $_GET["modoArmaz"];
-$secBoot = $_GET["secBoot"];
-$vt = $_GET["vt"];
-$tpm = $_GET["tpm"];
-$trocaPilha = $_GET["trocaPilha"];
+$processor = $_GET["processor"];
+$ram = $_GET["ram"];
+$storageSize = $_GET["hd"];
+$operatingSystem = $_GET["operatingSystem"];
+$nameDoComputador = $_GET["nameDoComputador"];
+$macAddress = $_GET["mac"];
+$ipAddress = $_GET["ipAddress"];
+$model = $_GET["model"];
+$inUse = $_GET["inUse"];
+$tag = $_GET["tag"];
+$hwType = $_GET["type"];
+$fwType = $_GET["typeFW"];
+$storageType = $_GET["typeStorage"];
+$videoCard = $_GET["gpu"];
+$mediaOperationMode = $_GET["mediaOperationMode"];
+$secureBoot = $_GET["secBoot"];
+$virtualizationTechnology = $_GET["vt"];
+$tpmVersion = $_GET["tpm"];
+$changePilha = $_GET["changePilha"];
 $ticketNum = $_GET["ticketNum"];
 $agent = $_GET["agent"];
 
-$dataF = substr($dataFormatacao, 0, 10);
-$dataExplodida = explode("/", $dataF);
-$dataFormatacao = $dataExplodida[2] . "-" . $dataExplodida[1] . "-" . $dataExplodida[0];
-$dataFormatacaoExpandida = $dataFormatacao;
+$dataF = substr($serviceDate, 0, 10);
+$explodedDate = explode("/", $dataF);
+$serviceDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
+$serviceDateExpandida = $serviceDate;
 $modoServico = "Manutenção";
 
-$queryPegaPatrimonio = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
-$total = mysqli_num_rows($queryPegaPatrimonio);
+$queryPegaAsset = mysqli_query($connection, "select * from asset where asset = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$total = mysqli_num_rows($queryPegaAsset);
 
 if ($total >= 1) {
-	$query = mysqli_query($conexao, "update patrimonio set lacre = '$numeroLacre', sala = '$sala', predio = '$predio', ad = '$ad', padrao = '$padrao', dataFormatacao = '$dataFormatacao', marca = '$marca', modelo = '$modelo', numSerie = '$numeroSerial', processador = '$processador', memoria = '$memoria', hd = '$hd', sistemaOperacional = '$sistemaOperacional', hostname = '$nomeDoComputador', bios = '$bios', mac = '$mac', ip = '$ip', emUso = '$emUso', etiqueta = '$etiqueta', tipo = '$tipo', tipoFW = '$tipoFW', tipoArmaz = '$tipoArmaz', gpu = '$gpu', modoArmaz = '$modoArmaz', secBoot = '$secBoot', vt = '$vt', tpm = '$tpm', trocaPilha = '$trocaPilha', ticketNum = '$ticketNum' where patrimonio = '$patrimonio';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($conexao));
+	$query = mysqli_query($connection, "update asset set sealNumber = '$numerosealNumber', room = '$room', building = '$building', ad = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$numeroSerial', processor = '$processor', ram = '$ram', hd = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$nameDoComputador', model = '$model', mac = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', type = '$hwType', typeFW = '$fwType', typeStorage = '$storageType', gpu = '$videoCard', mediaOperationMode = '$mediaOperationMode', secBoot = '$secureBoot', vt = '$virtualizationTechnology', tpm = '$tpmVersion', changePilha = '$changePilha', ticketNum = '$ticketNum' where asset = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	
-	$queryFormatAnt = mysqli_query($conexao, "insert into manutencoes (patrimonioFK, dataFormatacoesAnteriores, modoServico, trocaPilha, ticketNum, agent) values('$patrimonio', '$dataFormatacaoExpandida', '$modoServico', '$trocaPilha', '$ticketNum', '$agent');") or die($translations["ERORR_ADD_DATA"] . mysqli_error($conexao));
-	$mensagem = $translations["EXISTING_ASSET_UPDATING_DATA"];
+	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetFK, dataFormatacoesAnteriores, modoServico, changePilha, ticketNum, agent) values('$assetNumber', '$serviceDateExpandida', '$modoServico', '$changePilha', '$ticketNum', '$agent');") or die($translations["ERORR_ADD_DATA"] . mysqli_error($connection));
+	$message = $translations["EXISTING_ASSET_UPDATING_DATA"];
 }
 ?>
 
@@ -61,7 +61,7 @@ if ($total >= 1) {
 <body bgcolor=green>
 	<center>
 		<hr style="height:0pt; visibility:hidden;" />
-		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
+		<font size=3 color=white><b><?php echo $message; ?></b></font>
 		</td>
 	</center>
 </body>

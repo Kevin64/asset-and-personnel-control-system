@@ -1,21 +1,21 @@
 <?php
 require_once("connection.php");
 
-$patrimonio = $_GET["patrimonio"];
-$dataEntrega = $_GET["dataEntrega"];
-$siape = $_GET["siapeRecebedor"];
-$entregador = $_GET["entregador"];
+$assetNumber = $_GET["asset"];
+$lastDeliveryDate = $_GET["deliveryDate"];
+$deliveredToRegistrationNumber = $_GET["regNumreceiver"];
+$lastDeliveryMadeBy = $_GET["deliveryman"];
 
-$dataE = substr($dataEntrega, 0, 10);
-$dataExplodida = explode("/", $dataE);
-$dataEntrega = $dataExplodida[2] . "-" . $dataExplodida[1] . "-" . $dataExplodida[0];
+$dataE = substr($lastDeliveryDate, 0, 10);
+$explodedDate = explode("/", $dataE);
+$lastDeliveryDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
 
-$queryPegaPatrimonio = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
-$total = mysqli_num_rows($queryPegaPatrimonio);
+$queryPegaAsset = mysqli_query($connection, "select * from asset where asset = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$total = mysqli_num_rows($queryPegaAsset);
 
 if ($total >= 1) {
-	$query = mysqli_query($conexao, "update patrimonio set dataEntrega = '$dataEntrega', siapeRecebedor = '$siape', entregador = '$entregador' where patrimonio = '$patrimonio'") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($conexao));
-	$mensagem = $translations["SUCCESS_DELIVERY"];
+	$query = mysqli_query($connection, "update asset set deliveryDate = '$lastDeliveryDate', regNumreceiver = '$deliveredToRegistrationNumber', deliveryman = '$lastDeliveryMadeBy' where asset = '$assetNumber'") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
+	$message = $translations["SUCCESS_DELIVERY"];
 }
 ?>
 
@@ -28,7 +28,7 @@ if ($total >= 1) {
 
 <body bgcolor=green>
 	<center>
-		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
+		<font size=3 color=white><b><?php echo $message; ?></b></font>
 	</center>
 </body>
 

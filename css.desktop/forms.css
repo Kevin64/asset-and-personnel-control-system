@@ -1,20 +1,20 @@
 @media (prefers-color-scheme: light) {
 
-	#frmCadPatrimonio,
-	#frmCadBIOS,
-	#frmCadDocente {
+	#formAddAsset,
+	#formAddModel,
+	#formAddTeacher {
 		color: black;
 	}
 
-	#frmLogin *,
-	#frmCadPatrimonio *,
-	#frmCadBIOS *,
-	#frmCadDocente *,
-	#frmCadBIOSTable * {
+	#formLogin *,
+	#formAddAsset *,
+	#formAddModel *,
+	#formAddTeacher *,
+	#formAddModelTable * {
 		border-color: black;
 	}
 
-	#frmLogin {
+	#formLogin {
 		background-color: white;
 	}
 
@@ -29,21 +29,21 @@
 
 @media (prefers-color-scheme: dark) {
 
-	#frmCadPatrimonio,
-	#frmCadBIOS,
-	#frmCadDocente {
+	#formAddAsset,
+	#formAddModel,
+	#formAddTeacher {
 		color: white;
 	}
 
-	#frmLogin *,
-	#frmCadPatrimonio *,
-	#frmCadBIOS *,
-	#frmCadDocente *,
-	#frmCadBIOSTable * {
+	#formLogin *,
+	#formAddAsset *,
+	#formAddModel *,
+	#formAddTeacher *,
+	#formAddModelTable * {
 		border-color: white;
 	}
 
-	#frmLogin {
+	#formLogin {
 		background-color: black;
 	}
 
@@ -56,59 +56,58 @@
 	}
 }
 
-#frmLogin {
-	margin-left: 25px;
-	margin-right: 25px;
+#formLogin {
+	margin-left: 400px;
 	margin-top: -75px;
+	width: 350px;
 	height: 225px;
 	border: 2px solid;
 	border-radius: 20px;
 	padding: 20px;
 	text-align: center;
-	box-shadow: 0px 0px 25px;
+	box-shadow: 0px 0px 40px;
 }
 
-#frmCadBIOS {
+#formAddModel {
 	text-align: center;
-	width: auto;
+	width: 900px;
 	height: auto;
 	margin-left: 150px;
 }
 
-#frmCadDocente {
+#formAddTeacher {
 	text-align: center;
-	width: auto;
+	width: 1000px;
 	height: auto;
 	margin-left: 100px;
 }
 
-#frmCadBIOS table {
-	width: auto;
+#formAddModel table {
+	width: 900px;
 	height: auto;
-	border: 0px solid;
+	border: 1px solid;
 	padding: 5px;
 	text-align: center;
 }
 
-#frmCadDocente table {
-	width: auto;
+#formAddTeacher table {
+	width: 1000px;
 	height: auto;
-	border: 0px solid;
+	border: 1px solid;
 	padding: 5px;
 	text-align: center;
 }
 
-#frmGeneral table {
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
+#formGeneral table {
+	margin-left: 100px;
+	width: 1000px;
 	height: auto;
-	border: 0px solid;
+	border: 1px solid;
 	padding: 5px;
 	text-align: center;
 }
 
-#frmCadBIOS select,
+#formAddModel select,
 textarea {
 	width: auto;
 	border: 1px solid;
@@ -116,13 +115,13 @@ textarea {
 	text-align: center;
 }
 
-#frmCadBIOSTable select {
+#formAddModelTable select {
 	border: 1px solid;
 	padding: 5px;
 	text-align: center;
 }
 
-#frmCadDocente select,
+#formAddTeacher select,
 textarea {
 	width: auto;
 	border: 1px solid;
@@ -130,7 +129,7 @@ textarea {
 	text-align: center;
 }
 
-#frmGeneral td#label {
+#formGeneral td#label {
 	text-align: center;
 	width: 25%;
 }

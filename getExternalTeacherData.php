@@ -1,25 +1,25 @@
 <?php
 require_once("connection.php");
 
-$siape = $_GET["siape"];
-$nome = $_GET["nome"];
+$deliveredToRegistrationNumber = $_GET["regNum"];
+$name = $_GET["name"];
 $email = strtoupper($_GET["email"]);
-$ramal = strtoupper($_GET["ramal"]);
-$celular = strtoupper($_GET["celular"]);
-$curso = strtoupper($_GET["curso"]);
-$sala = strtoupper($_GET["sala"]);
+$extNum = strtoupper($_GET["extNum"]);
+$phone = strtoupper($_GET["phone"]);
+$course = strtoupper($_GET["course"]);
+$room = strtoupper($_GET["room"]);
 $faltas = strtoupper($_GET["faltas"]);
 $data_ultima_falta = strtoupper($_GET["data_ultima_falta"]);
 
-$queryPegaDocente = mysqli_query($conexao, "select * from docente where siape = '$siape'") or die("Erro na query! " . mysqli_error($conexao));
-$total = mysqli_num_rows($queryPegaDocente);
+$queryPegaTeacher = mysqli_query($connection, "select * from teacher where regNum = '$deliveredToRegistrationNumber'") or die("Erro na query! " . mysqli_error($connection));
+$total = mysqli_num_rows($queryPegaTeacher);
 
 if ($total >= 1) {
-	$query = mysqli_query($conexao, "update docente set siape = '$siape', nome = '$nome', email = '$email', ramal = '$ramal', celular = '$celular', curso = '$curso', sala = '$sala', faltas = '$faltas', data_ultima_falta = '$data_ultima_falta'") or die("Erro na query de atualização! " . mysqli_error($conexao));
-	$mensagem = "Dados atualizados com sucesso!";
+	$query = mysqli_query($connection, "update teacher set regNum = '$deliveredToRegistrationNumber', name = '$name', email = '$email', extNum = '$extNum', phone = '$phone', course = '$course', room = '$room', faltas = '$faltas', data_ultima_falta = '$data_ultima_falta'") or die("Erro na query de currentização! " . mysqli_error($connection));
+	$message = "Dados currentizados com sucesso!";
 } else {
-	$query = mysqli_query($conexao, "insert into docente (siape, nome, email, ramal, celular, curso, sala) values('$siape', '$nome', '$email', '$ramal', '$celular', '$curso', '$sala', '$faltas', '$data_ultima_falta')") or die("Erro ao incluir os dados! " . mysqli_error($conexao));
-	$mensagem = "Dados Cadastrados!";
+	$query = mysqli_query($connection, "insert into teacher (regNum, name, email, extNum, phone, course, room) values('$deliveredToRegistrationNumber', '$name', '$email', '$extNum', '$phone', '$course', '$room', '$faltas', '$data_ultima_falta')") or die("Erro ao incluir os dados! " . mysqli_error($connection));
+	$message = "Dados Cadastrados!";
 }
 
 ?>
@@ -33,7 +33,7 @@ if ($total >= 1) {
 
 <body bgcolor=blue>
 	<center>
-		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
+		<font size=3 color=white><b><?php echo $message; ?></b></font>
 	</center>
 </body>
 

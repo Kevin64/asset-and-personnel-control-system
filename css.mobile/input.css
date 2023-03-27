@@ -5,7 +5,7 @@
 		color: black;
 	}
 
-	#frmFields td {
+	#formFields td {
 		border: 1px solid gainsboro;
 	}
 
@@ -75,7 +75,7 @@
 		color: white;
 	}
 
-	#frmFields td {
+	#formFields td {
 		border: 1px solid rgb(80, 80, 80);
 	}
 
@@ -165,12 +165,12 @@ input[type=submit]:hover {
 	background-color: gray;
 }
 
-#frmFields input[type=text],
-#frmFields input[type=date],
-#frmFields input[type=email],
-#frmFields input[type=password],
-#frmFields select,
-#frmFields textarea {
+#formFields input[type=text],
+#formFields input[type=date],
+#formFields input[type=email],
+#formFields input[type=password],
+#formFields select,
+#formFields textarea {
 	width: 100%;
 }
 

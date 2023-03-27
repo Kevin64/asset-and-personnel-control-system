@@ -8,7 +8,7 @@ if ($file = fopen("etc/version", "r")) {
 	fclose($file);
 }
 ?>
-<div id="rodape">
+<div id="foot">
 	<font style="font-size: 14px;">
 		<b><?php echo $translations["ATCS"] ?></b><br>
 		<?php echo $translations["ATCS_VERSION"] ?><?php echo $line ?><br>

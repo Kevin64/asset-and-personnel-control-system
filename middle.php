@@ -1,14 +1,14 @@
-	<div id="meio">
+	<div id="middle">
 		<br><br><Br><Br>
 		<?php
 		if (!isset($_SESSION["id"])) {
 		?>
-			<form action="autentica.php" method="post" id="frmLogin">
+			<form action="authenticate.php" method="post" id="formLogin">
 				<h2><?php echo $translations["RESTRICTED_ACCESS"] ?></h2>
 				<br>
-				<input type="hidden" name="txtEnviar" value="1">
-				<label for="txtUsuario"><?php echo $translations["USERNAME"] ?><br><input type="text" name="txtUsuario"></label><br><br>
-				<label for="txtSenha"><?php echo $translations["PASSWORD"] ?><br><input type="password" name="txtSenha"></label><br><br>
+				<input type="hidden" name="txtSend" value="1">
+				<label for="txtUser"><?php echo $translations["USERNAME"] ?><br><input type="text" name="txtUser"></label><br><br>
+				<label for="txtPassword"><?php echo $translations["PASSWORD"] ?><br><input type="password" name="txtPassword"></label><br><br>
 				<input type="submit" value="Entrar">
 			</form>
 		<?php

@@ -3,35 +3,35 @@ require_once("checkSession.php");
 require_once("top.php");
 require_once("connection.php");
 
-if (isset($_SESSION["nivel"])) {
-	if ($_SESSION["nivel"] != $json_config_array["LIMITED_LEVEL"]) {
+if (isset($_SESSION["privilegeLevel"])) {
+	if ($_SESSION["privilegeLevel"] != $json_config_array["PrivilegeLevels"]["LIMITED_LEVEL"]) {
 
 ?>
-		<div id="meio">
-			<form action="addTeacher.php" method=post id=frmGeneral>
+		<div id="middle">
+			<form action="addTeacher.php" method=post id=formGeneral>
 				<h2><?php echo $translations["ADD_TEACHER_FORM"] ?></h2><br>
-				<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
-				<table id="frmFields">
+				<label id=asteriskWarning>Os campos branddos com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+				<table id="formFields">
 					<tr>
-						<td colspan=2 id=separador><?php echo $translations["TEACHER_DATA"] ?></td>
+						<td colspan=2 id=spacer><?php echo $translations["TEACHER_DATA"] ?></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtSiape placeholder="Ex.: 1234567" maxLength=8 required></td>
+						<td><input type=text name=txtRegNum placeholder="Ex.: 1234567" maxLength=8 required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_TYPE"] ?><mark id=asterisk>*</mark></td>
 						<td>
-							<select name=txtTipoServidor required>
+							<select name=txtTypeEmployee required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value="Docente"><?php echo $translations["TEACHER_TYPE_1"] ?></option>
-								<option value="Técnico Administrativo em Educação"><?php echo $translations["TEACHER_TYPE_2"] ?></option>
+								<option value="Teacher"><?php echo $translations["TEACHER_TYPE_1"] ?></option>
+								<option value="Técnico Administractive em Educação"><?php echo $translations["TEACHER_TYPE_2"] ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_NAME"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtNome placeholder="Ex.: Fulano de Tal" required></td>
+						<td><input type=text name=txtName placeholder="Ex.: Fulano de Tal" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_EMAIL"] ?><mark id=asterisk>*</mark></td>
@@ -39,18 +39,18 @@ if (isset($_SESSION["nivel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_PHONE_EXTENSION"] ?></td>
-						<td><input type=text name=txtRamal placeholder="Ex.: 9876" maxLength=4></td>
+						<td><input type=text name=txtExtNum placeholder="Ex.: 9876" maxLength=4></td>
 					</tr>
 					<td id="label"><?php echo $translations["TEACHER_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtCelular placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required></td>
+					<td><input type=text name=txtPhone placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_COURSE"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtCurso placeholder="Ex.: Curso de Humanas" required></td>
+						<td><input type=text name=txtCourse placeholder="Ex.: Curso de Humanas" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_ROOM"] ?></td>
-						<td><input type=text name=txtSala placeholder="Ex.: 4413" maxLength=4></td>
+						<td><input type=text name=txtRoom placeholder="Ex.: 4413" maxLength=4></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><br>

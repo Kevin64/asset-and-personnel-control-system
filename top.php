@@ -24,21 +24,21 @@ if (!isset($_SESSION)) {
 	<?php
 	if (in_array(true, $devices)) {
 	?>
-		<link rel="stylesheet" href="css.mobile/tabelas.css">
-		<link rel="stylesheet" href="css.mobile/estilos.css">
-		<link rel="stylesheet" href="css.mobile/formularios.css">
+		<link rel="stylesheet" href="css.mobile/table.css">
+		<link rel="stylesheet" href="css.mobile/styles.css">
+		<link rel="stylesheet" href="css.mobile/forms.css">
 		<link rel="stylesheet" href="css.mobile/menu.css">
 		<link rel="stylesheet" href="css.mobile/input.css">
-		<link rel="stylesheet" href="css.mobile/anim.css">
+		<link rel="stylesheet" href="css.mobile/animation.css">
 	<?php
 	} else {
 	?>
-		<link rel="stylesheet" href="css.desktop/tabelas.css">
-		<link rel="stylesheet" href="css.desktop/estilos.css">
-		<link rel="stylesheet" href="css.desktop/formularios.css">
+		<link rel="stylesheet" href="css.desktop/table.css">
+		<link rel="stylesheet" href="css.desktop/styles.css">
+		<link rel="stylesheet" href="css.desktop/forms.css">
 		<link rel="stylesheet" href="css.desktop/menu.css">
 		<link rel="stylesheet" href="css.desktop/input.css">
-		<link rel="stylesheet" href="css.desktop/anim.css">
+		<link rel="stylesheet" href="css.desktop/animation.css">
 	<?php
 	}
 	?>
@@ -49,7 +49,7 @@ if (!isset($_SESSION)) {
 
 <body>
 	<div id="container">
-		<div id="topo">
+		<div id="top">
 			<?php
 			require_once("menu.php");
 			?>

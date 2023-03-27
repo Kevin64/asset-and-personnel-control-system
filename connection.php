@@ -25,4 +25,4 @@ $dbName = $json_config_array["DbSettings"]["DbName"];
 $dbIP = $json_config_array["DbSettings"]["DbIP"];
 $dbPort = $json_config_array["DbSettings"]["DbPort"];
 
-$conexao = mysqli_connect($dbIP, $dbUser, $dbpassword, $dbName, $dbPort) or die("Erro ao tentar conectar no servidor mysql! " . mysqli_error($conexao));
+$connection = mysqli_connect($dbIP, $dbUser, $dbpassword, $dbName, $dbPort) or die("Erro ao tentar conectar no employee mysql! " . mysqli_error($connection));

@@ -147,7 +147,7 @@ li span {
 	z-index: 2;
 	padding: 10px 5px;
 	width: 190px;
-	cursor: pointer;
+	courser: pointer;
 	text-decoration: none;
 	text-align: center;
 }

@@ -1,13 +1,13 @@
 <?php
-require_once("verifica.php");
-require_once("topo.php");
+require_once("verify.php");
+require_once("top.php");
 require_once("connection.php");
 
-$deletar = $_POST["chkDeletar"];
+$delete = $_POST["chkDelete"];
 
-if (isset($deletar)) {
-	for ($i = 0; $i < count($deletar); $i++) {
-		$query = mysqli_query($conexao, "delete from bios where id = '$deletar[$i]'") or die($translations["ERROR_DELETE_MODEL"] . mysqli_error($conexao));
+if (isset($delete)) {
+	for ($i = 0; $i < count($delete); $i++) {
+		$query = mysqli_query($connection, "delete from model where id = '$delete[$i]'") or die($translations["ERROR_DELETE_MODEL"] . mysqli_error($connection));
 	}
 }
 

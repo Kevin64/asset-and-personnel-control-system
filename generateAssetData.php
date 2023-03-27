@@ -1,35 +1,35 @@
 <?php
 require_once("connection.php");
 
-$mensagem = $translations["SUCCESS_ASSET_DATA_EXPORT"];
+$message = $translations["SUCCESS_ASSET_DATA_EXPORT"];
 
-if(isset($_GET["patrimonio"]))
-	$patrimonio = $_GET["patrimonio"];
-if(isset($_GET["predio"]))
-	$predio = $_GET["predio"];
-if(isset($_GET["sala"]))
-	$sala = $_GET["sala"];
-if(isset($_GET["padrao"]))
-	$padrao = $_GET["padrao"];
+if(isset($_GET["asset"]))
+	$assetNumber = $_GET["asset"];
+if(isset($_GET["building"]))
+	$building = $_GET["building"];
+if(isset($_GET["room"]))
+	$room = $_GET["room"];
+if(isset($_GET["standard"]))
+	$standard = $_GET["standard"];
 if(isset($_GET["ad"]))
-	$ad = $_GET["ad"];
-if(isset($_GET["emUso"]))
-	$emUso = $_GET["emUso"];
-if(isset($_GET["lacre"]))
-	$lacre = $_GET["lacre"];
-if(isset($_GET["etiqueta"]))
-	$etiqueta = $_GET["etiqueta"];
-if(isset($_GET["tipo"]))
-	$tipo = $_GET["tipo"];
-if(isset($_GET["descarte"]))
-	$descarte = $_GET["descarte"];
-if(isset($_GET["dataFormatacao"]))
-	$dataFormatacao = $_GET["dataFormatacao"];
+	$adRegistered = $_GET["ad"];
+if(isset($_GET["inUse"]))
+	$inUse = $_GET["inUse"];
+if(isset($_GET["sealNumber"]))
+	$sealNumber = $_GET["sealNumber"];
+if(isset($_GET["tag"]))
+	$tag = $_GET["tag"];
+if(isset($_GET["type"]))
+	$hwType = $_GET["type"];
+if(isset($_GET["discard"]))
+	$discarded = $_GET["discard"];
+if(isset($_GET["serviceDate"]))
+	$serviceDate = $_GET["serviceDate"];
 
 $pcFile = __DIR__."/output/pc.json";
 $pcChecksum = __DIR__."/output/pc-checksum.txt";
 
-$query = mysqli_query($conexao, "select * from patrimonio where patrimonio = '$patrimonio'") or die($translations["ERROR_QUERY"] . mysqli_error($conexao));
+$query = mysqli_query($connection, "select * from asset where asset = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
 if (file_exists($pcFile) || file_exists($pcChecksum)) {
@@ -38,17 +38,17 @@ if (file_exists($pcFile) || file_exists($pcChecksum)) {
 }
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-	$row_array["patrimonio"] = $row["patrimonio"];
-	$row_array["predio"] = $row["predio"];
-	$row_array["sala"] = $row["sala"];
-	$row_array["padrao"] = $row["padrao"];
+	$row_array["asset"] = $row["asset"];
+	$row_array["building"] = $row["building"];
+	$row_array["room"] = $row["room"];
+	$row_array["standard"] = $row["standard"];
 	$row_array["ad"] = $row["ad"];
-	$row_array["emUso"] = $row["emUso"];
-	$row_array["lacre"] = $row["lacre"];
-	$row_array["etiqueta"] = $row["etiqueta"];
-	$row_array["tipo"] = $row["tipo"];
-	$row_array["descarte"] = $row["descarte"];
-	$row_array["dataFormatacao"] = $row["dataFormatacao"];
+	$row_array["inUse"] = $row["inUse"];
+	$row_array["sealNumber"] = $row["sealNumber"];
+	$row_array["tag"] = $row["tag"];
+	$row_array["type"] = $row["type"];
+	$row_array["discard"] = $row["discard"];
+	$row_array["serviceDate"] = $row["serviceDate"];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($pcFile, "w");
@@ -82,7 +82,7 @@ if(!isset($row_array)) {
 
 <body bgcolor=blue>
 	<center>
-		<font size=3 color=white><b><?php echo $mensagem; ?></b></font>
+		<font size=3 color=white><b><?php echo $message; ?></b></font>
 	</center>
 </body>
 
