@@ -4,7 +4,7 @@ require_once("top.php");
 require_once("connection.php");
 
 if (isset($_SESSION["privilegeLevel"])) {
-	if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+	if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 
 ?>
 
@@ -26,43 +26,43 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtVersion placeholder="Ex.: A30, 1.17, etc" required></td>
+						<td><input type=text name=txtFwVersion placeholder="Ex.: A30, 1.17, etc" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>
 						<td>
-							<select name=txtType required>
+							<select name=txtFwType required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=model><?php echo $json_config_array["FW_model"] ?></option>
-								<option value=UEFI><?php echo $json_config_array["FW_UEFI"] ?></option>
+								<option value=<?php echo $fwTypesArray[0] ?>><?php echo $fwTypesArray[0] ?></option>
+								<option value=<?php echo $fwTypesArray[1] ?>><?php echo $fwTypesArray[1] ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
 						<td>
-							<select name=txtTPM required>
+							<select name=txtTpmVersion required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=Nenhum>Não existente</option>
-								<option value=1.2><?php echo $json_config_array["TPM_1_2"] ?></option>
-								<option value=2.0><?php echo $json_config_array["TPM_2_0"] ?></option>
+								<option value=<?php echo $tpmTypesArray[0] ?>><?php echo $translations["NONE"] ?></option>
+								<option value=<?php echo $tpmTypesArray[1] ?>><?php echo $tpmTypesArray[1] ?></option>
+								<option value=<?php echo $tpmTypesArray[2] ?>><?php echo $tpmTypesArray[2] ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
 						<td>
-							<select name=txtMediaOp required>
+							<select name=txtMediaOperationMode required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=IDE/RAID><?php echo $json_config_array["MEDIA_OP_IDE"] ?></option>
-								<option value=AHCI><?php echo $json_config_array["MEDIA_OP_AHCI"] ?></option>
-								<option value=NVMe><?php echo $json_config_array["MEDIA_OP_NVME"] ?></option>
+								<option value=<?php echo $mediaOpTypesArray[0] ?>><?php echo $mediaOpTypesArray[0] ?></option>
+								<option value=<?php echo $mediaOpTypesArray[1] ?>><?php echo $mediaOpTypesArray[1] ?></option>
+								<option value=<?php echo $mediaOpTypesArray[2] ?>><?php echo $mediaOpTypesArray[2] ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><br>
-							<input id="registerButton" type="submit" value="Cadastrar">
+							<input id="registerButton" type="submit" value="<?php echo $translations["REGISTER"] ?>">
 						</td>
 					</tr>
 				</table>

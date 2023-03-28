@@ -8,24 +8,24 @@ if (isset($_POST["txtBrand"]))
 if (isset($_POST["txtModel"]))
 	$model = $_POST["txtModel"];
 
-if (isset($_POST["txtVersion"]))
-	$fwVersion = $_POST["txtVersion"];
+if (isset($_POST["txtFwVersion"]))
+	$fwVersion = $_POST["txtFwVersion"];
 
-if (isset($_POST["txtType"]))
-	$hwType = $_POST["txtType"];
+if (isset($_POST["txtFwType"]))
+	$fwType = $_POST["txtFwType"];
 
-if (isset($_POST["txtTPM"]))
-	$tpmVersion = $_POST["txtTPM"];
+if (isset($_POST["txtTpmVersion"]))
+	$tpmVersion = $_POST["txtTpmVersion"];
 
-if (isset($_POST["txtMediaOp"]))
-	$mediaOperationMode = $_POST["txtMediaOp"];
+if (isset($_POST["txtMediaOperationMode"]))
+	$mediaOperationMode = $_POST["txtMediaOperationMode"];
 
 $validateModel = mysqli_query($connection, "select * from model where model = '$model'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $totalModel = mysqli_num_rows($validateModel);
 
 if ($totalAsset == 0) {
 	//Inserir dados no banco
-	mysqli_query($connection, "insert into model (brand, model, version, type, tpm, mediaOp) values ('$brand', '$model', '$fwVersion', '$hwType', '$tpmVersion', '$mediaOperationMode')") or die($translations["ERRO_ADD_MODEL"] . mysqli_error($connection));
+	mysqli_query($connection, "insert into model (brand, model, fwVersion, fwType, tpmVersion, mediaOperationMode) values ('$brand', '$model', '$fwVersion', '$fwType', '$tpmVersion', '$mediaOperationMode')") or die($translations["ERRO_ADD_MODEL"] . mysqli_error($connection));
 
 	header("Location: successModel.php");
 } else

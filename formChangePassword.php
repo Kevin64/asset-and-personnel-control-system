@@ -12,19 +12,19 @@ require_once("connection.php");
 			<tr>
 				<td id=label><?php echo $translations["USER"] ?></td>
 				<?php
-				if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
-					<td><input type=text name=txtUser value=<?php echo $_SESSION["user"] ?> required></td>
+					<td><input type=text name=txtUser value=<?php echo $_SESSION["username"] ?> required></td>
 				<?php
 				} else {
 				?>
-					<td><input type=text name=txtUser value=<?php echo $_SESSION["user"] ?> readonly></td>
+					<td><input type=text name=txtUser value=<?php echo $_SESSION["username"] ?> readonly></td>
 				<?php
 				}
 				?>
 			</tr>
 			<?php
-			if ($_SESSION["privilegeLevel"] != $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+			if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 			?>
 				<tr>
 					<td id=label><?php echo $translations["CURRENT_PASSWORD"] ?></td>

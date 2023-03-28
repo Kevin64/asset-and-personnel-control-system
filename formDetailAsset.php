@@ -21,7 +21,7 @@ if ($send != 1) {
 	$queryFormatAnt = mysqli_query($connection, "select maintenances.previousServiceDates, maintenances.serviceType, maintenances.batteryChange, maintenances.ticketNumber, maintenances.agent from (select * from asset where id = '$idAsset') as a inner join maintenances on a.assetNumber = maintenances.assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 } else {
 	$idAsset = $_POST["txtIdAsset"];
-	$assetNumber = $_POST["txtAsset"];
+	$assetNumber = $_POST["txtAssetNumber"];
 	if (isset($_POST["chkBoxDiscard"])) {
 		$discarded = $_POST["chkBoxDiscard"];
 	} else {
@@ -29,13 +29,13 @@ if ($send != 1) {
 	}
 	$building = $_POST["txtBuilding"];
 	$room = $_POST["txtRoom"];
-	$deliveredToRegistrationNumber = $_POST["txtRegNumReceiver"];
-	if (isset($_POST["txtDeliveryman"]))
-		$lastDeliveryMadeBy = $_POST["txtDeliveryman"];
-	$lastDeliveryDate = $_POST["txtDeliveryDate"];
+	$deliveredToRegistrationNumber = $_POST["txtDeliveredToRegistrationNumber"];
+	if (isset($_POST["txtLastDeliveryMadeBy"]))
+		$lastDeliveryMadeBy = $_POST["txtLastDeliveryMadeBy"];
+	$lastDeliveryDate = $_POST["txtLastDeliveryDate"];
 	$standard = $_POST["txtStandard"];
 	$note = $_POST["txtNote"];
-	$serviceDate = $_POST["txtLastFormatting"];
+	$serviceDate = $_POST["txtServiceDate"];
 	if (isset($_POST["txtPreviousMaintenancesDate"]))
 		$maintenancesAnterioresData = $_POST["txtPreviousMaintenancesDate"];
 	if (isset($_POST["txtPreviousMaintenancesServiceType"]))
@@ -46,41 +46,41 @@ if ($send != 1) {
 		$maintenancesAnterioresTicket = $_POST["txtPreviousMaintenancesTicket"];
 	if (isset($_POST["txtPreviousMaintenancesAgent"]))
 		$maintenancesAnterioresAgente = $_POST["txtPreviousMaintenancesAgent"];
-	$adRegistered = $_POST["txtAd"];
-	$brand = $_POST["txtbrand"];
-	$model = $_POST["txtmodel"];
-	$serialNumber = $_POST["txtserialNumber"];
-	$processor = $_POST["txtprocessor"];
-	$ram = $_POST["txtram"];
-	$storageSize = $_POST["txtHd"];
-	$operatingSystem = $_POST["txtoperatingSystem"];
-	$hostname = $_POST["txtHostName"];
-	$inUse = $_POST["txtinUse"];
-	$sealNumber = $_POST["txtsealNumber"];
-	$tag = $_POST["txttag"];
-	$hwType = $_POST["txttype"];
-	$fwType = $_POST["txttypeFW"];
-	$macAddress = $_POST["txtMac"];
-	$ipAddress = $_POST["txtIp"];
-	$model = $_POST["txtmodel"];
-	$storageType = $_POST["txttypeStorage"];
-	$videoCard = $_POST["txtGPU"];
-	$mediaOperationMode = $_POST["txtmediaOperationMode"];
-	$secureBoot = $_POST["txtSecBoot"];
-	$virtualizationTechnology = $_POST["txtVT"];
-	$tpmVersion = $_POST["txtTPM"];
+	$adRegistered = $_POST["txtAdRegistered"];
+	$brand = $_POST["txtBrand"];
+	$model = $_POST["txtModel"];
+	$serialNumber = $_POST["txtSerialNumber"];
+	$processor = $_POST["txtProcessor"];
+	$ram = $_POST["txtRam"];
+	$storageSize = $_POST["txtStorageSize"];
+	$operatingSystem = $_POST["txtOperatingSystem"];
+	$hostname = $_POST["txtHostname"];
+	$inUse = $_POST["txtInUse"];
+	$sealNumber = $_POST["txtSealNumber"];
+	$tag = $_POST["txtTag"];
+	$hwType = $_POST["txtHwType"];
+	$fwType = $_POST["txtFwType"];
+	$macAddress = $_POST["txtMacAddress"];
+	$ipAddress = $_POST["txtIpAddress"];
+	$fwVersion = $_POST["txtFwVersion"];
+	$storageType = $_POST["txtStorageType"];
+	$videoCard = $_POST["txtVideoCard"];
+	$mediaOperationMode = $_POST["txtMediaOperationMode"];
+	$secureBoot = $_POST["txtSecureBoot"];
+	$virtualizationTechnology = $_POST["txtVirtualizationTechnology"];
+	$tpmVersion = $_POST["txtTpmVersion"];
 
 	//currentizando os dados do patrimônio
-	mysqli_query($connection, "update asset set asset = '$assetNumber', discard = '$discarded', building = '$building', room = '$room', regNumreceiver = '$deliveredToRegistrationNumber', deliveryDate = '$lastDeliveryDate', standard = '$standard', note = '$note', serviceDate = '$serviceDate', ad = '$adRegistered', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', hd = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', model = '$model', inUse = '$inUse', sealNumber = '$sealNumber', tag = '$tag', type = '$hwType', typeFW = '$fwType', typeStorage = '$storageType', mac = '$macAddress', ipAddress = '$ipAddress', gpu = '$videoCard', mediaOperationMode = '$mediaOperationMode', secBoot = '$secureBoot', vt = '$virtualizationTechnology', tpm = '$tpmVersion' where id = '$idAsset'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
+	mysqli_query($connection, "update asset set assetNumber = '$assetNumber', discarded = '$discarded', building = '$building', room = '$room', deliveredToRegistrationNumber = '$deliveredToRegistrationNumber', lastDeliveryDate = '$lastDeliveryDate', standard = '$standard', note = '$note', serviceDate = '$serviceDate', adRegistered = '$adRegistered', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', inUse = '$inUse', sealNumber = '$sealNumber', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', macAddress = '$macAddress', ipAddress = '$ipAddress', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where id = '$idAsset'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
 
 	$query = mysqli_query($connection, "select * from asset where id = '$idAsset'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
-	$queryFormatAnt = mysqli_query($connection, "select maintenances.previousServiceDates, maintenances.serviceType, maintenances.batteryChange, maintenances.ticketNumber, maintenances.agent from (select * from asset where id = '$idAsset') as p inner join maintenances on a.assetNumber = maintenances.assetNumberFK") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+	$queryFormatAnt = mysqli_query($connection, "select maintenances.previousServiceDates, maintenances.serviceType, maintenances.batteryChange, maintenances.ticketNumber, maintenances.agent from (select * from asset where id = '$idAsset') as a inner join maintenances on a.assetNumber = maintenances.assetNumberFK") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 }
 ?>
 <div id="middle">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/disable-controls.js"></script>
-	<form action="frmDetailAsset.php" method="post" id="formGeneral">
+	<form action="formDetailAsset.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
 		<h2>Detalhes do patrimônio</h2><br>
 		<?php
@@ -117,7 +117,7 @@ if ($send != 1) {
 				$hwType = $result["hwType"];
 				$macAddress = $result["macAddress"];
 				$ipAddress = $result["ipAddress"];
-				$model = $result["model"];
+				$fwVersion = $result["fwVersion"];
 				$fwType = $result["fwType"];
 				$storageType = $result["storageType"];
 				$videoCard = $result["videoCard"];
@@ -126,19 +126,34 @@ if ($send != 1) {
 				$virtualizationTechnology = $result["virtualizationTechnology"];
 				$tpmVersion = $result["tpmVersion"];
 
-				$adOk = substr($adRegistered, 0, 1);
-				$standardOk = substr($standard, 0, 1);
-				$inUseOk = substr($inUse, 0, 1);
-				$tagOk = substr($tag, 0, 1);
-
-				if ($adOk == "N") $adRegistered = "Não";
-				if ($standardOk == "N") $standard = "Não";
-				if ($inUseOk == "N") $inUse = "Não";
-				if ($tagOk == "N") $tag = "Não";
+				// if ($adRegistered == 0) {
+				// 	$adRegistered = $translations["NO"];
+				// } 
+				// else {
+				// 	$adRegistered = $translations["YES"];
+				// }
+				// if ($standard == 0) {
+				// 	$standard = $translations["NO"];
+				// } 
+				// else {
+				// 	$standard = $translations["YES"];
+				// }
+				// if ($inUse == 0) {
+				// 	$inUse = $translations["NO"];
+				// } 
+				// else {
+				// 	$inUse = $translations["YES"];
+				// }
+				// if ($tag == 0) {
+				// 	$tag = $translations["NO"];
+				// } 
+				// else {
+				// 	$tag = $translations["YES"];
+				// }
 			?>
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
-					if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 						<tr>
 							<td id="label"><?php echo $translations["DISCARDED_ASSET_QUESTION"] ?></td>
@@ -154,14 +169,14 @@ if ($send != 1) {
 				<tr>
 					<td id="label"><?php echo $translations["ASSET_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdAsset value="<?php echo $idAsset; ?>">
-					<td colspan=5><input type=text name=txtAsset placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
+					<td colspan=5><input type=text name=txtAssetNumber placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["BUILDING"] ?><mark id=asterisk>*</mark></td>
 					<td colspan=5>
 						<select id="formFields" name="txtBuilding" required>
 							<?php
-							foreach ($building_array as $str) {
+							foreach ($buildingArray as $str) {
 							?>
 								<option value=<?php echo $str ?> <?php if ($building == $str) echo "selected"; ?>><?php echo $str ?></option>
 							<?php
@@ -172,19 +187,19 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark></td>
-					<td colspan=5><input id="formFields" type=text name=txtroom placeholder="Ex.: 4413" maxlength="4" required value="<?php echo $room; ?>"></td>
+					<td colspan=5><input id="formFields" type=text name=txtRoom placeholder="Ex.: 4413" maxlength="4" required value="<?php echo $room; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
-					<td colspan=5><input type=text name=txtRegNumReceiver maxlength="8" value="<?php echo $deliveredToRegistrationNumber; ?>"></td>
+					<td colspan=5><input type=text name=txtDeliveredToRegistrationNumber maxlength="8" value="<?php echo $deliveredToRegistrationNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
-					<td colspan=5><input type=date name=txtDeliveryDate value="<?php echo $lastDeliveryDate; ?>"></td>
+					<td colspan=5><input type=date name=txtLastDeliveryDate value="<?php echo $lastDeliveryDate; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
-					<td colspan=5><label name=txtDeliveryman style=line-height:40px;color:green;font-size:12pt><?php echo $lastDeliveryMadeBy; ?></label></td>
+					<td colspan=5><label name=txtLastDeliveryMadeBy style=line-height:40px;color:green;font-size:12pt><?php echo $lastDeliveryMadeBy; ?></label></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["NOTE"] ?></td>
@@ -265,7 +280,7 @@ if ($send != 1) {
 				<td colspan="2" id=spacer><?php echo $translations["COMPUTER_DATA"] ?></td>
 			</tr>
 			<tr>
-				<td><input type=hidden name=txtLastFormatting value="<?php echo $serviceDate; ?>"></td>
+				<td><input type=hidden name=txtServiceDate value="<?php echo $serviceDate; ?>"></td>
 			</tr>
 			<tr>
 				<td id="label"><?php echo $translations["STANDARD"] ?></td>
@@ -279,9 +294,9 @@ if ($send != 1) {
 			<tr>
 				<td id=label><?php echo $translations["AD_REGISTERED"] ?></td>
 				<td>
-					<select name="txtAd">
-						<option value="Sim" <?php if ($adRegistered === "Sim") echo "selected"; ?>>Sim</option>
-						<option value="Não" <?php if ($adRegistered === "Não") echo "selected"; ?>>Não</option>
+					<select name="txtAdRegistered">
+						<option value=1 <?php if ($adRegistered == "1") echo "selected"; ?>><?php echo $translations["YES"]?></option>
+						<option value=0 <?php if ($adRegistered == "0") echo "selected"; ?>><?php echo $translations["NO"]?></option>
 					</select>
 			</tr>
 			<tr>
@@ -306,7 +321,7 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["STORAGE_SIZE"] ?></td>
-				<td><input type=text name=txtHd value="<?php echo $storageSize; ?>"></td>
+				<td><input type=text name=txtStorageSize value="<?php echo $storageSize; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["STORAGE_TYPE"] ?></td>
@@ -318,7 +333,7 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["VIDEO_CARD"] ?></td>
-				<td><input type=text name=txtGPU value="<?php echo $videoCard; ?>"></td>
+				<td><input type=text name=txtVideoCard value="<?php echo $videoCard; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["OPERATING_SYSTEM"] ?></td>
@@ -326,42 +341,42 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["HOSTNAME"] ?></td>
-				<td><input type=text name=txtHostName value="<?php echo $hostname; ?>"></td>
+				<td><input type=text name=txtHostname value="<?php echo $hostname; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["FW_TYPE"] ?></td>
-				<td><input type=text name=txtTypeFW value="<?php echo $fwType; ?>"></td>
+				<td><input type=text name=txtFwType value="<?php echo $fwType; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["FW_VERSION"] ?></td>
-				<td><input type=text name=txtModel value="<?php echo $model; ?>"></td>
+				<td><input type=text name=txtFwVersion value="<?php echo $fwVersion; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["SECURE_BOOT"] ?></td>
-				<td><input type=text name=txtSecBoot value="<?php echo $secureBoot; ?>"></td>
+				<td><input type=text name=txtSecureBoot value="<?php echo $secureBoot; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"] ?></td>
-				<td><input type=text name=txtVT value="<?php echo $virtualizationTechnology; ?>"></td>
+				<td><input type=text name=txtVirtualizationTechnology value="<?php echo $virtualizationTechnology; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["TPM_VERSION"] ?></td>
-				<td><input type=text name=txtTPM value="<?php echo $tpmVersion; ?>"></td>
+				<td><input type=text name=txtTpmVersion value="<?php echo $tpmVersion; ?>"></td>
 			</tr>
 			<tr>
 				<td id="label"><?php echo $translations["MAC_ADDRESS"] ?></td>
-				<td><input type="text" name="txtMac" value="<?php echo $macAddress; ?>"></td>
+				<td><input type="text" name="txtMacAddress" value="<?php echo $macAddress; ?>"></td>
 			</tr>
 			<tr>
 				<td id="label"><?php echo $translations["IP_ADDRESS"] ?></td>
-				<td><input type="text" name="txtIp" value="<?php echo $ipAddress; ?>"></td>
+				<td><input type="text" name="txtIpAddress" value="<?php echo $ipAddress; ?>"></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["IN_USE"] ?></td>
 				<td>
 					<select name="txtInUse">
-						<option value="Sim" <?php if ($inUse === "Sim") echo "selected"; ?>>Sim</option>
-						<option value="Não" <?php if ($inUse === "Não") echo "selected"; ?>>Não</option>
+						<option value=1 <?php if ($inUse =="1") echo "selected"; ?>><?php echo $translations["YES"]?></option>
+						<option value=0 <?php if ($inUse =="0") echo "selected"; ?>><?php echo $translations["NO"]?></option>
 					</select>
 			</tr>
 			<tr>
@@ -370,16 +385,16 @@ if ($send != 1) {
 			</tr>
 			<td id="label"><?php echo $translations["TAG"] ?></td>
 			<td><select name="txtTag">
-					<option value="Sim" <?php if ($tag === "Sim") echo "selected"; ?>>Sim</option>
-					<option value="Não" <?php if ($tag === "Não") echo "selected"; ?>>Não</option>
+					<option value=1 <?php if ($tag =="1") echo "selected"; ?>><?php echo $translations["YES"]?></option>
+					<option value=0 <?php if ($tag =="0") echo "selected"; ?>><?php echo $translations["NO"]?></option>
 				</select>
 			</td>
 			<tr>
 				<td id="label"><?php echo $translations["HW_TYPE"] ?></td>
 				<td>
-					<select name="txttype">
+					<select name="txtHwType">
 						<?php
-						foreach ($hwtype_array as $str) {
+						foreach ($hwTypesArray as $str) {
 						?>
 							<option value=<?php echo $str ?> <?php if ($hwType == $str) echo "selected"; ?>><?php echo $str ?></option>
 						<?php
@@ -392,10 +407,10 @@ if ($send != 1) {
 			<?php
 			}
 			if (isset($_SESSION["privilegeLevel"])) {
-				if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"] or $_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["STANDARD_LEVEL"]) {
+				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"] or $_SESSION["privilegeLevel"] == $privilegeLevelsArray["STANDARD_LEVEL"]) {
 			?>
 				<tr>
-					<td colspan=7 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
+					<td colspan=7 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
 				</tr>
 		<?php
 				}

@@ -55,12 +55,12 @@ if ($send != 1) {
 			<tr>
 				<td align=center>
 					<select id=filterAsset name=rdCriterion>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "asset") echo "selected='selected'"; ?>value="asset"><?php echo $translations["ASSETS_ACTIVE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "asset") echo "selected='selected'"; ?>value="assetNumber"><?php echo $translations["ASSETS_ACTIVE"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "discarded") echo "selected='selected'"; ?>value="discarded"><?php echo $translations["ASSETS_DISCARDED"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "sealNumber") echo "selected='selected'"; ?>value="sealNumber"><?php echo $translations["SEAL_NUMBER"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "room") echo "selected='selected'"; ?>value="room"><?php echo $translations["ASSET_ROOM"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "building") echo "selected='selected'"; ?>value="building"><?php echo $translations["BUILDING"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ad") echo "selected='selected'"; ?>value="ad"><?php echo $translations["AD_REGISTERED"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "adRegistered") echo "selected='selected'"; ?>value="adRegistered"><?php echo $translations["AD_REGISTERED"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "standard") echo "selected='selected'"; ?>value="standard"><?php echo $translations["STANDARD"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "serviceDate") echo "selected='selected'"; ?>value="serviceDate"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "brand") echo "selected='selected'"; ?>value="brand"><?php echo $translations["BRAND"] ?></option>
@@ -68,20 +68,20 @@ if ($send != 1) {
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "serialNumber") echo "selected='selected'"; ?>value="serialNumber"><?php echo $translations["SERIAL_NUMBER"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "processor") echo "selected='selected'"; ?>value="processor"><?php echo $translations["PROCESSOR"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="ram"><?php echo $translations["RAM"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "hd") echo "selected='selected'"; ?>value="hd"><?php echo $translations["STORAGE_SIZE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "storageSize") echo "selected='selected'"; ?>value="storageSize"><?php echo $translations["STORAGE_SIZE"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "operatingSystem") echo "selected='selected'"; ?>value="operatingSystem"><?php echo $translations["OPERATING_SYSTEM"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "hostname") echo "selected='selected'"; ?>value="hostname"><?php echo $translations["HOSTNAME"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mac") echo "selected='selected'"; ?>value="mac"><?php echo $translations["MAC_ADDRESS"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "macAddress") echo "selected='selected'"; ?>value="macAddress"><?php echo $translations["MAC_ADDRESS"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ipAddress") echo "selected='selected'"; ?>value="ipAddress"><?php echo $translations["IP_ADDRESS"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "model") echo "selected='selected'"; ?>value="model"><?php echo $translations["FW_VERSION"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "type") echo "selected='selected'"; ?>value="type"><?php echo $translations["HW_TYPE"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "typeFW") echo "selected='selected'"; ?>value="typeFW"><?php echo $translations["FW_TYPE"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "typeStorage") echo "selected='selected'"; ?>value="typeStorage"><?php echo $translations["STORAGE_TYPE"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "gpu") echo "selected='selected'"; ?>value="gpu"><?php echo $translations["VIDEO_CARD"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "type") echo "selected='selected'"; ?>value="hwType"><?php echo $translations["HW_TYPE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "typeFW") echo "selected='selected'"; ?>value="fwType"><?php echo $translations["FW_TYPE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "storageType") echo "selected='selected'"; ?>value="storageType"><?php echo $translations["STORAGE_TYPE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "gpu") echo "selected='selected'"; ?>value="videoCard"><?php echo $translations["VIDEO_CARD"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="mediaOperationMode"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "secBoot") echo "selected='selected'"; ?>value="secBoot"><?php echo $translations["SECURE_BOOT"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "vt") echo "selected='selected'"; ?>value="vt"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpm") echo "selected='selected'"; ?>value="tpm"><?php echo $translations["TPM_VERSION"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "secBoot") echo "selected='selected'"; ?>value="secureBoot"><?php echo $translations["SECURE_BOOT"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "vt") echo "selected='selected'"; ?>value="virtualizationTechnology"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpm") echo "selected='selected'"; ?>value="tpmVersion"><?php echo $translations["TPM_VERSION"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
@@ -106,7 +106,7 @@ if ($send != 1) {
 	else {
 		$queryActive = $querySearch;
 	?>
-		<h3><?php echo $translations["RESULTING_ASSETS"] ?> (<?php echo $totalsearch; ?>)</h3><br>
+		<h3><?php echo $translations["RESULTING_ASSETS"] ?> (<?php echo $totalSearch; ?>)</h3><br>
 	<?php
 	}
 	?>
@@ -115,14 +115,14 @@ if ($send != 1) {
 			<tr id="header_">
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
-					if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 						<td><img src="img/trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td><a href="?orderBy=asset&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></td>
+				<td><a href="?orderBy=assetNumber&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
@@ -151,7 +151,7 @@ if ($send != 1) {
 			</tr>
 			<?php
 			while ($result = mysqli_fetch_array($queryActive)) {
-				$id = $result["id"];
+				$idAsset = $result["id"];
 				$assetNumber = $result["assetNumber"];
 				$discarded = $result["discarded"];
 				$building = $result["building"];
@@ -173,22 +173,22 @@ if ($send != 1) {
 					$cor = "green";
 				}
 
-				$dataF = substr($formatacao, 0, 10);
-				$explodedDate = explode("-", $dataF);
+				$formatDate = substr($formatacao, 0, 10);
+				$explodedDate = explode("-", $formatDate);
 				if ($explodedDate[0] != "")
 					$serviceDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0];
 			?>
 				<tr id="data">
 					<?php
 					if (isset($_SESSION["privilegeLevel"])) {
-						if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<td><input type="checkbox" name="chkdelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if($discarded == 1) { ?> disabled <?php } ?>></td>
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idAsset; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if($discarded == 1) { ?> disabled <?php } ?>></td>
 					<?php
 						}
 					}
 					?>
-					<td><a href="formDetailAsset.php?id=<?php echo $id; ?>" <?php if($discarded == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor; }?>"><?php echo $assetNumber; ?></a></td>
+					<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if($discarded == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor; }?>"><?php echo $assetNumber; ?></a></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
@@ -217,9 +217,9 @@ if ($send != 1) {
 				</tr>
 				<?php
 			}
-			if(!isset($totalsearch)) {
+			if(!isset($totalSearch)) {
 				while ($result = mysqli_fetch_array($queryDiscarded)) {
-					$id = $result["id"];
+					$idAsset = $result["id"];
 					$assetNumber = $result["assetNumber"];
 					$discarded = $result["discarded"];
 					$building = $result["building"];
@@ -241,22 +241,22 @@ if ($send != 1) {
 						$cor = "green";
 					}
 
-					$dataF = substr($formatacao, 0, 10);
-					$explodedDate = explode("-", $dataF);
+					$formatDate = substr($formatacao, 0, 10);
+					$explodedDate = explode("-", $formatDate);
 					if ($explodedDate[0] != "")
 						$serviceDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0];
 				?>
 					<tr id="data">
 						<?php
 						if (isset($_SESSION["privilegeLevel"])) {
-							if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+							if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 						?>
-								<td><input type="checkbox" name="chkdelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById("eraseButton"); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if($discarded == 1) { ?> disabled <?php } ?>></td>
+								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idAsset; ?>" onclick="var input = document.getElementById("eraseButton"); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if($discarded == 1) { ?> disabled <?php } ?>></td>
 						<?php
 							}
 						}
 						?>
-						<td><a href="formDetailAsset.php?id=<?php echo $id; ?>" <?php if($discarded == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor; }?>"><?php echo $assetNumber; ?></a></td>
+						<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if($discarded == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor; }?>"><?php echo $assetNumber; ?></a></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
@@ -287,10 +287,10 @@ if ($send != 1) {
 				}
 			}
 			if (isset($_SESSION["privilegeLevel"])) {
-				if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 					<tr>
-						<td colspan=9 align="center"><br><input id="eraseButton" type="submit" value=<?php echo $translations["LABEL_ERASE_BUTTON"] ?> disabled></td>
+						<td colspan=9 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 					</tr>
 			<?php
 				}

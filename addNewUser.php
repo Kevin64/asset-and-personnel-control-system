@@ -9,9 +9,10 @@ if ($_POST["txtPassword"] != "") {
 } else {
 	$password = null;
 }
-$privilegeLevel = $_POST["txtStatus"];
+$privilegeLevel = $_POST["txtPrivilegeLevel"];
+$lastLoginDate = $_POST["txtLastLoginDate"];
 
-$query = mysqli_query($connection, "select * from users where user = '$username'") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from users where username = '$username'") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
 $total = mysqli_num_rows($query);
 
 if ($total > 0) {
@@ -23,11 +24,11 @@ if ($total > 0) {
 	<?php
 } else {
 	if ($password != null) {
-		mysqli_query($connection, "insert into users (user, password, status, status) values ('$username', '$password', '$privilegeLevel', '$privilegeLevel')") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
+		mysqli_query($connection, "insert into users (username, password, privilegeLevel, lastLoginDate) values ('$username', '$password', '$lastLoginDate', '$privilegeLevel')") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
 	?>
 		<div id="middle">
 			<h2><?php echo $translations["SUCCESS_ADD_USER"] ?></h2><br><br>
-			<a href=frmAdduser.php>[<?php echo $translations["ADD_ANOTHER"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=consultaruser.php>[<?php echo $translations["USER_LIST"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=index.php>[<?php echo $translations["BACK_HOME"] ?>]</a>
+			<a href=formAddUser.php>[<?php echo $translations["ADD_ANOTHER"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=queryUser.php>[<?php echo $translations["USER_LIST"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=index.php>[<?php echo $translations["BACK_HOME"] ?>]</a>
 		</div>
 	<?php
 	} else {

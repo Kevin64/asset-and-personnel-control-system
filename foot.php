@@ -14,7 +14,7 @@ if ($file = fopen("etc/version", "r")) {
 		<?php echo $translations["ATCS_VERSION"] ?><?php echo $line ?><br>
 		Sistema de desenvolvido pela Subdivisão de Tecnologia da Informação do CCSH<Br>
 		<?php echo $translations["ATCS_EMAIL"] ?><?php echo $email ?><br>
-		<?php echo $translations["ATCS_PHONE"] ?><?php echo $phone ?>
+		<?php echo $translations["ATCS_PHONE"] ?><?php echo $phoneNumber ?>
 	</font>
 </div>
 </div>

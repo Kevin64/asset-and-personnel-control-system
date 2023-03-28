@@ -4,7 +4,7 @@ require_once("top.php");
 require_once("connection.php");
 
 if (isset($_SESSION["privilegeLevel"])) {
-	if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+	if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 
 		$send = null;
 		$orderBy = null;
@@ -16,7 +16,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 			$orderBy = $_GET["orderBy"];
 
 		if ($orderBy == "")
-			$orderBy = "user";
+			$orderBy = "username";
 
 		if (isset($_GET["sort"]))
 			$sort = $_GET["sort"];
@@ -36,44 +36,59 @@ if (isset($_SESSION["privilegeLevel"])) {
 		}
 
 		$totalusers = mysqli_num_rows($query);
-?>
+		?>
 
 		<div id="middle">
 			<table>
-				<form action=consultaruser.php method=post>
+				<form action=queryUser.php method=post>
 					<input type=hidden name=txtSend value=1>
 				</form>
 			</table>
 			<br><br>
-			<h2>Lista de usuários (<?php echo $totalusers; ?>)</h2><br>
+			<h2>Lista de usuários (<?php echo $totalusers; ?>)
+			</h2><br>
 			<table id="userData" cellspacing=0>
 				<form action="eraseSelectedUser.php" method="post">
 					<tr id="header_">
 						<td><img src="img/trash.png" width="22" height="29"></td>
-						<td><a href="?orderBy=user&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a></td>
-						<td><a href="?orderBy=status&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"] ?></a></td>
+						<td><a href="?orderBy=username&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
+						</td>
+						<td><a href="?orderBy=privilegeLevel&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"] ?></a></td>
 					</tr>
 					<?php
 					while ($result = mysqli_fetch_array($query)) {
 						$id = $result["id"];
-						$user = $result["user"];
-						$privilegeLevel = $result["status"];
-					?>
+						$username = $result["username"];
+						$privilegeLevel = $result["privilegeLevel"];
+						?>
 						<tr id="data">
-							<td><input type="checkbox" name="chkdelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
-							<td><a href="formDetailUser.php?id=<?php echo $id; ?>"><?php echo $user; ?></a></td>
-							<td><?php echo $privilegeLevel; ?></td>
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $id; ?>"
+									onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}">
+							</td>
+							<td><a href="formDetailUser.php?id=<?php echo $id; ?>"><?php echo $username; ?></a></td>
+							<td>
+								<?php
+								if ($privilegeLevel == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+									echo $translations["ADMINISTRATOR_NAME"];
+								} else if ($privilegeLevel == $privilegeLevelsArray["STANDARD_LEVEL"]) {
+									echo $translations["STANDARD_NAME"];
+								} else if ($privilegeLevel == $privilegeLevelsArray["LIMITED_LEVEL"]) {
+									echo $translations["LIMITED_NAME"];
+								}
+								?>
+							</td>
 						</tr>
-					<?php
+						<?php
 					}
 					?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTOn"] ?>" disabled></td>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit"
+								value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 					</tr>
 				</form>
 			</table>
 		</div>
-<?php
+		<?php
 		require_once("foot.php");
 	} else {
 		header("Location: denied.php");

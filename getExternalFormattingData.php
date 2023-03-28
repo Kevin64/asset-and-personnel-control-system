@@ -5,7 +5,7 @@ $assetNumber = $_GET["asset"];
 $numerosealNumber = $_GET["sealNumber"];
 $room = $_GET["room"];
 $building = $_GET["building"];
-$adRegistered = $_GET["ad"];
+$adRegistered = $_GET["adRegistered"];
 $standard = $_GET["standard"];
 $serviceDate = $_GET["formatacao"];
 $formatacoesAnteriores = $_GET["formatacoesAnteriores"];
@@ -14,7 +14,7 @@ $model = $_GET["model"];
 $numeroSerial = $_GET["numeroSerial"];
 $processor = $_GET["processor"];
 $ram = $_GET["ram"];
-$storageSize = $_GET["hd"];
+$storageSize = $_GET["storageSize"];
 $operatingSystem = $_GET["operatingSystem"];
 $nameDoComputador = $_GET["nameDoComputador"];
 $macAddress = $_GET["mac"];
@@ -24,7 +24,7 @@ $inUse = $_GET["inUse"];
 $tag = $_GET["tag"];
 $hwType = $_GET["type"];
 $fwType = $_GET["typeFW"];
-$storageType = $_GET["typeStorage"];
+$storageType = $_GET["storageType"];
 $videoCard = $_GET["gpu"];
 $mediaOperationMode = $_GET["mediaOperationMode"];
 $secureBoot = $_GET["secBoot"];
@@ -44,12 +44,12 @@ $queryPegaAsset = mysqli_query($connection, "select * from asset where asset = '
 $total = mysqli_num_rows($queryPegaAsset);
 
 if ($total >= 1) {
-	$query = mysqli_query($connection, "update asset set sealNumber = '$numerosealNumber', room = '$room', building = '$building', ad = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$numeroSerial', processor = '$processor', ram = '$ram', hd = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$nameDoComputador', model = '$model', mac = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', type = '$hwType', typeFW = '$fwType', typeStorage = '$storageType', gpu = '$videoCard', mediaOperationMode = '$mediaOperationMode', secBoot = '$secureBoot', vt = '$virtualizationTechnology', tpm = '$tpmVersion', changePilha = '$changePilha', ticketNum = '$ticketNum' where asset = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "update asset set sealNumber = '$numerosealNumber', room = '$room', building = '$building', adRegistered = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$numeroSerial', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$nameDoComputador', model = '$model', mac = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', type = '$hwType', typeFW = '$fwType', storageType = '$storageType', gpu = '$videoCard', mediaOperationMode = '$mediaOperationMode', secBoot = '$secureBoot', vt = '$virtualizationTechnology', tpm = '$tpmVersion', changePilha = '$changePilha', ticketNum = '$ticketNum' where asset = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	
 	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetFK, dataFormatacoesAnteriores, modoServico, changePilha, ticketNum, agent) values('$assetNumber', '$serviceDateExpandida', '$modoServico', '$changePilha', '$ticketNum', '$agent');") or die("Erro ao incluir os dados! " . mysqli_error($connection));
 	$message = $translations["EXISTING_ASSET_UPDATING_DATA"];
 } else {
-	$query = mysqli_query($connection, "insert into asset (asset, discard, sealNumber, room, building, ad, standard, serviceDate, brand, model, serialNumber, processor, ram, hd, operatingSystem, hostname, model, mac, ipAddress, inUse, tag, type, typeFW, typeStorage, gpu, mediaOperationMode, secBoot, vt, tpm, changePilha, ticketNum) values('$assetNumber', 0, '$numerosealNumber', '$room', '$building', '$adRegistered', '$standard', '$serviceDate', '$brand', '$model', '$numeroSerial', '$processor', '$ram', '$storageSize', '$operatingSystem', '$nameDoComputador', '$model', '$macAddress', '$ipAddress', '$inUse', '$tag', '$hwType', '$fwType', '$storageType', '$videoCard', '$mediaOperationMode', '$secureBoot', '$virtualizationTechnology', '$tpmVersion', '$changePilha', '$ticketNum');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "insert into asset (asset, discarded, sealNumber, room, building, adRegistered, standard, serviceDate, brand, model, serialNumber, processor, ram, storageSize, operatingSystem, hostname, model, mac, ipAddress, inUse, tag, type, typeFW, storageType, gpu, mediaOperationMode, secBoot, vt, tpm, changePilha, ticketNum) values('$assetNumber', 0, '$numerosealNumber', '$room', '$building', '$adRegistered', '$standard', '$serviceDate', '$brand', '$model', '$numeroSerial', '$processor', '$ram', '$storageSize', '$operatingSystem', '$nameDoComputador', '$model', '$macAddress', '$ipAddress', '$inUse', '$tag', '$hwType', '$fwType', '$storageType', '$videoCard', '$mediaOperationMode', '$secureBoot', '$virtualizationTechnology', '$tpmVersion', '$changePilha', '$ticketNum');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	
 	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetFK, dataFormatacoesAnteriores, modoServico, changePilha, ticketNum, agent) values('$assetNumber', '$serviceDateExpandida', '$modoServico', '$changePilha', '$ticketNum', '$agent');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	$message = $translations["NEW_ASSET_REGISTERING_DATA"];

@@ -3,7 +3,7 @@ require_once("verify.php");
 require_once("top.php");
 require_once("connection.php");
 
-$deliveredToRegistrationNumber = $_GET["regNum"];
+$deliveredToRegistrationNumber = $_GET["teacherRegistrationNumber"];
 ?>
 
 <div id="middle">

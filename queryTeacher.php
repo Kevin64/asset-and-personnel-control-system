@@ -45,10 +45,10 @@ $totalTeachers = mysqli_num_rows($query);
 			<tr>
 				<td align=center>
 					<select id=filterTeacher name=rdCriterion>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "regNum") echo "selected='selected'"; ?>value="regNum"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "teacherRegistrationNumber") echo "selected='selected'"; ?>value="teacherRegistrationNumber"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "course") echo "selected='selected'"; ?>value="course"><?php echo $translations["TEACHER_COURSE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "name") echo "selected='selected'"; ?>value="name"><?php echo $translations["TEACHER_NAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "typeemployee") echo "selected='selected'"; ?>value="typeemployee"><?php echo $translations["EMPLOYEE_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeType") echo "selected='selected'"; ?>value="employeeType"><?php echo $translations["EMPLOYEE_TYPE"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
@@ -69,14 +69,14 @@ $totalTeachers = mysqli_num_rows($query);
 			<tr id="header_">
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
-					if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 						<td><img src="img/trash.png" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td><a href="?orderBy=regNum&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></a></td>
+				<td><a href="?orderBy=teacherRegistrationNumber&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></a></td>
 				<td><a href="?orderBy=name&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_NAME"] ?></a></td>
 				<td><a href="?orderBy=course&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_COURSE"] ?></a></td>
 				<?php
@@ -89,28 +89,28 @@ $totalTeachers = mysqli_num_rows($query);
 			</tr>
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
-				$id = $result["id"];
-				$deliveredToRegistrationNumber = $result["registrationNumber"];
+				$idTeacher = $result["id"];
+				$teacherRegistrationNumber = $result["teacherRegistrationNumber"];
 				$name = $result["name"];
 				$course = $result["course"];
-				$hwType = $result["employeeType"];
+				$employeeType = $result["employeeType"];
 			?>
 				<tr id="data">
 					<?php
 					if (isset($_SESSION["privilegeLevel"])) {
-						if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<td><input type="checkbox" name="chkdelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idTeacher; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
 					<?php
 						}
 					}
 					?>
-					<td><a href="formDetailTeacher.php?id=<?php echo $id; ?>"><?php echo $deliveredToRegistrationNumber; ?></a></td>
+					<td><a href="formDetailTeacher.php?id=<?php echo $idTeacher; ?>"><?php echo $teacherRegistrationNumber; ?></a></td>
 					<td class="unselectable"><?php echo $name; ?></td>
 					<td class="unselectable"><?php echo $course; ?></td>
 					<?php
 					if (!in_array(true, $devices)) {
-						if ($hwType == null) {
+						if ($employeeType == null) {
 					?>
 							<td class="unselectable" style="background-color:darkred;">
 								<?php echo $translations["INCOMPLETE_REGISTRATION_DATA"] ?>
@@ -119,7 +119,7 @@ $totalTeachers = mysqli_num_rows($query);
 						} else {
 						?>
 							<td class="unselectable">
-								<?php echo $hwType; ?>
+								<?php echo $employeeType; ?>
 							</td>
 					<?php
 						}
@@ -130,10 +130,10 @@ $totalTeachers = mysqli_num_rows($query);
 				<?php
 			}
 			if (isset($_SESSION["privilegeLevel"])) {
-				if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value=<?php echo $translations["LABEL_ERASE_BUTTON"] ?> disabled></td>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 					</tr>
 			<?php
 				}

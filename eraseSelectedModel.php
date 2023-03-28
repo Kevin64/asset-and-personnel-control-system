@@ -1,5 +1,5 @@
 <?php
-require_once("verify.php");
+require_once("checkSession.php");
 require_once("top.php");
 require_once("connection.php");
 

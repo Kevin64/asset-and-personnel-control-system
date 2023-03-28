@@ -11,18 +11,18 @@ if(isset($_GET["room"]))
 	$room = $_GET["room"];
 if(isset($_GET["standard"]))
 	$standard = $_GET["standard"];
-if(isset($_GET["ad"]))
-	$adRegistered = $_GET["ad"];
+if(isset($_GET["adRegistered"]))
+	$adRegistered = $_GET["adRegistered"];
 if(isset($_GET["inUse"]))
 	$inUse = $_GET["inUse"];
 if(isset($_GET["sealNumber"]))
 	$sealNumber = $_GET["sealNumber"];
 if(isset($_GET["tag"]))
 	$tag = $_GET["tag"];
-if(isset($_GET["type"]))
-	$hwType = $_GET["type"];
-if(isset($_GET["discard"]))
-	$discarded = $_GET["discard"];
+if(isset($_GET["hwType"]))
+	$hwType = $_GET["hwType"];
+if(isset($_GET["discarded"]))
+	$discarded = $_GET["discarded"];
 if(isset($_GET["serviceDate"]))
 	$serviceDate = $_GET["serviceDate"];
 
@@ -42,12 +42,12 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["building"] = $row["building"];
 	$row_array["room"] = $row["room"];
 	$row_array["standard"] = $row["standard"];
-	$row_array["ad"] = $row["ad"];
+	$row_array["adRegistered"] = $row["adRegistered"];
 	$row_array["inUse"] = $row["inUse"];
 	$row_array["sealNumber"] = $row["sealNumber"];
 	$row_array["tag"] = $row["tag"];
 	$row_array["type"] = $row["type"];
-	$row_array["discard"] = $row["discard"];
+	$row_array["discarded"] = $row["discarded"];
 	$row_array["serviceDate"] = $row["serviceDate"];
 	array_push($return_arr, $row_array);
 

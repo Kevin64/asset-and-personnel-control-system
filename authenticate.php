@@ -11,6 +11,7 @@ $verifyPassword = password_verify($_POST["txtPassword"], $password);
 if ($verifyPassword) {
 	$queryAuthenticate = mysqli_query($connection, "select * from users where username = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	$total = mysqli_num_rows($queryAuthenticate);
+	$lastLoginDate = date("Y-m-d H:i:s");
 
 	if ($total > 0) {
 		session_start();
@@ -18,11 +19,12 @@ if ($verifyPassword) {
 			$id = $row["id"];
 			$username = $row["username"];
 			$privilegeLevel = $row["privilegeLevel"];
+
 		}
 		$_SESSION["id"] = $id;
 		$_SESSION["username"] = $username;
 		$_SESSION["privilegeLevel"] = $privilegeLevel;
-		mysqli_query($connection, "update users set status = 1 where username = '$username'") or die($translations["ERROR_CHANGE_USER_STATUS"] . mysqli_error($connection));
+		mysqli_query($connection, "update users set lastLoginDate = '$lastLoginDate' where username = '$username'") or die($translations["ERROR_CHANGE_USER_STATUS"] . mysqli_error($connection));
 
 		header("Location: index.php");
 	} else {

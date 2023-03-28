@@ -4,7 +4,7 @@ require_once("top.php");
 require_once("connection.php");
 
 if (isset($_SESSION["privilegeLevel"])) {
-	if ($_SESSION["privilegeLevel"] != $json_config_array["PrivilegeLevels"]["LIMITED_LEVEL"]) {
+	if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {
 
 ?>
 		<div id="middle">
@@ -17,12 +17,12 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtRegNum placeholder="Ex.: 1234567" maxLength=8 required></td>
+						<td><input type=text name=txtTeacherRegistrationNumber placeholder="Ex.: 1234567" maxLength=8 required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_TYPE"] ?><mark id=asterisk>*</mark></td>
 						<td>
-							<select name=txtTypeEmployee required>
+							<select name=txtEmployeeType required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
 								<option value="Teacher"><?php echo $translations["TEACHER_TYPE_1"] ?></option>
 								<option value="Técnico Administractive em Educação"><?php echo $translations["TEACHER_TYPE_2"] ?></option>
@@ -39,10 +39,10 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_PHONE_EXTENSION"] ?></td>
-						<td><input type=text name=txtExtNum placeholder="Ex.: 9876" maxLength=4></td>
+						<td><input type=text name=txtPhoneExtension placeholder="Ex.: 9876" maxLength=4></td>
 					</tr>
 					<td id="label"><?php echo $translations["TEACHER_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtPhone placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required></td>
+					<td><input type=text name=txtPhoneNumber placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_COURSE"] ?><mark id=asterisk>*</mark></td>
@@ -54,7 +54,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><br>
-							<input id="registerButton" type="submit" value="Cadastrar">
+							<input id="registerButton" type="submit" value="<?php echo $translations["REGISTER"] ?>">
 						</td>
 					</tr>
 				</table>

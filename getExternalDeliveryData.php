@@ -2,19 +2,19 @@
 require_once("connection.php");
 
 $assetNumber = $_GET["asset"];
-$lastDeliveryDate = $_GET["deliveryDate"];
-$deliveredToRegistrationNumber = $_GET["regNumreceiver"];
-$lastDeliveryMadeBy = $_GET["deliveryman"];
+$lastDeliveryDate = $_GET["lastDeliveryDate"];
+$deliveredToRegistrationNumber = $_GET["deliveredToRegistrationNumber"];
+$lastDeliveryMadeBy = $_GET["lastDeliveryMadeBy"];
 
-$dataE = substr($lastDeliveryDate, 0, 10);
-$explodedDate = explode("/", $dataE);
+$delivDate = substr($lastDeliveryDate, 0, 10);
+$explodedDate = explode("/", $delivDate);
 $lastDeliveryDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
 
 $queryPegaAsset = mysqli_query($connection, "select * from asset where asset = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $total = mysqli_num_rows($queryPegaAsset);
 
 if ($total >= 1) {
-	$query = mysqli_query($connection, "update asset set deliveryDate = '$lastDeliveryDate', regNumreceiver = '$deliveredToRegistrationNumber', deliveryman = '$lastDeliveryMadeBy' where asset = '$assetNumber'") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "update asset set lastDeliveryDate = '$lastDeliveryDate', deliveredToRegistrationNumber = '$deliveredToRegistrationNumber', lastDeliveryMadeBy = '$lastDeliveryMadeBy' where asset = '$assetNumber'") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	$message = $translations["SUCCESS_DELIVERY"];
 }
 ?>

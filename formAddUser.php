@@ -4,7 +4,7 @@ require_once("top.php");
 require_once("connection.php");
 
 if (isset($_SESSION["privilegeLevel"])) {
-	if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+	if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 
 ?>
 		<div id="middle">
@@ -23,16 +23,16 @@ if (isset($_SESSION["privilegeLevel"])) {
 					<tr>
 						<td id=label><?php echo $translations["PRIVILEGE"] ?></td>
 						<td>
-							<select name=txtStatus>
-								<option value="Administrador"><?php echo $translations["ADMIN_USER"] ?></option>
-								<option value="Padrão"><?php echo $translations["STANDARD_USER"] ?></option>
-								<option value="Limitado"><?php echo $translations["LIMITED_USER"] ?></option>
+							<select name=txtPrivilegeLevel>
+								<option value=<?php $privilegeLevelsArray["ADMINISTRATOR_LEVEL"] ?>><?php echo $translations["ADMINISTRATOR_NAME"] ?></option>
+								<option value=<?php $privilegeLevelsArray["STANDARD_LEVEL"] ?>><?php echo $translations["STANDARD_NAME"] ?></option>
+								<option value=<?php $privilegeLevelsArray["LIMITED_LEVEL"] ?>><?php echo $translations["LIMITED_NAME"] ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td colspan=2><br>
-							<input id="registerButton" type=submit value="Cadastrar">
+							<input id="registerButton" type=submit value="<?php echo $translations["REGISTER"] ?>">
 						</td>
 					</tr>
 				</table>

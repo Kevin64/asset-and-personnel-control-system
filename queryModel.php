@@ -29,7 +29,7 @@ if ($send != 1)
 else {
 	$rdCriterion = $_POST["rdCriterion"];
 	$search = $_POST["txtSearch"];
-	$query = mysqlI_query($connection, "select * from model where $rdCriterion like "%$search%"") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from model where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 }
 
 $totalRooms = mysqli_num_rows($query);
@@ -47,10 +47,10 @@ $totalRooms = mysqli_num_rows($query);
 					<select id=filterModel name=rdCriterion>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "model") echo "selected='selected'"; ?>value="model"><?php echo $translations["MODEL"] ?></option>
 						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "brand") echo "selected='selected'"; ?>value="brand"><?php echo $translations["BRAND"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "version") echo "selected='selected'"; ?>value="version"><?php echo $translations["FW_VERSION"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "type") echo "selected='selected'"; ?>value="type"><?php echo $translations["FW_TYPE"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpm") echo "selected='selected'"; ?>value="tpm"><?php echo $translations["TPM_VERSION"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOp") echo "selected='selected'"; ?>value="mediaOp"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "fwVersion") echo "selected='selected'"; ?>value="fwVersion"><?php echo $translations["FW_VERSION"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "fwType") echo "selected='selected'"; ?>value="fwType"><?php echo $translations["FW_TYPE"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpmVersion") echo "selected='selected'"; ?>value="tpmVersion"><?php echo $translations["TPM_VERSION"] ?></option>
+						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="mediaOperationMode"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
@@ -65,13 +65,13 @@ $totalRooms = mysqli_num_rows($query);
 		?>
 	</table>
 	<br><br>
-	<h2><?php echo $translations["MODEL_LIST"] ?>(<?php echo $totalRooms; ?>)</h2><br>
+	<h2><?php echo $translations["MODEL_LIST"] . " " ?>(<?php echo $totalRooms; ?>)</h2><br>
 	<table id="modelData" cellspacing=0>
 		<form action="eraseSelectedModel.php" method="post">
 			<tr id="header_">
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
-					if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 						<td><img src="img/trash.png" width="22" height="29"></td>
 				<?php
@@ -80,10 +80,10 @@ $totalRooms = mysqli_num_rows($query);
 				?>
 				<td><a href="?orderBy=model&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
 				<td><a href="?orderBy=brand&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></td>
-				<td><a href="?orderBy=version&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></td>
-				<td><a href="?orderBy=type&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></td>
-				<td><a href="?orderBy=tpm&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></td>
-				<td><a href="?orderBy=mediaOp&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></td>
+				<td><a href="?orderBy=fwVersion&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></td>
+				<td><a href="?orderBy=fwType&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></td>
+				<td><a href="?orderBy=tpmVersion&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></td>
+				<td><a href="?orderBy=mediaOperationMode&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></td>
 			</tr>
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
@@ -98,9 +98,9 @@ $totalRooms = mysqli_num_rows($query);
 				<tr id="data">
 					<?php
 					if (isset($_SESSION["privilegeLevel"])) {
-						if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<td><input type="checkbox" name="chkdelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 					<?php
 						}
 					}
@@ -109,16 +109,16 @@ $totalRooms = mysqli_num_rows($query);
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $fwVersion; ?></td>
 					<td><?php echo $hwType; ?></td>
-					<td><?php echo $tpmVersion; ?></td>
+					<td><?php if ($tpmVersion != $tpmTypesArray[0]) echo $tpmVersion; else echo $translations["NONE"]; ?></td>
 					<td><?php echo $mediaOperationMode; ?></td>
 				</tr>
 				<?php
 			}
 			if (isset($_SESSION["privilegeLevel"])) {
-				if ($_SESSION["privilegeLevel"] == $json_config_array["PrivilegeLevels"]["ADMIN_LEVEL"]) {
+				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value=<?php echo $translations["LABEL_ERASE_BUTTON"] ?> disabled></td>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 					</tr>
 			<?php
 				}

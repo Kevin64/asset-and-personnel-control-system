@@ -46,14 +46,14 @@ if ($send != 1) {
 	$mediaOperationMode = $_POST["txtMediaOperationMode"];
 
 	//currentizando os dados do patrimônio
-	mysqli_query($connection, "update model set brand = '$brand', model = '$model', fwVersion = '$fwVersion', fwType = '$fwType', tpm = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$id'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
+	mysqli_query($connection, "update model set brand = '$brand', model = '$model', fwVersion = '$fwVersion', fwType = '$fwType', tpmVersion = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$id'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
 
 	$query = mysqli_query($connection, "select * from model where id = '$id'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
 }
 ?>
 
 <div id="middle">
-	<form action="frmDetalhemodel.php" method="post" id="formGeneral">
+	<form action="formDetailModel.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
 		<h2><?php echo $translations["MODEL_DETAIL"] ?></h2><br>
 		<?php
@@ -94,8 +94,8 @@ if ($send != 1) {
 						<?php
 						?>
 						<select name=txtFwType required>
-							<option value=model <?php if ($fwType == $json_config_array["FW_model"]) echo "selected='selected'"; ?>><?php echo $json_config_array["FW_model"] ?></option>
-							<option value=UEFI <?php if ($fwType == $json_config_array["FW_UEFI"]) echo "selected='selected'"; ?>><?php echo $json_config_array["FW_UEFI"] ?></option>
+							<option value=BIOS <?php if ($fwType == $fwTypesArray[0]) echo "selected='selected'"; ?>><?php echo $fwTypesArray[0] ?></option>
+							<option value=UEFI <?php if ($fwType == $fwTypesArray[1]) echo "selected='selected'"; ?>><?php echo $fwTypesArray[1] ?></option>
 						</select>
 					</td>
 				</tr>
@@ -105,9 +105,9 @@ if ($send != 1) {
 						<?php
 						?>
 						<select name=txtTpmVersion required>
-							<option value="Não existente" <?php if ($tpmVersion == "Não existente") echo "selected='selected'"; ?>>Não existente</option>
-							<option value=1.2 <?php if ($tpmVersion == $json_config_array["TPM_1_2"]) echo "selected='selected'"; ?>><?php echo $json_config_array["TPM_1_2"] ?></option>
-							<option value=2.0 <?php if ($tpmVersion == $json_config_array["TPM_2_0"]) echo "selected='selected'"; ?>><?php echo $json_config_array["TPM_2_0"] ?></option>
+							<option value=<?php echo $tpmTypesArray[0] ?> <?php if ($tpmVersion == $tpmTypesArray[0]) echo "selected='selected'"; ?>><?php echo $translations["NONE"] ?></option>
+							<option value=<?php echo $tpmTypesArray[1] ?> <?php if ($tpmVersion == $tpmTypesArray[1]) echo "selected='selected'"; ?>><?php echo $tpmTypesArray[1] ?></option>
+							<option value=<?php echo $tpmTypesArray[2] ?> <?php if ($tpmVersion == $tpmTypesArray[2]) echo "selected='selected'"; ?>><?php echo $tpmTypesArray[2] ?></option>
 						</select>
 					</td>
 				</tr>
@@ -117,19 +117,19 @@ if ($send != 1) {
 						<?php
 						?>
 						<select name=txtMediaOperationMode required>
-							<option value=IDE/RAID <?php if ($mediaOperationMode == $json_config_array["MEDIA_OP_IDE"]) echo "selected='selected'"; ?>><?php echo $json_config_array["MEDIA_OP_IDE"] ?></option>
-							<option value=AHCI <?php if ($mediaOperationMode == $json_config_array["MEDIA_OP_AHCI"]) echo "selected='selected'"; ?>><?php echo $json_config_array["MEDIA_OP_AHCI"] ?></option>
-							<option value=NVMe <?php if ($mediaOperationMode == $json_config_array["MEDIA_OP_NVME"]) echo "selected='selected'"; ?>><?php echo $json_config_array["MEDIA_OP_NVME"] ?></option>
+							<option value=IDE/RAID <?php if ($mediaOperationMode == $mediaOpTypesArray[0]) echo "selected='selected'"; ?>><?php echo $mediaOpTypesArray[0] ?></option>
+							<option value=AHCI <?php if ($mediaOperationMode == $mediaOpTypesArray[1]) echo "selected='selected'"; ?>><?php echo $mediaOpTypesArray[1] ?></option>
+							<option value=NVMe <?php if ($mediaOperationMode == $mediaOpTypesArray[2]) echo "selected='selected'"; ?>><?php echo $mediaOpTypesArray[2] ?></option>
 						</select>
 					</td>
 				</tr>
 				</tr>
 			<?php
 			}
-			if ($_SESSION["privilegeLevel"] != $json_config_array["PrivilegeLevels"]["LIMITED_LEVEL"]) {
+			if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {
 			?>
 				<tr>
-					<td colspan=2 align=center><br><input id="updateButton" type=submit value=Atualizar></td>
+					<td colspan=2 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
 				</tr>
 			<?php
 			}
