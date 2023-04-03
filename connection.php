@@ -15,9 +15,12 @@ $hwTypesArray = gatherJsonTypes($json_config_array, "Definitions", "HardwareType
 $fwTypesArray = gatherJsonTypes($json_config_array, "Definitions", "FirmwareTypes");
 $tpmTypesArray = gatherJsonTypes($json_config_array, "Definitions", "TpmTypes");
 $mediaOpTypesArray = gatherJsonTypes($json_config_array, "Definitions", "MediaOperationTypes");
+$secureBootArray = gatherJsonTypes($json_config_array, "Definitions", "SecureBoot");
+$virtualizationTechnologyArray = gatherJsonTypes($json_config_array, "Definitions", "VirtualizationTechnology");
 $orgDataArray = gatherJsonTypes($json_config_array, "OrgData", null);
 $dbSettingsArray = gatherJsonTypes($json_config_array, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array, "PrivilegeLevels", null);
+$entityTypesArray = gatherJsonTypes($json_config_array, "EntityTypes", null);
 $employeeTypesArray = gatherJsonTypes($json_config_array, "EmployeeTypes", null);
 
 $orgFullName = $orgDataArray["OrganizationFullName"];

@@ -10,7 +10,6 @@ if (isset($_SESSION["privilegeLevel"])) {
 		<div id="middle">
 			<form action=addNewUser.php method=post id="formGeneral">
 				<h2><?php echo $translations["ADD_USER_FORM"] ?></h2><br>
-				<input type=hidden name=txtStatus value="0">
 				<table id="formFields">
 					<tr>
 						<td id=label><?php echo $translations["USER"] ?></td>
@@ -21,12 +20,16 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td><input type=password name=txtPassword></td>
 					</tr>
 					<tr>
-						<td id=label><?php echo $translations["PRIVILEGE"] ?></td>
+						<td id=label><?php echo $translations["PRIVILEGE"]["NAME"] ?></td>
 						<td>
 							<select name=txtPrivilegeLevel>
-								<option value=<?php $privilegeLevelsArray["ADMINISTRATOR_LEVEL"] ?>><?php echo $translations["ADMINISTRATOR_NAME"] ?></option>
-								<option value=<?php $privilegeLevelsArray["STANDARD_LEVEL"] ?>><?php echo $translations["STANDARD_NAME"] ?></option>
-								<option value=<?php $privilegeLevelsArray["LIMITED_LEVEL"] ?>><?php echo $translations["LIMITED_NAME"] ?></option>
+								<?php
+								foreach ($privilegeLevelsArray as $str1 => $str2) {
+								?>
+									<option value=<?php echo $str2 ?>> <?php echo $translations["PRIVILEGE"][$str2] ?></option>
+								<?php
+								}
+								?>
 							</select>
 						</td>
 					</tr>

@@ -3,8 +3,8 @@ require_once("connection.php");
 
 $message = $translations["SUCCESS_ASSET_DATA_EXPORT"];
 
-if(isset($_GET["asset"]))
-	$assetNumber = $_GET["asset"];
+if(isset($_GET["assetNumber"]))
+	$assetNumber = $_GET["assetNumber"];
 if(isset($_GET["building"]))
 	$building = $_GET["building"];
 if(isset($_GET["room"]))
@@ -26,19 +26,19 @@ if(isset($_GET["discarded"]))
 if(isset($_GET["serviceDate"]))
 	$serviceDate = $_GET["serviceDate"];
 
-$pcFile = __DIR__."/output/pc.json";
-$pcChecksum = __DIR__."/output/pc-checksum.txt";
+$assetFile = __DIR__."/output/asset.json";
+$assetChecksum = __DIR__."/output/asset-checksum.txt";
 
-$query = mysqli_query($connection, "select * from asset where asset = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
-if (file_exists($pcFile) || file_exists($pcChecksum)) {
-	unlink($pcFile);
-	unlink($pcChecksum);
+if (file_exists($assetFile) || file_exists($assetChecksum)) {
+	unlink($assetFile);
+	unlink($assetChecksum);
 }
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-	$row_array["asset"] = $row["asset"];
+	$row_array["assetNumber"] = $row["assetNumber"];
 	$row_array["building"] = $row["building"];
 	$row_array["room"] = $row["room"];
 	$row_array["standard"] = $row["standard"];
@@ -46,26 +46,26 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["inUse"] = $row["inUse"];
 	$row_array["sealNumber"] = $row["sealNumber"];
 	$row_array["tag"] = $row["tag"];
-	$row_array["type"] = $row["type"];
+	$row_array["hwType"] = $row["hwType"];
 	$row_array["discarded"] = $row["discarded"];
 	$row_array["serviceDate"] = $row["serviceDate"];
 	array_push($return_arr, $row_array);
 
-	$fp = fopen($pcFile, "w");
+	$fp = fopen($assetFile, "w");
 	$jsonCmd = json_encode($return_arr, JSON_UNESCAPED_UNICODE);
 	fwrite($fp, $jsonCmd);
 	$checksum = hash("sha256", $jsonCmd);
-	$fp2 = fopen($pcChecksum, "w");
+	$fp2 = fopen($assetChecksum, "w");
 	fwrite($fp2, $checksum);
 	fclose($fp);
 	fclose($fp2);
 }
 
 if(!isset($row_array)) {
-	$fp = fopen($pcFile, "w");
+	$fp = fopen($assetFile, "w");
 	fwrite($fp, json_encode($return_arr));
 	$checksum = hash("sha256", json_encode($return_arr));
-	$fp2 = fopen($pcChecksum, "w");
+	$fp2 = fopen($assetChecksum, "w");
 	fwrite($fp2, $checksum);
 	fclose($fp);
 	fclose($fp2);

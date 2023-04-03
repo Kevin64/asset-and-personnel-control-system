@@ -7,14 +7,14 @@ if(isset($_GET["brand"]))
 	$brand = $_GET["brand"];
 if(isset($_GET["model"]))
 	$model = $_GET["model"];
-if(isset($_GET["version"]))
-	$fwVersion = $_GET["version"];
-if(isset($_GET["type"]))
-	$hwType = $_GET["type"];
-if(isset($_GET["tpm"]))
-	$tpmVersion = $_GET["tpm"];
-if(isset($_GET["mediaOp"]))
-	$mediaOperationMode = $_GET["mediaOp"];
+if(isset($_GET["fwVersion"]))
+	$fwVersion = $_GET["fwVersion"];
+if(isset($_GET["fwType"]))
+	$hwType = $_GET["fwType"];
+if(isset($_GET["tpmVersion"]))
+	$tpmVersion = $_GET["tpmVersion"];
+if(isset($_GET["mediaOperationMode"]))
+	$mediaOperationMode = $_GET["mediaOperationMode"];
 
 $modelFile = __DIR__."/output/model.json";
 $modelChecksum = __DIR__."/output/model-checksum.txt";
@@ -31,10 +31,10 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["id"] = $row["id"];
 	$row_array["brand"] = $row["brand"];
 	$row_array["model"] = $row["model"];
-	$row_array["version"] = $row["version"];
-	$row_array["type"] = $row["type"];
-	$row_array["tpm"] = $row["tpm"];
-	$row_array["mediaOp"] = $row["mediaOp"];
+	$row_array["fwVersion"] = $row["fwVersion"];
+	$row_array["fwType"] = $row["fwType"];
+	$row_array["tpmVersion"] = $row["tpmVersion"];
+	$row_array["mediaOperationMode"] = $row["mediaOperationMode"];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($modelFile, "w");

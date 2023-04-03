@@ -16,13 +16,21 @@ if ($send != 1) {
 		$idUser = $_POST["txtIdUser"];
 	if (isset($_POST["txtUser"]))
 		$username = $_POST["txtUser"];
+	$oldUsername = $_POST["txtOldUsername"];
 	if (isset($_POST["txtPrivilegeLevel"]))
 		$privilegeLevel = $_POST["txtPrivilegeLevel"];
 	if (isset($_POST["txtLastLoginDate"]))
 		$lastLoginDate = $_POST["txtLastLoginDate"];
 
-	//currentizando os dados do agente
-	mysqli_query($connection, "update users set username = '$username', privilegeLevel = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from users where username = '$username'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+
+	$num_rows = mysqli_num_rows($query);
+
+	if ($num_rows == 0) {
+		mysqli_query($connection, "update users set username = '$username', privilegeLevel = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+	} else if ($num_rows == 1 && $username == $oldUsername) {
+		mysqli_query($connection, "update users set privilegeLevel = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+	}
 
 	$query = mysqli_query($connection, "select * from users where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
 }
@@ -34,10 +42,14 @@ if ($send != 1) {
 		<h2>Detalhes do agente</h2><br>
 		<?php
 		if ($send == 1) {
-			echo "<font color=blue>" . $translations["SUCCESS_UPDATE_USER_DATA"] . "</font><br><br>";
+			if ($num_rows > 0 && $username != $oldUsername) {
+				echo "<font color=red>" . $translations["USER_ALREADY_EXIST"] . "</font><br><br>";
+			} else {
+				echo "<font color=blue>" . $translations["SUCCESS_UPDATE_USER_DATA"] . "</font><br><br>";
+			}
 		}
 		?>
-		<label id=asteriskWarning>Os campos branddos com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
@@ -45,6 +57,8 @@ if ($send != 1) {
 				$username = $result["username"];
 				$privilegeLevel = $result["privilegeLevel"];
 				$lastLoginDate = $result["lastLoginDate"];
+
+				$oldUsername = $result["username"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["USER_DATA"] ?></td>
@@ -52,16 +66,21 @@ if ($send != 1) {
 				<tr>
 					<td id="label"><?php echo $translations["USER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdUser value="<?php echo $idUser; ?>">
+					<input type=hidden name=txtOldUsername value="<?php echo $oldUsername; ?>">
 					<td><input type=text name=txtUser required value="<?php echo $username; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["PRIVILEGE"] ?><mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["PRIVILEGE"]["NAME"] ?><mark id=asterisk>*</mark></td>
 					<td>
 						<select name=txtPrivilegeLevel required>
-							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-							<option value=<?php echo $privilegeLevelsArray["ADMINISTRATOR_LEVEL"] ?> <?php if ($privilegeLevel == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) echo "selected='selected'"; ?>><?php echo $translations["ADMINISTRATOR_NAME"] ?></option>
-							<option value=<?php echo $privilegeLevelsArray["STANDARD_LEVEL"] ?> <?php if ($privilegeLevel == $privilegeLevelsArray["STANDARD_LEVEL"]) echo "selected='selected'"; ?>><?php echo $translations["STANDARD_NAME"] ?></option>
-							<option value=<?php echo $privilegeLevelsArray["LIMITED_LEVEL"] ?> <?php if ($privilegeLevel == $privilegeLevelsArray["LIMITED_LEVEL"]) echo "selected='selected'"; ?>><?php echo $translations["LIMITED_NAME"] ?></option>
+							<?php
+							foreach ($privilegeLevelsArray as $str2) {
+							?>
+								<option value=<?php echo $str2 ?> <?php if ($privilegeLevel == $str2) echo "selected"; ?>><?php echo $translations["PRIVILEGE"][$str2] ?></option>
+							<?php
+							}
+							?>
+
 						</select>
 					</td>
 				</tr>

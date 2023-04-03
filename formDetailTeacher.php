@@ -16,6 +16,8 @@ if ($send != 1) {
 		$idTeacher = $_POST["txtIdTeacher"];
 	if (isset($_POST["txtTeacherRegistrationNumber"]))
 		$teacherRegistrationNumber = $_POST["txtTeacherRegistrationNumber"];
+	if (isset($_POST["txtOldTeacherRegistrationNumber"]))
+		$oldTeacherRegistrationNumber = $_POST["txtOldTeacherRegistrationNumber"];
 	if (isset($_POST["txtEmployeeType"]))
 		$employeeType = $_POST["txtEmployeeType"];
 	if (isset($_POST["txtName"]))
@@ -33,9 +35,15 @@ if ($send != 1) {
 	if (isset($_POST["txtFaltas"]))
 		$faltas = $_POST["txtFaltas"];
 
-	//currentizando os dados do docente
-	mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$teacherRegistrationNumber', employeeType = '$employeeType', name = '$name', email = '$email', phoneExtension = '$phoneExtension', phoneNumber = '$phoneNumber', course = '$course', room = '$room' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from teacher where teacherRegistrationNumber = '$teacherRegistrationNumber'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
+	$num_rows = mysqli_num_rows($query);
+
+	if ($num_rows == 0) {
+		mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$teacherRegistrationNumber', employeeType = '$employeeType', name = '$name', email = '$email', phoneExtension = '$phoneExtension', phoneNumber = '$phoneNumber', course = '$course', room = '$room' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+	} else if ($num_rows == 1 && $teacherRegistrationNumber == $oldTeacherRegistrationNumber) {
+		mysqli_query($connection, "update teacher set employeeType = '$employeeType', name = '$name', email = '$email', phoneExtension = '$phoneExtension', phoneNumber = '$phoneNumber', course = '$course', room = '$room' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+	}
 	$query = mysqli_query($connection, "select * from teacher where id = '$idTeacher'") or die($translations["ERROR_SHOW_DETAIL_TEACHER"] . mysqli_error($connection));
 }
 ?>
@@ -46,10 +54,14 @@ if ($send != 1) {
 		<h2><?php echo $translations["TEACHER_DETAIL"] ?></h2><br>
 		<?php
 		if ($send == 1) {
-			echo "<font color=blue>" . $translations["SUCCESS_UPDATE_TEACHER_DATA"] . "</font><br><br>";
+			if ($num_rows > 0 && $teacherRegistrationNumber != $oldTeacherRegistrationNumber) {
+				echo "<font color=red>" . $translations["TEACHER_ALREADY_EXIST"] . "</font><br><br>";
+			} else {
+				echo "<font color=blue>" . $translations["SUCCESS_UPDATE_TEACHER_DATA"] . "</font><br><br>";
+			}
 		}
 		?>
-		<label id=asteriskWarning>Os campos branddos com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
@@ -62,6 +74,8 @@ if ($send != 1) {
 				$phoneNumber = $result["phoneNumber"];
 				$course = $result["course"];
 				$room = $result["room"];
+
+				$oldTeacherRegistrationNumber = $result["teacherRegistrationNumber"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["TEACHER_DATA"] ?></td>
@@ -69,6 +83,7 @@ if ($send != 1) {
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdTeacher value="<?php echo $idTeacher; ?>">
+					<input type=hidden name=txtOldTeacherRegistrationNumber value="<?php echo $oldTeacherRegistrationNumber; ?>">
 					<td><input type=text name=txtTeacherRegistrationNumber maxlength="8" required value="<?php echo $teacherRegistrationNumber; ?>"></td>
 				</tr>
 				<tr>

@@ -40,14 +40,21 @@ if ($send != 1) {
 	$id = $_POST["txtIdModel"];
 	$brand = $_POST["txtBrand"];
 	$model = $_POST["txtModel"];
+	$oldModel = $_POST["txtOldModel"];
 	$fwVersion = $_POST["txtFwVersion"];
 	$fwType = $_POST["txtFwType"];
 	$tpmVersion = $_POST["txtTpmVersion"];
 	$mediaOperationMode = $_POST["txtMediaOperationMode"];
 
-	//currentizando os dados do patrimônio
-	mysqli_query($connection, "update model set brand = '$brand', model = '$model', fwVersion = '$fwVersion', fwType = '$fwType', tpmVersion = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$id'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from model where model = '$model'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
 
+	$num_rows = mysqli_num_rows($query);
+
+	if ($num_rows == 0) {
+		mysqli_query($connection, "update model set brand = '$brand', model = '$model', fwVersion = '$fwVersion', fwType = '$fwType', tpmVersion = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$id'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
+	} else if ($num_rows == 1 && $model == $oldModel) {
+		mysqli_query($connection, "update model set brand = '$brand', fwVersion = '$fwVersion', fwType = '$fwType', tpmVersion = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$id'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
+	}
 	$query = mysqli_query($connection, "select * from model where id = '$id'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
 }
 ?>
@@ -57,10 +64,15 @@ if ($send != 1) {
 		<input type=hidden name=txtSend value="1">
 		<h2><?php echo $translations["MODEL_DETAIL"] ?></h2><br>
 		<?php
-		if ($send == 1)
-			echo "<font color=blue>" . $translations["SUCCESS_UPDATE_MODEL_DATA"] . "</font><br><br>";
+		if ($send == 1) {
+			if($num_rows > 0 && $model != $oldModel) {
+				echo "<font color=red>" . $translations["MODEL_ALREADY_EXIST"] . "</font><br><br>";
+			} else {
+				echo "<font color=blue>" . $translations["SUCCESS_UPDATE_MODEL_DATA"] . "</font><br><br>";
+			}
+		}
 		?>
-		<label id=asteriskWarning>Os campos branddos com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
@@ -71,6 +83,8 @@ if ($send != 1) {
 				$fwType = $result["fwType"];
 				$tpmVersion = $result["tpmVersion"];
 				$mediaOperationMode = $result["mediaOperationMode"];
+
+				$oldModel = $result["model"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>
@@ -82,6 +96,7 @@ if ($send != 1) {
 				<tr>
 					<td id="label"><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdModel value="<?php echo $id; ?>">
+					<input type=hidden name=txtOldModel value="<?php echo $oldModel; ?>">
 					<td><input type=text name=txtModel placeholder="Ex.: 9010, 6005, etc" required value="<?php echo $model; ?>"></td>
 				</tr>
 				<tr>

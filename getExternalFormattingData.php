@@ -1,57 +1,56 @@
 <?php
 require_once("connection.php");
 
-$assetNumber = $_GET["asset"];
-$numerosealNumber = $_GET["sealNumber"];
+$assetNumber = $_GET["assetNumber"];
+$sealNumber = $_GET["sealNumber"];
 $room = $_GET["room"];
 $building = $_GET["building"];
 $adRegistered = $_GET["adRegistered"];
 $standard = $_GET["standard"];
-$serviceDate = $_GET["formatacao"];
-$formatacoesAnteriores = $_GET["formatacoesAnteriores"];
+$serviceDate = $_GET["serviceDate"];
 $brand = $_GET["brand"];
 $model = $_GET["model"];
-$numeroSerial = $_GET["numeroSerial"];
+$serialNumber = $_GET["serialNumber"];
 $processor = $_GET["processor"];
 $ram = $_GET["ram"];
 $storageSize = $_GET["storageSize"];
 $operatingSystem = $_GET["operatingSystem"];
-$nameDoComputador = $_GET["nameDoComputador"];
-$macAddress = $_GET["mac"];
+$hostname = $_GET["hostname"];
+$macAddress = $_GET["macAddress"];
 $ipAddress = $_GET["ipAddress"];
-$model = $_GET["model"];
+$fwVersion = $_GET["fwVersion"];
 $inUse = $_GET["inUse"];
 $tag = $_GET["tag"];
-$hwType = $_GET["type"];
-$fwType = $_GET["typeFW"];
+$hwType = $_GET["hwType"];
+$fwType = $_GET["fwType"];
 $storageType = $_GET["storageType"];
-$videoCard = $_GET["gpu"];
+$videoCard = $_GET["videoCard"];
 $mediaOperationMode = $_GET["mediaOperationMode"];
-$secureBoot = $_GET["secBoot"];
-$virtualizationTechnology = $_GET["vt"];
-$tpmVersion = $_GET["tpm"];
-$changePilha = $_GET["changePilha"];
-$ticketNum = $_GET["ticketNum"];
+$secureBoot = $_GET["secureBoot"];
+$virtualizationTechnology = $_GET["virtualizationTechnology"];
+$tpmVersion = $_GET["tpmVersion"];
+$batteryChange = $_GET["batteryChange"];
+$ticketNumber = $_GET["ticketNumber"];
 $agent = $_GET["agent"];
 
-$dataF = substr($serviceDate, 0, 10);
-$explodedDate = explode("/", $dataF);
+$fDate = substr($serviceDate, 0, 10);
+$explodedDate = explode("/", $fDate);
 $serviceDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
-$serviceDateExpandida = $serviceDate;
-$modoServico = "Formatação";
+$serviceDateExpanded = $serviceDate;
+$serviceType = $translations["FORMATTING"];
 
-$queryPegaAsset = mysqli_query($connection, "select * from asset where asset = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$queryPegaAsset = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $total = mysqli_num_rows($queryPegaAsset);
 
 if ($total >= 1) {
-	$query = mysqli_query($connection, "update asset set sealNumber = '$numerosealNumber', room = '$room', building = '$building', adRegistered = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$numeroSerial', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$nameDoComputador', model = '$model', mac = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', type = '$hwType', typeFW = '$fwType', storageType = '$storageType', gpu = '$videoCard', mediaOperationMode = '$mediaOperationMode', secBoot = '$secureBoot', vt = '$virtualizationTechnology', tpm = '$tpmVersion', changePilha = '$changePilha', ticketNum = '$ticketNum' where asset = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "update asset set sealNumber = '$sealNumber', room = '$room', building = '$building', adRegistered = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', macAddress = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where assetNumber = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	
-	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetFK, dataFormatacoesAnteriores, modoServico, changePilha, ticketNum, agent) values('$assetNumber', '$serviceDateExpandida', '$modoServico', '$changePilha', '$ticketNum', '$agent');") or die("Erro ao incluir os dados! " . mysqli_error($connection));
+	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetNumberFK, previousServiceDates, serviceType, batteryChange, ticketNumber, agent) values('$assetNumber', '$serviceDateExpanded', '$serviceType', '$batteryChange', '$ticketNumber', '$agent');") or die("Erro ao incluir os dados! " . mysqli_error($connection));
 	$message = $translations["EXISTING_ASSET_UPDATING_DATA"];
 } else {
-	$query = mysqli_query($connection, "insert into asset (asset, discarded, sealNumber, room, building, adRegistered, standard, serviceDate, brand, model, serialNumber, processor, ram, storageSize, operatingSystem, hostname, model, mac, ipAddress, inUse, tag, type, typeFW, storageType, gpu, mediaOperationMode, secBoot, vt, tpm, changePilha, ticketNum) values('$assetNumber', 0, '$numerosealNumber', '$room', '$building', '$adRegistered', '$standard', '$serviceDate', '$brand', '$model', '$numeroSerial', '$processor', '$ram', '$storageSize', '$operatingSystem', '$nameDoComputador', '$model', '$macAddress', '$ipAddress', '$inUse', '$tag', '$hwType', '$fwType', '$storageType', '$videoCard', '$mediaOperationMode', '$secureBoot', '$virtualizationTechnology', '$tpmVersion', '$changePilha', '$ticketNum');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "insert into asset (assetNumber, discarded, sealNumber, room, building, adRegistered, standard, serviceDate, brand, model, serialNumber, processor, ram, storageSize, operatingSystem, hostname, fwVersion, macAddress, ipAddress, inUse, tag, hwType, fwType, storageType, videoCard, mediaOperationMode, secureBoot, virtualizationTechnology, tpmVersion) values('$assetNumber', 0, '$sealNumber', '$room', '$building', '$adRegistered', '$standard', '$serviceDate', '$brand', '$model', '$sealNumber', '$processor', '$ram', '$storageSize', '$operatingSystem', '$hostname', '$fwVersion', '$macAddress', '$ipAddress', '$inUse', '$tag', '$hwType', '$fwType', '$storageType', '$videoCard', '$mediaOperationMode', '$secureBoot', '$virtualizationTechnology', '$tpmVersion');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	
-	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetFK, dataFormatacoesAnteriores, modoServico, changePilha, ticketNum, agent) values('$assetNumber', '$serviceDateExpandida', '$modoServico', '$changePilha', '$ticketNum', '$agent');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetNumberFK, previousServiceDates, serviceType, batteryChange, ticketNumber, agent) values('$assetNumber', '$serviceDateExpanded', '$serviceType', '$batteryChange', '$ticketNumber', '$agent');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	$message = $translations["NEW_ASSET_REGISTERING_DATA"];
 }
 

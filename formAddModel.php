@@ -11,7 +11,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 		<div id="middle">
 			<form action="addModel.php" method=post id=formGeneral>
 				<h2><?php echo $translations["ADD_MODEL_FORM"] ?></h2><br>
-				<label id=asteriskWarning>Os campos branddos com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+				<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
 				<table id="formFields">
 					<tr>
 						<td colspan=2 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>

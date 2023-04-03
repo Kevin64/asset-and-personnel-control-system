@@ -23,7 +23,7 @@ if (isset($_POST["txtMediaOperationMode"]))
 $validateModel = mysqli_query($connection, "select * from model where model = '$model'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $totalModel = mysqli_num_rows($validateModel);
 
-if ($totalAsset == 0) {
+if ($totalModel == 0) {
 	//Inserir dados no banco
 	mysqli_query($connection, "insert into model (brand, model, fwVersion, fwType, tpmVersion, mediaOperationMode) values ('$brand', '$model', '$fwVersion', '$fwType', '$tpmVersion', '$mediaOperationMode')") or die($translations["ERRO_ADD_MODEL"] . mysqli_error($connection));
 

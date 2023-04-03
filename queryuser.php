@@ -53,7 +53,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td><img src="img/trash.png" width="22" height="29"></td>
 						<td><a href="?orderBy=username&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
 						</td>
-						<td><a href="?orderBy=privilegeLevel&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"] ?></a></td>
+						<td><a href="?orderBy=privilegeLevel&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></td>
 					</tr>
 					<?php
 					while ($result = mysqli_fetch_array($query)) {
