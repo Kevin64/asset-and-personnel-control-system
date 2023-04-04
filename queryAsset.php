@@ -79,8 +79,8 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "storageType") echo "selected='selected'"; ?>value="storageType"><?php echo $translations["STORAGE_TYPE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "gpu") echo "selected='selected'"; ?>value="videoCard"><?php echo $translations["VIDEO_CARD"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="mediaOperationMode"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "secBoot") echo "selected='selected'"; ?>value="secureBoot"><?php echo $translations["SECURE_BOOT"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "vt") echo "selected='selected'"; ?>value="virtualizationTechnology"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "secBoot") echo "selected='selected'"; ?>value="secureBoot"><?php echo $translations["SECURE_BOOT"]["NAME"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "vt") echo "selected='selected'"; ?>value="virtualizationTechnology"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpm") echo "selected='selected'"; ?>value="tpmVersion"><?php echo $translations["TPM_VERSION"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">

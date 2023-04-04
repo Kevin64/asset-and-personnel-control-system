@@ -48,7 +48,7 @@ $totalTeachers = mysqli_num_rows($query);
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "teacherRegistrationNumber") echo "selected='selected'"; ?>value="teacherRegistrationNumber"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "course") echo "selected='selected'"; ?>value="course"><?php echo $translations["TEACHER_COURSE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "name") echo "selected='selected'"; ?>value="name"><?php echo $translations["TEACHER_NAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeType") echo "selected='selected'"; ?>value="employeeType"><?php echo $translations["EMPLOYEE_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeType") echo "selected='selected'"; ?>value="employeeType"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
