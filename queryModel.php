@@ -45,23 +45,23 @@ $totalRooms = mysqli_num_rows($query);
 			<tr>
 				<td align=center>
 					<select id=filterModel name=rdCriterion>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "model") echo "selected='selected'"; ?>value="model"><?php echo $translations["MODEL"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "brand") echo "selected='selected'"; ?>value="brand"><?php echo $translations["BRAND"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "fwVersion") echo "selected='selected'"; ?>value="fwVersion"><?php echo $translations["FW_VERSION"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "fwType") echo "selected='selected'"; ?>value="fwType"><?php echo $translations["FW_TYPE"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpmVersion") echo "selected='selected'"; ?>value="tpmVersion"><?php echo $translations["TPM_VERSION"] ?></option>
-						<option <?php if(isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="mediaOperationMode"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "model") echo "selected='selected'"; ?>value="model"><?php echo $translations["MODEL"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "brand") echo "selected='selected'"; ?>value="brand"><?php echo $translations["BRAND"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "fwVersion") echo "selected='selected'"; ?>value="fwVersion"><?php echo $translations["FW_VERSION"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "fwType") echo "selected='selected'"; ?>value="fwType"><?php echo $translations["FW_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpmVersion") echo "selected='selected'"; ?>value="tpmVersion"><?php echo $translations["TPM_VERSION"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="mediaOperationMode"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
 		<?php
-			if(isset($_POST["txtSearch"])){
-				if(isset($_POST["rdCriterion"])){
-					$value = $_POST["rdCriterion"];
-				}
+		if (isset($_POST["txtSearch"])) {
+			if (isset($_POST["rdCriterion"])) {
+				$value = $_POST["rdCriterion"];
 			}
+		}
 		?>
 	</table>
 	<br><br>
@@ -87,7 +87,7 @@ $totalRooms = mysqli_num_rows($query);
 			</tr>
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
-				$id = $result["id"];
+				$idModel = $result["id"];
 				$brand = $result["brand"];
 				$model = $result["model"];
 				$fwVersion = $result["fwVersion"];
@@ -100,16 +100,17 @@ $totalRooms = mysqli_num_rows($query);
 					if (isset($_SESSION["privilegeLevel"])) {
 						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $id; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idModel; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
 					<?php
 						}
 					}
 					?>
-					<td><a href="formDetailModel.php?id=<?php echo $id; ?>"><?php echo $model; ?></a></td>
+					<td><a href="formDetailModel.php?id=<?php echo $idModel; ?>"><?php echo $model; ?></a></td>
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $fwVersion; ?></td>
 					<td><?php echo $hwType; ?></td>
-					<td><?php if ($tpmVersion != $tpmTypesArray[0]) echo $tpmVersion; else echo $translations["NONE"]; ?></td>
+					<td><?php if ($tpmVersion != $tpmTypesArray[0]) echo $tpmVersion;
+						else echo $translations["NONE"]; ?></td>
 					<td><?php echo $mediaOperationMode; ?></td>
 				</tr>
 				<?php

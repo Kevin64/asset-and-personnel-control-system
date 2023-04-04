@@ -57,15 +57,15 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<?php
 					while ($result = mysqli_fetch_array($query)) {
-						$id = $result["id"];
+						$idUser = $result["id"];
 						$username = $result["username"];
 						$privilegeLevel = $result["privilegeLevel"];
 						?>
 						<tr id="data">
-							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $id; ?>"
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>"
 									onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}">
 							</td>
-							<td><a href="formDetailUser.php?id=<?php echo $id; ?>"><?php echo $username; ?></a></td>
+							<td><a href="formDetailUser.php?id=<?php echo $idUser; ?>"><?php echo $username; ?></a></td>
 							<td>
 								<?php
 								if ($privilegeLevel == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {

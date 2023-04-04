@@ -16,10 +16,10 @@ $total = mysqli_num_rows($queryPegaTeacher);
 
 if ($total >= 1) {
 	$query = mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$deliveredToRegistrationNumber', name = '$name', email = '$email', extNum = '$phoneExtension', phone = '$phoneNumber', course = '$course', room = '$room', faltas = '$faltas', data_ultima_falta = '$data_ultima_falta'") or die("Erro na query de currentização! " . mysqli_error($connection));
-	$message = "Dados currentizados com sucesso!";
+	$message = $translations["UPDATED_DATA_SUCCESS"];
 } else {
 	$query = mysqli_query($connection, "insert into teacher (teacherRegistrationNumber, name, email, extNum, phone, course, room) values('$deliveredToRegistrationNumber', '$name', '$email', '$phoneExtension', '$phoneNumber', '$course', '$room', '$faltas', '$data_ultima_falta')") or die("Erro ao incluir os dados! " . mysqli_error($connection));
-	$message = "Dados Cadastrados!";
+	$message = $translations["REGISTERED_DATA"];
 }
 
 ?>

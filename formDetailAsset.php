@@ -92,7 +92,7 @@ if ($send != 1) {
 	<script src="js/disable-controls.js"></script>
 	<form action="formDetailAsset.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2>Detalhes do patrimônio</h2><br>
+		<h2><?php $translations["ASSET_DETAIL"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $assetNumber != $oldAssetNumber) {
@@ -102,13 +102,13 @@ if ($send != 1) {
 			}
 		}
 		?>
-		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são
-			obrigatórios!</label>
+		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idAsset = $result["id"];
 				$assetNumber = $result["assetNumber"];
+				$oldAssetNumber = $result["assetNumber"];
 				$discarded = $result["discarded"];
 				$building = $result["building"];
 				$room = $result["room"];
@@ -141,9 +141,6 @@ if ($send != 1) {
 				$secureBoot = $result["secureBoot"];
 				$virtualizationTechnology = $result["virtualizationTechnology"];
 				$tpmVersion = $result["tpmVersion"];
-
-				$oldAssetNumber = $result["assetNumber"];
-
 			?>
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {

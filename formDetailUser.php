@@ -39,7 +39,7 @@ if ($send != 1) {
 <div id="middle">
 	<form action="formDetailUser.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2>Detalhes do agente</h2><br>
+		<h2><?php $translations["USER_DETAIL"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $username != $oldUsername) {
@@ -49,16 +49,15 @@ if ($send != 1) {
 			}
 		}
 		?>
-		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idUser = $result["id"];
 				$username = $result["username"];
+				$oldUsername = $result["username"];
 				$privilegeLevel = $result["privilegeLevel"];
 				$lastLoginDate = $result["lastLoginDate"];
-
-				$oldUsername = $result["username"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["USER_DATA"] ?></td>
@@ -80,9 +79,12 @@ if ($send != 1) {
 							<?php
 							}
 							?>
-
 						</select>
 					</td>
+				</tr>
+				<tr>
+					<td id="label"><?php echo $translations["LAST_LOGIN_DATE"] ?></td>
+					<td><?php echo $lastLoginDate; ?></td>
 				</tr>
 			<?php
 			}

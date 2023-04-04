@@ -10,6 +10,9 @@ $translations = json_decode($lang_file_content, true);
 $jsonFile = file_get_contents(__DIR__ . "/etc/config.json");
 $json_config_array = json_decode($jsonFile, true);
 
+$timezone = gatherJsonTypes($json_config_array, "Locale", null);
+date_default_timezone_set($timezone);
+
 $buildingArray = gatherJsonTypes($json_config_array, "Definitions", "Buildings");
 $hwTypesArray = gatherJsonTypes($json_config_array, "Definitions", "HardwareTypes");
 $fwTypesArray = gatherJsonTypes($json_config_array, "Definitions", "FirmwareTypes");

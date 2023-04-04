@@ -19,7 +19,6 @@ if ($verifyPassword) {
 			$id = $row["id"];
 			$username = $row["username"];
 			$privilegeLevel = $row["privilegeLevel"];
-
 		}
 		$_SESSION["id"] = $id;
 		$_SESSION["username"] = $username;

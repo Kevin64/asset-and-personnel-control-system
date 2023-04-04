@@ -1,6 +1,7 @@
 <?php
 require_once("connection.php");
 ?>
+<script type="text/javascript" src="js/theme-switcher.js"></script>
 <div id="menu">
 	<nav>
 		<ul>
@@ -10,7 +11,7 @@ require_once("connection.php");
 			<?php if (isset($_SESSION["id"])) {
 			?>
 				<li>
-					<label id="hov"><span>Patrimônio</span></label>
+					<label id="hov"><span><?php echo $translations["ASSET"] ?></span></label>
 					<ol class=slide>
 						<li><a href="queryAsset.php"><?php echo $translations["QUERY_ASSET"] ?></a></li>
 						<?php
@@ -43,14 +44,13 @@ require_once("connection.php");
 				<?php
 				if (!isset($_SESSION["id"])) {
 				?>
-					<!-- <span>Usuário desconectado</span> -->
 				<?php
 				} else {
 				?>
 					<label id="hov">
 						<span>
 							<?php
-							echo "" . $_SESSION["username"];
+							echo $_SESSION["username"];
 							?>
 						</span>
 					</label>
@@ -79,7 +79,7 @@ require_once("connection.php");
 			</li>
 			<li>
 				<a href="about.php"><?php echo $translations["ABOUT"] ?></a>
-			</li>			
+			</li>
 		</ul>
 	</nav>
 </div>

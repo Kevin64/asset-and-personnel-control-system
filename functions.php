@@ -9,5 +9,3 @@ function gatherJsonTypes($json, $param1, $param2) {
     }
 
 }
-
-?>

@@ -3,31 +3,31 @@ require_once("connection.php");
 
 $message = $translations["SUCCESS_ASSET_DATA_EXPORT"];
 
-if(isset($_GET["assetNumber"]))
+if (isset($_GET["assetNumber"]))
 	$assetNumber = $_GET["assetNumber"];
-if(isset($_GET["building"]))
+if (isset($_GET["building"]))
 	$building = $_GET["building"];
-if(isset($_GET["room"]))
+if (isset($_GET["room"]))
 	$room = $_GET["room"];
-if(isset($_GET["standard"]))
+if (isset($_GET["standard"]))
 	$standard = $_GET["standard"];
-if(isset($_GET["adRegistered"]))
+if (isset($_GET["adRegistered"]))
 	$adRegistered = $_GET["adRegistered"];
-if(isset($_GET["inUse"]))
+if (isset($_GET["inUse"]))
 	$inUse = $_GET["inUse"];
-if(isset($_GET["sealNumber"]))
+if (isset($_GET["sealNumber"]))
 	$sealNumber = $_GET["sealNumber"];
-if(isset($_GET["tag"]))
+if (isset($_GET["tag"]))
 	$tag = $_GET["tag"];
-if(isset($_GET["hwType"]))
+if (isset($_GET["hwType"]))
 	$hwType = $_GET["hwType"];
-if(isset($_GET["discarded"]))
+if (isset($_GET["discarded"]))
 	$discarded = $_GET["discarded"];
-if(isset($_GET["serviceDate"]))
+if (isset($_GET["serviceDate"]))
 	$serviceDate = $_GET["serviceDate"];
 
-$assetFile = __DIR__."/output/asset.json";
-$assetChecksum = __DIR__."/output/asset-checksum.txt";
+$assetFile = "/output/asset.json";
+$assetChecksum = "/output/asset-checksum.txt";
 
 $query = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
@@ -61,7 +61,7 @@ while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	fclose($fp2);
 }
 
-if(!isset($row_array)) {
+if (!isset($row_array)) {
 	$fp = fopen($assetFile, "w");
 	fwrite($fp, json_encode($return_arr));
 	$checksum = hash("sha256", json_encode($return_arr));

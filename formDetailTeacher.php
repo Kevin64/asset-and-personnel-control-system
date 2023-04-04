@@ -61,12 +61,13 @@ if ($send != 1) {
 			}
 		}
 		?>
-		<label id=asteriskWarning>Os campos marcados com asterisco (<mark id=asterisk>*</mark>) são obrigatórios!</label>
+		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idTeacher = $result["id"];
 				$teacherRegistrationNumber = $result["teacherRegistrationNumber"];
+				$oldTeacherRegistrationNumber = $result["teacherRegistrationNumber"];
 				$employeeType = $result["employeeType"];
 				$name = $result["name"];
 				$email = $result["email"];
@@ -74,8 +75,6 @@ if ($send != 1) {
 				$phoneNumber = $result["phoneNumber"];
 				$course = $result["course"];
 				$room = $result["room"];
-
-				$oldTeacherRegistrationNumber = $result["teacherRegistrationNumber"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["TEACHER_DATA"] ?></td>
@@ -132,26 +131,26 @@ if ($send != 1) {
 					} else {
 						if ($employeeType == "Técnico Administractive em Educação") {
 						?>
-							<td colspan=2><br><?php echo "<h4>" . "TAE" . " " . $name . " - course de " . $course; ?></br></td>
+							<td colspan=2><br><?php echo "<h4>" . "TAE" . " " . $name . " - " . $translations["TEACHER_COURSE_OF"] . ": " . $course; ?></br></td>
 						<?php
 						} else {
 						?>
-							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $name . $translations["COURSE_OF"] . $course; ?></br></td>
+							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $name . $translations["COURSE_OF"] . ": " . $course; ?></br></td>
 						<?php
 						}
 						?>
 				</tr>
 				<tr>
-					<td colspan=2><br><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] . $teacherRegistrationNumber; ?></br></td>
+					<td colspan=2><br><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] . ": " . $teacherRegistrationNumber; ?></br></td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["TEACHER_COURSE"] . $course; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_COURSE"] . ": " . $course; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["TEACHER_PHONE_NUMBER_SHORT"] . $phoneNumber; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_PHONE_NUMBER_SHORT"] . ": " . $phoneNumber; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["TEACHER_EMAIL"] . $email; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_EMAIL"] . ": " . $email; ?> </td>
 				</tr>
 			<?php
 					}
