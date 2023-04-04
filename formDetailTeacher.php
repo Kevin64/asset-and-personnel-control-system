@@ -21,17 +21,17 @@ if ($send != 1) {
 	if (isset($_POST["txtEmployeeType"]))
 		$employeeType = $_POST["txtEmployeeType"];
 	if (isset($_POST["txtName"]))
-		$name = $_POST["txtName"];
+		$teacherName = $_POST["txtName"];
 	if (isset($_POST["txtEmail"]))
-		$email = $_POST["txtEmail"];
+		$teacherEmail = $_POST["txtEmail"];
 	if (isset($_POST["txtPhoneExtension"]))
-		$phoneExtension = $_POST["txtPhoneExtension"];
+		$teacherPhoneExtension = $_POST["txtPhoneExtension"];
 	if (isset($_POST["txtPhoneNumber"]))
-		$phoneNumber = $_POST["txtPhoneNumber"];
+		$teacherPhoneNumber = $_POST["txtPhoneNumber"];
 	if (isset($_POST["txtCourse"]))
-		$course = $_POST["txtCourse"];
+		$teacherCourse = $_POST["txtCourse"];
 	if (isset($_POST["txtRoom"]))
-		$room = $_POST["txtRoom"];
+		$teacherRoom = $_POST["txtRoom"];
 	if (isset($_POST["txtFaltas"]))
 		$faltas = $_POST["txtFaltas"];
 
@@ -40,9 +40,9 @@ if ($send != 1) {
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$teacherRegistrationNumber', employeeType = '$employeeType', name = '$name', email = '$email', phoneExtension = '$phoneExtension', phoneNumber = '$phoneNumber', course = '$course', room = '$room' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$teacherRegistrationNumber', employeeType = '$employeeType', name = '$teacherName', email = '$teacherEmail', phoneExtension = '$teacherPhoneExtension', phoneNumber = '$teacherPhoneNumber', course = '$teacherCourse', room = '$teacherRoom' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $teacherRegistrationNumber == $oldTeacherRegistrationNumber) {
-		mysqli_query($connection, "update teacher set employeeType = '$employeeType', name = '$name', email = '$email', phoneExtension = '$phoneExtension', phoneNumber = '$phoneNumber', course = '$course', room = '$room' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update teacher set employeeType = '$employeeType', name = '$teacherName', email = '$teacherEmail', phoneExtension = '$teacherPhoneExtension', phoneNumber = '$teacherPhoneNumber', course = '$teacherCourse', room = '$teacherRoom' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
 	}
 	$query = mysqli_query($connection, "select * from teacher where id = '$idTeacher'") or die($translations["ERROR_SHOW_DETAIL_TEACHER"] . mysqli_error($connection));
 }
@@ -69,12 +69,12 @@ if ($send != 1) {
 				$teacherRegistrationNumber = $result["teacherRegistrationNumber"];
 				$oldTeacherRegistrationNumber = $result["teacherRegistrationNumber"];
 				$employeeType = $result["employeeType"];
-				$name = $result["name"];
-				$email = $result["email"];
-				$phoneExtension = $result["phoneExtension"];
-				$phoneNumber = $result["phoneNumber"];
-				$course = $result["course"];
-				$room = $result["room"];
+				$teacherName = $result["name"];
+				$teacherEmail = $result["email"];
+				$teacherPhoneExtension = $result["phoneExtension"];
+				$teacherPhoneNumber = $result["phoneNumber"];
+				$teacherCourse = $result["course"];
+				$teacherRoom = $result["room"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["TEACHER_DATA"] ?></td>
@@ -86,56 +86,60 @@ if ($send != 1) {
 					<td><input type=text name=txtTeacherRegistrationNumber maxlength="8" required value="<?php echo $teacherRegistrationNumber; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_TYPE"] ?><mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?><mark id=asterisk>*</mark></td>
 					<td>
 						<select name=txtEmployeeType required>
-							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?></option>
-							<option value="Teacher" <?php if ($employeeType == "Teacher") echo "selected='selected'"; ?>><?php echo $translations["TEACHER_TYPE_1"] ?></option>
-							<option value="Técnico Administractive em Educação" <?php if ($employeeType == "Técnico Administractive em Educação") echo "selected='selected'"; ?>><?php echo $translations["TEACHER_TYPE_2"] ?></option>
+							<?php
+							foreach ($employeeTypesArray as $str1 => $str2) {
+							?>
+							<option value=<?php echo $str1 ?> <?php if ($employeeType == $str1) echo "selected='selected'"; ?>><?php echo $translations["EMPLOYEE_TYPE"][$str1] ?></option>
+							<?php
+							}
+							?>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td id="label">name<mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtName required value="<?php echo $name; ?>"></td>
+					<td id="label"><?php echo $translations["TEACHER_NAME"] ?><mark id=asterisk>*</mark></td>
+					<td><input type=text name=txtName required value="<?php echo $teacherName; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_EMAIL"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=email name=txtEmail required value="<?php echo $email; ?>"></td>
+					<td><input type=email name=txtEmail required value="<?php echo $teacherEmail; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_PHONE_EXTENSION"] ?></td>
-					<td><input type=text name=txtPhoneExtension maxLength=4 value="<?php echo $phoneExtension; ?>"></td>
+					<td><input type=text name=txtPhoneExtension maxLength=4 value="<?php echo $teacherPhoneExtension; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtPhoneNumber minLength=11 maxLength=11 required value="<?php echo $phoneNumber; ?>"></td>
+					<td><input type=text name=txtPhoneNumber minLength=11 maxLength=11 required value="<?php echo $teacherPhoneNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_COURSE"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtCourse required value="<?php echo $course; ?>"></td>
+					<td><input type=text name=txtCourse required value="<?php echo $teacherCourse; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_ROOM"] ?></td>
-					<td><input type=text name=txtRoom maxLength=4 value="<?php echo $room; ?>"></td>
+					<td><input type=text name=txtRoom maxLength=4 value="<?php echo $teacherRoom; ?>"></td>
 				</tr>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["MRBS_TEMPLATE"] ?></td>
 				</tr>
 				<tr>
 					<?php
-					if ($teacherRegistrationNumber == "" || $employeeType == null || $name == "" || $email == "" || $phoneNumber == "" || $course == "") {
+					if ($teacherRegistrationNumber == "" || $employeeType == null || $teacherName == "" || $teacherEmail == "" || $teacherPhoneNumber == "" || $teacherCourse == "") {
 					?>
-						<td colspan=2 style="color:red;"><br><?php echo "<h4> Completar dados cadastrais antes de continuar! " ?></br></td>
+						<td colspan=2 style="color:red;"><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
 						<?php
 					} else {
 						if ($employeeType == "Técnico Administractive em Educação") {
 						?>
-							<td colspan=2><br><?php echo "<h4>" . "TAE" . " " . $name . " - " . $translations["TEACHER_COURSE_OF"] . ": " . $course; ?></br></td>
+							<td colspan=2><br><?php echo "<h4>" . "TAE" . " " . $teacherName . " - " . $translations["TEACHER_COURSE_OF"] . ": " . $teacherCourse; ?></br></td>
 						<?php
 						} else {
 						?>
-							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $name . $translations["COURSE_OF"] . ": " . $course; ?></br></td>
+							<td colspan=2><br><?php echo "<h4>" . "Prof." . " " . $teacherName . $translations["COURSE_OF"] . " " . $teacherCourse; ?></br></td>
 						<?php
 						}
 						?>
@@ -144,13 +148,13 @@ if ($send != 1) {
 					<td colspan=2><br><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] . ": " . $teacherRegistrationNumber; ?></br></td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["TEACHER_COURSE"] . ": " . $course; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_COURSE"] . ": " . $teacherCourse; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["TEACHER_PHONE_NUMBER_SHORT"] . ": " . $phoneNumber; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_PHONE_NUMBER_SHORT"] . ": " . $teacherPhoneNumber; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["TEACHER_EMAIL"] . ": " . $email; ?> </td>
+					<td colspan=2><?php echo $translations["TEACHER_EMAIL"] . ": " . $teacherEmail; ?> </td>
 				</tr>
 			<?php
 					}

@@ -20,12 +20,17 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td><input type=text name=txtTeacherRegistrationNumber placeholder="Ex.: 1234567" maxLength=8 required></td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["EMPLOYEE_TYPE"] ?><mark id=asterisk>*</mark></td>
+						<td id="label"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?><mark id=asterisk>*</mark></td>
 						<td>
 							<select name=txtEmployeeType required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value="Teacher"><?php echo $translations["TEACHER_TYPE_1"] ?></option>
-								<option value="Técnico Administractive em Educação"><?php echo $translations["TEACHER_TYPE_2"] ?></option>
+								<?php
+								foreach ($employeeTypesArray as $str1 => $str2) {
+								?>
+									<option value=<?php echo $str1 ?>> <?php echo $translations["EMPLOYEE_TYPE"][$str1] ?></option>
+									<?php
+								}
+									?>
 							</select>
 						</td>
 					</tr>

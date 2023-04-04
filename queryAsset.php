@@ -167,9 +167,9 @@ if ($send != 1) {
 				if ($inUseOk == "N") $inUse = "Não";
 
 				if ($inUse == "Não") {
-					$cor = "red";
+					$color = "red";
 				} else {
-					$cor = "green";
+					$color = "green";
 				}
 
 				$formatDate = substr($formatacao, 0, 10);
@@ -187,33 +187,33 @@ if ($send != 1) {
 						}
 					}
 					?>
-					<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor;
+					<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } else { ?> style="color: <?php echo $color;
 																																							} ?>"><?php echo $assetNumber; ?></a></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $building; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $building; ?></label></td>
 					<?php
 					}
 					?>
-					<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $room; ?></label></td>
+					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $room; ?></label></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $standard; ?></label></td>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $brand; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $translations["ENTITY_TYPES"][$standard] ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $brand; ?></label></td>
 					<?php
 					}
 					?>
-					<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $model; ?></label></td>
+					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $model; ?></label></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $ipAddress; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $ipAddress; ?></label></td>
 					<?php
 					}
 					?>
-					<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $serviceDate; ?></label></td>
+					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $serviceDate; ?></label></td>
 				</tr>
 				<?php
 			}
@@ -236,9 +236,9 @@ if ($send != 1) {
 					if ($inUseOk == "N") $inUse = "Não";
 
 					if ($inUse == "Não") {
-						$cor = "red";
+						$color = "red";
 					} else {
-						$cor = "green";
+						$color = "green";
 					}
 
 					$formatDate = substr($formatacao, 0, 10);
@@ -256,33 +256,33 @@ if ($send != 1) {
 							}
 						}
 						?>
-						<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=discarded <?php } else { ?> style="color: <?php echo $cor;
+						<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } else { ?> style="color: <?php echo $color;
 																																								} ?>"><?php echo $assetNumber; ?></a></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-							<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $building; ?></label></td>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $building; ?></label></td>
 						<?php
 						}
 						?>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $room; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $room; ?></label></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-							<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $standard; ?></label></td>
-							<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $brand; ?></label></td>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $translations["ENTITY_TYPES"][$standard] ?></label></td>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $brand; ?></label></td>
 						<?php
 						}
 						?>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $model; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $model; ?></label></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-							<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $ipAddress; ?></label></td>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $ipAddress; ?></label></td>
 						<?php
 						}
 						?>
-						<td><label <?php if ($discarded == 1) { ?> id=discarded <?php } ?>><?php echo $serviceDate; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $serviceDate; ?></label></td>
 					</tr>
 				<?php
 				}

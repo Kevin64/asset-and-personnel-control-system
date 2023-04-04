@@ -181,7 +181,7 @@ input[type=text] {
 	border: 1px solid;
 }
 
-#discarded {
+#inactive {
 	font-style: italic;
 	opacity: 0.4;
 }

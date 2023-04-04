@@ -82,7 +82,7 @@ $totalTeachers = mysqli_num_rows($query);
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<td><a href="?orderBy=employeeType&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_TYPE"] ?></a></td>
+					<td><a href="?orderBy=employeeType&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></a></td>
 				<?php
 				}
 				?>
@@ -112,14 +112,14 @@ $totalTeachers = mysqli_num_rows($query);
 					if (!in_array(true, $devices)) {
 						if ($employeeType == null) {
 					?>
-							<td class="unselectable" style="background-color:darkred;">
+							<td class="unselectable" style="background-color:darkred; color:white">
 								<?php echo $translations["INCOMPLETE_REGISTRATION_DATA"] ?>
 							</td>
 						<?php
 						} else {
 						?>
 							<td class="unselectable">
-								<?php echo $employeeType; ?>
+								<?php echo $translations["EMPLOYEE_TYPE"][$employeeType] ?>
 							</td>
 					<?php
 						}

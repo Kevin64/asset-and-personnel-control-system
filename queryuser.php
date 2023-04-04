@@ -36,7 +36,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 		}
 
 		$totalusers = mysqli_num_rows($query);
-		?>
+?>
 
 		<div id="middle">
 			<table>
@@ -54,16 +54,17 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td><a href="?orderBy=username&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
 						</td>
 						<td><a href="?orderBy=privilegeLevel&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></td>
+						<td><a href="?orderBy=lastLoginDate&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></td>
 					</tr>
 					<?php
 					while ($result = mysqli_fetch_array($query)) {
 						$idUser = $result["id"];
 						$username = $result["username"];
 						$privilegeLevel = $result["privilegeLevel"];
-						?>
+						$lastLoginDate = $result["lastLoginDate"];
+					?>
 						<tr id="data">
-							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>"
-									onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}">
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> disabled <?php } ?>>
 							</td>
 							<td><a href="formDetailUser.php?id=<?php echo $idUser; ?>"><?php echo $username; ?></a></td>
 							<td>
@@ -77,18 +78,20 @@ if (isset($_SESSION["privilegeLevel"])) {
 								}
 								?>
 							</td>
+							<td>
+								<?php echo $lastLoginDate; ?>
+							</td>
 						</tr>
-						<?php
+					<?php
 					}
 					?>
 					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit"
-								value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
+						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 					</tr>
 				</form>
 			</table>
 		</div>
-		<?php
+<?php
 		require_once("foot.php");
 	} else {
 		header("Location: denied.php");

@@ -39,8 +39,8 @@ $serviceDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0
 $serviceDateExpanded = $serviceDate;
 $serviceType = $translations["FORMATTING"];
 
-$queryPegaAsset = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
-$total = mysqli_num_rows($queryPegaAsset);
+$queryGetAsset = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$total = mysqli_num_rows($queryGetAsset);
 
 if ($total >= 1) {
 	$query = mysqli_query($connection, "update asset set sealNumber = '$sealNumber', room = '$room', building = '$building', adRegistered = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', macAddress = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where assetNumber = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));

@@ -25,7 +25,7 @@ require_once("connection.php");
 					</ol>
 				</li>
 				<li>
-					<label id="hov"><span><?php echo $translations["TEACHER_TYPE_1"] ?></span></label>
+					<label id="hov"><span><?php echo $translations["EMPLOYEE_TYPE"]["0"] ?></span></label>
 					<ol class=slide>
 						<?php
 						if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {

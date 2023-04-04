@@ -20,6 +20,12 @@ if ($send != 1) {
 
 	$query = mysqli_query($connection, "select * from asset where id = '$idAsset'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 	$queryFormatAnt = mysqli_query($connection, "select maintenances.previousServiceDates, maintenances.serviceType, maintenances.batteryChange, maintenances.ticketNumber, maintenances.agent from (select * from asset where id = '$idAsset') as a inner join maintenances on a.assetNumber = maintenances.assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryUsers = mysqli_query($connection, "select * from users") or die($translations["ERROR_QUERY_USER"] . mysqli_error($connection));
+
+	while ($resultUsers = mysqli_fetch_array($queryUsers)) {
+		$idUser = $resultUsers["id"];
+		$username = $resultUsers["username"];
+	}
 } else {
 	$idAsset = $_POST["txtIdAsset"];
 	$assetNumber = $_POST["txtAssetNumber"];
@@ -38,16 +44,6 @@ if ($send != 1) {
 	$standard = $_POST["txtStandard"];
 	$note = $_POST["txtNote"];
 	$serviceDate = $_POST["txtServiceDate"];
-	if (isset($_POST["txtPreviousMaintenancesDate"]))
-		$maintenancesAnterioresData = $_POST["txtPreviousMaintenancesDate"];
-	if (isset($_POST["txtPreviousMaintenancesServiceType"]))
-		$maintenancesAnterioresModo = $_POST["txtPreviousMaintenancesServiceType"];
-	if (isset($_POST["txtPreviousMaintenancesBattery"]))
-		$maintenancesAnterioresPilha = $_POST["txtPreviousMaintenancesBattery"];
-	if (isset($_POST["txtPreviousMaintenancesTicket"]))
-		$maintenancesAnterioresTicket = $_POST["txtPreviousMaintenancesTicket"];
-	if (isset($_POST["txtPreviousMaintenancesAgent"]))
-		$maintenancesAnterioresAgente = $_POST["txtPreviousMaintenancesAgent"];
 	$adRegistered = $_POST["txtAdRegistered"];
 	$brand = $_POST["txtBrand"];
 	$model = $_POST["txtModel"];
@@ -238,10 +234,12 @@ if ($send != 1) {
 			</tr>
 			<?php
 				while ($resultFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
+
+
 			?>
 				<tr id=bodyPreviousMaintenance>
 					<td>
-						<label name=txtPreviousMaintenancesDate>
+						<label>
 							<?php $previousMaintenancesDate = $resultFormatAnt["previousServiceDates"];
 							$datePM = substr($previousMaintenancesDate, 0, 10);
 							$explodedDateA = explode("-", $datePM);
@@ -250,17 +248,17 @@ if ($send != 1) {
 							?></label>
 					</td>
 					<td>
-						<label name=txtPreviousMaintenancesServiceType>
-							<?php $previousMaintenancesServiceType = $resultFormatAnt["serviceType"];
-							if ($previousMaintenancesServiceType != "")
-								echo $previousMaintenancesServiceType;
-							else
-								echo "-";
+						<label>
+							<?php
+							foreach ($serviceTypesArray as $str) {
+								if ($resultFormatAnt["serviceType"] == $str)
+									echo $translations["SERVICE_TYPE"][$str];
+							}
 							?>
 						</label>
 					</td>
 					<td>
-						<label name=txtPreviousMaintenancesBattery>
+						<label>
 							<?php $previousMaintenancesBattery = $resultFormatAnt["batteryChange"];
 							if ($previousMaintenancesBattery != "" && $previousMaintenancesBattery == "1") {
 								echo $translations["BATTERY_REPLACED"];
@@ -273,7 +271,7 @@ if ($send != 1) {
 						</label>
 					</td>
 					<td>
-						<label type=text name=txtPreviousMaintenancesTicket>
+						<label>
 							<?php $previousMaintenancesTicket = $resultFormatAnt["ticketNumber"];
 							if ($previousMaintenancesTicket != "")
 								echo $previousMaintenancesTicket;
@@ -283,14 +281,20 @@ if ($send != 1) {
 						</label>
 					</td>
 					<td>
-						<label type=text name=txtPreviousMaintenancesAgent>
-							<?php $previousMaintenancesAgent = $resultFormatAnt["agent"];
-							if ($previousMaintenancesAgent != "")
-								echo $previousMaintenancesAgent;
-							else
-								echo "-";
-							?>
-						</label>
+						<?php
+						if (isset($queryUsers))
+							mysqli_data_seek($queryUsers, 0);
+						while ($resultUsers = mysqli_fetch_array($queryUsers)) {
+						?>
+							<label>
+								<?php
+								if ($resultFormatAnt["agent"] == $resultUsers["id"])
+									echo $resultUsers["username"];
+								?>
+							</label>
+						<?php
+						}
+						?>
 					</td>
 				</tr>
 			<?php
@@ -311,12 +315,15 @@ if ($send != 1) {
 				</td>
 				<td colspan=5>
 					<select name="txtStandard">
-						<option value=1 <?php if ($standard == "1")
-											echo "selected"; ?>><?php echo $translations["STUDENT"] ?>
-						</option>
-						<option value=0 <?php if ($standard == "0")
-											echo "selected"; ?>><?php echo $translations["EMPLOYEE"] ?>
-						</option>
+						<?php
+						foreach ($entityTypesArray as $str1 => $str2) {
+						?>
+							<option value=<?php echo $str1 ?> <?php if ($standard == $str1)
+																	echo "selected"; ?>><?php echo $translations["ENTITY_TYPES"][$str1] ?>
+							</option>
+						<?php
+						}
+						?>
 					</select>
 				</td>
 			</tr>
