@@ -16,8 +16,8 @@ if (isset($_GET["tpmVersion"]))
 if (isset($_GET["mediaOperationMode"]))
 	$mediaOperationMode = $_GET["mediaOperationMode"];
 
-$modelFile = "/output/model.json";
-$modelChecksum = "/output/model-checksum.txt";
+$modelFile = __DIR__ . "/output/model.json";
+$modelChecksum = __DIR__ . "/output/model-checksum.txt";
 
 $query = mysqli_query($connection, "select * from model") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();

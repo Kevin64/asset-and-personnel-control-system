@@ -108,32 +108,41 @@ if ($send != 1) {
 						<?php
 						?>
 						<select name=txtFwType required>
-							<option value=BIOS <?php if ($fwType == $fwTypesArray[0]) echo "selected='selected'"; ?>><?php echo $fwTypesArray[0] ?></option>
-							<option value=UEFI <?php if ($fwType == $fwTypesArray[1]) echo "selected='selected'"; ?>><?php echo $fwTypesArray[1] ?></option>
+							<?php
+							foreach ($fwTypesArray as $str1 => $str2) {
+							?>
+								<option value=<?php echo $str1 ?> <?php if ($fwType == $str1) echo "selected='selected'"; ?>><?php echo $str2 ?></option>
+							<?php
+							}
+							?>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
 					<td>
-						<?php
-						?>
 						<select name=txtTpmVersion required>
-							<option value=<?php echo $tpmTypesArray[0] ?> <?php if ($tpmVersion == $tpmTypesArray[0]) echo "selected='selected'"; ?>><?php echo $translations["NONE"] ?></option>
-							<option value=<?php echo $tpmTypesArray[1] ?> <?php if ($tpmVersion == $tpmTypesArray[1]) echo "selected='selected'"; ?>><?php echo $tpmTypesArray[1] ?></option>
-							<option value=<?php echo $tpmTypesArray[2] ?> <?php if ($tpmVersion == $tpmTypesArray[2]) echo "selected='selected'"; ?>><?php echo $tpmTypesArray[2] ?></option>
+							<?php
+							foreach ($tpmTypesArray as $str1 => $str2) {
+							?>
+								<option value=<?php echo $str1 ?> <?php if ($tpmVersion == $str1) echo "selected='selected'"; ?>><?php echo $str2; ?></option>
+							<?php
+							}
+							?>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
 					<td>
-						<?php
-						?>
 						<select name=txtMediaOperationMode required>
-							<option value=IDE/RAID <?php if ($mediaOperationMode == $mediaOpTypesArray[0]) echo "selected='selected'"; ?>><?php echo $mediaOpTypesArray[0] ?></option>
-							<option value=AHCI <?php if ($mediaOperationMode == $mediaOpTypesArray[1]) echo "selected='selected'"; ?>><?php echo $mediaOpTypesArray[1] ?></option>
-							<option value=NVMe <?php if ($mediaOperationMode == $mediaOpTypesArray[2]) echo "selected='selected'"; ?>><?php echo $mediaOpTypesArray[2] ?></option>
+							<?php
+							foreach ($mediaOpTypesArray as $str1 => $str2) {
+							?>
+								<option value=<?php echo $str1 ?> <?php if ($mediaOperationMode == $str1) echo "selected='selected'"; ?>><?php echo $str2 ?></option>
+							<?php
+							}
+							?>
 						</select>
 					</td>
 				</tr>

@@ -91,7 +91,7 @@ $totalRooms = mysqli_num_rows($query);
 				$brand = $result["brand"];
 				$model = $result["model"];
 				$fwVersion = $result["fwVersion"];
-				$hwType = $result["fwType"];
+				$fwType = $result["fwType"];
 				$tpmVersion = $result["tpmVersion"];
 				$mediaOperationMode = $result["mediaOperationMode"];
 			?>
@@ -108,10 +108,9 @@ $totalRooms = mysqli_num_rows($query);
 					<td><a href="formDetailModel.php?id=<?php echo $idModel; ?>"><?php echo $model; ?></a></td>
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $fwVersion; ?></td>
-					<td><?php echo $hwType; ?></td>
-					<td><?php if ($tpmVersion != $tpmTypesArray[0]) echo $tpmVersion;
-						else echo $translations["NONE"]; ?></td>
-					<td><?php echo $mediaOperationMode; ?></td>
+					<td><?php echo $fwTypesArray[$fwType]; ?></td>
+					<td><?php echo $tpmTypesArray[$tpmVersion]; ?></td>
+					<td><?php echo $mediaOpTypesArray[$mediaOperationMode]; ?></td>
 				</tr>
 				<?php
 			}

@@ -37,7 +37,7 @@ $fDate = substr($serviceDate, 0, 10);
 $explodedDate = explode("/", $fDate);
 $serviceDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
 $serviceDateExpanded = $serviceDate;
-$serviceType = $translations["MAINTENANCE"];
+$serviceType = $serviceTypesArray[1];
 
 $queryGetAsset = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $total = mysqli_num_rows($queryGetAsset);

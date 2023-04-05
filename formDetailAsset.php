@@ -11,6 +11,8 @@ $oldAssetNumber = null;
 if (isset($_POST["txtSend"]))
 	$send = $_POST["txtSend"];
 
+$queryUsers = mysqli_query($connection, "select * from users") or die($translations["ERROR_QUERY_USER"] . mysqli_error($connection));
+
 if ($send != 1) {
 	if (isset($_GET["id"]))
 		$idAsset = $_GET["id"];
@@ -20,12 +22,7 @@ if ($send != 1) {
 
 	$query = mysqli_query($connection, "select * from asset where id = '$idAsset'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 	$queryFormatAnt = mysqli_query($connection, "select maintenances.previousServiceDates, maintenances.serviceType, maintenances.batteryChange, maintenances.ticketNumber, maintenances.agent from (select * from asset where id = '$idAsset') as a inner join maintenances on a.assetNumber = maintenances.assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
-	$queryUsers = mysqli_query($connection, "select * from users") or die($translations["ERROR_QUERY_USER"] . mysqli_error($connection));
 
-	while ($resultUsers = mysqli_fetch_array($queryUsers)) {
-		$idUser = $resultUsers["id"];
-		$username = $resultUsers["username"];
-	}
 } else {
 	$idAsset = $_POST["txtIdAsset"];
 	$assetNumber = $_POST["txtAssetNumber"];
@@ -88,7 +85,7 @@ if ($send != 1) {
 	<script src="js/disable-controls.js"></script>
 	<form action="formDetailAsset.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2><?php $translations["ASSET_DETAIL"] ?></h2><br>
+		<h2><?php echo $translations["ASSET_DETAIL"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $assetNumber != $oldAssetNumber) {
@@ -170,10 +167,10 @@ if ($send != 1) {
 					<td colspan=5>
 						<select id="formFields" name="txtBuilding" required>
 							<?php
-							foreach ($buildingArray as $str) {
+							foreach ($buildingArray as $str1 => $str2) {
 							?>
-								<option value=<?php echo $str ?> <?php if ($building == $str)
-																		echo "selected"; ?>><?php echo $str ?></option>
+								<option value=<?php echo $str1 ?> <?php if ($building == $str1)
+																		echo "selected"; ?>><?php echo $str2 ?></option>
 							<?php
 							}
 							?>
@@ -501,9 +498,9 @@ if ($send != 1) {
 				<td>
 					<select name="txtHwType">
 						<?php
-						foreach ($hwTypesArray as $str) {
+						foreach ($hwTypesArray as $str1 => $str2) {
 						?>
-							<option value=<?php echo $str ?> <?php if ($hwType == $str) echo "selected"; ?>><?php echo $str ?>
+							<option value=<?php echo $str1 ?> <?php if ($hwType == $str1) echo "selected"; ?>><?php echo $str2 ?>
 							</option>
 						<?php
 						}

@@ -192,7 +192,7 @@ if ($send != 1) {
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $building; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $buildingArray[$building]; ?></label></td>
 					<?php
 					}
 					?>

@@ -37,7 +37,7 @@ $fDate = substr($serviceDate, 0, 10);
 $explodedDate = explode("/", $fDate);
 $serviceDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
 $serviceDateExpanded = $serviceDate;
-$serviceType = $translations["FORMATTING"];
+$serviceType = $serviceTypesArray[0];
 
 $queryGetAsset = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $total = mysqli_num_rows($queryGetAsset);
@@ -48,7 +48,7 @@ if ($total >= 1) {
 	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetNumberFK, previousServiceDates, serviceType, batteryChange, ticketNumber, agent) values('$assetNumber', '$serviceDateExpanded', '$serviceType', '$batteryChange', '$ticketNumber', '$agent');") or die("Erro ao incluir os dados! " . mysqli_error($connection));
 	$message = $translations["EXISTING_ASSET_UPDATING_DATA"];
 } else {
-	$query = mysqli_query($connection, "insert into asset (assetNumber, discarded, sealNumber, room, building, adRegistered, standard, serviceDate, brand, model, serialNumber, processor, ram, storageSize, operatingSystem, hostname, fwVersion, macAddress, ipAddress, inUse, tag, hwType, fwType, storageType, videoCard, mediaOperationMode, secureBoot, virtualizationTechnology, tpmVersion) values('$assetNumber', 0, '$sealNumber', '$room', '$building', '$adRegistered', '$standard', '$serviceDate', '$brand', '$model', '$sealNumber', '$processor', '$ram', '$storageSize', '$operatingSystem', '$hostname', '$fwVersion', '$macAddress', '$ipAddress', '$inUse', '$tag', '$hwType', '$fwType', '$storageType', '$videoCard', '$mediaOperationMode', '$secureBoot', '$virtualizationTechnology', '$tpmVersion');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "insert into asset (assetNumber, discarded, sealNumber, room, building, adRegistered, standard, serviceDate, brand, model, serialNumber, processor, ram, storageSize, operatingSystem, hostname, fwVersion, macAddress, ipAddress, inUse, tag, hwType, fwType, storageType, videoCard, mediaOperationMode, secureBoot, virtualizationTechnology, tpmVersion) values('$assetNumber', 0, '$sealNumber', '$room', '$building', '$adRegistered', '$standard', '$serviceDate', '$brand', '$model', '$serialNumber', '$processor', '$ram', '$storageSize', '$operatingSystem', '$hostname', '$fwVersion', '$macAddress', '$ipAddress', '$inUse', '$tag', '$hwType', '$fwType', '$storageType', '$videoCard', '$mediaOperationMode', '$secureBoot', '$virtualizationTechnology', '$tpmVersion');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	
 	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetNumberFK, previousServiceDates, serviceType, batteryChange, ticketNumber, agent) values('$assetNumber', '$serviceDateExpanded', '$serviceType', '$batteryChange', '$ticketNumber', '$agent');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	$message = $translations["NEW_ASSET_REGISTERING_DATA"];

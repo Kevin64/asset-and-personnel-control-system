@@ -33,8 +33,13 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td>
 							<select name=txtFwType required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=<?php echo $fwTypesArray[0] ?>><?php echo $fwTypesArray[0] ?></option>
-								<option value=<?php echo $fwTypesArray[1] ?>><?php echo $fwTypesArray[1] ?></option>
+								<?php
+								foreach ($fwTypesArray as $str1 => $str2) {
+								?>
+									<option value=<?php echo $str1 ?>><?php echo $str2 ?></option>
+								<?php
+								}
+								?>
 							</select>
 						</td>
 					</tr>
@@ -43,9 +48,13 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td>
 							<select name=txtTpmVersion required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=<?php echo $tpmTypesArray[0] ?>><?php echo $translations["NONE"] ?></option>
-								<option value=<?php echo $tpmTypesArray[1] ?>><?php echo $tpmTypesArray[1] ?></option>
-								<option value=<?php echo $tpmTypesArray[2] ?>><?php echo $tpmTypesArray[2] ?></option>
+								<?php
+								foreach ($tpmTypesArray as $str1 => $str2) {
+								?>
+									<option value=<?php echo $str1 ?>><?php echo $str2 ?></option>
+								<?php
+								}
+								?>
 							</select>
 						</td>
 					</tr>
@@ -54,9 +63,13 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td>
 							<select name=txtMediaOperationMode required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
-								<option value=<?php echo $mediaOpTypesArray[0] ?>><?php echo $mediaOpTypesArray[0] ?></option>
-								<option value=<?php echo $mediaOpTypesArray[1] ?>><?php echo $mediaOpTypesArray[1] ?></option>
-								<option value=<?php echo $mediaOpTypesArray[2] ?>><?php echo $mediaOpTypesArray[2] ?></option>
+								<?php
+								foreach($mediaOpTypesArray as $str1 => $str2) {
+								?>
+									<option value=<?php echo $str1 ?>><?php echo $str2 ?></option>
+								<?php
+								}
+								?>
 							</select>
 						</td>
 					</tr>

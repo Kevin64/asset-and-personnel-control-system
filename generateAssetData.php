@@ -26,8 +26,8 @@ if (isset($_GET["discarded"]))
 if (isset($_GET["serviceDate"]))
 	$serviceDate = $_GET["serviceDate"];
 
-$assetFile = "/output/asset.json";
-$assetChecksum = "/output/asset-checksum.txt";
+$assetFile = __DIR__ . "/output/asset.json";
+$assetChecksum = __DIR__ . "/output/asset-checksum.txt";
 
 $query = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();

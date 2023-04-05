@@ -12,8 +12,8 @@ if (isset($_GET["privilegeLevel"]))
 if (isset($_GET["lastLoginDate"]))
 	$lastLoginDate = $_GET["lastLoginDate"];
 
-$usersFile = "/output/users.json";
-$usersChecksum = "/output/users-checksum.txt";
+$usersFile = __DIR__ . "/output/users.json";
+$usersChecksum = __DIR__ . "/output/users-checksum.txt";
 
 $query = mysqli_query($connection, "select * from users") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
