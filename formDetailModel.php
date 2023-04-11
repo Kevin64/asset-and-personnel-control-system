@@ -59,7 +59,8 @@ if ($send != 1) {
 }
 ?>
 
-<div id="middle">
+<div id="middle" <?php if (isset($_SESSION["privilegeLevel"])) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["LIMITED_LEVEL"]) { ?> class="readonly" <?php }} ?>>
 	<form action="formDetailModel.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
 		<h2><?php echo $translations["MODEL_DETAIL"] ?></h2><br>
