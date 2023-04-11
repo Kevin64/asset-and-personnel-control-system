@@ -33,10 +33,6 @@ $batteryChange = $_GET["batteryChange"];
 $ticketNumber = $_GET["ticketNumber"];
 $agent = $_GET["agent"];
 
-$fDate = substr($serviceDate, 0, 10);
-$explodedDate = explode("/", $fDate);
-$serviceDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
-$serviceDateExpanded = $serviceDate;
 $serviceType = $serviceTypesArray[1];
 
 $queryGetAsset = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
@@ -45,7 +41,7 @@ $total = mysqli_num_rows($queryGetAsset);
 if ($total >= 1) {
 	$query = mysqli_query($connection, "update asset set sealNumber = '$sealNumber', room = '$room', building = '$building', adRegistered = '$adRegistered', standard = '$standard', serviceDate = '$serviceDate', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', macAddress = '$macAddress', ipAddress = '$ipAddress', inUse = '$inUse', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where assetNumber = '$assetNumber';") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
-	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetNumberFK, previousServiceDates, serviceType, batteryChange, ticketNumber, agent) values('$assetNumber', '$serviceDateExpanded', '$serviceType', '$batteryChange', '$ticketNumber', '$agent');") or die($translations["ERORR_ADD_DATA"] . mysqli_error($connection));
+	$queryFormatAnt = mysqli_query($connection, "insert into maintenances (assetNumberFK, previousServiceDates, serviceType, batteryChange, ticketNumber, agent) values('$assetNumber', '$serviceDate', '$serviceType', '$batteryChange', '$ticketNumber', '$agent');") or die($translations["ERORR_ADD_DATA"] . mysqli_error($connection));
 	$message = $translations["EXISTING_ASSET_UPDATING_DATA"];
 	?>
 
