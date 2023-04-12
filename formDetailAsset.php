@@ -33,7 +33,7 @@ if ($send != 1) {
 		$discarded = "0";
 	}
 	$building = $_POST["txtBuilding"];
-	$room = $_POST["txtRoom"];
+	$roomNumber = $_POST["txtRoomNumber"];
 	$deliveredToRegistrationNumber = $_POST["txtDeliveredToRegistrationNumber"];
 	if (isset($_POST["txtLastDeliveryMadeBy"]))
 		$lastDeliveryMadeBy = $_POST["txtLastDeliveryMadeBy"];
@@ -70,11 +70,11 @@ if ($send != 1) {
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update asset set assetNumber = '$assetNumber', discarded = '$discarded', building = '$building', room = '$room', deliveredToRegistrationNumber = '$deliveredToRegistrationNumber', lastDeliveryDate = '$lastDeliveryDate', standard = '$standard', note = '$note', serviceDate = '$serviceDate', adRegistered = '$adRegistered', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', inUse = '$inUse', sealNumber = '$sealNumber', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', macAddress = '$macAddress', ipAddress = '$ipAddress', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where id = '$idAsset'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update asset set assetNumber = '$assetNumber', discarded = '$discarded', building = '$building', roomNumber = '$roomNumber', deliveredToRegistrationNumber = '$deliveredToRegistrationNumber', lastDeliveryDate = '$lastDeliveryDate', standard = '$standard', note = '$note', serviceDate = '$serviceDate', adRegistered = '$adRegistered', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', inUse = '$inUse', sealNumber = '$sealNumber', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', macAddress = '$macAddress', ipAddress = '$ipAddress', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where id = '$idAsset'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
 
 		mysqli_query($connection, "update maintenances set assetNumberFK = '$assetNumber' where assetNumberFK = '$oldAssetNumber'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $assetNumber == $oldAssetNumber) {
-		mysqli_query($connection, "update asset set discarded = '$discarded', building = '$building', room = '$room', deliveredToRegistrationNumber = '$deliveredToRegistrationNumber', lastDeliveryDate = '$lastDeliveryDate', standard = '$standard', note = '$note', serviceDate = '$serviceDate', adRegistered = '$adRegistered', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', inUse = '$inUse', sealNumber = '$sealNumber', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', macAddress = '$macAddress', ipAddress = '$ipAddress', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where id = '$idAsset'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update asset set discarded = '$discarded', building = '$building', roomNumber = '$roomNumber', deliveredToRegistrationNumber = '$deliveredToRegistrationNumber', lastDeliveryDate = '$lastDeliveryDate', standard = '$standard', note = '$note', serviceDate = '$serviceDate', adRegistered = '$adRegistered', brand = '$brand', model = '$model', serialNumber = '$serialNumber', processor = '$processor', ram = '$ram', storageSize = '$storageSize', operatingSystem = '$operatingSystem', hostname = '$hostname', fwVersion = '$fwVersion', inUse = '$inUse', sealNumber = '$sealNumber', tag = '$tag', hwType = '$hwType', fwType = '$fwType', storageType = '$storageType', macAddress = '$macAddress', ipAddress = '$ipAddress', videoCard = '$videoCard', mediaOperationMode = '$mediaOperationMode', secureBoot = '$secureBoot', virtualizationTechnology = '$virtualizationTechnology', tpmVersion = '$tpmVersion' where id = '$idAsset'") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
 	}
 	$query = mysqli_query($connection, "select * from asset where id = '$idAsset'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 	$queryFormatAnt = mysqli_query($connection, "select maintenances.previousServiceDates, maintenances.serviceType, maintenances.batteryChange, maintenances.ticketNumber, maintenances.agent from (select * from asset where id = '$idAsset') as a inner join maintenances on a.assetNumber = maintenances.assetNumberFK") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
@@ -105,7 +105,7 @@ if ($send != 1) {
 				$oldAssetNumber = $result["assetNumber"];
 				$discarded = $result["discarded"];
 				$building = $result["building"];
-				$room = $result["room"];
+				$roomNumber = $result["roomNumber"];
 				$deliveredToRegistrationNumber = $result["deliveredToRegistrationNumber"];
 				$lastDeliveryDate = $result["lastDeliveryDate"];
 				$lastDeliveryMadeBy = $result["lastDeliveryMadeBy"];
@@ -182,7 +182,7 @@ if ($send != 1) {
 					<td id="label">
 						<?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark>
 					</td>
-					<td colspan=5><input id="formFields" type=text name=txtRoom placeholder="Ex.: 4413" maxlength="5" required value="<?php echo $room; ?>"></td>
+					<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="Ex.: 4413" maxlength="5" required value="<?php echo $roomNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">

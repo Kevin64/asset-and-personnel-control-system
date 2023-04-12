@@ -58,7 +58,7 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "asset") echo "selected='selected'"; ?>value="assetNumber"><?php echo $translations["ASSETS_ACTIVE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "discarded") echo "selected='selected'"; ?>value="discarded"><?php echo $translations["ASSETS_DISCARDED"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "sealNumber") echo "selected='selected'"; ?>value="sealNumber"><?php echo $translations["SEAL_NUMBER"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "room") echo "selected='selected'"; ?>value="room"><?php echo $translations["ASSET_ROOM"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "roomNumber") echo "selected='selected'"; ?>value="roomNumber"><?php echo $translations["ASSET_ROOM"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "building") echo "selected='selected'"; ?>value="building"><?php echo $translations["BUILDING"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "adRegistered") echo "selected='selected'"; ?>value="adRegistered"><?php echo $translations["AD_REGISTERED"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "standard") echo "selected='selected'"; ?>value="standard"><?php echo $translations["STANDARD"] ?></option>
@@ -129,7 +129,7 @@ if ($send != 1) {
 				<?php
 				}
 				?>
-				<td><a href="?orderBy=room&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></td>
+				<td><a href="?orderBy=roomNumber&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
@@ -154,7 +154,7 @@ if ($send != 1) {
 				$assetNumber = $result["assetNumber"];
 				$discarded = $result["discarded"];
 				$building = $result["building"];
-				$room = $result["room"];
+				$roomNumber = $result["roomNumber"];
 				$standard = $result["standard"];
 				$brand = $result["brand"];
 				$model = $result["model"];
@@ -196,7 +196,7 @@ if ($send != 1) {
 					<?php
 					}
 					?>
-					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $room; ?></label></td>
+					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $roomNumber; ?></label></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
@@ -223,7 +223,7 @@ if ($send != 1) {
 					$assetNumber = $result["assetNumber"];
 					$discarded = $result["discarded"];
 					$building = $result["building"];
-					$room = $result["room"];
+					$roomNumber = $result["roomNumber"];
 					$standard = $result["standard"];
 					$brand = $result["brand"];
 					$model = $result["model"];
@@ -265,7 +265,7 @@ if ($send != 1) {
 						<?php
 						}
 						?>
-						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $room; ?></label></td>
+						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $roomNumber; ?></label></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>

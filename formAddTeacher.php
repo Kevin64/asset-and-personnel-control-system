@@ -55,7 +55,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["TEACHER_ROOM"] ?></td>
-						<td><input type=text name=txtRoom placeholder="Ex.: 4413" maxLength=4></td>
+						<td><input type=text name=txtRoomNumber placeholder="Ex.: 4413" maxLength=4></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><br>

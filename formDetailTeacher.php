@@ -30,8 +30,8 @@ if ($send != 1) {
 		$teacherPhoneNumber = $_POST["txtPhoneNumber"];
 	if (isset($_POST["txtCourse"]))
 		$teacherCourse = $_POST["txtCourse"];
-	if (isset($_POST["txtRoom"]))
-		$teacherRoom = $_POST["txtRoom"];
+	if (isset($_POST["txtRoomNumber"]))
+		$teacherRoom = $_POST["txtRoomNumber"];
 	if (isset($_POST["txtFaltas"]))
 		$faltas = $_POST["txtFaltas"];
 
@@ -40,9 +40,9 @@ if ($send != 1) {
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$teacherRegistrationNumber', employeeType = '$employeeType', name = '$teacherName', email = '$teacherEmail', phoneExtension = '$teacherPhoneExtension', phoneNumber = '$teacherPhoneNumber', course = '$teacherCourse', room = '$teacherRoom' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update teacher set teacherRegistrationNumber = '$teacherRegistrationNumber', employeeType = '$employeeType', name = '$teacherName', email = '$teacherEmail', phoneExtension = '$teacherPhoneExtension', phoneNumber = '$teacherPhoneNumber', course = '$teacherCourse', roomNumber = '$teacherRoom' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $teacherRegistrationNumber == $oldTeacherRegistrationNumber) {
-		mysqli_query($connection, "update teacher set employeeType = '$employeeType', name = '$teacherName', email = '$teacherEmail', phoneExtension = '$teacherPhoneExtension', phoneNumber = '$teacherPhoneNumber', course = '$teacherCourse', room = '$teacherRoom' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update teacher set employeeType = '$employeeType', name = '$teacherName', email = '$teacherEmail', phoneExtension = '$teacherPhoneExtension', phoneNumber = '$teacherPhoneNumber', course = '$teacherCourse', roomNumber = '$teacherRoom' where id = '$idTeacher'") or die($translations["ERROR_UPDATE_TEACHER_DATA"] . mysqli_error($connection));
 	}
 	$query = mysqli_query($connection, "select * from teacher where id = '$idTeacher'") or die($translations["ERROR_SHOW_DETAIL_TEACHER"] . mysqli_error($connection));
 }
@@ -75,7 +75,7 @@ if ($send != 1) {
 				$teacherPhoneExtension = $result["phoneExtension"];
 				$teacherPhoneNumber = $result["phoneNumber"];
 				$teacherCourse = $result["course"];
-				$teacherRoom = $result["room"];
+				$teacherRoom = $result["roomNumber"];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["TEACHER_DATA"] ?></td>
@@ -122,7 +122,7 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["TEACHER_ROOM"] ?></td>
-					<td><input type=text name=txtRoom maxLength=4 value="<?php echo $teacherRoom; ?>"></td>
+					<td><input type=text name=txtRoomNumber maxLength=4 value="<?php echo $teacherRoom; ?>"></td>
 				</tr>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["MRBS_TEMPLATE"] ?></td>

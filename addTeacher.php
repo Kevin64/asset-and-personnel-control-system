@@ -9,13 +9,13 @@ $email = $_POST["txtEmail"];
 $phoneExtension = $_POST["txtPhoneExtension"];
 $phoneNumber = $_POST["txtPhoneNumber"];
 $course = $_POST["txtCourse"];
-$room = $_POST["txtRoom"];
+$roomNumber = $_POST["txtRoomNumber"];
 
 $validateTeacher = mysqli_query($connection, "select * from teacher where teacherRegistrationNumber = '$teacherRegistrationNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $totalTeacher = mysqli_num_rows($validateTeacher);
 
 if ($totalTeacher == 0) {
-	mysqli_query($connection, "insert into teacher (teacherRegistrationNumber, employeeType, name, email, phoneExtension, phoneNumber, course, room) values ('$teacherRegistrationNumber', '$employeeType', '$name', '$email', '$phoneExtension', '$phoneNumber', '$course', '$room')") or die($translations["ERROR_ADD_TEACHER"] . mysqli_error($connection));
+	mysqli_query($connection, "insert into teacher (teacherRegistrationNumber, employeeType, name, email, phoneExtension, phoneNumber, course, roomNumber) values ('$teacherRegistrationNumber', '$employeeType', '$name', '$email', '$phoneExtension', '$phoneNumber', '$course', '$roomNumber')") or die($translations["ERROR_ADD_TEACHER"] . mysqli_error($connection));
 
 	header("Location: successTeacher.php");
 } else

@@ -121,3 +121,7 @@ table {
 	text-align: center;
 	border: 1px solid;
 }
+
+.readonly {
+	pointer-events: none;
+}

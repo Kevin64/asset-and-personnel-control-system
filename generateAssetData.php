@@ -7,8 +7,8 @@ if (isset($_GET["assetNumber"]))
 	$assetNumber = $_GET["assetNumber"];
 if (isset($_GET["building"]))
 	$building = $_GET["building"];
-if (isset($_GET["room"]))
-	$room = $_GET["room"];
+if (isset($_GET["roomNumber"]))
+	$roomNumber = $_GET["roomNumber"];
 if (isset($_GET["standard"]))
 	$standard = $_GET["standard"];
 if (isset($_GET["adRegistered"]))
@@ -40,7 +40,7 @@ if (file_exists($assetFile) || file_exists($assetChecksum)) {
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["assetNumber"] = $row["assetNumber"];
 	$row_array["building"] = $row["building"];
-	$row_array["room"] = $row["room"];
+	$row_array["roomNumber"] = $row["roomNumber"];
 	$row_array["standard"] = $row["standard"];
 	$row_array["adRegistered"] = $row["adRegistered"];
 	$row_array["inUse"] = $row["inUse"];
