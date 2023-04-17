@@ -13,7 +13,7 @@
 			</form>
 		<?php
 		} else {
-			echo "<h1>" . $translations["ATCS"] . "</h1>";
+			echo "<h1>" . $translations["APCS"] . "</h1>";
 			echo "<h2>" . $translations["USE_NAVIGATION_MENU"] . "</h2>";
 		}
 		?>

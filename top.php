@@ -43,7 +43,7 @@ if (!isset($_SESSION)) {
 	}
 	?>
 	<meta charset="utf-8">
-	<title>.:: <?php echo $translations["ATCS"] ?> ::.</title>
+	<title>.:: <?php echo $translations["APCS"] ?> ::.</title>
 	<link rel="icon" href="img/favicon.png" type="image/x-icon" />
 </head>
 

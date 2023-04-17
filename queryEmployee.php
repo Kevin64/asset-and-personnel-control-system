@@ -25,29 +25,29 @@ if (isset($sort) and $sort == "asc") {
 }
 
 if ($send != 1)
-	$query = mysqli_query($connection, "select * from teacher order by $orderBy $sort") or die($translations["ERROR_QUERY_TEACHER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from employee order by $orderBy $sort") or die($translations["ERROR_QUERY_EMPLOYEE"] . mysqli_error($connection));
 else {
 	$rdCriterion = $_POST["rdCriterion"];
 	$search = $_POST["txtSearch"];
-	$query = mysqli_query($connection, "select * from teacher where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from employee where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 }
 
-$totalTeachers = mysqli_num_rows($query);
+$totalEmployees = mysqli_num_rows($query);
 ?>
 
 <div id="middle">
 	<table id="tbSearch">
-		<form action=queryTeacher.php method=post>
+		<form action=queryEmployee.php method=post>
 			<input type=hidden name=txtSend value=1>
 			<tr>
 				<td align=center><?php echo $translations["SEARCH_FOR"] ?></td>
 			</tr>
 			<tr>
 				<td align=center>
-					<select id=filterTeacher name=rdCriterion>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "teacherRegistrationNumber") echo "selected='selected'"; ?>value="teacherRegistrationNumber"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "course") echo "selected='selected'"; ?>value="course"><?php echo $translations["TEACHER_COURSE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "name") echo "selected='selected'"; ?>value="name"><?php echo $translations["TEACHER_NAME"] ?></option>
+					<select id=filterEmployee name=rdCriterion>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeRegistrationNumber") echo "selected='selected'"; ?>value="employeeRegistrationNumber"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "sector") echo "selected='selected'"; ?>value="sector"><?php echo $translations["EMPLOYEE_SECTOR"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "name") echo "selected='selected'"; ?>value="name"><?php echo $translations["EMPLOYEE_NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeType") echo "selected='selected'"; ?>value="employeeType"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
@@ -63,9 +63,9 @@ $totalTeachers = mysqli_num_rows($query);
 		?>
 	</table>
 	<br><br>
-	<h2><?php echo $translations["TEACHER_LIST"] ?> (<?php echo $totalTeachers; ?>)</h2><br>
-	<table id="teacherData" cellspacing=0>
-		<form action="eraseSelectedTeacher.php" method="post">
+	<h2><?php echo $translations["EMPLOYEE_LIST"] ?> (<?php echo $totalEmployees; ?>)</h2><br>
+	<table id="employeeData" cellspacing=0>
+		<form action="eraseSelectedEmployee.php" method="post">
 			<tr id="header_">
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
@@ -76,9 +76,9 @@ $totalTeachers = mysqli_num_rows($query);
 					}
 				}
 				?>
-				<td><a href="?orderBy=teacherRegistrationNumber&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_REGISTRATION_NUMBER"] ?></a></td>
-				<td><a href="?orderBy=name&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_NAME"] ?></a></td>
-				<td><a href="?orderBy=course&sort=<?php echo $sort; ?>"><?php echo $translations["TEACHER_COURSE"] ?></a></td>
+				<td><a href="?orderBy=employeeRegistrationNumber&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></a></td>
+				<td><a href="?orderBy=name&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></a></td>
+				<td><a href="?orderBy=sector&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_SECTOR"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
@@ -89,10 +89,10 @@ $totalTeachers = mysqli_num_rows($query);
 			</tr>
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
-				$idTeacher = $result["id"];
-				$teacherRegistrationNumber = $result["teacherRegistrationNumber"];
+				$idEmployee = $result["id"];
+				$employeeRegistrationNumber = $result["employeeRegistrationNumber"];
 				$name = $result["name"];
-				$course = $result["course"];
+				$sector = $result["sector"];
 				$employeeType = $result["employeeType"];
 			?>
 				<tr id="data">
@@ -100,14 +100,14 @@ $totalTeachers = mysqli_num_rows($query);
 					if (isset($_SESSION["privilegeLevel"])) {
 						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idTeacher; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
+							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idEmployee; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}"></td>
 					<?php
 						}
 					}
 					?>
-					<td><a href="formDetailTeacher.php?id=<?php echo $idTeacher; ?>"><?php echo $teacherRegistrationNumber; ?></a></td>
+					<td><a href="formDetailEmployee.php?id=<?php echo $idEmployee; ?>"><?php echo $employeeRegistrationNumber; ?></a></td>
 					<td class="unselectable"><?php echo $name; ?></td>
-					<td class="unselectable"><?php echo $course; ?></td>
+					<td class="unselectable"><?php echo $sector; ?></td>
 					<?php
 					if (!in_array(true, $devices)) {
 						if ($employeeType == null) {

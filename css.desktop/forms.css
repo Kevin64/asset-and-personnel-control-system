@@ -2,14 +2,14 @@
 
 	#formAddAsset,
 	#formAddModel,
-	#formAddTeacher {
+	#formAddEmployee {
 		color: black;
 	}
 
 	#formLogin *,
 	#formAddAsset *,
 	#formAddModel *,
-	#formAddTeacher *,
+	#formAddEmployee *,
 	#formAddModelTable * {
 		border-color: black;
 	}
@@ -31,14 +31,14 @@
 
 	#formAddAsset,
 	#formAddModel,
-	#formAddTeacher {
+	#formAddEmployee {
 		color: white;
 	}
 
 	#formLogin *,
 	#formAddAsset *,
 	#formAddModel *,
-	#formAddTeacher *,
+	#formAddEmployee *,
 	#formAddModelTable * {
 		border-color: white;
 	}
@@ -75,7 +75,7 @@
 	margin-left: 150px;
 }
 
-#formAddTeacher {
+#formAddEmployee {
 	text-align: center;
 	width: 1000px;
 	height: auto;
@@ -90,7 +90,7 @@
 	text-align: center;
 }
 
-#formAddTeacher table {
+#formAddEmployee table {
 	width: 1000px;
 	height: auto;
 	border: 1px solid;
@@ -121,7 +121,7 @@ textarea {
 	text-align: center;
 }
 
-#formAddTeacher select,
+#formAddEmployee select,
 textarea {
 	width: auto;
 	border: 1px solid;

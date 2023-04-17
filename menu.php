@@ -25,16 +25,16 @@ require_once("connection.php");
 					</ol>
 				</li>
 				<li>
-					<label id="hov"><span><?php echo $translations["EMPLOYEE_TYPE"]["0"] ?></span></label>
+					<label id="hov"><span><?php echo $translations["EMPLOYEE"] ?></span></label>
 					<ol class=slide>
 						<?php
 						if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {
 						?>
-							<a href="formAddTeacher.php"><?php echo $translations["ADD_TEACHER"] ?></a>
+							<a href="formAddEmployee.php"><?php echo $translations["ADD_EMPLOYEE"] ?></a>
 						<?php
 						}
 						?>
-						<a href="queryTeacher.php"><?php echo $translations["QUERY_TEACHER"] ?></a>
+						<a href="queryEmployee.php"><?php echo $translations["QUERY_EMPLOYEE"] ?></a>
 					</ol>
 				</li>
 			<?php

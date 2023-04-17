@@ -10,11 +10,11 @@ if ($file = fopen("etc/version", "r")) {
 ?>
 <div id="foot">
 	<font style="font-size: 14px;">
-		<b><?php echo $translations["ATCS"] ?></b><br>
-		<?php echo $translations["ATCS_VERSION"] ?><?php echo $line ?><br>
+		<b><?php echo $translations["APCS"] ?></b><br>
+		<?php echo $translations["APCS_VERSION"] ?><?php echo $line ?><br>
 		Sistema de desenvolvido pela Subdivisão de Tecnologia da Informação do CCSH<Br>
-		<?php echo $translations["ATCS_EMAIL"] ?><?php echo $email ?><br>
-		<?php echo $translations["ATCS_PHONE"] ?><?php echo $phoneNumber ?>
+		<?php echo $translations["APCS_EMAIL"] ?><?php echo $email ?><br>
+		<?php echo $translations["APCS_PHONE"] ?><?php echo $phoneNumber ?>
 	</font>
 </div>
 </div>
