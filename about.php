@@ -5,13 +5,10 @@ require_once("menu.php");
 
 <div id="container">
 	<div id="middle">
-		<font size=5><b><?php echo $translations["APCS"] ?></b></font><br><br>
-		<p align=justify style="padding: 10px; text-indent: 30px;">
-			<?php echo $translations["ABOUT_TEXT"] ?><br><br>
-		<fieldset style="text-align: left; font-weight: bold; font-size: 15px; border-radius: 20px; padding: 15px; width: 90%; margin: 0 auto;">
-			<legend><?php echo $translations["COLLABORATORS"] ?></legend>
-			<p style="font-weight: normal; font-size: 14px;">
-				<?php echo $translations["DEVELOPERS_TEXT"] ?>
+		<fieldset style="text-align: left; font-weight: bold; font-size: 22px; border-radius: 10px; padding: 15px; width: 90%; margin: 0 auto;">
+			<legend><?php echo $translations["ABOUT_APCS"] ?></legend>
+			<p style="font-weight: normal; font-size: 20px;">
+				<?php echo nl2br($translations["DEVELOPERS_TEXT"]) ?>
 			</p>
 		</fieldset>
 	</div>
