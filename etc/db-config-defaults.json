@@ -1,0 +1,33 @@
+{
+    "Locale": "America/Sao_Paulo",
+    "OrgData": {
+        "OrganizationFullName": "Company Name",
+        "OrganizationAcronym": "Co",
+        "DepartamentFullName": "Department Name",
+        "DepartamentAcronym": "Dep",
+        "SubDepartamentFullName": "Subdepartment Name",
+        "SubDepartamentAcronym": "SubDep",
+        "Email": "email@domain.com",
+        "Phone": "12345678"
+    },
+    "DbSettings": {
+        "DbUser": "root",
+        "DbPassword": "root",
+        "DbName": "atcsdb",
+        "DbIP": "localhost",
+        "DbPort": "3306"
+    },
+    "PrivilegeLevels": {
+        "ADMINISTRATOR_LEVEL": 0,
+        "STANDARD_LEVEL": 1,
+        "LIMITED_LEVEL": 2
+    },
+    "EntityTypes": [
+        "Employee",
+        "Student"
+    ],
+    "EmployeeTypes": [
+        "Teacher",
+        "Administrative Worker"
+    ]
+}

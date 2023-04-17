@@ -1,5 +1,6 @@
 *.zip
-*.json
 *.txt
 *.cmd
 phpinfo.php
+.vscode/
+output/
