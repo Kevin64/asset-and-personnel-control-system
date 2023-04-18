@@ -15,7 +15,7 @@ if (isset($_GET["lastLoginDate"]))
 $usersFile = __DIR__ . "/output/users.json";
 $usersChecksum = __DIR__ . "/output/users-checksum.txt";
 
-$query = mysqli_query($connection, "select * from users") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . "") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
 if (file_exists($usersFile) || file_exists($usersChecksum)) {

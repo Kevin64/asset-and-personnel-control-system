@@ -29,7 +29,7 @@ if (isset($_GET["serviceDate"]))
 $assetFile = __DIR__ . "/output/asset.json";
 $assetChecksum = __DIR__ . "/output/asset-checksum.txt";
 
-$query = mysqli_query($connection, "select * from asset where assetNumber = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
 if (file_exists($assetFile) || file_exists($assetChecksum)) {

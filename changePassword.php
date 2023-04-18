@@ -10,7 +10,7 @@ $username = $_POST["txtUser"];
 $newPassword = password_hash($_POST["txtPassword1"], PASSWORD_BCRYPT);
 $verifyPasswordAlt = password_verify($_POST["txtPassword2"], $newPassword);
 
-$query = mysqli_query($connection, "select * from users where username = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 while ($row = mysqli_fetch_array($query)) {
 	$idUser = $row["id"];
@@ -24,7 +24,7 @@ if (mysqli_num_rows($query) == 0) {
 		$currentPassword = password_verify($_POST["txtCurrentPassword"], $password);
 		if ($verifyPasswordAlt) {
 			if ($password == $currentPassword) {
-				$queryChangePassword = mysqli_query($connection, "update users set password = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
+				$queryChangePassword = mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["PASSWORD"] . " = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
 				$message = "<font color=blue>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
 			} else {
 				$message = "<font color=red>" . $translations["OLD_PASSWORD_NOT_MATCH"] . "</font>";
@@ -34,7 +34,7 @@ if (mysqli_num_rows($query) == 0) {
 		}
 	} else {
 		if ($verifyPasswordAlt) {
-			$queryChangePassword = mysqli_query($connection, "update users set password = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
+			$queryChangePassword = mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["PASSWORD"] . " = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
 			$message = "<font color=blue>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
 		} else {
 			$message = "<font color=red>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";

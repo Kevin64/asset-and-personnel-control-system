@@ -12,7 +12,7 @@ if ($_POST["txtPassword"] != "") {
 $privilegeLevel = $_POST["txtPrivilegeLevel"];
 $lastLoginDate = null;
 
-$query = mysqli_query($connection, "select * from users where username = '$username'") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
 $total = mysqli_num_rows($query);
 
 if ($total > 0) {
@@ -24,7 +24,7 @@ if ($total > 0) {
 	<?php
 } else {
 	if ($password != null) {
-		mysqli_query($connection, "insert into users (username, password, privilegeLevel, lastLoginDate) values ('$username', '$password', '$privilegeLevel', '$lastLoginDate')") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
+		mysqli_query($connection, "insert into " . $dbAgentsArray["AGENTS_TABLE"] . " (" . $dbAgentsArray["USERNAME"] . ", " . $dbAgentsArray["PASSWORD"] . ", " . $dbAgentsArray["PRIVILEGE_LEVEL"] . ", " . $dbAgentsArray["LAST_LOGIN_DATE"] . ") values ('$username', '$password', '$privilegeLevel', '$lastLoginDate')") or die($translations["ERROR_ADD_USER"] . mysqli_error($connection));
 	?>
 		<div id="middle">
 			<h2><?php echo $translations["SUCCESS_ADD_USER"] ?></h2><br><br>

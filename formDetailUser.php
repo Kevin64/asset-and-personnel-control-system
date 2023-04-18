@@ -10,7 +10,7 @@ if (isset($_POST["txtSend"]))
 
 if ($send != 1) {
 	$idUser = $_GET["id"];
-	$query = mysqli_query($connection, "select * from users where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
 } else {
 	if (isset($_POST["txtIdUser"]))
 		$idUser = $_POST["txtIdUser"];
@@ -22,17 +22,17 @@ if ($send != 1) {
 	if (isset($_POST["txtLastLoginDate"]))
 		$lastLoginDate = $_POST["txtLastLoginDate"];
 
-	$query = mysqli_query($connection, "select * from users where username = '$username'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
 
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update users set username = '$username', privilegeLevel = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["USERNAME"] . " = '$username', " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $username == $oldUsername) {
-		mysqli_query($connection, "update users set privilegeLevel = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
 	}
 
-	$query = mysqli_query($connection, "select * from users where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
 }
 ?>
 

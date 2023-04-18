@@ -25,11 +25,11 @@ if (isset($sort) and $sort == "asc") {
 }
 
 if ($send != 1)
-	$query = mysqli_query($connection, "select * from model order by $orderBy $sort") or die($translations["ERROR_QUERY_MODEL"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbModelArray["MODEL_TABLE"] . " order by $orderBy $sort") or die($translations["ERROR_QUERY_MODEL"] . mysqli_error($connection));
 else {
 	$rdCriterion = $_POST["rdCriterion"];
 	$search = $_POST["txtSearch"];
-	$query = mysqli_query($connection, "select * from model where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbModelArray["MODEL_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 }
 
 $totalRooms = mysqli_num_rows($query);
@@ -88,12 +88,12 @@ $totalRooms = mysqli_num_rows($query);
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idModel = $result["id"];
-				$brand = $result["brand"];
-				$model = $result["model"];
-				$fwVersion = $result["fwVersion"];
-				$fwType = $result["fwType"];
-				$tpmVersion = $result["tpmVersion"];
-				$mediaOperationMode = $result["mediaOperationMode"];
+				$brand = $result[$dbModelArray["BRAND"]];
+				$model = $result[$dbModelArray["MODEL"]];
+				$fwVersion = $result[$dbModelArray["FW_VERSION"]];
+				$fwType = $result[$dbModelArray["FW_TYPE"]];
+				$tpmVersion = $result[$dbModelArray["TPM_VERSION"]];
+				$mediaOperationMode = $result[$dbModelArray["MEDIA_OPERATION_MODE"]];
 			?>
 				<tr id="data">
 					<?php

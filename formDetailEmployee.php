@@ -10,7 +10,7 @@ if (isset($_POST["txtSend"]))
 
 if ($send != 1) {
 	$idEmployee = $_GET["id"];
-	$query = mysqli_query($connection, "select * from employee where id = '$idEmployee'") or die($translations["ERROR_SHOW_DETAIL_EMPLOYEE"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where id = '$idEmployee'") or die($translations["ERROR_SHOW_DETAIL_EMPLOYEE"] . mysqli_error($connection));
 } else {
 	if (isset($_POST["txtIdEmployee"]))
 		$idEmployee = $_POST["txtIdEmployee"];
@@ -35,16 +35,16 @@ if ($send != 1) {
 	if (isset($_POST["txtFaltas"]))
 		$faltas = $_POST["txtFaltas"];
 
-	$query = mysqli_query($connection, "select * from employee where employeeRegistrationNumber = '$employeeRegistrationNumber'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where " . $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] . " = '$employeeRegistrationNumber'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update employee set employeeRegistrationNumber = '$employeeRegistrationNumber', employeeType = '$employeeType', name = '$employeeName', email = '$employeeEmail', phoneExtension = '$employeePhoneExtension', phoneNumber = '$employeePhoneNumber', sector = '$employeeSector', roomNumber = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " set " . $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] . " = '$employeeRegistrationNumber', " . $dbEmployeeArray["EMPLOYEE_TYPE"] . " = '$employeeType', " . $dbEmployeeArray["NAME"] . " = '$employeeName', " . $dbEmployeeArray["EMAIL"] . " = '$employeeEmail', " . $dbEmployeeArray["PHONE_EXTENSION"] . " = '$employeePhoneExtension', " . $dbEmployeeArray["PHONE_NUMBER"] . " = '$employeePhoneNumber', " . $dbEmployeeArray["SECTOR"] . " = '$employeeSector', " . $dbEmployeeArray["ROOM_NUMBER"] . " = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $employeeRegistrationNumber == $oldEmployeeRegistrationNumber) {
-		mysqli_query($connection, "update employee set employeeType = '$employeeType', name = '$employeeName', email = '$employeeEmail', phoneExtension = '$employeePhoneExtension', phoneNumber = '$employeePhoneNumber', sector = '$employeeSector', roomNumber = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " set " . $dbEmployeeArray["EMPLOYEE_TYPE"] . " = '$employeeType', " . $dbEmployeeArray["NAME"] . " = '$employeeName', " . $dbEmployeeArray["EMAIL"] . " = '$employeeEmail', " . $dbEmployeeArray["PHONE_EXTENSION"] . " = '$employeePhoneExtension', " . $dbEmployeeArray["PHONE_NUMBER"] . " = '$employeePhoneNumber', " . $dbEmployeeArray["SECTOR"] . " = '$employeeSector', " . $dbEmployeeArray["ROOM_NUMBER"] . " = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
 	}
-	$query = mysqli_query($connection, "select * from employee where id = '$idEmployee'") or die($translations["ERROR_SHOW_DETAIL_EMPLOYEE"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where id = '$idEmployee'") or die($translations["ERROR_SHOW_DETAIL_EMPLOYEE"] . mysqli_error($connection));
 }
 ?>
 

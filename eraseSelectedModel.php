@@ -7,7 +7,7 @@ $delete = $_POST["chkDelete"];
 
 if (isset($delete)) {
 	for ($i = 0; $i < count($delete); $i++) {
-		$query = mysqli_query($connection, "delete from model where id = '$delete[$i]'") or die($translations["ERROR_DELETE_MODEL"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "delete from " . $dbModelArray["MODEL_TABLE"] . " where id = '$delete[$i]'") or die($translations["ERROR_DELETE_MODEL"] . mysqli_error($connection));
 	}
 }
 

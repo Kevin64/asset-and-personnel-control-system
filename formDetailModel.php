@@ -35,7 +35,7 @@ if ($send != 1) {
 	if (isset($_GET["mediaOperationMode"]))
 		$mediaOperationMode = $_GET["mediaOperationMode"];
 
-	$query = mysqli_query($connection, "select * from model where id = '$idModel'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbModelArray["MODEL_TABLE"] . " where id = '$idModel'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
 } else {
 	$idModel = $_POST["txtIdModel"];
 	$brand = $_POST["txtBrand"];
@@ -46,16 +46,16 @@ if ($send != 1) {
 	$tpmVersion = $_POST["txtTpmVersion"];
 	$mediaOperationMode = $_POST["txtMediaOperationMode"];
 
-	$query = mysqli_query($connection, "select * from model where model = '$model'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbModelArray["MODEL_TABLE"] . " where " . $dbModelArray["MODEL"] . " = '$model'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
 
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update model set brand = '$brand', model = '$model', fwVersion = '$fwVersion', fwType = '$fwType', tpmVersion = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$idModel'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbModelArray["MODEL_TABLE"] . " set " . $dbModelArray["BRAND"] . " = '$brand', " . $dbModelArray["MODEL"] . " = '$model', " . $dbModelArray["FW_VERSION"] . " = '$fwVersion', " . $dbModelArray["FW_TYPE"] . " = '$fwType', " . $dbModelArray["TPM_VERSION"] . " = '$tpmVersion', " . $dbModelArray["MEDIA_OPERATION_MODE"] . " = '$mediaOperationMode' where id = '$idModel'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $model == $oldModel) {
-		mysqli_query($connection, "update model set brand = '$brand', fwVersion = '$fwVersion', fwType = '$fwType', tpmVersion = '$tpmVersion', mediaOperationMode = '$mediaOperationMode' where id = '$idModel'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbModelArray["MODEL_TABLE"] . " set " . $dbModelArray["BRAND"] . " = '$brand', " . $dbModelArray["FW_VERSION"] . " = '$fwVersion', " . $dbModelArray["FW_TYPE"] . " = '$fwType', " . $dbModelArray["TPM_VERSION"] . " = '$tpmVersion', " . $dbModelArray["MEDIA_OPERATION_MODE"] . " = '$mediaOperationMode' where id = '$idModel'") or die($translations["ERROR_UPDATE_MODEL_DATA"] . mysqli_error($connection));
 	}
-	$query = mysqli_query($connection, "select * from model where id = '$idModel'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbModelArray["MODEL_TABLE"] . " where id = '$idModel'") or die($translations["ERROR_SHOW_DETAIL_MODEL"] . mysqli_error($connection));
 }
 ?>
 
@@ -78,13 +78,13 @@ if ($send != 1) {
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idModel = $result["id"];
-				$brand = $result["brand"];
-				$model = $result["model"];
-				$oldModel = $result["model"];
-				$fwVersion = $result["fwVersion"];
-				$fwType = $result["fwType"];
-				$tpmVersion = $result["tpmVersion"];
-				$mediaOperationMode = $result["mediaOperationMode"];
+				$brand = $result[$dbModelArray["BRAND"]];
+				$model = $result[$dbModelArray["MODEL"]];
+				$oldModel = $result[$dbModelArray["MODEL"]];
+				$fwVersion = $result[$dbModelArray["FW_VERSION"]];
+				$fwType = $result[$dbModelArray["FW_TYPE"]];
+				$tpmVersion = $result[$dbModelArray["TPM_VERSION"]];
+				$mediaOperationMode = $result[$dbModelArray["MEDIA_OPERATION_MODE"]];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>

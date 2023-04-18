@@ -30,7 +30,11 @@ $dbSettingsArray = gatherJsonTypes($json_config_array_db, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array_db, "PrivilegeLevels", null);
 $entityTypesArray = gatherJsonTypes($json_config_array_db, "EntityTypes", null);
 $employeeTypesArray = gatherJsonTypes($json_config_array_db, "EmployeeTypes", null);
-$queriesArray = gatherJsonTypes($json_constants_array, "QUERIES", null);
+$dbAssetArray = gatherJsonTypes($json_constants_array, "DB_ASSET", null);
+$dbMaintenancesArray = gatherJsonTypes($json_constants_array, "DB_MAINTENANCES", null);
+$dbAgentsArray = gatherJsonTypes($json_constants_array, "DB_AGENTS", null);
+$dbEmployeeArray = gatherJsonTypes($json_constants_array, "DB_EMPLOYEE", null);
+$dbModelArray = gatherJsonTypes($json_constants_array, "DB_MODEL", null);
 
 $orgFullName = $orgDataArray["OrganizationFullName"];
 $orgAcronym = $orgDataArray["OrganizationAcronym"];

@@ -1,13 +1,17 @@
 {
     "COPYRIGHT": "Copyright © 2023 Kevin Vinícius Teixeira Costa",
-    "QUERIES": {
+    "DB_ASSET": {
+        "ASSET_TABLE": "asset",
         "ASSET_NUMBER": "assetNumber",
         "DISCARDED": "discarded",
-        "ROOM_NUMBER": "sealNumber",
         "BUILDING": "building",
-        "AD_REGISTERED": "adRegistered",
+        "ROOM_NUMBER": "roomNumber",
+        "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
+        "LAST_DELIVERY_DATE": "lastDeliveryDate",
         "STANDARD": "standard",
+        "NOTE": "note",
         "SERVICE_DATE": "serviceDate",
+        "AD_REGISTERED": "adRegistered",
         "BRAND": "brand",
         "MODEL": "model",
         "SERIAL_NUMBER": "serialNumber",
@@ -17,18 +21,54 @@
         "OPERATING_SYSTEM": "operatingSystem",
         "HOSTNAME": "hostname",
         "FW_VERSION": "fwVersion",
-        "MAC_ADDRESS": "macAddress",
-        "IP_ADDRESS": "ipAddress",
         "IN_USE": "inUse",
         "SEAL_NUMBER": "sealNumber",
         "TAG": "tag",
         "HW_TYPE": "hwType",
         "FW_TYPE": "fwType",
         "STORAGE_TYPE": "storageType",
+        "MAC_ADDRESS": "macAddress",
+        "IP_ADDRESS": "ipAddress",
         "VIDEO_CARD": "videoCard",
         "MEDIA_OPERATION_MODE": "mediaOperationMode",
         "SECURE_BOOT": "secureBoot",
         "VIRTUALIZATION_TECHNOLOGY": "virtualizationTechnology",
         "TPM_VERSION": "tpmVersion"
+    },
+    "DB_MAINTENANCES": {
+        "MAINTENANCES_TABLE": "maintenances",
+        "ASSET_NUMBER_FK": "assetNumberFK",
+        "PREVIOUS_SERVICE_DATES": "previousServiceDates",
+        "SERVICE_TYPE": "serviceType",
+        "BATTERY_CHANGE": "batteryChange",
+        "TICKET_NUMBER": "ticketNumber",
+        "AGENT": "agent"
+    },
+    "DB_AGENTS": {
+        "AGENTS_TABLE": "agents",
+        "USERNAME": "username",
+        "PASSWORD": "password",
+        "PRIVILEGE_LEVEL": "privilegeLevel",
+        "LAST_LOGIN_DATE": "lastLoginDate"
+    },
+    "DB_EMPLOYEE": {
+        "EMPLOYEE_TABLE": "employee",
+        "EMPLOYEE_REGISTRATION_NUMBER": "employeeRegistrationNumber",
+        "NAME": "name",
+        "EMAIL": "email",
+        "PHONE_EXTENSION": "phoneExtension",
+        "PHONE_NUMBER": "phoneNumber",
+        "SECTOR": "sector",
+        "ROOM_NUMBER": "roomNumber",
+        "EMPLOYEE_TYPE": "employeeType"
+    },
+    "DB_MODEL": {
+        "MODEL_TABLE": "model",
+        "BRAND": "brand",
+        "MODEL": "model",
+        "FW_VERSION": "fwVersion",
+        "FW_TYPE": "fwType",
+        "TPM_VERSION": "tpmVersion",
+        "MEDIA_OPERATION_MODE": "mediaOperationMode"
     }
 }

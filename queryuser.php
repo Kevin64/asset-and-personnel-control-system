@@ -28,11 +28,11 @@ if (isset($_SESSION["privilegeLevel"])) {
 		}
 
 		if ($send != 1)
-			$query = mysqli_query($connection, "select * from users order by $orderBy $sort") or die($translations["ERROR_QUERY_USER"] . mysqli_error($connection));
+			$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " order by $orderBy $sort") or die($translations["ERROR_QUERY_USER"] . mysqli_error($connection));
 		else {
 			$rdCriterion = $_POST["rdCriterion"];
 			$search = $_POST["txtSearch"];
-			$query = mysqli_query($connection, "select * from users where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+			$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 		}
 
 		$totalusers = mysqli_num_rows($query);

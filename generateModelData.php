@@ -19,7 +19,7 @@ if (isset($_GET["mediaOperationMode"]))
 $modelFile = __DIR__ . "/output/model.json";
 $modelChecksum = __DIR__ . "/output/model-checksum.txt";
 
-$query = mysqli_query($connection, "select * from model") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from " . $dbModelArray["MODEL_TABLE"] . "") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
 if (file_exists($modelFile) || file_exists($modelChecksum)) {
@@ -29,12 +29,12 @@ if (file_exists($modelFile) || file_exists($modelChecksum)) {
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["id"] = $row["id"];
-	$row_array["brand"] = $row["brand"];
-	$row_array["model"] = $row["model"];
-	$row_array["fwVersion"] = $row["fwVersion"];
-	$row_array["fwType"] = $row["fwType"];
-	$row_array["tpmVersion"] = $row["tpmVersion"];
-	$row_array["mediaOperationMode"] = $row["mediaOperationMode"];
+	$row_array["brand"] = $row[$dbModelArray["BRAND"]];
+	$row_array["model"] = $row[$dbModelArray["MODEL"]];
+	$row_array["fwVersion"] = $row[$dbModelArray["FW_VERSION"]];
+	$row_array["fwType"] = $row[$dbModelArray["FW_TYPE"]];
+	$row_array["tpmVersion"] = $row[$dbModelArray["TPM_VERSION"]];
+	$row_array["mediaOperationMode"] = $row[$dbModelArray["MEDIA_OPERATION_MODE"]];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($modelFile, "w");

@@ -25,11 +25,11 @@ if (isset($sort) and $sort == "asc") {
 }
 
 if ($send != 1)
-	$query = mysqli_query($connection, "select * from employee order by $orderBy $sort") or die($translations["ERROR_QUERY_EMPLOYEE"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " order by $orderBy $sort") or die($translations["ERROR_QUERY_EMPLOYEE"] . mysqli_error($connection));
 else {
 	$rdCriterion = $_POST["rdCriterion"];
 	$search = $_POST["txtSearch"];
-	$query = mysqli_query($connection, "select * from employee where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 }
 
 $totalEmployees = mysqli_num_rows($query);

@@ -7,7 +7,7 @@ $delete = $_POST["chkDelete"];
 
 if (isset($delete)) {
 	for ($i = 0; $i < count($delete); $i++) {
-		$query = mysqli_query($connection, "delete from employee where id = '$delete[$i]'") or die($translations["ERROR_DELETE_EMPLOYEE"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "delete from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where id = '$delete[$i]'") or die($translations["ERROR_DELETE_EMPLOYEE"] . mysqli_error($connection));
 	}
 }
 
