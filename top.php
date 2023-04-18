@@ -44,7 +44,7 @@ if (!isset($_SESSION)) {
 	?>
 	<meta charset="utf-8">
 	<title>.:: <?php echo $translations["APCS"] ?> ::.</title>
-	<link rel="icon" href="img/favicon.png" type="image/x-icon" />
+	<link rel="icon" href="<?php echo $imgArray["FAVICON"] ?>" type="image/x-icon" />
 </head>
 
 <body>

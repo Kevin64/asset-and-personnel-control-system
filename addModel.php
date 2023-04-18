@@ -29,4 +29,4 @@ if ($totalModel == 0) {
 
 	header("Location: successModel.php");
 } else
-	header("Location: modelAlreadyExists.php?model='$model'");
+	header("Location: modelAlreadyExists.php?" . $dbModelArray["MODEL"] . "='$model'");

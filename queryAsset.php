@@ -33,13 +33,13 @@ if (isset($sort) and $sort == "desc") {
 }
 
 if ($send != 1) {
-	$queryActive = mysqli_query($connection, "select * from (select * from asset order by $orderBy $sort) T where discarded = 0") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
-	$queryDiscarded = mysqli_query($connection, "select * from (select * from asset order by $orderBy $sort) T where discarded = 1") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+	$queryActive = mysqli_query($connection, "select * from (select * from " . $dbAssetArray["ASSET_TABLE"] . " order by $orderBy $sort) T where " . $dbAssetArray["DISCARDED"] . " = 0") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+	$queryDiscarded = mysqli_query($connection, "select * from (select * from " . $dbAssetArray["ASSET_TABLE"] . " order by $orderBy $sort) T where " . $dbAssetArray["DISCARDED"] . " = 1") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
 } else {
-	$querySearch = mysqli_query($connection, "select * from asset where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$querySearch = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	$totalSearch = mysqli_num_rows($querySearch);
 }
 
@@ -55,33 +55,33 @@ if ($send != 1) {
 			<tr>
 				<td align=center>
 					<select id=filterAsset name=rdCriterion>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "asset") echo "selected='selected'"; ?>value="assetNumber"><?php echo $translations["ASSETS_ACTIVE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "discarded") echo "selected='selected'"; ?>value="discarded"><?php echo $translations["ASSETS_DISCARDED"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "sealNumber") echo "selected='selected'"; ?>value="sealNumber"><?php echo $translations["SEAL_NUMBER"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "roomNumber") echo "selected='selected'"; ?>value="roomNumber"><?php echo $translations["ASSET_ROOM"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "building") echo "selected='selected'"; ?>value="building"><?php echo $translations["BUILDING"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "adRegistered") echo "selected='selected'"; ?>value="adRegistered"><?php echo $translations["AD_REGISTERED"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "standard") echo "selected='selected'"; ?>value="standard"><?php echo $translations["STANDARD"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "serviceDate") echo "selected='selected'"; ?>value="serviceDate"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "brand") echo "selected='selected'"; ?>value="brand"><?php echo $translations["BRAND"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "model") echo "selected='selected'"; ?>value="model"><?php echo $translations["MODEL"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "serialNumber") echo "selected='selected'"; ?>value="serialNumber"><?php echo $translations["SERIAL_NUMBER"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "processor") echo "selected='selected'"; ?>value="processor"><?php echo $translations["PROCESSOR"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="ram"><?php echo $translations["RAM"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "storageSize") echo "selected='selected'"; ?>value="storageSize"><?php echo $translations["STORAGE_SIZE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "operatingSystem") echo "selected='selected'"; ?>value="operatingSystem"><?php echo $translations["OPERATING_SYSTEM"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "hostname") echo "selected='selected'"; ?>value="hostname"><?php echo $translations["HOSTNAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "macAddress") echo "selected='selected'"; ?>value="macAddress"><?php echo $translations["MAC_ADDRESS"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ipAddress") echo "selected='selected'"; ?>value="ipAddress"><?php echo $translations["IP_ADDRESS"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "model") echo "selected='selected'"; ?>value="model"><?php echo $translations["FW_VERSION"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "type") echo "selected='selected'"; ?>value="hwType"><?php echo $translations["HW_TYPE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "typeFW") echo "selected='selected'"; ?>value="fwType"><?php echo $translations["FW_TYPE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "storageType") echo "selected='selected'"; ?>value="storageType"><?php echo $translations["STORAGE_TYPE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "gpu") echo "selected='selected'"; ?>value="videoCard"><?php echo $translations["VIDEO_CARD"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="mediaOperationMode"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "secBoot") echo "selected='selected'"; ?>value="secureBoot"><?php echo $translations["SECURE_BOOT"]["NAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "vt") echo "selected='selected'"; ?>value="virtualizationTechnology"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "tpm") echo "selected='selected'"; ?>value="tpmVersion"><?php echo $translations["TPM_VERSION"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["ASSET_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["ASSET_NUMBER"] ?>"><?php echo $translations["ASSET_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["DISCARDED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["DISCARDED"] ?>"><?php echo $translations["ASSETS_DISCARDED"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SEAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SEAL_NUMBER"] ?>"><?php echo $translations["SEAL_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["ROOM_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["ROOM_NUMBER"] ?>"><?php echo $translations["ASSET_ROOM"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["BUILDING"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["BUILDING"] ?>"><?php echo $translations["BUILDING"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["AD_REGISTERED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["AD_REGISTERED"] ?>"><?php echo $translations["AD_REGISTERED"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STANDARD"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STANDARD"] ?>"><?php echo $translations["STANDARD"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["BRAND"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["BRAND"] ?>"><?php echo $translations["BRAND"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["MODEL"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["MODEL"] ?>"><?php echo $translations["MODEL"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SERIAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SERIAL_NUMBER"] ?>"><?php echo $translations["SERIAL_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["PROCESSOR"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["PROCESSOR"] ?>"><?php echo $translations["PROCESSOR"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["RAM"] ?>"><?php echo $translations["RAM"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STORAGE_SIZE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STORAGE_SIZE"] ?>"><?php echo $translations["STORAGE_SIZE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["OPERATING_SYSTEM"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["OPERATING_SYSTEM"] ?>"><?php echo $translations["OPERATING_SYSTEM"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["HOSTNAME"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["HOSTNAME"] ?>"><?php echo $translations["HOSTNAME"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["MAC_ADDRESS"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["MAC_ADDRESS"] ?>"><?php echo $translations["MAC_ADDRESS"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["IP_ADDRESS"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["IP_ADDRESS"] ?>"><?php echo $translations["IP_ADDRESS"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["FW_VERSION"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["FW_VERSION"] ?>"><?php echo $translations["FW_VERSION"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["HW_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["HW_TYPE"] ?>"><?php echo $translations["HW_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["FW_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["FW_TYPE"] ?>"><?php echo $translations["FW_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STORAGE_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STORAGE_TYPE"] ?>"><?php echo $translations["STORAGE_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["VIDEO_CARD"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["VIDEO_CARD"] ?>"><?php echo $translations["VIDEO_CARD"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["MEDIA_OPERATION_MODE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["MEDIA_OPERATION_MODE"] ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SECURE_BOOT"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SECURE_BOOT"] ?>"><?php echo $translations["SECURE_BOOT"]["NAME"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] ?>"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["TPM_VERSION"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["TPM_VERSION"] ?>"><?php echo $translations["TPM_VERSION"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
@@ -99,7 +99,7 @@ if ($send != 1) {
 	<?php
 	if (!isset($totalSearch)) {
 	?>
-		<h3><?php echo $translations["ASSETS_ACTIVE"] ?> (<?php echo $totalActive; ?>)</h3>
+		<h3><?php echo $translations["ASSET_NUMBER"] ?> (<?php echo $totalActive; ?>)</h3>
 		<h3><?php echo $translations["ASSETS_DISCARDED"] ?> (<?php echo $totalDiscarded; ?>)</h3><br>
 	<?php
 	} else {
@@ -116,51 +116,51 @@ if ($send != 1) {
 				if (isset($_SESSION["privilegeLevel"])) {
 					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
-						<td><img src="img/trash.png" width="22" height="29"></td>
+						<td><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td><a href="?orderBy=assetNumber&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<td><a href="?orderBy=building&sort=<?php echo $sort; ?>"><?php echo $translations["BUILDING"] ?></a></td>
+					<td><a href="?orderBy=<?php $dbAssetArray["BUILDING"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BUILDING"] ?></a></td>
 				<?php
 				}
 				?>
-				<td><a href="?orderBy=roomNumber&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbAssetArray["ROOM_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<td><a href="?orderBy=standard&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></td>
-					<td><a href="?orderBy=brand&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></td>
+					<td><a href="?orderBy=<?php $dbAssetArray["STANDARD"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></td>
+					<td><a href="?orderBy=<?php $dbAssetArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></td>
 				<?php
 				}
 				?>
-				<td><a href="?orderBy=model&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbAssetArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<td><a href="?orderBy=ipAddress&sort=<?php echo $sort; ?>"><?php echo $translations["IP_ADDRESS"] ?></a></td>
+					<td><a href="?orderBy=<?php $dbAssetArray["IP_ADDRESS"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["IP_ADDRESS"] ?></a></td>
 				<?php
 				}
 				?>
-				<td><a href="?orderBy=serviceDate&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbAssetArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></td>
 			</tr>
 			<?php
 			while ($result = mysqli_fetch_array($queryActive)) {
 				$idAsset = $result["id"];
-				$assetNumber = $result["assetNumber"];
-				$discarded = $result["discarded"];
-				$building = $result["building"];
-				$roomNumber = $result["roomNumber"];
-				$standard = $result["standard"];
-				$brand = $result["brand"];
-				$model = $result["model"];
-				$inUse = $result["inUse"];
-				$formatacao = $result["serviceDate"];
-				$ipAddress = $result["ipAddress"];
+				$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
+				$discarded = $result[$dbAssetArray["DISCARDED"]];
+				$building = $result[$dbAssetArray["BUILDING"]];
+				$roomNumber = $result[$dbAssetArray["ROOM_NUMBER"]];
+				$standard = $result[$dbAssetArray["STANDARD"]];
+				$brand = $result[$dbAssetArray["BRAND"]];
+				$model = $result[$dbAssetArray["MODEL"]];
+				$inUse = $result[$dbAssetArray["IN_USE"]];
+				$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
+				$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 
 				$inUseOk = substr($inUse, 0, 1);
 
@@ -220,16 +220,16 @@ if ($send != 1) {
 			if (!isset($totalSearch)) {
 				while ($result = mysqli_fetch_array($queryDiscarded)) {
 					$idAsset = $result["id"];
-					$assetNumber = $result["assetNumber"];
-					$discarded = $result["discarded"];
-					$building = $result["building"];
-					$roomNumber = $result["roomNumber"];
-					$standard = $result["standard"];
-					$brand = $result["brand"];
-					$model = $result["model"];
-					$inUse = $result["inUse"];
-					$formatacao = $result["serviceDate"];
-					$ipAddress = $result["ipAddress"];
+					$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
+					$discarded = $result[$dbAssetArray["DISCARDED"]];
+					$building = $result[$dbAssetArray["BUILDING"]];
+					$roomNumber = $result[$dbAssetArray["ROOM_NUMBER"]];
+					$standard = $result[$dbAssetArray["STANDARD"]];
+					$brand = $result[$dbAssetArray["BRAND"]];
+					$model = $result[$dbAssetArray["MODEL"]];
+					$inUse = $result[$dbAssetArray["IN_USE"]];
+					$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
+					$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 
 					$inUseOk = substr($inUse, 0, 1);
 

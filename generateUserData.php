@@ -25,10 +25,10 @@ if (file_exists($usersFile) || file_exists($usersChecksum)) {
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["id"] = $row["id"];
-	$row_array["username"] = $row["username"];
-	$row_array["password"] = $row["password"];
-	$row_array["privilegeLevel"] = $row["privilegeLevel"];
-	$row_array["lastLoginDate"] = $row["lastLoginDate"];
+	$row_array["username"] = $row[$dbAgentArray["USERNAME"]];
+	$row_array["password"] = $row[$dbAgentArray["PASSWORD"]];
+	$row_array["privilegeLevel"] = $row[$dbAgentArray["PRIVILEGE_LEVEL"]];
+	$row_array["lastLoginDate"] = $row[$dbAgentArray["LAST_LOGIN_DATE"]];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($usersFile, "w");

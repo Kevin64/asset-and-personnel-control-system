@@ -45,10 +45,10 @@ $totalEmployees = mysqli_num_rows($query);
 			<tr>
 				<td align=center>
 					<select id=filterEmployee name=rdCriterion>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeRegistrationNumber") echo "selected='selected'"; ?>value="employeeRegistrationNumber"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "sector") echo "selected='selected'"; ?>value="sector"><?php echo $translations["EMPLOYEE_SECTOR"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "name") echo "selected='selected'"; ?>value="name"><?php echo $translations["EMPLOYEE_NAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "employeeType") echo "selected='selected'"; ?>value="employeeType"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] ?>"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbEmployeeArray["SECTOR"]) echo "selected='selected'"; ?>value="<?php echo $dbEmployeeArray["SECTOR"] ?>"><?php echo $translations["EMPLOYEE_SECTOR"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbEmployeeArray["NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbEmployeeArray["NAME"] ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbEmployeeArray["EMPLOYEE_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbEmployeeArray["EMPLOYEE_TYPE"] ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></option>
 					</select>
 					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
@@ -71,18 +71,18 @@ $totalEmployees = mysqli_num_rows($query);
 				if (isset($_SESSION["privilegeLevel"])) {
 					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
-						<td><img src="img/trash.png" width="22" height="29"></td>
+						<td><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></td>
 				<?php
 					}
 				}
 				?>
-				<td><a href="?orderBy=employeeRegistrationNumber&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></a></td>
-				<td><a href="?orderBy=name&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></a></td>
-				<td><a href="?orderBy=sector&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_SECTOR"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbEmployeeArray["NAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></a></td>
+				<td><a href="?orderBy=<?php $dbEmployeeArray["SECTOR"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_SECTOR"] ?></a></td>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<td><a href="?orderBy=employeeType&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></a></td>
+					<td><a href="?orderBy=<?php $dbEmployeeArray["EMPLOYEE_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></a></td>
 				<?php
 				}
 				?>
@@ -90,10 +90,10 @@ $totalEmployees = mysqli_num_rows($query);
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idEmployee = $result["id"];
-				$employeeRegistrationNumber = $result["employeeRegistrationNumber"];
-				$name = $result["name"];
-				$sector = $result["sector"];
-				$employeeType = $result["employeeType"];
+				$employeeRegistrationNumber = $result[$dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"]];
+				$name = $result[$dbEmployeeArray["NAME"]];
+				$sector = $result[$dbEmployeeArray["SECTOR"]];
+				$employeeType = $result[$dbEmployeeArray["EMPLOYEE_TYPE"]];
 			?>
 				<tr id="data">
 					<?php

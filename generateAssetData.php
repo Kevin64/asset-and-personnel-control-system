@@ -38,17 +38,17 @@ if (file_exists($assetFile) || file_exists($assetChecksum)) {
 }
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-	$row_array["assetNumber"] = $row["assetNumber"];
-	$row_array["building"] = $row["building"];
-	$row_array["roomNumber"] = $row["roomNumber"];
-	$row_array["standard"] = $row["standard"];
-	$row_array["adRegistered"] = $row["adRegistered"];
-	$row_array["inUse"] = $row["inUse"];
-	$row_array["sealNumber"] = $row["sealNumber"];
-	$row_array["tag"] = $row["tag"];
-	$row_array["hwType"] = $row["hwType"];
-	$row_array["discarded"] = $row["discarded"];
-	$row_array["serviceDate"] = $row["serviceDate"];
+	$row_array["assetNumber"] = $row[$dbAssetArray["ASSET_NUMBER"]];
+	$row_array["building"] = $row[$dbAssetArray["BUILDING"]];
+	$row_array["roomNumber"] = $row[$dbAssetArray["ROOM_NUMBER"]];
+	$row_array["standard"] = $row[$dbAssetArray["STANDARD"]];
+	$row_array["adRegistered"] = $row[$dbAssetArray["AD_REGISTERED"]];
+	$row_array["inUse"] = $row[$dbAssetArray["IN_USE"]];
+	$row_array["sealNumber"] = $row[$dbAssetArray["SEAL_NUMBER"]];
+	$row_array["tag"] = $row[$dbAssetArray["TAG"]];
+	$row_array["hwType"] = $row[$dbAssetArray["HW_TYPE"]];
+	$row_array["discarded"] = $row[$dbAssetArray["DISCARDED"]];
+	$row_array["serviceDate"] = $row[$dbAssetArray["SERVICE_DATE"]];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($assetFile, "w");

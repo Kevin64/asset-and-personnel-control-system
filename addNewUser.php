@@ -28,14 +28,14 @@ if ($total > 0) {
 	?>
 		<div id="middle">
 			<h2><?php echo $translations["SUCCESS_ADD_USER"] ?></h2><br><br>
-			<a href=formAddUser.php>[<?php echo $translations["ADD_ANOTHER"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=queryUser.php>[<?php echo $translations["USER_LIST"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=index.php>[<?php echo $translations["BACK_TO_HOME"] ?>]</a>
+			<a href=formAddUser.php>[<?php echo $translations["ADD_ANOTHER"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=queryUser.php>[<?php echo $translations["SEE_USER_LIST"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=index.php>[<?php echo $translations["BACK_TO_HOME"] ?>]</a>
 		</div>
 	<?php
 	} else {
 	?>
 		<div id="middle">
 			<h2><?php echo $translations["ERROR_PASSWORD_BLANK"] ?></h2><br><br>
-			<a href=queryUser.php>[<?php echo $translations["USER_LIST"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=index.php>[<?php echo $translations["BACK_TO_HOME"] ?>]</a>
+			<a href=queryUser.php>[<?php echo $translations["SEE_USER_LIST"] ?>]</a> &nbsp;&nbsp;&nbsp; <a href=index.php>[<?php echo $translations["BACK_TO_HOME"] ?>]</a>
 		</div>
 <?php
 	}

@@ -88,7 +88,7 @@ if ($send != 1) {
 		mysqli_stmt_execute($q);
 	}
 	$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
-	$queryFormatAnt = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTEY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["ASSET_NUMBER_FK"] . "") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+	$queryFormatAnt = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["ASSET_NUMBER_FK"] . "") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 }
 ?>
 <div id="middle" <?php if (isset($_SESSION["privilegeLevel"])) {
@@ -112,40 +112,40 @@ if ($send != 1) {
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idAsset = $result["id"];
-				$assetNumber = $result["assetNumber"];
-				$oldAssetNumber = $result["assetNumber"];
-				$discarded = $result["discarded"];
-				$building = $result["building"];
-				$roomNumber = $result["roomNumber"];
-				$deliveredToRegistrationNumber = $result["deliveredToRegistrationNumber"];
-				$lastDeliveryDate = $result["lastDeliveryDate"];
-				$lastDeliveryMadeBy = $result["lastDeliveryMadeBy"];
-				$note = $result["note"];
-				$serviceDate = $result["serviceDate"];
-				$standard = $result["standard"];
-				$adRegistered = $result["adRegistered"];
-				$brand = $result["brand"];
-				$model = $result["model"];
-				$serialNumber = $result["serialNumber"];
-				$processor = $result["processor"];
-				$ram = $result["ram"];
-				$storageSize = $result["storageSize"];
-				$operatingSystem = $result["operatingSystem"];
-				$hostname = $result["hostname"];
-				$inUse = $result["inUse"];
-				$sealNumber = $result["sealNumber"];
-				$tag = $result["tag"];
-				$hwType = $result["hwType"];
-				$macAddress = $result["macAddress"];
-				$ipAddress = $result["ipAddress"];
-				$fwVersion = $result["fwVersion"];
-				$fwType = $result["fwType"];
-				$storageType = $result["storageType"];
-				$videoCard = $result["videoCard"];
-				$mediaOperationMode = $result["mediaOperationMode"];
-				$secureBoot = $result["secureBoot"];
-				$virtualizationTechnology = $result["virtualizationTechnology"];
-				$tpmVersion = $result["tpmVersion"];
+				$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
+				$oldAssetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
+				$discarded = $result[$dbAssetArray["DISCARDED"]];
+				$building = $result[$dbAssetArray["BUILDING"]];
+				$roomNumber = $result[$dbAssetArray["ROOM_NUMBER"]];
+				$deliveredToRegistrationNumber = $result[$dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
+				$lastDeliveryDate = $result[$dbAssetArray["LAST_DELIVERY_DATE"]];
+				$lastDeliveryMadeBy = $result[$dbAssetArray["LAST_DELIVERY_MADE_BY"]];
+				$note = $result[$dbAssetArray["NOTE"]];
+				$serviceDate = $result[$dbAssetArray["SERVICE_DATE"]];
+				$standard = $result[$dbAssetArray["STANDARD"]];
+				$adRegistered = $result[$dbAssetArray["AD_REGISTERED"]];
+				$brand = $result[$dbAssetArray["BRAND"]];
+				$model = $result[$dbAssetArray["MODEL"]];
+				$serialNumber = $result[$dbAssetArray["SERIAL_NUMBER"]];
+				$processor = $result[$dbAssetArray["PROCESSOR"]];
+				$ram = $result[$dbAssetArray["RAM"]];
+				$storageSize = $result[$dbAssetArray["STORAGE_SIZE"]];
+				$operatingSystem = $result[$dbAssetArray["OPERATING_SYSTEM"]];
+				$hostname = $result[$dbAssetArray["HOSTNAME"]];
+				$inUse = $result[$dbAssetArray["IN_USE"]];
+				$sealNumber = $result[$dbAssetArray["SEAL_NUMBER"]];
+				$tag = $result[$dbAssetArray["TAG"]];
+				$hwType = $result[$dbAssetArray["HW_TYPE"]];
+				$macAddress = $result[$dbAssetArray["MAC_ADDRESS"]];
+				$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
+				$fwVersion = $result[$dbAssetArray["FW_VERSION"]];
+				$fwType = $result[$dbAssetArray["FW_TYPE"]];
+				$storageType = $result[$dbAssetArray["STORAGE_TYPE"]];
+				$videoCard = $result[$dbAssetArray["VIDEO_CARD"]];
+				$mediaOperationMode = $result[$dbAssetArray["MEDIA_OPERATION_MODE"]];
+				$secureBoot = $result[$dbAssetArray["SECURE_BOOT"]];
+				$virtualizationTechnology = $result[$dbAssetArray["VIRTUALIZATION_TECHNOLOGY"]];
+				$tpmVersion = $result[$dbAssetArray["TPM_VERSION"]];
 			?>
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {

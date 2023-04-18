@@ -45,23 +45,23 @@ if (isset($_SESSION["privilegeLevel"])) {
 				</form>
 			</table>
 			<br><br>
-			<h2>Lista de usuários (<?php echo $totalusers; ?>)
+			<h2><?php echo $translations["USER_LIST"] ?> (<?php echo $totalusers; ?>)
 			</h2><br>
 			<table id="userData" cellspacing=0>
 				<form action="eraseSelectedUser.php" method="post">
 					<tr id="header_">
-						<td><img src="img/trash.png" width="22" height="29"></td>
-						<td><a href="?orderBy=username&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
+						<td><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></td>
+						<td><a href="?orderBy=<?php $dbAgentsArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
 						</td>
-						<td><a href="?orderBy=privilegeLevel&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></td>
-						<td><a href="?orderBy=lastLoginDate&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></td>
+						<td><a href="?orderBy=<?php $dbAgentsArray["PRIVILEGE_LEVEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></td>
+						<td><a href="?orderBy=<?php $dbAgentsArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></td>
 					</tr>
 					<?php
 					while ($result = mysqli_fetch_array($query)) {
 						$idUser = $result["id"];
-						$username = $result["username"];
-						$privilegeLevel = $result["privilegeLevel"];
-						$lastLoginDate = $result["lastLoginDate"];
+						$username = $result[$dbAgentsArray["USERNAME"]];
+						$privilegeLevel = $result[$dbAgentsArray["PRIVILEGE_LEVEL"]];
+						$lastLoginDate = $result[$dbAgentsArray["LAST_LOGIN_DATE"]];
 					?>
 						<tr id="data">
 							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> disabled <?php } ?>>

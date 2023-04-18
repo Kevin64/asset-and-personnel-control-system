@@ -1,5 +1,9 @@
 {
     "COPYRIGHT": "Copyright © 2023 Kevin Vinícius Teixeira Costa",
+    "IMG": {
+        "FAVICON": "img/favicon.png",
+        "TRASH": "img/trash.png"
+    },
     "DB_ASSET": {
         "ASSET_TABLE": "asset",
         "ASSET_NUMBER": "assetNumber",
@@ -8,6 +12,7 @@
         "ROOM_NUMBER": "roomNumber",
         "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
         "LAST_DELIVERY_DATE": "lastDeliveryDate",
+        "LAST_DELIVERY_MADE_BY": "lastDeliveryMadeBy",
         "STANDARD": "standard",
         "NOTE": "note",
         "SERVICE_DATE": "serviceDate",

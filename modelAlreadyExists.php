@@ -3,7 +3,7 @@ require_once("checkSession.php");
 require_once("top.php");
 require_once("connection.php");
 
-$model = $_GET["model"];
+$model = $_GET[$dbModelArray["MODEL"]];
 ?>
 
 <div id="middle">

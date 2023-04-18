@@ -1,7 +1,6 @@
 <?php
 require_once("connection.php");
 ?>
-<script type="text/javascript" src="js/theme-switcher.js"></script>
 <div id="menu">
 	<nav>
 		<ul>

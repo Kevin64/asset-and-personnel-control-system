@@ -1,10 +1,10 @@
 <?php
 require_once("connection.php");
 
-$assetNumber = $_GET["assetNumber"];
-$lastDeliveryDate = $_GET["lastDeliveryDate"];
-$deliveredToRegistrationNumber = $_GET["deliveredToRegistrationNumber"];
-$lastDeliveryMadeBy = $_GET["lastDeliveryMadeBy"];
+$assetNumber = $_GET[$dbAssetArray["ASSET_NUMBER"]];
+$lastDeliveryDate = $_GET[$dbAssetArray["LAST_DELIVERY_DATE"]];
+$deliveredToRegistrationNumber = $_GET[$dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
+$lastDeliveryMadeBy = $_GET[$dbAssetArray["LAST_DELIVERY_MADE_BY"]];
 
 $delivDate = substr($lastDeliveryDate, 0, 10);
 $explodedDate = explode("/", $delivDate);

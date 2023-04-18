@@ -54,10 +54,10 @@ if ($send != 1) {
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idUser = $result["id"];
-				$username = $result["username"];
-				$oldUsername = $result["username"];
-				$privilegeLevel = $result["privilegeLevel"];
-				$lastLoginDate = $result["lastLoginDate"];
+				$username = $result[$dbAgentsArray["USERNAME"]];
+				$oldUsername = $result[$dbAgentsArray["USERNAME"]];
+				$privilegeLevel = $result[$dbAgentsArray["PRIVILEGE_LEVEL"]];
+				$lastLoginDate = $result[$dbAgentsArray["LAST_LOGIN_DATE"]];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["USER_DATA"] ?></td>

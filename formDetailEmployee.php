@@ -68,15 +68,15 @@ if ($send != 1) {
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idEmployee = $result["id"];
-				$employeeRegistrationNumber = $result["employeeRegistrationNumber"];
-				$oldEmployeeRegistrationNumber = $result["employeeRegistrationNumber"];
-				$employeeType = $result["employeeType"];
-				$employeeName = $result["name"];
-				$employeeEmail = $result["email"];
-				$employeePhoneExtension = $result["phoneExtension"];
-				$employeePhoneNumber = $result["phoneNumber"];
-				$employeeSector = $result["sector"];
-				$employeeRoom = $result["roomNumber"];
+				$employeeRegistrationNumber = $result[$dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"]];
+				$oldEmployeeRegistrationNumber = $result[$dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"]];
+				$employeeType = $result[$dbEmployeeArray["EMPLOYEE_TYPE"]];
+				$employeeName = $result[$dbEmployeeArray["NAME"]];
+				$employeeEmail = $result[$dbEmployeeArray["EMAIL"]];
+				$employeePhoneExtension = $result[$dbEmployeeArray["PHONE_EXTENSION"]];
+				$employeePhoneNumber = $result[$dbEmployeeArray["PHONE_NUMBER"]];
+				$employeeSector = $result[$dbEmployeeArray["SECTOR"]];
+				$employeeRoom = $result[$dbEmployeeArray["ROOM_NUMBER"]];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["EMPLOYEE_DATA"] ?></td>

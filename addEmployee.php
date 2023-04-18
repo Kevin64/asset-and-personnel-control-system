@@ -19,4 +19,4 @@ if ($totalEmployee == 0) {
 
 	header("Location: successEmployee.php");
 } else
-	header("Location: employeeAlreadyExists.php?employeeRegistrationNumber='$employeeRegistrationNumber'");
+	header("Location: employeeAlreadyExists.php?" . $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] . "='$employeeRegistrationNumber'");
