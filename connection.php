@@ -8,26 +8,29 @@ $lang_file_content = file_get_contents(__DIR__ . $lang_file);
 $translations = json_decode($lang_file_content, true);
 
 $jsonFileDb = file_get_contents(__DIR__ . "/etc/db-config.json");
-$jsonFile = file_get_contents(__DIR__ . "/etc/config.json");
+$jsonFileParameters = file_get_contents(__DIR__ . "/etc/parameters.json");
+$jsonFileConstants = file_get_contents(__DIR__ . "/etc/constants.json");
 $json_config_array_db = json_decode($jsonFileDb, true);
-$json_config_array = json_decode($jsonFile, true);
+$json_parameters_array = json_decode($jsonFileParameters, true);
+$json_constants_array = json_decode($jsonFileConstants, true);
 
 $timezone = gatherJsonTypes($json_config_array_db, "Locale", null);
 date_default_timezone_set($timezone);
 
-$buildingArray = gatherJsonTypes($json_config_array, "Definitions", "Buildings");
-$hwTypesArray = gatherJsonTypes($json_config_array, "Definitions", "HardwareTypes");
-$fwTypesArray = gatherJsonTypes($json_config_array, "Definitions", "FirmwareTypes");
-$tpmTypesArray = gatherJsonTypes($json_config_array, "Definitions", "TpmTypes");
-$mediaOpTypesArray = gatherJsonTypes($json_config_array, "Definitions", "MediaOperationTypes");
-$secureBootArray = gatherJsonTypes($json_config_array, "Definitions", "SecureBootStates");
-$virtualizationTechnologyArray = gatherJsonTypes($json_config_array, "Definitions", "VirtualizationTechnologyStates");
-$serviceTypesArray = gatherJsonTypes($json_config_array, "Definitions", "ServiceTypes");
+$buildingArray = gatherJsonTypes($json_parameters_array, "Definitions", "Buildings");
+$hwTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "HardwareTypes");
+$fwTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "FirmwareTypes");
+$tpmTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "TpmTypes");
+$mediaOpTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "MediaOperationTypes");
+$secureBootArray = gatherJsonTypes($json_parameters_array, "Definitions", "SecureBootStates");
+$virtualizationTechnologyArray = gatherJsonTypes($json_parameters_array, "Definitions", "VirtualizationTechnologyStates");
+$serviceTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "ServiceTypes");
 $orgDataArray = gatherJsonTypes($json_config_array_db, "OrgData", null);
 $dbSettingsArray = gatherJsonTypes($json_config_array_db, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array_db, "PrivilegeLevels", null);
 $entityTypesArray = gatherJsonTypes($json_config_array_db, "EntityTypes", null);
 $employeeTypesArray = gatherJsonTypes($json_config_array_db, "EmployeeTypes", null);
+$queriesArray = gatherJsonTypes($json_constants_array, "QUERIES", null);
 
 $orgFullName = $orgDataArray["OrganizationFullName"];
 $orgAcronym = $orgDataArray["OrganizationAcronym"];

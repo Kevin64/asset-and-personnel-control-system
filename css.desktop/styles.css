@@ -125,3 +125,7 @@ table {
 .readonly {
 	pointer-events: none;
 }
+
+#linksameline {
+    display: inline;
+}
