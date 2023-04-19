@@ -6,7 +6,9 @@
     },
     "COLOR": {
         "IN_USE": "green",
-        "NOT_IN_USE": "red"
+        "NOT_IN_USE": "red",
+        "MISSING_DATA_BACKGROUND": "firebrick",
+        "MISSING_DATA_FOREGROUND": "white"
     },
     "DB_ASSET": {
         "ASSET_TABLE": "asset",

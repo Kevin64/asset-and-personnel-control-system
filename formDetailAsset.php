@@ -22,7 +22,6 @@ if ($send != 1) {
 
 	$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 	$queryFormatAnt = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
-
 } else {
 	$idAsset = $_POST["txtIdAsset"];
 	$assetNumber = $_POST["txtAssetNumber"];
@@ -70,7 +69,7 @@ if ($send != 1) {
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		
+
 		$q = mysqli_prepare($connection, "update " . $dbAssetArray["ASSET_TABLE"] . " set " . $dbAssetArray["ASSET_NUMBER"] . " = ?, " . $dbAssetArray["DISCARDED"] . " = ?, " . $dbAssetArray["BUILDING"] . " = ?, " . $dbAssetArray["ROOM_NUMBER"] . " = ?, " . $dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"] . " = ?, " . $dbAssetArray["LAST_DELIVERY_DATE"] . " = ?, " . $dbAssetArray["STANDARD"] . " = ?, " . $dbAssetArray["NOTE"] . " = ?, " . $dbAssetArray["SERVICE_DATE"] . " = ?, " . $dbAssetArray["AD_REGISTERED"] . " = ?, " . $dbAssetArray["BRAND"] . " = ?, " . $dbAssetArray["MODEL"] . " = ?, " . $dbAssetArray["SERIAL_NUMBER"] . " = ?, " . $dbAssetArray["PROCESSOR"] . " = ?, " . $dbAssetArray["RAM"] . " = ?, " . $dbAssetArray["STORAGE_SIZE"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"] . " = ?, " . $dbAssetArray["HOSTNAME"] . " = ?, " . $dbAssetArray["FW_VERSION"] . " = ?, " . $dbAssetArray["IN_USE"] . " = ?, " . $dbAssetArray["SEAL_NUMBER"] . " = ?, " . $dbAssetArray["TAG"] . " = ?, " . $dbAssetArray["HW_TYPE"] . " = ?, " . $dbAssetArray["FW_TYPE"] . " = ?, " . $dbAssetArray["STORAGE_TYPE"] . " = ?, " . $dbAssetArray["MAC_ADDRESS"] . " = ?, " . $dbAssetArray["IP_ADDRESS"] . " = ?, " . $dbAssetArray["VIDEO_CARD"] . " = ?, " . $dbAssetArray["MEDIA_OPERATION_MODE"] . " = ?, " . $dbAssetArray["SECURE_BOOT"] . " = ?, " . $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] . " = ?, " . $dbAssetArray["TPM_VERSION"] . " = ? where id = ?");
 
 		mysqli_stmt_bind_param($q, "iisssssssisssssssssisissssssssssi", $assetNumber, $discarded, $building, $roomNumber, $deliveredToRegistrationNumber, $lastDeliveryDate, $standard, $note, $serviceDate, $adRegistered, $brand, $model, $serialNumber, $processor, $ram, $storageSize, $operatingSystem, $hostname, $fwVersion, $inUse, $sealNumber, $tag, $hwType, $fwType, $storageType, $macAddress, $ipAddress, $videoCard, $mediaOperationMode, $secureBoot, $virtualizationTechnology, $tpmVersion, $idAsset);
@@ -78,9 +77,8 @@ if ($send != 1) {
 		mysqli_stmt_execute($q);
 
 		mysqli_query($connection, "update " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " set " . $dbMaintenancesArray["ASSET_NUMBER_FK"] . " = '$assetNumber' where " . $dbMaintenancesArray["ASSET_NUMBER_FK"] . " = '$oldAssetNumber'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
-
 	} else if ($num_rows == 1 && $assetNumber == $oldAssetNumber) {
-		
+
 		$q = mysqli_prepare($connection, "update " . $dbAssetArray["ASSET_TABLE"] . " set " . $dbAssetArray["DISCARDED"] . " = ?, " . $dbAssetArray["BUILDING"] . " = ?, " . $dbAssetArray["ROOM_NUMBER"] . " = ?, " . $dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"] . " = ?, " . $dbAssetArray["LAST_DELIVERY_DATE"] . " = ?, " . $dbAssetArray["STANDARD"] . " = ?, " . $dbAssetArray["NOTE"] . " = ?, " . $dbAssetArray["SERVICE_DATE"] . " = ?, " . $dbAssetArray["AD_REGISTERED"] . " = ?, " . $dbAssetArray["BRAND"] . " = ?, " . $dbAssetArray["MODEL"] . " = ?, " . $dbAssetArray["SERIAL_NUMBER"] . " = ?, " . $dbAssetArray["PROCESSOR"] . " = ?, " . $dbAssetArray["RAM"] . " = ?, " . $dbAssetArray["STORAGE_SIZE"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"] . " = ?, " . $dbAssetArray["HOSTNAME"] . " = ?, " . $dbAssetArray["FW_VERSION"] . " = ?, " . $dbAssetArray["IN_USE"] . " = ?, " . $dbAssetArray["SEAL_NUMBER"] . " = ?, " . $dbAssetArray["TAG"] . " = ?, " . $dbAssetArray["HW_TYPE"] . " = ?, " . $dbAssetArray["FW_TYPE"] . " = ?, " . $dbAssetArray["STORAGE_TYPE"] . " = ?, " . $dbAssetArray["MAC_ADDRESS"] . " = ?, " . $dbAssetArray["IP_ADDRESS"] . " = ?, " . $dbAssetArray["VIDEO_CARD"] . " = ?, " . $dbAssetArray["MEDIA_OPERATION_MODE"] . " = ?, " . $dbAssetArray["SECURE_BOOT"] . " = ?, " . $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] . " = ?, " . $dbAssetArray["TPM_VERSION"] . " = ? where id = ?") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
 
 		mysqli_stmt_bind_param($q, "isssssssisssssssssisissssssssssi", $discarded, $building, $roomNumber, $deliveredToRegistrationNumber, $lastDeliveryDate, $standard, $note, $serviceDate, $adRegistered, $brand, $model, $serialNumber, $processor, $ram, $storageSize, $operatingSystem, $hostname, $fwVersion, $inUse, $sealNumber, $tag, $hwType, $fwType, $storageType, $macAddress, $ipAddress, $videoCard, $mediaOperationMode, $secureBoot, $virtualizationTechnology, $tpmVersion, $idAsset);
@@ -92,7 +90,8 @@ if ($send != 1) {
 }
 ?>
 <div id="middle" <?php if (isset($_SESSION["privilegeLevel"])) {
-					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["LIMITED_LEVEL"]) { ?> class="readonly" <?php }} ?>>
+						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["LIMITED_LEVEL"]) { ?> class="readonly" <?php }
+																													} ?>>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/disable-controls.js"></script>
 	<form action="formDetailAsset.php" method="post" id="formGeneral">
@@ -177,7 +176,7 @@ if ($send != 1) {
 						<?php echo $translations["BUILDING"] ?><mark id=asterisk>*</mark>
 					</td>
 					<td colspan=5>
-						<select id="formFields" name="txtBuilding" required>
+						<select id="formFields" name="txtBuilding" required <?php if ($building == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<?php
 							foreach ($buildingArray as $str1 => $str2) {
 							?>
@@ -193,7 +192,7 @@ if ($send != 1) {
 					<td id="label">
 						<?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark>
 					</td>
-					<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="Ex.: 4413" maxlength="5" required value="<?php echo $roomNumber; ?>"></td>
+					<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="Ex.: 4413" maxlength="5" required value="<?php echo $roomNumber; ?>" <?php if ($roomNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id="label">
@@ -323,7 +322,7 @@ if ($send != 1) {
 					<?php echo $translations["STANDARD"] ?>
 				</td>
 				<td colspan=5>
-					<select name="txtStandard">
+					<select name="txtStandard" <?php if ($standard == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($entityTypesArray as $str1 => $str2) {
 						?>
@@ -339,7 +338,7 @@ if ($send != 1) {
 			<tr>
 				<td id=label><?php echo $translations["AD_REGISTERED"] ?></td>
 				<td>
-					<select name="txtAdRegistered">
+					<select name="txtAdRegistered" <?php if ($adRegistered == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option value=1 <?php if ($adRegistered == "1")
 											echo "selected"; ?>><?php echo $translations["YES"] ?>
 						</option>
@@ -351,36 +350,36 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["BRAND"] ?></td>
-				<td><input type=text name=txtBrand value="<?php echo $brand; ?>"></td>
+				<td><input type=text name=txtBrand value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["MODEL"] ?></td>
-				<td><input type=text name=txtModel value="<?php echo $model; ?>"></td>
+				<td><input type=text name=txtModel value="<?php echo $model; ?>" <?php if ($model == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["SERIAL_NUMBER"] ?></td>
-				<td><input type=text name=txtSerialNumber value="<?php echo $serialNumber; ?>"></td>
+				<td><input type=text name=txtSerialNumber value="<?php echo $serialNumber; ?>" <?php if ($serialNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["PROCESSOR"] ?></td>
-				<td><input type=text name=txtProcessor value="<?php echo $processor; ?>"></td>
+				<td><input type=text name=txtProcessor value="<?php echo $processor; ?>" <?php if ($processor == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["RAM"] ?></td>
-				<td><input type=text name=txtRam value="<?php echo $ram; ?>"></td>
+				<td><input type=text name=txtRam value="<?php echo $ram; ?>" <?php if ($ram == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["STORAGE_SIZE"] ?></td>
-				<td><input type=text name=txtStorageSize value="<?php echo $storageSize; ?>"></td>
+				<td><input type=text name=txtStorageSize value="<?php echo $storageSize; ?>" <?php if ($storageSize == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["STORAGE_TYPE"] ?></td>
-				<td><input type=text name=txtStorageType value="<?php echo $storageType; ?>"></td>
+				<td><input type=text name=txtStorageType value="<?php echo $storageType; ?>" <?php if ($storageType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
 				<td>
-					<select name="txtMediaOperationMode">
+					<select name="txtMediaOperationMode" <?php if ($mediaOperationMode == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($mediaOpTypesArray as $str1 => $str2) {
 						?>
@@ -394,19 +393,19 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["VIDEO_CARD"] ?></td>
-				<td><input type=text name=txtVideoCard value="<?php echo $videoCard; ?>"></td>
+				<td><input type=text name=txtVideoCard value="<?php echo $videoCard; ?>" <?php if ($videoCard == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["OPERATING_SYSTEM"] ?></td>
-				<td><input type=text name=txtOperatingSystem value="<?php echo $operatingSystem; ?>"></td>
+				<td><input type=text name=txtOperatingSystem value="<?php echo $operatingSystem; ?>" <?php if ($operatingSystem == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["HOSTNAME"] ?></td>
-				<td><input type=text name=txtHostname value="<?php echo $hostname; ?>"></td>
+				<td><input type=text name=txtHostname value="<?php echo $hostname; ?>" <?php if ($hostname == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["FW_TYPE"] ?></td>
-				<td><select name="txtFwType">
+				<td><select name="txtFwType" <?php if ($fwType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($fwTypesArray as $str1 => $str2) {
 						?>
@@ -419,12 +418,12 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["FW_VERSION"] ?></td>
-				<td><input type=text name=txtFwVersion value="<?php echo $fwVersion; ?>"></td>
+				<td><input type=text name=txtFwVersion value="<?php echo $fwVersion; ?>" <?php if ($fwVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["SECURE_BOOT"]["NAME"] ?></td>
 				<td>
-					<select name="txtSecureBoot">
+					<select name="txtSecureBoot" <?php if ($secureBoot == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($secureBootArray as $str) {
 						?>
@@ -439,7 +438,7 @@ if ($send != 1) {
 			<tr>
 				<td id=label><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></td>
 				<td>
-					<select name="txtVirtualizationTechnology">
+					<select name="txtVirtualizationTechnology" <?php if ($virtualizationTechnology == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($virtualizationTechnologyArray as $str) {
 						?>
@@ -455,7 +454,7 @@ if ($send != 1) {
 			<tr>
 				<td id=label><?php echo $translations["TPM_VERSION"] ?></td>
 				<td>
-					<select name="txtTpmVersion">
+					<select name="txtTpmVersion" <?php if ($tpmVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($tpmTypesArray as $str1 => $str2) {
 						?>
@@ -471,18 +470,18 @@ if ($send != 1) {
 				<td id="label">
 					<?php echo $translations["MAC_ADDRESS"] ?>
 				</td>
-				<td><input type="text" name="txtMacAddress" value="<?php echo $macAddress; ?>"></td>
+				<td><input type="text" name="txtMacAddress" value="<?php echo $macAddress; ?>" <?php if ($macAddress == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id="label">
 					<?php echo $translations["IP_ADDRESS"] ?>
 				</td>
-				<td><input type="text" name="txtIpAddress" value="<?php echo $ipAddress ?>" required></td>
+				<td><input type="text" name="txtIpAddress" value="<?php echo $ipAddress ?>" required <?php if ($ipAddress == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=label><?php echo $translations["IN_USE"] ?></td>
 				<td>
-					<select name="txtInUse">
+					<select name="txtInUse" <?php if ($inUse == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option value=1 <?php if ($inUse == "1") echo "selected"; ?>><?php echo $translations["YES"] ?>
 						</option>
 						<option value=0 <?php if ($inUse == "0") echo "selected"; ?>><?php echo $translations["NO"] ?>
@@ -498,7 +497,8 @@ if ($send != 1) {
 			<td id="label">
 				<?php echo $translations["TAG"] ?>
 			</td>
-			<td><select name="txtTag">
+			<td>
+				<select name="txtTag" <?php if ($tag == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 					<option value=1 <?php if ($tag == "1") echo "selected"; ?>><?php echo $translations["YES"] ?></option>
 					<option value=0 <?php if ($tag == "0") echo "selected"; ?>><?php echo $translations["NO"] ?></option>
 				</select>
@@ -508,7 +508,7 @@ if ($send != 1) {
 					<?php echo $translations["HW_TYPE"] ?>
 				</td>
 				<td>
-					<select name="txtHwType">
+					<select name="txtHwType" <?php if ($hwType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<?php
 						foreach ($hwTypesArray as $str1 => $str2) {
 						?>

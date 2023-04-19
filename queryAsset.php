@@ -162,8 +162,6 @@ if ($send != 1) {
 				$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
 				$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 
-				$inUseOk = substr($inUse, 0, 1);
-
 				if ($inUse == "0") {
 					$color = $colorArray["NOT_IN_USE"];
 				} else {

@@ -112,7 +112,7 @@ $totalEmployees = mysqli_num_rows($query);
 					if (!in_array(true, $devices)) {
 						if ($employeeType == null) {
 					?>
-							<td class="unselectable" style="background-color:darkred; color:white">
+							<td class="unselectable" style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>">
 								<?php echo $translations["INCOMPLETE_REGISTRATION_DATA"] ?>
 							</td>
 						<?php
