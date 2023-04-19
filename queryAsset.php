@@ -56,7 +56,7 @@ if ($send != 1) {
 				<td align=center>
 					<select id=filterAsset name=rdCriterion>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["ASSET_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["ASSET_NUMBER"] ?>"><?php echo $translations["ASSET_NUMBER"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["DISCARDED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["DISCARDED"] ?>"><?php echo $translations["ASSETS_DISCARDED"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["DISCARDED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["DISCARDED"] ?>"><?php echo $translations["ASSETS_DISCARDED_STATUS"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SEAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SEAL_NUMBER"] ?>"><?php echo $translations["SEAL_NUMBER"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["ROOM_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["ROOM_NUMBER"] ?>"><?php echo $translations["ASSET_ROOM"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["BUILDING"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["BUILDING"] ?>"><?php echo $translations["BUILDING"] ?></option>
@@ -99,7 +99,7 @@ if ($send != 1) {
 	<?php
 	if (!isset($totalSearch)) {
 	?>
-		<h3><?php echo $translations["ASSET_NUMBER"] ?> (<?php echo $totalActive; ?>)</h3>
+		<h3><?php echo $translations["ASSET_ACTIVE"] ?> (<?php echo $totalActive; ?>)</h3>
 		<h3><?php echo $translations["ASSETS_DISCARDED"] ?> (<?php echo $totalDiscarded; ?>)</h3><br>
 	<?php
 	} else {
@@ -261,7 +261,7 @@ if ($send != 1) {
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $building; ?></label></td>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $buildingArray[$building]; ?></label></td>
 						<?php
 						}
 						?>

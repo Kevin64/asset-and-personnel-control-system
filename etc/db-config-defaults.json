@@ -13,7 +13,7 @@
     "DbSettings": {
         "DbUser": "root",
         "DbPassword": "root",
-        "DbName": "atcsdb",
+        "DbName": "apcsdb",
         "DbIP": "localhost",
         "DbPort": "3306"
     },

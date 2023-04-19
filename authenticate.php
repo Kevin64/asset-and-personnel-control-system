@@ -3,7 +3,7 @@ require_once("connection.php");
 
 $send = $_POST["txtSend"];
 $username = $_POST["txtUser"];
-$queryResult = mysqli_query($connection, "select " . $dbAgentArray["PASSWORD"] . " from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["USER_NOT_EXIST"] . mysqli_error($connection));
+$queryResult = mysqli_query($connection, "select " . $dbAgentsArray["PASSWORD"] . " from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["USER_NOT_EXIST"] . mysqli_error($connection));
 $getPassword = mysqli_fetch_assoc($queryResult);
 $password = $getPassword["password"];
 $verifyPassword = password_verify($_POST["txtPassword"], $password);
@@ -17,8 +17,8 @@ if ($verifyPassword) {
 		session_start();
 		while ($row = mysqli_fetch_assoc($queryAuthenticate)) {
 			$id = $row["id"];
-			$username = $row[$dbAgentArray["USERNAME"]];
-			$privilegeLevel = $row[$dbAgentArray["PRIVILEGE_LEVEL"]];
+			$username = $row[$dbAgentsArray["USERNAME"]];
+			$privilegeLevel = $row[$dbAgentsArray["PRIVILEGE_LEVEL"]];
 		}
 		$_SESSION["id"] = $id;
 		$_SESSION["username"] = $username;
