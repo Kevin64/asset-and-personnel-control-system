@@ -4,6 +4,10 @@
         "FAVICON": "img/favicon.png",
         "TRASH": "img/trash.png"
     },
+    "COLOR": {
+        "IN_USE": "green",
+        "NOT_IN_USE": "red"
+    },
     "DB_ASSET": {
         "ASSET_TABLE": "asset",
         "ASSET_NUMBER": "assetNumber",

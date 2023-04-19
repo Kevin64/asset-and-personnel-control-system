@@ -15,6 +15,7 @@
 	"ASSETS_DISCARDED": "Disposed assets",
 	"ASSETS_DISCARDED_STATUS": "Asset disposed status",
 	"ASSET_DATA": "Asset data",
+	"PERSONNEL": "Personnel",
 	"ASSET_DETAIL": "Asset details",
 	"ASSET_NUMBER": "Asset number",
 	"ASSET_ROOM": "Room",
@@ -23,7 +24,7 @@
 	"ASSET_ACTIVE": "Assets in use",
 	"ASSET_ALREADY_EXIST": "Asset already exists!",
 	"ASTERISK_MARK_MANDATORY": "Fields marked with an asterisk are required!",
-	"APCS": "Asset and Employee Control System",
+	"APCS": "Asset and Personnel Control System",
 	"APCS_EMAIL": "E-mail: ",
 	"APCS_PHONE": "Phone: ",
 	"APCS_VERSION": "Version: ",
@@ -38,14 +39,14 @@
 	"COMPUTER_DATA": "Equipment data",
 	"CURRENT_PASSWORD": "Current password",
 	"DELIVERED_TO_REGISTRATION_NUMBER": "Last delivery recipient registration number",
-	"DEVELOPERS_TEXT": "The APCS system proposes the simplified management of assets and personnel for small organizations. Developed in PHP 8, using MySQL, HTML5, CSS3 and Javascript/jQuery <br> &nbsp;&nbsp; ► Asset and Personnel Control System - APCS<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system>Project URL (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system/blob/main/LICENSE>License (MIT)</a><br><br> This software must be used in conjunction with the AIR project for all its features to work properly.<br> &nbsp;&nbsp; ► Asset Information and Registration - AIR<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-information-and-registration>Project URL (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-information-and-registration/blob/master/LICENSE>License (MIT)</a>",
+	"DEVELOPERS_TEXT": "The APCS system proposes the simplified management of IT assets and personnel for small organizations. Developed in PHP 8, using MySQL, HTML5, CSS3 and Javascript/jQuery. <br> &nbsp;&nbsp; ► Asset and Personnel Control System - APCS<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system>Project URL (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system/blob/main/LICENSE>License (MIT)</a><br><br> This system must be used in conjunction with the AIR software for all its features to work properly.<br> &nbsp;&nbsp; ► Asset Information and Registration - AIR<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-information-and-registration>Project URL (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-information-and-registration/blob/master/LICENSE>License (MIT)</a>",
 	"DISCARDED_ASSET_QUESTION": "Asset sent for disposal?",
 	"DISABLED": "Disabled",
 	"EMPLOYEE": "Employees",
 	"EMPLOYEE_TYPE": {
 		"NAME": "Employee type",
 		"0": "Teacher",
-		"1": "Técnico Administrativo em Educação"
+		"1": "Technical Administrative Worker"
 	},
 	"ENABLED": "Enabled",
 	"ENTITY_TYPES": {
@@ -105,7 +106,7 @@
 	"MODEL_DATA": "Model data",
 	"MODEL_DETAIL": "Model details",
 	"MODEL_LIST": "List of models",
-	"MRBS_TEMPLATE": "Room Reservation Template (Copy and Paste)",
+	"MRBS_TEMPLATE": "MRBS Reservation Template (Copy and Paste)",
 	"NEW_ASSET_REGISTERING_DATA": "Computer successfully registered!",
 	"NEED_FORMATTING_FIRST": "A formatting record is required first!",
 	"NEW_PASSWORD": "New password",
@@ -134,7 +135,7 @@
 	"QUERY_EMPLOYEE": "Query Employees",
 	"QUERY_USERS": "List agents",
 	"RAM": "RAM",
-	"REGISTER": "Register",
+	"LABEL_REGISTER_BUTTON": "Register",
 	"REPEAT_NEW_PASSWORD": "Repeat new password",
 	"RESTRICTED_ACCESS": "Restricted access",
 	"RESULTING_ASSETS": "Resulting assets",
@@ -207,5 +208,16 @@
 		"1": "Disabled",
 		"2": "Enabled"
 	},
-	"YES": "Yes"
+	"YES": "Yes",
+	"PLACEHOLDER_EMPLOYEE_REGISTRATION_NUMBER": "e.g. 99887766",
+	"PLACEHOLDER_EMPLOYEE_NAME": "e.g. John Doe, Tom, Dick, Harry, etc",
+	"PLACEHOLDER_EMPLOYEE_EMAIL": "e.g. john@email.com",
+	"PLACEHOLDER_EMPLOYEE_PHONE_EXTENSION": "e.g. 9876",
+	"PLACEHOLDER_EMPLOYEE_PHONE_NUMBER": "e.g. 55998765432",
+	"PLACEHOLDER_EMPLOYEE_SECTOR": "e.g. Finance, Logistics, Administrative, etc",
+	"PLACEHOLDER_EMPLOYEE_ROOM_NUMBER": "e.g. 1234",
+	"PLACEHOLDER_MODEL_BRAND": "e.g. Dell, Hewlett-Packard, LENOVO, etc",
+	"PLACEHOLDER_MODEL_MODEL": "e.g. 9010, 6005, etc",
+	"PLACEHOLDER_MODEL_FW_VERSION": "e.g. A30, 1.17, etc",
+	"AUTHENTICATE": "Authenticate"
 }

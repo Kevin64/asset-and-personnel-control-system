@@ -39,7 +39,7 @@ if ($send != 1) {
 <div id="middle">
 	<form action="formDetailUser.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2><?php $translations["USER_DETAIL"] ?></h2><br>
+		<h2><?php echo $translations["USER_DETAIL"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $username != $oldUsername) {
@@ -71,7 +71,7 @@ if ($send != 1) {
 				<tr>
 					<td id="label"><?php echo $translations["PRIVILEGE"]["NAME"] ?><mark id=asterisk>*</mark></td>
 					<td>
-						<select name=txtPrivilegeLevel required>
+						<select name=txtPrivilegeLevel required onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> id=inactive disabled <?php } ?>>
 							<?php
 							foreach ($privilegeLevelsArray as $str2) {
 							?>

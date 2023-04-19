@@ -44,7 +44,7 @@ require_once("connection.php");
 			</tr>
 			<tr>
 				<td colspan=2><br>
-					<input type=submit value="Alterar">
+					<input type=submit value="<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>">
 				</td>
 			</tr>
 		</table>

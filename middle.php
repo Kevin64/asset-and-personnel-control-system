@@ -9,7 +9,7 @@
 				<input type="hidden" name="txtSend" value="1">
 				<label for="txtUser"><?php echo $translations["USERNAME"] ?><br><input type="text" name="txtUser"></label><br><br>
 				<label for="txtPassword"><?php echo $translations["PASSWORD"] ?><br><input type="password" name="txtPassword"></label><br><br>
-				<input type="submit" value="Entrar">
+				<input id="updateButton" type="submit" value="<?php echo $translations["AUTHENTICATE"] ?>">
 			</form>
 		<?php
 		} else {

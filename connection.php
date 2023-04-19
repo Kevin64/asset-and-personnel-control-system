@@ -16,7 +16,6 @@ $json_constants_array = json_decode($jsonFileConstants, true);
 
 $timezone = gatherJsonTypes($json_config_array_db, "Locale", null);
 date_default_timezone_set($timezone);
-
 $buildingArray = gatherJsonTypes($json_parameters_array, "Definitions", "Buildings");
 $hwTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "HardwareTypes");
 $fwTypesArray = gatherJsonTypes($json_parameters_array, "Definitions", "FirmwareTypes");
@@ -30,9 +29,8 @@ $dbSettingsArray = gatherJsonTypes($json_config_array_db, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array_db, "PrivilegeLevels", null);
 $entityTypesArray = gatherJsonTypes($json_config_array_db, "EntityTypes", null);
 $employeeTypesArray = gatherJsonTypes($json_config_array_db, "EmployeeTypes", null);
-
 $imgArray = gatherJsonTypes($json_constants_array, "IMG", null);
-
+$colorArray = gatherJsonTypes($json_constants_array, "COLOR", null);
 $dbAssetArray = gatherJsonTypes($json_constants_array, "DB_ASSET", null);
 $dbMaintenancesArray = gatherJsonTypes($json_constants_array, "DB_MAINTENANCES", null);
 $dbAgentsArray = gatherJsonTypes($json_constants_array, "DB_AGENTS", null);

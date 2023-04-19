@@ -75,7 +75,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><br>
-							<input id="registerButton" type="submit" value="<?php echo $translations["REGISTER"] ?>">
+							<input id="registerButton" type="submit" value="<?php echo $translations["LABEL_REGISTER_BUTTON"] ?>">
 						</td>
 					</tr>
 				</table>

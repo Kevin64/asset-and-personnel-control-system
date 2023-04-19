@@ -164,12 +164,10 @@ if ($send != 1) {
 
 				$inUseOk = substr($inUse, 0, 1);
 
-				if ($inUseOk == "N") $inUse = "Não";
-
-				if ($inUse == "Não") {
-					$color = "red";
+				if ($inUse == "0") {
+					$color = $colorArray["NOT_IN_USE"];
 				} else {
-					$color = "green";
+					$color = $colorArray["IN_USE"];
 				}
 
 				$formatDate = substr($formatacao, 0, 10);
@@ -230,16 +228,6 @@ if ($send != 1) {
 					$inUse = $result[$dbAssetArray["IN_USE"]];
 					$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
 					$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
-
-					$inUseOk = substr($inUse, 0, 1);
-
-					if ($inUseOk == "N") $inUse = "Não";
-
-					if ($inUse == "Não") {
-						$color = "red";
-					} else {
-						$color = "green";
-					}
 
 					$formatDate = substr($formatacao, 0, 10);
 					$explodedDate = explode("-", $formatDate);

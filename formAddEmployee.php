@@ -17,7 +17,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtEmployeeRegistrationNumber placeholder="Ex.: 1234567" maxLength=8 required></td>
+						<td><input type=text name=txtEmployeeRegistrationNumber placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_REGISTRATION_NUMBER"] ?>" maxLength=8 required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?><mark id=asterisk>*</mark></td>
@@ -36,30 +36,30 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_NAME"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtName placeholder="Ex.: Fulano de Tal" required></td>
+						<td><input type=text name=txtName placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_NAME"] ?>" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_EMAIL"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=email name=txtEmail placeholder="Ex.: fulano@email.com" required></td>
+						<td><input type=email name=txtEmail placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_EMAIL"] ?>" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_PHONE_EXTENSION"] ?></td>
-						<td><input type=text name=txtPhoneExtension placeholder="Ex.: 9876" maxLength=4></td>
+						<td><input type=text name=txtPhoneExtension placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_PHONE_EXTENSION"] ?>" maxLength=4></td>
 					</tr>
 					<td id="label"><?php echo $translations["EMPLOYEE_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtPhoneNumber placeholder="Ex.: 55998765432" minLength=11 maxLength=11 required></td>
+					<td><input type=text name=txtPhoneNumber placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_PHONE_NUMBER"] ?>" minLength=11 maxLength=11 required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_SECTOR"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtSector placeholder="Ex.: Curso de Humanas" required></td>
+						<td><input type=text name=txtSector placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_SECTOR"] ?>" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["EMPLOYEE_ROOM"] ?></td>
-						<td><input type=text name=txtRoomNumber placeholder="Ex.: 4413" maxLength=4></td>
+						<td><input type=text name=txtRoomNumber placeholder="<?php echo $translations["PLACEHOLDER_EMPLOYEE_ROOM_NUMBER"] ?>" maxLength=4></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><br>
-							<input id="registerButton" type="submit" value="<?php echo $translations["REGISTER"] ?>">
+							<input id="registerButton" type="submit" value="<?php echo $translations["LABEL_REGISTER_BUTTON"] ?>">
 						</td>
 					</tr>
 				</table>
