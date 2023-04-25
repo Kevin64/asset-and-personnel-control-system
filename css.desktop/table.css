@@ -14,13 +14,15 @@
 		border: 1px solid gainsboro;
 	}
 
-	#data:hover {
-		background-color: rgb(249, 202, 20);
-		border: 10px solid red;
+	#assetData thead th,
+	#modelData thead th,
+	#employeeData thead th,
+	#userData thead th {
+		background-color: gainsboro;
 	}
 
-	#tbAddNewUser {
-		border-color: black;
+	#data:hover {
+		background-color: rgb(249, 202, 20);
 	}
 
 	#header_ {
@@ -35,7 +37,7 @@
 	}
 
 	#bodyPreviousMaintenance {
-		background-color:aliceblue;
+		background-color: aliceblue;
 	}
 
 	#bodyPreviousMaintenance label {
@@ -43,7 +45,7 @@
 	}
 
 	#headerPreviousMaintenance {
-		background-color:powderblue;
+		background-color: powderblue;
 	}
 }
 
@@ -63,12 +65,15 @@
 		border: 1px solid rgb(80, 80, 80);
 	}
 
-	#data:hover {
-		background-color: rgb(0, 87, 158);
+	#assetData thead th,
+	#modelData thead th,
+	#employeeData thead th,
+	#userData thead th {
+		background-color: rgb(80, 80, 80);
 	}
 
-	#tbAddNewUser {
-		border-color: white;
+	#data:hover {
+		background-color: rgb(0, 87, 158);
 	}
 
 	#header_ {
@@ -91,25 +96,34 @@
 	}
 
 	#headerPreviousMaintenance {
-		background-color:darkslategray;
+		background-color: darkslategray;
 	}
 }
 
 .unselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #assetData {
-	width: 1100px;
+	width: 1200px;
 	border: 1px solid;
 	border-radius: 15px;
 	padding: 10px;
-	margin-left: 50px;
+	margin-left: 0px;
+}
+
+#assetData thead th,
+#modelData thead th,
+#employeeData thead th,
+#userData thead th {
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }
 
 #modelData {
@@ -150,15 +164,6 @@ a {
 #data {
 	height: 30px;
 	text-align: center;
-}
-
-#tbAddNewUser {
-	border: 1px solid;
-	border-radius: 10px;
-	padding: 10px;
-	text-align: center;
-	width: 700px;
-	margin-left: 150px;
 }
 
 #tbSearch {

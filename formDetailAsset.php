@@ -21,7 +21,7 @@ if ($send != 1) {
 		$assetFK = $_GET["assetNumberFK"];
 
 	$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
-	$queryFormatAnt = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryFormatPrevious = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 } else {
 	$idAsset = $_POST["txtIdAsset"];
 	$assetNumber = $_POST["txtAssetNumber"];
@@ -86,7 +86,7 @@ if ($send != 1) {
 		mysqli_stmt_execute($q);
 	}
 	$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
-	$queryFormatAnt = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["ASSET_NUMBER_FK"] . "") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+	$queryFormatPrevious = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["ASSET_NUMBER_FK"] . "") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 }
 ?>
 <div id="middle" <?php if (isset($_SESSION["privilegeLevel"])) {
@@ -210,7 +210,23 @@ if ($send != 1) {
 					<td id="label">
 						<?php echo $translations["LAST_DELIVERY_MADE_BY"] ?>
 					</td>
-					<td colspan=5><label name=txtLastDeliveryMadeBy style=line-height:40px;color:green;font-size:12pt><?php echo $lastDeliveryMadeBy; ?></label></td>
+					<td colspan=5><label name=txtLastDeliveryMadeBy style=line-height:40px;color:green;font-size:12pt></label>
+						<?php
+						if (isset($queryUsers))
+							mysqli_data_seek($queryUsers, 0);
+						while ($resultUsers = mysqli_fetch_array($queryUsers)) {
+							if ($lastDeliveryMadeBy == $resultUsers["id"]) {
+						?>
+								<label>
+									<?php
+									echo $resultUsers["username"];
+									?>
+								</label>
+						<?php
+							}
+						}
+						?>
+					</td>
 				</tr>
 				<tr>
 					<td id="label">
@@ -241,14 +257,14 @@ if ($send != 1) {
 				</td>
 			</tr>
 			<?php
-				while ($resultFormatAnt = mysqli_fetch_array($queryFormatAnt)) {
+				while ($resultFormatPrevious = mysqli_fetch_array($queryFormatPrevious)) {
 
 
 			?>
 				<tr id=bodyPreviousMaintenance>
 					<td>
 						<label>
-							<?php $previousMaintenancesDate = $resultFormatAnt["previousServiceDates"];
+							<?php $previousMaintenancesDate = $resultFormatPrevious["previousServiceDates"];
 							$datePM = substr($previousMaintenancesDate, 0, 10);
 							$explodedDateA = explode("-", $datePM);
 							$previousMaintenancesDate = $explodedDateA[2] . "/" . $explodedDateA[1] . "/" . $explodedDateA[0];
@@ -259,7 +275,7 @@ if ($send != 1) {
 						<label>
 							<?php
 							foreach ($serviceTypesArray as $str) {
-								if ($resultFormatAnt["serviceType"] == $str)
+								if ($resultFormatPrevious["serviceType"] == $str)
 									echo $translations["SERVICE_TYPE"][$str];
 							}
 							?>
@@ -267,7 +283,7 @@ if ($send != 1) {
 					</td>
 					<td>
 						<label>
-							<?php $previousMaintenancesBattery = $resultFormatAnt["batteryChange"];
+							<?php $previousMaintenancesBattery = $resultFormatPrevious["batteryChange"];
 							if ($previousMaintenancesBattery != "" && $previousMaintenancesBattery == "1") {
 								echo $translations["BATTERY_REPLACED"];
 							} else if ($previousMaintenancesBattery == "0") {
@@ -280,7 +296,7 @@ if ($send != 1) {
 					</td>
 					<td>
 						<label>
-							<?php $previousMaintenancesTicket = $resultFormatAnt["ticketNumber"];
+							<?php $previousMaintenancesTicket = $resultFormatPrevious["ticketNumber"];
 							if ($previousMaintenancesTicket != "")
 								echo $previousMaintenancesTicket;
 							else
@@ -296,7 +312,7 @@ if ($send != 1) {
 						?>
 							<label>
 								<?php
-								if ($resultFormatAnt["agent"] == $resultUsers["id"])
+								if ($resultFormatPrevious["agent"] == $resultUsers["id"])
 									echo $resultUsers["username"];
 								?>
 							</label>

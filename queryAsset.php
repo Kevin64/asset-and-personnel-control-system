@@ -23,6 +23,9 @@ if (isset($_POST["rdCriterion"]))
 if (isset($_POST["txtSearch"]))
 	$search = $_POST["txtSearch"];
 
+if (isset($_POST["radioSearch"]))
+	$search = $_POST["radioSearch"];
+
 if ($orderBy == "")
 	$orderBy = "serviceDate";
 
@@ -45,16 +48,19 @@ if ($send != 1) {
 
 ?>
 
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/show-controls.js"></script>
 <div id="middle">
 	<table id="tbSearch">
-		<form action=queryAsset.php method=post>
+		<form action=queryAsset.php method=post onsubmit='return getOption();'>
 			<input type=hidden name=txtSend value=1>
 			<tr>
 				<td align=center><?php echo $translations["SEARCH_FOR"] ?></td>
 			</tr>
 			<tr>
-				<td align=center>
+				<td id=testRadioInput align=center>
 					<select id=filterAsset name=rdCriterion>
+						<!-- <select id=filterAsset name=rdCriterion onchange='f(document.getElementById("filterAsset").selectedIndex, <?php echo json_encode($tpmTypesArray) ?>)'> -->
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["ASSET_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["ASSET_NUMBER"] ?>"><?php echo $translations["ASSET_NUMBER"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["DISCARDED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["DISCARDED"] ?>"><?php echo $translations["ASSETS_DISCARDED_STATUS"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SEAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SEAL_NUMBER"] ?>"><?php echo $translations["SEAL_NUMBER"] ?></option>
@@ -83,17 +89,11 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] ?>"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["TPM_VERSION"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["TPM_VERSION"] ?>"><?php echo $translations["TPM_VERSION"] ?></option>
 					</select>
-					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
+					<input id=radioButton style="width:300px" type=text name=txtSearch>
+					<input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
-		<?php
-		if (isset($_POST["txtSearch"])) {
-			if (isset($_POST["rdCriterion"])) {
-				$value = $_POST["rdCriterion"];
-			}
-		}
-		?>
 	</table>
 	<br><br>
 	<?php
@@ -109,112 +109,48 @@ if ($send != 1) {
 	<?php
 	}
 	?>
-	<table id="assetData" cellspacing=0>
-		<form action="eraseSelectedAsset.php" method="post">
-			<tr id="header_">
-				<?php
-				if (isset($_SESSION["privilegeLevel"])) {
-					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-				?>
-						<td><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></td>
-				<?php
-					}
-				}
-				?>
-				<td><a href="?orderBy=<?php $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></td>
-				<?php
-				if (!in_array(true, $devices)) {
-				?>
-					<td><a href="?orderBy=<?php $dbAssetArray["BUILDING"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BUILDING"] ?></a></td>
-				<?php
-				}
-				?>
-				<td><a href="?orderBy=<?php $dbAssetArray["ROOM_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></td>
-				<?php
-				if (!in_array(true, $devices)) {
-				?>
-					<td><a href="?orderBy=<?php $dbAssetArray["STANDARD"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></td>
-					<td><a href="?orderBy=<?php $dbAssetArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></td>
-				<?php
-				}
-				?>
-				<td><a href="?orderBy=<?php $dbAssetArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
-				<?php
-				if (!in_array(true, $devices)) {
-				?>
-					<td><a href="?orderBy=<?php $dbAssetArray["IP_ADDRESS"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["IP_ADDRESS"] ?></a></td>
-				<?php
-				}
-				?>
-				<td><a href="?orderBy=<?php $dbAssetArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></td>
-			</tr>
-			<?php
-			while ($result = mysqli_fetch_array($queryActive)) {
-				$idAsset = $result["id"];
-				$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
-				$discarded = $result[$dbAssetArray["DISCARDED"]];
-				$building = $result[$dbAssetArray["BUILDING"]];
-				$roomNumber = $result[$dbAssetArray["ROOM_NUMBER"]];
-				$standard = $result[$dbAssetArray["STANDARD"]];
-				$brand = $result[$dbAssetArray["BRAND"]];
-				$model = $result[$dbAssetArray["MODEL"]];
-				$inUse = $result[$dbAssetArray["IN_USE"]];
-				$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
-				$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
-
-				if ($inUse == "0") {
-					$color = $colorArray["NOT_IN_USE"];
-				} else {
-					$color = $colorArray["IN_USE"];
-				}
-
-				$formatDate = substr($formatacao, 0, 10);
-				$explodedDate = explode("-", $formatDate);
-				if ($explodedDate[0] != "")
-					$serviceDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0];
-			?>
-				<tr id="data">
+	<form action="eraseSelectedAsset.php" method="post">
+		<table id="assetData" cellspacing=0>
+			<thead id="header_">
 					<?php
 					if (isset($_SESSION["privilegeLevel"])) {
 						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idAsset; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if ($discarded == 1) { ?> disabled <?php } ?>></td>
+							<th><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></th>
 					<?php
 						}
 					}
 					?>
-					<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } else { ?> style="color: <?php echo $color;
-																																							} ?>"><?php echo $assetNumber; ?></a></td>
+					<th><a href="?orderBy=<?php $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></th>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $buildingArray[$building]; ?></label></td>
+						<th><a href="?orderBy=<?php $dbAssetArray["BUILDING"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BUILDING"] ?></a></th>
 					<?php
 					}
 					?>
-					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $roomNumber; ?></label></td>
+					<th><a href="?orderBy=<?php $dbAssetArray["ROOM_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></th>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $translations["ENTITY_TYPES"][$standard] ?></label></td>
-						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $brand; ?></label></td>
+						<th><a href="?orderBy=<?php $dbAssetArray["STANDARD"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></th>
+						<th><a href="?orderBy=<?php $dbAssetArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
 					<?php
 					}
 					?>
-					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $model; ?></label></td>
-					<?php
-					if (!in_array(true, $devices)) {
-					?>
-						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $ipAddress; ?></label></td>
-					<?php
-					}
-					?>
-					<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $serviceDate; ?></label></td>
-				</tr>
+					<th><a href="?orderBy=<?php $dbAssetArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
+						<?php
+						if (!in_array(true, $devices)) {
+						?>
+					<th><a href="?orderBy=<?php $dbAssetArray["IP_ADDRESS"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["IP_ADDRESS"] ?></a></th>
 				<?php
-			}
-			if (!isset($totalSearch)) {
-				while ($result = mysqli_fetch_array($queryDiscarded)) {
+						}
+				?>
+				<th><a href="?orderBy=<?php $dbAssetArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
+			</thead>
+			<tbody>
+				<?php
+				while ($result = mysqli_fetch_array($queryActive)) {
 					$idAsset = $result["id"];
 					$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
 					$discarded = $result[$dbAssetArray["DISCARDED"]];
@@ -227,6 +163,12 @@ if ($send != 1) {
 					$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
 					$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 
+					if ($inUse == "0") {
+						$color = $colorArray["NOT_IN_USE"];
+					} else {
+						$color = $colorArray["IN_USE"];
+					}
+
 					$formatDate = substr($formatacao, 0, 10);
 					$explodedDate = explode("-", $formatDate);
 					if ($explodedDate[0] != "")
@@ -237,7 +179,7 @@ if ($send != 1) {
 						if (isset($_SESSION["privilegeLevel"])) {
 							if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 						?>
-								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idAsset; ?>" onclick="var input = document.getElementById(" eraseButton"); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($discarded == 1) { ?> disabled <?php } ?>></td>
+								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idAsset; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}" <?php if ($discarded == 1) { ?> disabled <?php } ?>></td>
 						<?php
 							}
 						}
@@ -270,21 +212,82 @@ if ($send != 1) {
 						?>
 						<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $serviceDate; ?></label></td>
 					</tr>
-				<?php
+					<?php
 				}
-			}
-			if (isset($_SESSION["privilegeLevel"])) {
-				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-				?>
-					<tr>
-						<td colspan=9 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
-					</tr>
-			<?php
+				if (!isset($totalSearch)) {
+					while ($result = mysqli_fetch_array($queryDiscarded)) {
+						$idAsset = $result["id"];
+						$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
+						$discarded = $result[$dbAssetArray["DISCARDED"]];
+						$building = $result[$dbAssetArray["BUILDING"]];
+						$roomNumber = $result[$dbAssetArray["ROOM_NUMBER"]];
+						$standard = $result[$dbAssetArray["STANDARD"]];
+						$brand = $result[$dbAssetArray["BRAND"]];
+						$model = $result[$dbAssetArray["MODEL"]];
+						$inUse = $result[$dbAssetArray["IN_USE"]];
+						$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
+						$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
+
+						$formatDate = substr($formatacao, 0, 10);
+						$explodedDate = explode("-", $formatDate);
+						if ($explodedDate[0] != "")
+							$serviceDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0];
+					?>
+						<tr id="data">
+							<?php
+							if (isset($_SESSION["privilegeLevel"])) {
+								if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+							?>
+									<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idAsset; ?>" onclick="var input = document.getElementById(" eraseButton"); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($discarded == 1) { ?> disabled <?php } ?>></td>
+							<?php
+								}
+							}
+							?>
+							<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } else { ?> style="color: <?php echo $color;
+																																									} ?>"><?php echo $assetNumber; ?></a></td>
+							<?php
+							if (!in_array(true, $devices)) {
+							?>
+								<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $buildingArray[$building]; ?></label></td>
+							<?php
+							}
+							?>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $roomNumber; ?></label></td>
+							<?php
+							if (!in_array(true, $devices)) {
+							?>
+								<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $translations["ENTITY_TYPES"][$standard] ?></label></td>
+								<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $brand; ?></label></td>
+							<?php
+							}
+							?>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $model; ?></label></td>
+							<?php
+							if (!in_array(true, $devices)) {
+							?>
+								<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $ipAddress; ?></label></td>
+							<?php
+							}
+							?>
+							<td><label <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $serviceDate; ?></label></td>
+						</tr>
+			</tbody>
+		<?php
+					}
 				}
-			}
-			?>
-		</form>
-	</table>
+				if (isset($_SESSION["privilegeLevel"])) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+		?>
+			<tr>
+				<td colspan=9 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
+			</tr>
+	<?php
+					}
+				}
+	?>
+
+		</table>
+	</form>
 </div>
 <?php
 require_once("foot.php");

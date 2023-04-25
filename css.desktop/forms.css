@@ -1,16 +1,13 @@
 @media (prefers-color-scheme: light) {
 
-	#formAddAsset,
 	#formAddModel,
 	#formAddEmployee {
 		color: black;
 	}
 
 	#formLogin *,
-	#formAddAsset *,
 	#formAddModel *,
-	#formAddEmployee *,
-	#formAddModelTable * {
+	#formAddEmployee * {
 		border-color: black;
 	}
 
@@ -29,17 +26,14 @@
 
 @media (prefers-color-scheme: dark) {
 
-	#formAddAsset,
 	#formAddModel,
 	#formAddEmployee {
 		color: white;
 	}
 
 	#formLogin *,
-	#formAddAsset *,
 	#formAddModel *,
-	#formAddEmployee *,
-	#formAddModelTable * {
+	#formAddEmployee * {
 		border-color: white;
 	}
 
@@ -68,62 +62,10 @@
 	box-shadow: 0px 0px 40px;
 }
 
-#formAddModel {
-	text-align: center;
-	width: 900px;
-	height: auto;
-	margin-left: 150px;
-}
-
-#formAddEmployee {
-	text-align: center;
-	width: 1000px;
-	height: auto;
-	margin-left: 100px;
-}
-
-#formAddModel table {
-	width: 900px;
-	height: auto;
-	border: 1px solid;
-	padding: 5px;
-	text-align: center;
-}
-
-#formAddEmployee table {
-	width: 1000px;
-	height: auto;
-	border: 1px solid;
-	padding: 5px;
-	text-align: center;
-}
-
 #formGeneral table {
 	margin-left: 100px;
 	width: 1000px;
 	height: auto;
-	border: 1px solid;
-	padding: 5px;
-	text-align: center;
-}
-
-#formAddModel select,
-textarea {
-	width: auto;
-	border: 1px solid;
-	padding: 5px;
-	text-align: center;
-}
-
-#formAddModelTable select {
-	border: 1px solid;
-	padding: 5px;
-	text-align: center;
-}
-
-#formAddEmployee select,
-textarea {
-	width: auto;
 	border: 1px solid;
 	padding: 5px;
 	text-align: center;

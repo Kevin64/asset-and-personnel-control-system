@@ -66,74 +66,76 @@ $totalRooms = mysqli_num_rows($query);
 	</table>
 	<br><br>
 	<h2><?php echo $translations["MODEL_LIST"] . " " ?>(<?php echo $totalRooms; ?>)</h2><br>
-	<table id="modelData" cellspacing=0>
-		<form action="eraseSelectedModel.php" method="post">
-			<tr id="header_">
+	<form action="eraseSelectedModel.php" method="post">
+		<table id="modelData" cellspacing=0>
+			<thead id="header_">
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
 					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
-						<td><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></td>
+						<th><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></th>
 				<?php
 					}
 				}
 				?>
-				<td><a href="?orderBy=<?php $dbModelArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
-				<td><a href="?orderBy=<?php $dbModelArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></td>
-				<td><a href="?orderBy=<?php $dbModelArray["FW_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></td>
-				<td><a href="?orderBy=<?php $dbModelArray["FW_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></td>
-				<td><a href="?orderBy=<?php $dbModelArray["TPM_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></td>
-				<td><a href="?orderBy=<?php $dbModelArray["MEDIA_OPERATION_MODE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></td>
-			</tr>
-			<?php
-			while ($result = mysqli_fetch_array($query)) {
-				$idModel = $result["id"];
-				$brand = $result[$dbModelArray["BRAND"]];
-				$model = $result[$dbModelArray["MODEL"]];
-				$fwVersion = $result[$dbModelArray["FW_VERSION"]];
-				$fwType = $result[$dbModelArray["FW_TYPE"]];
-				$tpmVersion = $result[$dbModelArray["TPM_VERSION"]];
-				$mediaOperationMode = $result[$dbModelArray["MEDIA_OPERATION_MODE"]];
-			?>
-				<tr id="data">
-					<?php
-					if (isset($_SESSION["privilegeLevel"])) {
-						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-					?>
-							<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idModel; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
-					<?php
+				<th><a href="?orderBy=<?php $dbModelArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></th>
+				<th><a href="?orderBy=<?php $dbModelArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
+				<th><a href="?orderBy=<?php $dbModelArray["FW_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></th>
+				<th><a href="?orderBy=<?php $dbModelArray["FW_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></th>
+				<th><a href="?orderBy=<?php $dbModelArray["TPM_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></th>
+				<th><a href="?orderBy=<?php $dbModelArray["MEDIA_OPERATION_MODE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></th>
+			</thead>
+			<tbody>
+				<?php
+				while ($result = mysqli_fetch_array($query)) {
+					$idModel = $result["id"];
+					$brand = $result[$dbModelArray["BRAND"]];
+					$model = $result[$dbModelArray["MODEL"]];
+					$fwVersion = $result[$dbModelArray["FW_VERSION"]];
+					$fwType = $result[$dbModelArray["FW_TYPE"]];
+					$tpmVersion = $result[$dbModelArray["TPM_VERSION"]];
+					$mediaOperationMode = $result[$dbModelArray["MEDIA_OPERATION_MODE"]];
+				?>
+					<tr id="data">
+						<?php
+						if (isset($_SESSION["privilegeLevel"])) {
+							if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+						?>
+								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idModel; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled = false;}else{input.disabled=true;}"></td>
+						<?php
+							}
 						}
-					}
-					?>
-					<td><a href="formDetailModel.php?id=<?php echo $idModel; ?>"><?php echo $model; ?></a></td>
-					<td><?php echo $brand; ?></td>
-					<td><?php echo $fwVersion; ?></td>
-					<td><?php echo $fwTypesArray[$fwType]; ?></td>
-					<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
-						<td><?php echo $tpmTypesArray[$tpmVersion];
-						} else { ?>
-						<td style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
-						} ?></td>
+						?>
+						<td><a href="formDetailModel.php?id=<?php echo $idModel; ?>"><?php echo $model; ?></a></td>
+						<td><?php echo $brand; ?></td>
+						<td><?php echo $fwVersion; ?></td>
+						<td><?php echo $fwTypesArray[$fwType]; ?></td>
 						<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
-							<td><?php echo $mediaOpTypesArray[$mediaOperationMode];
+							<td><?php echo $tpmTypesArray[$tpmVersion];
 							} else { ?>
 							<td style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
-							} ?></td>
-				</tr>
-				<?php
-			}
-			if (isset($_SESSION["privilegeLevel"])) {
-				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-				?>
-					<tr>
-						<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
+																																								} ?></td>
+							<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
+								<td><?php echo $mediaOpTypesArray[$mediaOperationMode];
+								} else { ?>
+								<td style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
+																																									} ?></td>
 					</tr>
+			</tbody>
 			<?php
 				}
-			}
+				if (isset($_SESSION["privilegeLevel"])) {
+					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 			?>
-		</form>
-	</table>
+				<tr>
+					<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
+				</tr>
+		<?php
+					}
+				}
+		?>
+		</table>
+	</form>
 </div>
 <?php
 require_once("foot.php");

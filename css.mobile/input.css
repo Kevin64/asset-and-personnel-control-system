@@ -5,10 +5,6 @@
 		color: black;
 	}
 
-	#formFields td {
-		border: 1px solid gainsboro;
-	}
-
 	#registerButton {
 		border-color: black;
 		background-color: white;
@@ -56,14 +52,14 @@
 	input,
 	select,
 	textarea {
-		box-shadow: 0px 0px 5px rgb(0,0,0,.3);
+		box-shadow: 0px 0px 5px rgb(0, 0, 0, .3);
 		transition: all .4s ease-in-out;
 	}
 
 	input:hover,
 	select:hover,
 	textarea:hover {
-		box-shadow: 0px 0px 5px rgb(0,0,0,1);
+		box-shadow: 0px 0px 5px rgb(0, 0, 0, 1);
 		transition: all .4s ease-in-out;
 	}
 }
@@ -75,10 +71,6 @@
 		color: white;
 	}
 
-	#formFields td {
-		border: 1px solid rgb(80, 80, 80);
-	}
-
 	#registerButton {
 		border-color: white;
 		background-color: black;
@@ -126,14 +118,14 @@
 	input,
 	select,
 	textarea {
-		box-shadow: 0px 0px 5px rgb(255,255,255,.3);
+		box-shadow: 0px 0px 5px rgb(255, 255, 255, .3);
 		transition: all .4s ease-in-out;
 	}
 
 	input:hover,
 	select:hover,
 	textarea:hover {
-		box-shadow: 0px 0px 5px rgb(255,255,255,1);
+		box-shadow: 0px 0px 5px rgb(255, 255, 255, 1);
 		transition: all .4s ease-in-out;
 	}
 }
@@ -161,6 +153,10 @@ input[type=submit] {
 	width: auto;
 }
 
+input[type=radio] {
+	margin: 0 10px 0 10px;
+}
+
 input[type=submit]:hover {
 	background-color: gray;
 }
@@ -171,6 +167,7 @@ input[type=submit]:hover {
 #formFields input[type=password],
 #formFields select,
 #formFields textarea {
+	box-sizing: border-box;
 	width: 100%;
 }
 
@@ -208,32 +205,4 @@ input[type=submit]:hover {
 
 #searchButton:hover {
 	background-color: darkorange;
-}
-
-#missPlusButton {
-	width: 30px;
-	height: 30px;
-	vertical-align: middle;
-	border-radius: 0px;
-	color: darkgreen;
-}
-
-#missPlusButton:hover {
-	background-color: darkgreen;
-	color: white;
-	border-color: darkgreen;
-}
-
-#missMinusButton {
-	width: 30px;
-	height: 30px;
-	vertical-align: middle;
-	border-radius: 0px;
-	color: firebrick;
-}
-
-#missMinusButton:hover {
-	background-color: darkred;
-	color: white;
-	border-color: darkred;
 }

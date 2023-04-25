@@ -118,7 +118,7 @@ a {
 	border-radius: 15px 15px 0 0;
 	list-style-type: none;
 	display: flex;
-	justify-content: center;	
+	justify-content: center;
 }
 
 #menu ul>li {
@@ -147,7 +147,7 @@ li span {
 	z-index: 2;
 	padding: 10px 5px;
 	width: auto;
-	courser: pointer;
+	cursor: pointer;
 	text-decoration: none;
 	text-align: center;
 }
