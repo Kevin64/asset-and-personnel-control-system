@@ -89,7 +89,7 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] ?>"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["TPM_VERSION"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["TPM_VERSION"] ?>"><?php echo $translations["TPM_VERSION"] ?></option>
 					</select>
-					<input id=radioButton style="width:300px" type=text name=txtSearch>
+					<input style="width:335px" type=text name=txtSearch>
 					<input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>

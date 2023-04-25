@@ -50,7 +50,7 @@ $totalEmployees = mysqli_num_rows($query);
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbEmployeeArray["NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbEmployeeArray["NAME"] ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbEmployeeArray["EMPLOYEE_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbEmployeeArray["EMPLOYEE_TYPE"] ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></option>
 					</select>
-					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
+					<input style="width:335px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>

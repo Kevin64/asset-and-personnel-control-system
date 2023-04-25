@@ -52,7 +52,7 @@ $totalRooms = mysqli_num_rows($query);
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbModelArray["MEDIA_OPERATION_MODE"]) echo "selected='selected'"; ?>value="<?php echo $dbModelArray["TPM_VERSION"] ?>"><?php echo $translations["TPM_VERSION"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "mediaOperationMode") echo "selected='selected'"; ?>value="<?php echo $dbModelArray["MEDIA_OPERATION_MODE"] ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
 					</select>
-					<input style="width:300px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
+					<input style="width:335px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
 		</form>
@@ -81,9 +81,15 @@ $totalRooms = mysqli_num_rows($query);
 				<th><a href="?orderBy=<?php $dbModelArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></th>
 				<th><a href="?orderBy=<?php $dbModelArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
 				<th><a href="?orderBy=<?php $dbModelArray["FW_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbModelArray["FW_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbModelArray["TPM_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbModelArray["MEDIA_OPERATION_MODE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></th>
+				<?php
+				if (!in_array(true, $devices)) {
+				?>
+					<th><a href="?orderBy=<?php $dbModelArray["FW_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></th>
+					<th><a href="?orderBy=<?php $dbModelArray["TPM_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></th>
+					<th><a href="?orderBy=<?php $dbModelArray["MEDIA_OPERATION_MODE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></th>
+				<?php
+				}
+				?>
 			</thead>
 			<tbody>
 				<?php
@@ -109,17 +115,23 @@ $totalRooms = mysqli_num_rows($query);
 						<td><a href="formDetailModel.php?id=<?php echo $idModel; ?>"><?php echo $model; ?></a></td>
 						<td><?php echo $brand; ?></td>
 						<td><?php echo $fwVersion; ?></td>
-						<td><?php echo $fwTypesArray[$fwType]; ?></td>
-						<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
-							<td><?php echo $tpmTypesArray[$tpmVersion];
-							} else { ?>
-							<td style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
-																																								} ?></td>
+						<?php
+						if (!in_array(true, $devices)) {
+						?>
+							<td><?php echo $fwTypesArray[$fwType]; ?></td>
 							<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
-								<td><?php echo $mediaOpTypesArray[$mediaOperationMode];
+								<td><?php echo $tpmTypesArray[$tpmVersion];
 								} else { ?>
 								<td style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
 																																									} ?></td>
+								<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
+									<td><?php echo $mediaOpTypesArray[$mediaOperationMode];
+									} else { ?>
+									<td style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
+																																										} ?></td>
+								<?php
+							}
+								?>
 					</tr>
 			</tbody>
 			<?php

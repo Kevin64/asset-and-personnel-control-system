@@ -54,7 +54,13 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<th><a href="?orderBy=<?php $dbAgentsArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
 						</th>
 						<th><a href="?orderBy=<?php $dbAgentsArray["PRIVILEGE_LEVEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></th>
-						<th><a href="?orderBy=<?php $dbAgentsArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></th>
+						<?php
+						if (!in_array(true, $devices)) {
+						?>
+							<th><a href="?orderBy=<?php $dbAgentsArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></th>
+						<?php
+						}
+						?>
 					</thead>
 					<tbody>
 						<?php
@@ -79,9 +85,15 @@ if (isset($_SESSION["privilegeLevel"])) {
 									}
 									?>
 								</td>
-								<td>
-									<?php echo $lastLoginDate; ?>
-								</td>
+								<?php
+								if (!in_array(true, $devices)) {
+								?>
+									<td>
+										<?php echo $lastLoginDate; ?>
+									</td>
+								<?php
+								}
+								?>
 							</tr>
 					</tbody>
 				<?php

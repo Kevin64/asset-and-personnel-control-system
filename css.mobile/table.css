@@ -171,8 +171,7 @@ input[type=text] {
 #filterAsset,
 #filterModel,
 #filterEmployee {
-	margin-left: 0px;
-	width: 100px;
+	width: 350px;
 }
 
 #bodyPreviousMaintenance td,
