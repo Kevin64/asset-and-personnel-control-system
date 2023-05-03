@@ -39,12 +39,18 @@ $dbModelArray = gatherJsonTypes($json_constants_array, "DB_MODEL", null);
 
 $orgFullName = $orgDataArray["OrganizationFullName"];
 $orgAcronym = $orgDataArray["OrganizationAcronym"];
+$orgURL = $orgDataArray["OrganizationURL"];
 $depFullName = $orgDataArray["DepartamentFullName"];
 $depAcronym = $orgDataArray["DepartamentAcronym"];
+$depURL = $orgDataArray["DepartamentURL"];
 $subDepFullName = $orgDataArray["SubDepartamentFullName"];
 $subDepAcronym = $orgDataArray["SubDepartamentAcronym"];
+$subURL = $orgDataArray["SubDepartamentURL"];
 $email = $orgDataArray["Email"];
 $phoneNumber = $orgDataArray["Phone"];
+$location = $orgDataArray["Location"];
+
+$location = str_replace(",","%2C",$location);
 
 $dbUser = $dbSettingsArray["DbUser"];
 $dbpassword = $dbSettingsArray["DbPassword"];

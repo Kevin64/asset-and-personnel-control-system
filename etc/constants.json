@@ -2,7 +2,8 @@
     "APCS": "Asset and Personnel Control System - APCS",
     "IMG": {
         "FAVICON": "img/favicon.png",
-        "TRASH": "img/trash.png"
+        "TRASH": "img/trash.png",
+        "OPEN_LINK": "img/open_link.png"
     },
     "COLOR": {
         "IN_USE": "green",

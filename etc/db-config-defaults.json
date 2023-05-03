@@ -3,12 +3,16 @@
     "OrgData": {
         "OrganizationFullName": "Company Name",
         "OrganizationAcronym": "Co",
+        "OrganizationURL": "www.example.site1.com",
         "DepartamentFullName": "Department Name",
         "DepartamentAcronym": "Dep",
+        "DepartamentURL": "www.example.site2.com",
         "SubDepartamentFullName": "Subdepartment Name",
         "SubDepartamentAcronym": "SubDep",
+        "SubDepartamentURL": "www.example.site3.com",
         "Email": "email@domain.com",
-        "Phone": "12345678"
+        "Phone": "12345678",
+        "Location": "<ENTER YOUR ORG COORDINATES HERE>"
     },
     "DbSettings": {
         "DbUser": "root",

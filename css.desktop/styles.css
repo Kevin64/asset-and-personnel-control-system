@@ -19,10 +19,14 @@
 		color: black;
 	}
 
-	#foot {
-		border: 1px solid black;
+	#foot-up,
+	#foot-down {
 		background-color: rgb(25, 81, 133);
 		color: white;
+	}
+
+	#band {
+		background-color:rgb(249, 202, 20);
 	}
 }
 
@@ -47,9 +51,13 @@
 		color: white;
 	}
 
-	#foot {
-		border: 1px solid white;
+	#foot-up,
+	#foot-down {
 		background: gray;
+	}
+
+	#band {
+		background-color:rgb(0, 87, 158);
 	}
 }
 
@@ -80,6 +88,8 @@ select {
 
 table {
 	font-size: 18px;
+	border-style: hidden;
+	border-width: 0px;
 }
 
 #container {
@@ -108,9 +118,13 @@ table {
 	padding-top: 20px;
 }
 
-#foot {
+#foot-up {
 	width: 1200px;
-	height: auto;
+	text-align: center;
+}
+
+#foot-down {
+	width: 1200px;
 	text-align: center;
 	border-radius: 0 0 15px 15px;
 	margin-bottom: 5px;
@@ -120,6 +134,11 @@ table {
 	font-weight: bold;
 	text-align: center;
 	border: 1px solid;
+}
+
+#band {
+	font-size:2px;
+	width: 1200px;
 }
 
 .readonly {

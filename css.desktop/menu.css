@@ -1,10 +1,5 @@
-/*==================*/
-/*FormataÃ§Ã£o do Menu*/
-/*==================*/
-
 @media (prefers-color-scheme: light) {
 	#menu ul {
-		/*Borda do menu cantos arredondados e fundo cinza escuro*/
 		border-color: black;
 		background-color: rgb(25, 81, 133);
 	}
@@ -15,13 +10,11 @@
 	}
 
 	#menu ul>li {
-		/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
 		border-color: white;
 		background-color: rgb(25, 81, 133);
 	}
 
 	#menu ul>li:hover {
-		/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
 		background-color: cadetblue;
 	}
 
@@ -94,7 +87,7 @@
 	}
 
 	#menu ol a:hover {
-		border-color: white;
+		border-color: rgb(0, 87, 158);
 	}
 }
 
@@ -114,7 +107,7 @@ a {
 
 #menu ul {
 	z-index: 2;
-	border: 1px solid;
+	
 	border-radius: 15px 15px 0 0;
 	list-style-type: none;
 	display: flex;
