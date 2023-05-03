@@ -140,7 +140,6 @@ textarea {
 	border: 2px;
 	border-style: solid;
 	text-align: center;
-	width: 100%;
 	border-radius: 8px;
 	padding: 7px;
 }
@@ -151,10 +150,6 @@ input[type=submit] {
 
 input[type=submit] {
 	width: auto;
-}
-
-input[type=radio] {
-	margin: 0 10px 0 10px;
 }
 
 input[type=submit]:hover {

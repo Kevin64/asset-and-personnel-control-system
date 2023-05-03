@@ -29,7 +29,7 @@ if ($file = fopen("etc/version", "r")) {
 			<?php echo $translations["APCS_PHONE"] ?><?php echo $phoneNumber ?>
 		</div>
 		<div>
-			<a id=linksameline href=<?php echo "https://www.google.com/maps/search/?api=1&query=" . $location ?> target="_blank" style="text-decoration:none;color:white"><?php echo $translations["LOCATION"] ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"></a>
+			<a id=linksameline href=<?php echo "https://www.google.com/maps/search/?api=1&query=" . $location ?> target="_blank" style="text-decoration:none;color:white"><?php echo $translations["LOCATION"] . " "  ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"></a>
 		</div>
 	</div>
 	<div id="band">

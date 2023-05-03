@@ -45,7 +45,6 @@
 
 @media (prefers-color-scheme: dark) {
 	#menu ul {
-		/*Borda do menu cantos arredondados e fundo cinza escuro*/
 		border-color: white;
 		background-color: grey;
 	}
@@ -56,13 +55,11 @@
 	}
 
 	#menu ul>li {
-		/*Borda do lado esquerdo do item e um ao lado do outro com o float*/
 		border-color: white;
 		background-color: grey;
 	}
 
 	#menu ul>li:hover {
-		/*Este Ã© a cor do fundo quando o mouse passar por cima do item */
 		background-color: black;
 	}
 
@@ -161,7 +158,3 @@ li span {
 	transition: all .5s ease-in-out;
 	-webkit-transition: all .5s ease-in-out;
 }
-
-/*=========================*/
-/*Fim da formataÃ§Ã£o do Menu*/
-/*=========================*/
