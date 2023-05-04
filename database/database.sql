@@ -1,60 +1,103 @@
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: patrimonio
+-- Host: localhost    Database: apcsdb
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE="+00:00" */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE="NO_AUTO_VALUE_ON_ZERO" */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `model`
+-- Table structure for table `agents`
 --
 
-DROP TABLE IF EXISTS `model`;
+DROP TABLE IF EXISTS `agents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `model` (
+CREATE TABLE `agents` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `brand` varchar(45) DEFAULT NULL,
-  `model` varchar(45) DEFAULT NULL,
-  `version` varchar(45) DEFAULT NULL,
-  `type` varchar(10) DEFAULT NULL,
-  `tpm` varchar(15) DEFAULT NULL,
-  `mediaOp` varchar(10) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `privilegeLevel` tinyint DEFAULT NULL,
+  `lastLoginDate` varchar(20) DEFAULT NULL,
+  `blocked` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `funcionário`
+-- Table structure for table `asset`
 --
 
-DROP TABLE IF EXISTS `funcionário`;
+DROP TABLE IF EXISTS `asset`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `funcionário` (
+CREATE TABLE `asset` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `regNum` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `extNum` varchar(45) DEFAULT NULL,
-  `phone` varchar(45) DEFAULT NULL,
-  `course` varchar(45) DEFAULT NULL,
-  `room` varchar(45) DEFAULT NULL,
-  `faltas` int DEFAULT "0",
-  `data_ultima_falta` varchar(10) DEFAULT NULL,
-  `typeemployee` varchar(45) DEFAULT NULL,
+  `assetNumber` int DEFAULT NULL,
+  `discarded` tinyint DEFAULT NULL,
+  `building` varchar(100) DEFAULT NULL,
+  `roomNumber` varchar(10) DEFAULT NULL,
+  `deliveredToRegistrationNumber` varchar(20) DEFAULT NULL,
+  `lastDeliveryMadeBy` varchar(50) DEFAULT NULL,
+  `lastDeliveryDate` varchar(10) DEFAULT NULL,
+  `note` text,
+  `standard` tinyint DEFAULT NULL,
+  `serviceDate` varchar(10) DEFAULT NULL,
+  `adRegistered` tinyint DEFAULT NULL,
+  `brand` varchar(100) DEFAULT NULL,
+  `model` varchar(100) DEFAULT NULL,
+  `serialNumber` varchar(100) DEFAULT NULL,
+  `processor` varchar(100) DEFAULT NULL,
+  `ram` varchar(100) DEFAULT NULL,
+  `storageSize` varchar(100) DEFAULT NULL,
+  `operatingSystem` varchar(100) DEFAULT NULL,
+  `hostname` varchar(30) DEFAULT NULL,
+  `inUse` tinyint DEFAULT NULL,
+  `sealNumber` varchar(50) DEFAULT NULL,
+  `tag` tinyint DEFAULT NULL,
+  `macAddress` varchar(18) DEFAULT NULL,
+  `ipAddress` varchar(16) DEFAULT NULL,
+  `hwType` tinyint DEFAULT NULL,
+  `fwVersion` varchar(100) DEFAULT NULL,
+  `fwType` tinyint DEFAULT NULL,
+  `storageType` varchar(100) DEFAULT NULL,
+  `videoCard` varchar(100) DEFAULT NULL,
+  `mediaOperationMode` tinyint DEFAULT NULL,
+  `secureBoot` tinyint DEFAULT NULL,
+  `virtualizationTechnology` tinyint DEFAULT NULL,
+  `tpmVersion` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=432 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employee` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `employeeRegistrationNumber` int DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phoneExtension` varchar(5) DEFAULT NULL,
+  `phoneNumber` varchar(11) DEFAULT NULL,
+  `sector` varchar(100) DEFAULT NULL,
+  `roomNumber` varchar(5) DEFAULT NULL,
+  `employeeType` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,82 +109,33 @@ DROP TABLE IF EXISTS `maintenances`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `maintenances` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `patrimonioFK` int DEFAULT NULL,
-  `dataFormatacoesAnteriores` varchar(30) DEFAULT NULL,
-  `modoServico` varchar(30) DEFAULT NULL,
-  `changePilha` varchar(30) DEFAULT NULL,
-  `ticketNum` int DEFAULT NULL,
+  `assetNumberFK` int DEFAULT NULL,
+  `previousServiceDates` varchar(10) DEFAULT NULL,
+  `serviceType` tinyint DEFAULT NULL,
+  `batteryChange` tinyint DEFAULT NULL,
+  `ticketNumber` int DEFAULT NULL,
   `agent` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1987 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `patrimonio`
+-- Table structure for table `model`
 --
 
-DROP TABLE IF EXISTS `patrimonio`;
+DROP TABLE IF EXISTS `model`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `patrimonio` (
+CREATE TABLE `model` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `patrimonio` int DEFAULT NULL,
-  `building` varchar(20) DEFAULT NULL,
-  `room` varchar(10) DEFAULT NULL,
-  `descricao` text,
-  `namereceiver` varchar(50) DEFAULT NULL,
-  `regNumreceiver` varchar(50) DEFAULT NULL,
-  `extNum` varchar(15) DEFAULT NULL,
-  `deliveryman` varchar(45) DEFAULT NULL,
-  `deliveryDate` varchar(10) DEFAULT NULL,
-  `note` text,
-  `standard` varchar(15) DEFAULT "Funcionário",
-  `serviceDate` varchar(10) DEFAULT NULL,
-  `ad` varchar(5) DEFAULT NULL,
-  `brand` varchar(30) DEFAULT NULL,
-  `model` varchar(50) DEFAULT NULL,
-  `serialNumber` varchar(50) DEFAULT NULL,
-  `processor` varchar(100) DEFAULT NULL,
-  `ram` varchar(50) DEFAULT NULL,
-  `hd` varchar(30) DEFAULT NULL,
-  `iduser` int DEFAULT NULL,
-  `operatingSystem` varchar(70) DEFAULT NULL,
-  `hostname` varchar(30) DEFAULT NULL,
-  `inUse` varchar(10) DEFAULT NULL,
-  `sealNumber` varchar(30) DEFAULT NULL,
-  `tag` varchar(10) DEFAULT NULL,
-  `mac` varchar(30) DEFAULT NULL,
-  `ipAddress` varchar(30) DEFAULT NULL,
-  `type` varchar(10) DEFAULT NULL,
-  `model` varchar(40) DEFAULT NULL,
-  `typeFW` varchar(10) DEFAULT NULL,
-  `typeStorage` varchar(45) DEFAULT NULL,
-  `gpu` varchar(100) DEFAULT NULL,
-  `mediaOperationMode` varchar(45) DEFAULT NULL,
-  `secBoot` varchar(45) DEFAULT NULL,
-  `vt` varchar(45) DEFAULT NULL,
-  `tpm` varchar(45) DEFAULT NULL,
-  `changePilha` varchar(30) DEFAULT NULL,
-  `ticketNum` int DEFAULT NULL,
+  `brand` varchar(100) DEFAULT NULL,
+  `model` varchar(100) DEFAULT NULL,
+  `fwVersion` varchar(100) DEFAULT NULL,
+  `fwType` tinyint DEFAULT NULL,
+  `tpmVersion` tinyint DEFAULT NULL,
+  `mediaOperationMode` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2041 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `status` varchar(5) DEFAULT NULL,
-  `status` int DEFAULT "0",
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -153,4 +147,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-05 10:20:08
+-- Dump completed on 2023-05-04  9:25:06
