@@ -28,9 +28,11 @@ if ($file = fopen("etc/version", "r")) {
 		<div>
 			<?php echo $translations["APCS_PHONE"] ?><?php echo $phoneNumber ?>
 		</div>
+		<?php if ($location != "") { ?>
 		<div>
 			<a id=linksameline href=<?php echo "https://www.google.com/maps/search/?api=1&query=" . $location ?> target="_blank" style="text-decoration:none;color:white"><?php echo $translations["LOCATION"] . " "  ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"></a>
 		</div>
+		<?php } ?>
 	</div>
 	<div id="band">
 		<div>
