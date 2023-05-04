@@ -7,6 +7,7 @@ $send = null;
 $idAsset = null;
 $assetFK = null;
 $oldAssetNumber = null;
+$printed = false;
 
 if (isset($_POST["txtSend"]))
 	$send = $_POST["txtSend"];
@@ -312,13 +313,22 @@ if ($send != 1) {
 						?>
 							<label>
 								<?php
-								if ($resultFormatPrevious["agent"] == $resultUsers["id"])
+								if ($resultFormatPrevious["agent"] == $resultUsers["id"]) {
 									echo $resultUsers["username"];
+									$printed = true;
+									break;
+								}
 								?>
 							</label>
 						<?php
 						}
 						?>
+						<label>
+							<?php
+							if ($printed != true)
+								echo "-";
+							?>
+						</label>
 					</td>
 				</tr>
 			<?php
