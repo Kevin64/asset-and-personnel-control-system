@@ -1,7 +1,8 @@
 {
 	"ABOUT": "Sobre",
 	"ABOUT_APCS": "Sobre o Asset and Personnel Control System - APCS",
-	"ABOUT_HOST_SERVER": "Sobre o servidor anfitrião",
+	"ABOUT_HOST_SERVER": "Informações do servidor",
+	"WEBSERVER_VERSION": "Software do Servidor Web: ",
 	"ACCESS_DENIED": "Acesso negado!",
 	"ADD_ANOTHER": "Cadastrar outro",
 	"ADD_EMPLOYEE": "Cadastrar Funcionários",
@@ -32,6 +33,7 @@
 	"BACK_TO_HOME": "Voltar ao início",
 	"BATTERY_NOT_REPLACED": "S/ troca de pilha",
 	"BATTERY_REPLACED": "C/ troca de pilha",
+	"BLOCKED_AGENT": "Agente bloqueado",
 	"BRAND": "Marca",
 	"BUILDING": "Prédio",
 	"CHANGE_PASSWORD": "Alterar senha",

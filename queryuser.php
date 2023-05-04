@@ -51,13 +51,13 @@ if (isset($_SESSION["privilegeLevel"])) {
 				<table id="userData" cellspacing=0>
 					<thead id="header_">
 						<th><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></th>
-						<th><a href="?orderBy=<?php $dbAgentsArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
+						<th><a href="?orderBy=<?php echo $dbAgentsArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
 						</th>
-						<th><a href="?orderBy=<?php $dbAgentsArray["PRIVILEGE_LEVEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></th>
+						<th><a href="?orderBy=<?php echo $dbAgentsArray["PRIVILEGE_LEVEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></th>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-							<th><a href="?orderBy=<?php $dbAgentsArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></th>
+							<th><a href="?orderBy=<?php echo $dbAgentsArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></th>
 						<?php
 						}
 						?>
@@ -69,27 +69,35 @@ if (isset($_SESSION["privilegeLevel"])) {
 							$username = $result[$dbAgentsArray["USERNAME"]];
 							$privilegeLevel = $result[$dbAgentsArray["PRIVILEGE_LEVEL"]];
 							$lastLoginDate = $result[$dbAgentsArray["LAST_LOGIN_DATE"]];
+							$blocked = $result[$dbAgentsArray["BLOCKED"]];
+
+							$formatDate1 = substr($lastLoginDate, 0, 10);
+							$formatDate2 = substr($lastLoginDate, 11, 16);
+							$explodedDate = explode("-", $formatDate1);
+							if ($explodedDate[0] != "")
+								$lastLoginDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0] . " " . $formatDate2;
 						?>
 							<tr id="data">
-								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> disabled <?php } ?>>
+								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> disabled <?php } ?> <?php if ($blocked == 1) { ?> disabled <?php } ?>>
 								</td>
-								<td><a href="formDetailUser.php?id=<?php echo $idUser; ?>"><?php echo $username; ?></a></td>
-								<td>
-									<?php
-									if ($privilegeLevel == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-										echo $translations["ADMINISTRATOR_NAME"];
-									} else if ($privilegeLevel == $privilegeLevelsArray["STANDARD_LEVEL"]) {
-										echo $translations["STANDARD_NAME"];
-									} else if ($privilegeLevel == $privilegeLevelsArray["LIMITED_LEVEL"]) {
-										echo $translations["LIMITED_NAME"];
-									}
-									?>
+								<td><a href="formDetailUser.php?id=<?php echo $idUser; ?>" <?php if ($blocked == 1) { ?> id=inactive <?php } ?>><?php echo $username; ?></a></td>
+								<td><label <?php if ($blocked == 1) { ?> id=inactive <?php } ?>>
+										<?php
+										if ($privilegeLevel == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+											echo $translations["ADMINISTRATOR_NAME"];
+										} else if ($privilegeLevel == $privilegeLevelsArray["STANDARD_LEVEL"]) {
+											echo $translations["STANDARD_NAME"];
+										} else if ($privilegeLevel == $privilegeLevelsArray["LIMITED_LEVEL"]) {
+											echo $translations["LIMITED_NAME"];
+										}
+										?></label>
 								</td>
 								<?php
 								if (!in_array(true, $devices)) {
 								?>
-									<td>
-										<?php echo $lastLoginDate; ?>
+									<td><label <?php if ($blocked == 1) { ?> id=inactive <?php } ?>>
+											<?php echo $lastLoginDate; ?>
+										</label>
 									</td>
 								<?php
 								}

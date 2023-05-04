@@ -19,13 +19,19 @@ if ($verifyPassword) {
 			$id = $row["id"];
 			$username = $row[$dbAgentsArray["USERNAME"]];
 			$privilegeLevel = $row[$dbAgentsArray["PRIVILEGE_LEVEL"]];
+			$blocked = $row[$dbAgentsArray["BLOCKED"]];
 		}
-		$_SESSION["id"] = $id;
-		$_SESSION["username"] = $username;
-		$_SESSION["privilegeLevel"] = $privilegeLevel;
-		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["LAST_LOGIN_DATE"] . " = '$lastLoginDate' where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_CHANGE_USER_STATUS"] . mysqli_error($connection));
-
-		header("Location: index.php");
+		if ($blocked != 1) {
+			$_SESSION["id"] = $id;
+			$_SESSION["username"] = $username;
+			$_SESSION["privilegeLevel"] = $privilegeLevel;
+			mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["LAST_LOGIN_DATE"] . " = '$lastLoginDate' where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_CHANGE_USER_STATUS"] . mysqli_error($connection));
+	
+			header("Location: index.php");
+		}
+		else {
+			header("Location: denied.php");
+		}
 	} else {
 		header("Location: denied.php");
 	}

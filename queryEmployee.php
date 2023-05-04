@@ -76,13 +76,13 @@ $totalEmployees = mysqli_num_rows($query);
 					}
 				}
 				?>
-				<th><a href="?orderBy=<?php $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbEmployeeArray["NAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbEmployeeArray["SECTOR"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_SECTOR"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbEmployeeArray["NAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_NAME"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbEmployeeArray["SECTOR"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_SECTOR"] ?></a></th>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<th><a href="?orderBy=<?php $dbEmployeeArray["EMPLOYEE_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbEmployeeArray["EMPLOYEE_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?></a></th>
 				<?php
 				}
 				?>

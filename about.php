@@ -16,8 +16,9 @@ require_once("menu.php");
 				<legend><?php echo $translations["ABOUT_HOST_SERVER"] ?></legend>
 				<p style="font-weight: normal; font-size: 20px;">
 					<b><?php echo $translations["SERVER_OS"] ?></b><?php echo php_uname(); ?><br>
+					<b><?php echo $translations["WEBSERVER_VERSION"] ?></b><?php echo $_SERVER["SERVER_SOFTWARE"]; ?><br>
 					<b><?php echo $translations["PHP_VERSION"] ?></b><?php echo phpversion(); ?><br>
-					<b><?php echo $translations["MYSQL_VERSION"] ?></b><?php echo mysqli_get_server_info($connection); ?>
+					<b><?php echo $translations["MYSQL_VERSION"] ?></b><?php echo mysqli_get_server_info($connection); ?><br>
 				</p>
 			</fieldset>
 		<?php } ?>

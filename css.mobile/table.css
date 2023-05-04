@@ -69,7 +69,7 @@
 	#modelData thead th,
 	#employeeData thead th,
 	#userData thead th {
-		background-color: gainsboro;
+		background-color: rgb(80, 80, 80);
 	}
 
 	#data:hover {

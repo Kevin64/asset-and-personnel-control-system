@@ -21,15 +21,20 @@ if ($send != 1) {
 		$privilegeLevel = $_POST["txtPrivilegeLevel"];
 	if (isset($_POST["txtLastLoginDate"]))
 		$lastLoginDate = $_POST["txtLastLoginDate"];
+	if (isset($_POST["chkBoxBlocked"])) {
+		$blocked = $_POST["chkBoxBlocked"];
+	} else {
+		$blocked = "0";
+	}
 
 	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
 
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["USERNAME"] . " = '$username', " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["USERNAME"] . " = '$username', " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentsArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $username == $oldUsername) {
-		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentsArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
 	}
 
 	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
@@ -58,6 +63,7 @@ if ($send != 1) {
 				$oldUsername = $result[$dbAgentsArray["USERNAME"]];
 				$privilegeLevel = $result[$dbAgentsArray["PRIVILEGE_LEVEL"]];
 				$lastLoginDate = $result[$dbAgentsArray["LAST_LOGIN_DATE"]];
+				$blocked = $result[$dbAgentsArray["BLOCKED"]];
 			?>
 				<tr>
 					<td colspan=2 id=spacer><?php echo $translations["USER_DATA"] ?></td>
@@ -81,6 +87,12 @@ if ($send != 1) {
 							?>
 						</select>
 					</td>
+				</tr>
+				<tr>
+					<td id="label">
+						<?php echo $translations["BLOCKED_AGENT"] ?>
+					</td>
+					<td colspan=5><input type=checkbox class=chkBox name=chkBoxBlocked value="1" <?php echo ($blocked == 1 ? "checked" : ""); ?> <?php if ($_SESSION["id"] == $idUser) { ?> id=inactive disabled <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["LAST_LOGIN_DATE"] ?></td>

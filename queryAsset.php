@@ -121,32 +121,32 @@ if ($send != 1) {
 						}
 					}
 					?>
-					<th><a href="?orderBy=<?php $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></th>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<th><a href="?orderBy=<?php $dbAssetArray["BUILDING"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BUILDING"] ?></a></th>
+						<th><a href="?orderBy=<?php echo $dbAssetArray["BUILDING"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BUILDING"] ?></a></th>
 					<?php
 					}
 					?>
-					<th><a href="?orderBy=<?php $dbAssetArray["ROOM_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbAssetArray["ROOM_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["ASSET_ROOM"] ?></a></th>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
-						<th><a href="?orderBy=<?php $dbAssetArray["STANDARD"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></th>
-						<th><a href="?orderBy=<?php $dbAssetArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
+						<th><a href="?orderBy=<?php echo $dbAssetArray["STANDARD"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></th>
+						<th><a href="?orderBy=<?php echo $dbAssetArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
 					<?php
 					}
 					?>
-					<th><a href="?orderBy=<?php $dbAssetArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
+					<th><a href="?orderBy=<?php echo $dbAssetArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-					<th><a href="?orderBy=<?php $dbAssetArray["IP_ADDRESS"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["IP_ADDRESS"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbAssetArray["IP_ADDRESS"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["IP_ADDRESS"] ?></a></th>
 				<?php
 						}
 				?>
-				<th><a href="?orderBy=<?php $dbAssetArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbAssetArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
 			</thead>
 			<tbody>
 				<?php
@@ -160,7 +160,7 @@ if ($send != 1) {
 					$brand = $result[$dbAssetArray["BRAND"]];
 					$model = $result[$dbAssetArray["MODEL"]];
 					$inUse = $result[$dbAssetArray["IN_USE"]];
-					$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
+					$serviceDate = $result[$dbAssetArray["SERVICE_DATE"]];
 					$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 
 					if ($inUse == "0") {
@@ -169,7 +169,7 @@ if ($send != 1) {
 						$color = $colorArray["IN_USE"];
 					}
 
-					$formatDate = substr($formatacao, 0, 10);
+					$formatDate = substr($serviceDate, 0, 10);
 					$explodedDate = explode("-", $formatDate);
 					if ($explodedDate[0] != "")
 						$serviceDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0];
@@ -225,10 +225,10 @@ if ($send != 1) {
 						$brand = $result[$dbAssetArray["BRAND"]];
 						$model = $result[$dbAssetArray["MODEL"]];
 						$inUse = $result[$dbAssetArray["IN_USE"]];
-						$formatacao = $result[$dbAssetArray["SERVICE_DATE"]];
+						$serviceDate = $result[$dbAssetArray["SERVICE_DATE"]];
 						$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 
-						$formatDate = substr($formatacao, 0, 10);
+						$formatDate = substr($serviceDate, 0, 10);
 						$explodedDate = explode("-", $formatDate);
 						if ($explodedDate[0] != "")
 							$serviceDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0];

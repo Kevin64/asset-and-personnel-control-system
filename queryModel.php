@@ -78,15 +78,15 @@ $totalRooms = mysqli_num_rows($query);
 					}
 				}
 				?>
-				<th><a href="?orderBy=<?php $dbModelArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbModelArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
-				<th><a href="?orderBy=<?php $dbModelArray["FW_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbModelArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbModelArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbModelArray["FW_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_VERSION"] ?></a></th>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>
-					<th><a href="?orderBy=<?php $dbModelArray["FW_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></th>
-					<th><a href="?orderBy=<?php $dbModelArray["TPM_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></th>
-					<th><a href="?orderBy=<?php $dbModelArray["MEDIA_OPERATION_MODE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbModelArray["FW_TYPE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["FW_TYPE"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbModelArray["TPM_VERSION"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["TPM_VERSION"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbModelArray["MEDIA_OPERATION_MODE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></a></th>
 				<?php
 				}
 				?>

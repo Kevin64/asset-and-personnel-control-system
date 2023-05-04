@@ -61,7 +61,8 @@
         "USERNAME": "username",
         "PASSWORD": "password",
         "PRIVILEGE_LEVEL": "privilegeLevel",
-        "LAST_LOGIN_DATE": "lastLoginDate"
+        "LAST_LOGIN_DATE": "lastLoginDate",
+        "BLOCKED": "blocked"
     },
     "DB_EMPLOYEE": {
         "EMPLOYEE_TABLE": "employee",
