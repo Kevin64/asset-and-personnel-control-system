@@ -12,7 +12,7 @@
         "SubDepartamentURL": "www.example.site3.com",
         "Email": "email@domain.com",
         "Phone": "12345678",
-        "Location": "<ENTER YOUR ORG COORDINATES HERE AS XX.XXXXXXXXXX,YY.YYYYYYYYYY, OR LEAVE IT BLANK>"
+        "LocationCoordinates": "<ENTER YOUR ORG COORDINATES HERE AS XX.XXXXXXXXXX,YY.YYYYYYYYYY, OR LEAVE IT BLANK>"
     },
     "DbSettings": {
         "DbUser": "root",

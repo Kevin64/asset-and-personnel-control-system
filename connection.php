@@ -48,7 +48,7 @@ $subDepAcronym = $orgDataArray["SubDepartamentAcronym"];
 $subURL = $orgDataArray["SubDepartamentURL"];
 $email = $orgDataArray["Email"];
 $phoneNumber = $orgDataArray["Phone"];
-$location = $orgDataArray["Location"];
+$location = $orgDataArray["LocationCoordinates"];
 
 $location = str_replace(",","%2C",$location);
 
