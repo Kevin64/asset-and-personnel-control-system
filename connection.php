@@ -33,7 +33,7 @@ $imgArray = gatherJsonTypes($json_constants_array, "IMG", null);
 $colorArray = gatherJsonTypes($json_constants_array, "COLOR", null);
 $dbAssetArray = gatherJsonTypes($json_constants_array, "DB_ASSET", null);
 $dbMaintenancesArray = gatherJsonTypes($json_constants_array, "DB_MAINTENANCES", null);
-$dbAgentsArray = gatherJsonTypes($json_constants_array, "DB_AGENTS", null);
+$dbAgentArray = gatherJsonTypes($json_constants_array, "DB_AGENT", null);
 $dbEmployeeArray = gatherJsonTypes($json_constants_array, "DB_EMPLOYEE", null);
 $dbModelArray = gatherJsonTypes($json_constants_array, "DB_MODEL", null);
 

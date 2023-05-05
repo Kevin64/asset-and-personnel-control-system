@@ -5,13 +5,13 @@ require_once("connection.php");
 ?>
 
 <div id="middle">
-	<h2><?php echo $translations["CHANGE_USER_PASSWORD"] ?></h2><br>
+	<h2><?php echo $translations["CHANGE_AGENT_PASSWORD"] ?></h2><br>
 	<form action="changePassword.php" method="post" id="formGeneral">
 		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<input type=hidden name=txtStatus value="0">
 		<table id="formFields">
 			<tr>
-				<td id=label><?php echo $translations["USER"] ?><mark id=asterisk>*</mark></td>
+				<td id=label><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
 				<?php
 				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
@@ -44,7 +44,7 @@ require_once("connection.php");
 			</tr>
 			<tr>
 				<td colspan=2><br>
-					<input type=submit value="<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>">
+					<input id="updateButton" type=submit value="<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>">
 				</td>
 			</tr>
 		</table>

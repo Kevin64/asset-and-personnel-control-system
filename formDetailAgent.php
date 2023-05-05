@@ -10,7 +10,7 @@ if (isset($_POST["txtSend"]))
 
 if ($send != 1) {
 	$idUser = $_GET["id"];
-	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_AGENT"] . mysqli_error($connection));
 } else {
 	if (isset($_POST["txtIdUser"]))
 		$idUser = $_POST["txtIdUser"];
@@ -27,30 +27,30 @@ if ($send != 1) {
 		$blocked = "0";
 	}
 
-	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where " . $dbAgentsArray["USERNAME"] . " = '$username'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " where " . $dbAgentArray["USERNAME"] . " = '$username'") or die($translations["ERROR_SHOW_DETAIL_AGENT"] . mysqli_error($connection));
 
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["USERNAME"] . " = '$username', " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentsArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["USERNAME"] . " = '$username', " . $dbAgentArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_AGENT_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $username == $oldUsername) {
-		mysqli_query($connection, "update " . $dbAgentsArray["AGENTS_TABLE"] . " set " . $dbAgentsArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentsArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_USER_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_AGENT_DATA"] . mysqli_error($connection));
 	}
 
-	$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_USER"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_AGENT"] . mysqli_error($connection));
 }
 ?>
 
 <div id="middle">
-	<form action="formDetailUser.php" method="post" id="formGeneral">
+	<form action="formDetailAgent.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2><?php echo $translations["USER_DETAIL"] ?></h2><br>
+		<h2><?php echo $translations["AGENT_DETAIL"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $username != $oldUsername) {
-				echo "<font color=red>" . $translations["USER_ALREADY_EXIST"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["ERROR"] . ">" . $translations["AGENT_ALREADY_EXIST"] . "</font><br><br>";
 			} else {
-				echo "<font color=blue>" . $translations["SUCCESS_UPDATE_USER_DATA"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["SUCCESS_REGISTER"] . ">" . $translations["SUCCESS_UPDATE_AGENT_DATA"] . "</font><br><br>";
 			}
 		}
 		?>
@@ -59,17 +59,17 @@ if ($send != 1) {
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idUser = $result["id"];
-				$username = $result[$dbAgentsArray["USERNAME"]];
-				$oldUsername = $result[$dbAgentsArray["USERNAME"]];
-				$privilegeLevel = $result[$dbAgentsArray["PRIVILEGE_LEVEL"]];
-				$lastLoginDate = $result[$dbAgentsArray["LAST_LOGIN_DATE"]];
-				$blocked = $result[$dbAgentsArray["BLOCKED"]];
+				$username = $result[$dbAgentArray["USERNAME"]];
+				$oldUsername = $result[$dbAgentArray["USERNAME"]];
+				$privilegeLevel = $result[$dbAgentArray["PRIVILEGE_LEVEL"]];
+				$lastLoginDate = $result[$dbAgentArray["LAST_LOGIN_DATE"]];
+				$blocked = $result[$dbAgentArray["BLOCKED"]];
 			?>
 				<tr>
-					<td colspan=2 id=spacer><?php echo $translations["USER_DATA"] ?></td>
+					<td colspan=2 id=spacer><?php echo $translations["AGENT_DATA"] ?></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["USER"] ?><mark id=asterisk>*</mark></td>
+					<td id="label"><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdUser value="<?php echo $idUser; ?>">
 					<input type=hidden name=txtOldUsername value="<?php echo $oldUsername; ?>">
 					<td><input type=text name=txtUser required value="<?php echo $username; ?>"></td>

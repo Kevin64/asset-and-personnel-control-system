@@ -5,24 +5,19 @@
             "Building1",
             "Building2"
         ],
-        "HardwareTypes": [
-            "Desktop",
-            "All-In-One",
-            "Notebook/Laptop",
-            "Tablet"
-        ],
         "FirmwareTypes": [
             "BIOS",
             "UEFI"
         ],
-        "TpmTypes": [
-            "N/A",
-            "1.2",
-            "2.0"
+        "HardwareTypes": [
+            "All-In-One",
+            "Desktop",
+            "Notebook/Laptop",
+            "Tablet"
         ],
         "MediaOperationTypes": [
-            "IDE/RAID",
             "AHCI",
+            "IDE/RAID",
             "NVMe"
         ],
         "SecureBootStates": [
@@ -30,14 +25,19 @@
             1,
             2
         ],
+        "ServiceTypes": [
+            0,
+            1
+        ],
+        "TpmTypes": [
+            "1.2",
+            "2.0",
+            "N/A"
+        ],
         "VirtualizationTechnologyStates": [
             0,
             1,
             2
-        ],
-        "ServiceTypes": [
-            0,
-            1
         ]
     }
 }

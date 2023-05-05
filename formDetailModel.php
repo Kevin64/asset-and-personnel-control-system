@@ -67,9 +67,9 @@ if ($send != 1) {
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $model != $oldModel) {
-				echo "<font color=red>" . $translations["MODEL_ALREADY_EXIST"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["ERROR"] . ">" . $translations["MODEL_ALREADY_EXIST"] . "</font><br><br>";
 			} else {
-				echo "<font color=blue>" . $translations["SUCCESS_UPDATE_MODEL_DATA"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["SUCCESS_REGISTER"] . ">" . $translations["SUCCESS_UPDATE_MODEL_DATA"] . "</font><br><br>";
 			}
 		}
 		?>

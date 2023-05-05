@@ -1,37 +1,37 @@
 {
-    "Locale": "America/Sao_Paulo",
-    "OrgData": {
-        "OrganizationFullName": "Company Name",
-        "OrganizationAcronym": "Co",
-        "OrganizationURL": "www.example.site1.com",
-        "DepartamentFullName": "Department Name",
-        "DepartamentAcronym": "Dep",
-        "DepartamentURL": "www.example.site2.com",
-        "SubDepartamentFullName": "Subdepartment Name",
-        "SubDepartamentAcronym": "SubDep",
-        "SubDepartamentURL": "www.example.site3.com",
-        "Email": "email@domain.com",
-        "Phone": "12345678",
-        "LocationCoordinates": "<ENTER YOUR ORG COORDINATES HERE AS XX.XXXXXXXXXX,YY.YYYYYYYYYY, OR LEAVE IT BLANK>"
-    },
     "DbSettings": {
-        "DbUser": "root",
-        "DbPassword": "root",
-        "DbName": "apcsdb",
         "DbIP": "localhost",
-        "DbPort": "3306"
+        "DbName": "apcsdb",
+        "DbPassword": "root",
+        "DbPort": "3306",
+        "DbUser": "root"
     },
-    "PrivilegeLevels": {
-        "ADMINISTRATOR_LEVEL": 0,
-        "STANDARD_LEVEL": 1,
-        "LIMITED_LEVEL": 2
-    },
+    "EmployeeTypes": [
+        "Administrative Worker",
+        "Teacher"
+    ],
     "EntityTypes": [
         "Employee",
         "Student"
     ],
-    "EmployeeTypes": [
-        "Teacher",
-        "Administrative Worker"
-    ]
+    "Locale": "America/Sao_Paulo",
+    "OrgData": {
+        "DepartamentAcronym": "Dep",
+        "DepartamentFullName": "Department Name",
+        "DepartamentURL": "www.example.site2.com",
+        "Email": "email@domain.com",
+        "LocationCoordinates": "<ENTER YOUR ORG COORDINATES HERE AS XX.XXXXXXXXXX,YY.YYYYYYYYYY, OR LEAVE IT BLANK>",
+        "OrganizationAcronym": "Co",
+        "OrganizationFullName": "Company Name",
+        "OrganizationURL": "www.example.site1.com",
+        "Phone": "12345678",
+        "SubDepartamentAcronym": "SubDep",
+        "SubDepartamentFullName": "Subdepartment Name",
+        "SubDepartamentURL": "www.example.site3.com"
+    },
+    "PrivilegeLevels": {
+        "ADMINISTRATOR_LEVEL": 0,
+        "LIMITED_LEVEL": 2,
+        "STANDARD_LEVEL": 1
+    }
 }

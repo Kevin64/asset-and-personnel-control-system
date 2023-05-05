@@ -61,8 +61,8 @@ require_once("connection.php");
 					if (isset($_SESSION["privilegeLevel"])) {
 						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 					?>
-							<li><a href="queryUser.php"><?php echo $translations["QUERY_USERS"] ?></a></li>
-							<li><a href="formAddUser.php"><?php echo $translations["ADD_USER"] ?></a></li>
+							<li><a href="queryAgent.php"><?php echo $translations["QUERY_AGENTS"] ?></a></li>
+							<li><a href="formAddAgent.php"><?php echo $translations["ADD_AGENT"] ?></a></li>
 							<li><a href="formChangePassword.php"><?php echo $translations["CHANGE_PASSWORD"] ?></a></li>
 							<li><a href="logout.php"><?php echo $translations["LOGOUT"] ?></a></li>
 						<?php

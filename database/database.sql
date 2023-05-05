@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `agents`
+-- Table structure for table `agent`
 --
 
-DROP TABLE IF EXISTS `agents`;
+DROP TABLE IF EXISTS `agent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `agents` (
+CREATE TABLE `agent` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -88,14 +88,14 @@ DROP TABLE IF EXISTS `employee`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employee` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `employeeRegistrationNumber` int DEFAULT NULL,
+  `registrationNumber` int DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `phoneExtension` varchar(5) DEFAULT NULL,
   `phoneNumber` varchar(11) DEFAULT NULL,
   `sector` varchar(100) DEFAULT NULL,
   `roomNumber` varchar(5) DEFAULT NULL,
-  `employeeType` tinyint DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -114,7 +114,7 @@ CREATE TABLE `maintenances` (
   `serviceType` tinyint DEFAULT NULL,
   `batteryChange` tinyint DEFAULT NULL,
   `ticketNumber` int DEFAULT NULL,
-  `agent` varchar(45) DEFAULT NULL,
+  `agentId` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -147,4 +147,4 @@ CREATE TABLE `model` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-04  9:25:06
+-- Dump completed on 2023-05-05  9:20:23

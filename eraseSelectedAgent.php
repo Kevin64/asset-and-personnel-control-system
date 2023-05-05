@@ -7,7 +7,7 @@ $delete = $_POST["chkDelete"];
 
 if (isset($delete)) {
 	for ($i = 0; $i < count($delete); $i++) {
-		$query = mysqli_query($connection, "delete from " . $dbAgentsArray["AGENTS_TABLE"] . " where id = '$delete[$i]'") or die($translations["ERROR_DELETE_USER"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "delete from " . $dbAgentArray["AGENTS_TABLE"] . " where id = '$delete[$i]'") or die($translations["ERROR_DELETE_AGENT"] . mysqli_error($connection));
 		if ($_SESSION["id"] == $delete[$i]) {
 			$_SESSION = array();
 			header("Location: index.php");
@@ -16,4 +16,4 @@ if (isset($delete)) {
 }
 
 if (isset($_SESSION["id"]))
-	header("Location: queryUser.php?del=ok");
+	header("Location: queryAgent.php?del=ok");

@@ -28,11 +28,11 @@ if (isset($_SESSION["privilegeLevel"])) {
 		}
 
 		if ($send != 1)
-			$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " order by $orderBy $sort") or die($translations["ERROR_QUERY_USER"] . mysqli_error($connection));
+			$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " order by $orderBy $sort") or die($translations["ERROR_QUERY_AGENT"] . mysqli_error($connection));
 		else {
 			$rdCriterion = $_POST["rdCriterion"];
 			$search = $_POST["txtSearch"];
-			$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+			$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 		}
 
 		$totalusers = mysqli_num_rows($query);
@@ -40,24 +40,24 @@ if (isset($_SESSION["privilegeLevel"])) {
 
 		<div id="middle">
 			<table>
-				<form action=queryUser.php method=post>
+				<form action=queryAgent.php method=post>
 					<input type=hidden name=txtSend value=1>
 				</form>
 			</table>
 			<br><br>
-			<h2><?php echo $translations["USER_LIST"] ?> (<?php echo $totalusers; ?>)
+			<h2><?php echo $translations["AGENT_LIST"] ?> (<?php echo $totalusers; ?>)
 			</h2><br>
-			<form action="eraseSelectedUser.php" method="post">
+			<form action="eraseSelectedAgent.php" method="post">
 				<table id="userData" cellspacing=0>
 					<thead id="header_">
 						<th><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></th>
-						<th><a href="?orderBy=<?php echo $dbAgentsArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
+						<th><a href="?orderBy=<?php echo $dbAgentArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
 						</th>
-						<th><a href="?orderBy=<?php echo $dbAgentsArray["PRIVILEGE_LEVEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></th>
+						<th><a href="?orderBy=<?php echo $dbAgentArray["PRIVILEGE_LEVEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["PRIVILEGE"]["NAME"] ?></a></th>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
-							<th><a href="?orderBy=<?php echo $dbAgentsArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></th>
+							<th><a href="?orderBy=<?php echo $dbAgentArray["LAST_LOGIN_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["LAST_LOGIN_DATE"] ?></a></th>
 						<?php
 						}
 						?>
@@ -66,10 +66,10 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<?php
 						while ($result = mysqli_fetch_array($query)) {
 							$idUser = $result["id"];
-							$username = $result[$dbAgentsArray["USERNAME"]];
-							$privilegeLevel = $result[$dbAgentsArray["PRIVILEGE_LEVEL"]];
-							$lastLoginDate = $result[$dbAgentsArray["LAST_LOGIN_DATE"]];
-							$blocked = $result[$dbAgentsArray["BLOCKED"]];
+							$username = $result[$dbAgentArray["USERNAME"]];
+							$privilegeLevel = $result[$dbAgentArray["PRIVILEGE_LEVEL"]];
+							$lastLoginDate = $result[$dbAgentArray["LAST_LOGIN_DATE"]];
+							$blocked = $result[$dbAgentArray["BLOCKED"]];
 
 							$formatDate1 = substr($lastLoginDate, 0, 10);
 							$formatDate2 = substr($lastLoginDate, 11, 16);
@@ -80,7 +80,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 							<tr id="data">
 								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> disabled <?php } ?> <?php if ($blocked == 1) { ?> disabled <?php } ?>>
 								</td>
-								<td><a href="formDetailUser.php?id=<?php echo $idUser; ?>" <?php if ($blocked == 1) { ?> id=inactive <?php } ?>><?php echo $username; ?></a></td>
+								<td><a href="formDetailAgent.php?id=<?php echo $idUser; ?>" <?php if ($blocked == 1) { ?> id=inactive <?php } ?>><?php echo $username; ?></a></td>
 								<td><label <?php if ($blocked == 1) { ?> id=inactive <?php } ?>>
 										<?php
 										if ($privilegeLevel == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {

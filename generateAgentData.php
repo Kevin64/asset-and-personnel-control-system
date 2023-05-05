@@ -1,21 +1,12 @@
 <?php
 require_once("connection.php");
 
-$message = $translations["SUCCESS_USER_DATA_EXPORT"];
-
-if (isset($_GET["username"]))
-	$username = $_GET["username"];
-if (isset($_GET["password"]))
-	$password = $_GET["password"];
-if (isset($_GET["privilegeLevel"]))
-	$privilegeLevel = $_GET["privilegeLevel"];
-if (isset($_GET["lastLoginDate"]))
-	$lastLoginDate = $_GET["lastLoginDate"];
+$message = $translations["SUCCESS_AGENT_DATA_EXPORT"];
 
 $usersFile = __DIR__ . "/output/users.json";
 $usersChecksum = __DIR__ . "/output/users-checksum.txt";
 
-$query = mysqli_query($connection, "select * from " . $dbAgentsArray["AGENTS_TABLE"] . "") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . "") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $return_arr = array();
 
 if (file_exists($usersFile) || file_exists($usersChecksum)) {
@@ -25,10 +16,10 @@ if (file_exists($usersFile) || file_exists($usersChecksum)) {
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 	$row_array["id"] = $row["id"];
-	$row_array["username"] = $row[$dbAgentsArray["USERNAME"]];
-	$row_array["password"] = $row[$dbAgentsArray["PASSWORD"]];
-	$row_array["privilegeLevel"] = $row[$dbAgentsArray["PRIVILEGE_LEVEL"]];
-	$row_array["lastLoginDate"] = $row[$dbAgentsArray["LAST_LOGIN_DATE"]];
+	$row_array["username"] = $row[$dbAgentArray["USERNAME"]];
+	$row_array["password"] = $row[$dbAgentArray["PASSWORD"]];
+	$row_array["privilegeLevel"] = $row[$dbAgentArray["PRIVILEGE_LEVEL"]];
+	$row_array["lastLoginDate"] = $row[$dbAgentArray["LAST_LOGIN_DATE"]];
 	array_push($return_arr, $row_array);
 
 	$fp = fopen($usersFile, "w");

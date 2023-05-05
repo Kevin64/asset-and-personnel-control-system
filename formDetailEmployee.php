@@ -35,14 +35,14 @@ if ($send != 1) {
 	if (isset($_POST["txtFaltas"]))
 		$faltas = $_POST["txtFaltas"];
 
-	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where " . $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] . " = '$employeeRegistrationNumber'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where " . $dbEmployeeArray["REGISTRATION_NUMBER"] . " = '$employeeRegistrationNumber'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " set " . $dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"] . " = '$employeeRegistrationNumber', " . $dbEmployeeArray["EMPLOYEE_TYPE"] . " = '$employeeType', " . $dbEmployeeArray["NAME"] . " = '$employeeName', " . $dbEmployeeArray["EMAIL"] . " = '$employeeEmail', " . $dbEmployeeArray["PHONE_EXTENSION"] . " = '$employeePhoneExtension', " . $dbEmployeeArray["PHONE_NUMBER"] . " = '$employeePhoneNumber', " . $dbEmployeeArray["SECTOR"] . " = '$employeeSector', " . $dbEmployeeArray["ROOM_NUMBER"] . " = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " set " . $dbEmployeeArray["REGISTRATION_NUMBER"] . " = '$employeeRegistrationNumber', " . $dbEmployeeArray["TYPE"] . " = '$employeeType', " . $dbEmployeeArray["NAME"] . " = '$employeeName', " . $dbEmployeeArray["EMAIL"] . " = '$employeeEmail', " . $dbEmployeeArray["PHONE_EXTENSION"] . " = '$employeePhoneExtension', " . $dbEmployeeArray["PHONE_NUMBER"] . " = '$employeePhoneNumber', " . $dbEmployeeArray["SECTOR"] . " = '$employeeSector', " . $dbEmployeeArray["ROOM_NUMBER"] . " = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $employeeRegistrationNumber == $oldEmployeeRegistrationNumber) {
-		mysqli_query($connection, "update " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " set " . $dbEmployeeArray["EMPLOYEE_TYPE"] . " = '$employeeType', " . $dbEmployeeArray["NAME"] . " = '$employeeName', " . $dbEmployeeArray["EMAIL"] . " = '$employeeEmail', " . $dbEmployeeArray["PHONE_EXTENSION"] . " = '$employeePhoneExtension', " . $dbEmployeeArray["PHONE_NUMBER"] . " = '$employeePhoneNumber', " . $dbEmployeeArray["SECTOR"] . " = '$employeeSector', " . $dbEmployeeArray["ROOM_NUMBER"] . " = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " set " . $dbEmployeeArray["TYPE"] . " = '$employeeType', " . $dbEmployeeArray["NAME"] . " = '$employeeName', " . $dbEmployeeArray["EMAIL"] . " = '$employeeEmail', " . $dbEmployeeArray["PHONE_EXTENSION"] . " = '$employeePhoneExtension', " . $dbEmployeeArray["PHONE_NUMBER"] . " = '$employeePhoneNumber', " . $dbEmployeeArray["SECTOR"] . " = '$employeeSector', " . $dbEmployeeArray["ROOM_NUMBER"] . " = '$employeeRoom' where id = '$idEmployee'") or die($translations["ERROR_UPDATE_EMPLOYEE_DATA"] . mysqli_error($connection));
 	}
 	$query = mysqli_query($connection, "select * from " . $dbEmployeeArray["EMPLOYEE_TABLE"] . " where id = '$idEmployee'") or die($translations["ERROR_SHOW_DETAIL_EMPLOYEE"] . mysqli_error($connection));
 }
@@ -57,9 +57,9 @@ if ($send != 1) {
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $employeeRegistrationNumber != $oldEmployeeRegistrationNumber) {
-				echo "<font color=red>" . $translations["EMPLOYEE_ALREADY_EXIST"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["ERROR"] . ">" . $translations["EMPLOYEE_ALREADY_EXIST"] . "</font><br><br>";
 			} else {
-				echo "<font color=blue>" . $translations["SUCCESS_UPDATE_EMPLOYEE_DATA"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["SUCCESS_REGISTER"] . ">" . $translations["SUCCESS_UPDATE_EMPLOYEE_DATA"] . "</font><br><br>";
 			}
 		}
 		?>
@@ -68,9 +68,9 @@ if ($send != 1) {
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
 				$idEmployee = $result["id"];
-				$employeeRegistrationNumber = $result[$dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"]];
-				$oldEmployeeRegistrationNumber = $result[$dbEmployeeArray["EMPLOYEE_REGISTRATION_NUMBER"]];
-				$employeeType = $result[$dbEmployeeArray["EMPLOYEE_TYPE"]];
+				$employeeRegistrationNumber = $result[$dbEmployeeArray["REGISTRATION_NUMBER"]];
+				$oldEmployeeRegistrationNumber = $result[$dbEmployeeArray["REGISTRATION_NUMBER"]];
+				$employeeType = $result[$dbEmployeeArray["TYPE"]];
 				$employeeName = $result[$dbEmployeeArray["NAME"]];
 				$employeeEmail = $result[$dbEmployeeArray["EMAIL"]];
 				$employeePhoneExtension = $result[$dbEmployeeArray["PHONE_EXTENSION"]];
@@ -132,7 +132,7 @@ if ($send != 1) {
 					<?php
 					if ($employeeRegistrationNumber == "" || $employeeType == null || $employeeName == "" || $employeeEmail == "" || $employeePhoneNumber == "" || $employeeSector == "") {
 					?>
-						<td colspan=2 style="color:red;"><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
+						<td colspan=2 style=color:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
 					<?php
 					} else {
 					?>

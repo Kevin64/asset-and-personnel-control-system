@@ -3,19 +3,6 @@ require_once("connection.php");
 
 $message = $translations["SUCCESS_MODEL_DATA_EXPORT"];
 
-if (isset($_GET["brand"]))
-	$brand = $_GET["brand"];
-if (isset($_GET["model"]))
-	$model = $_GET["model"];
-if (isset($_GET["fwVersion"]))
-	$fwVersion = $_GET["fwVersion"];
-if (isset($_GET["fwType"]))
-	$hwType = $_GET["fwType"];
-if (isset($_GET["tpmVersion"]))
-	$tpmVersion = $_GET["tpmVersion"];
-if (isset($_GET["mediaOperationMode"]))
-	$mediaOperationMode = $_GET["mediaOperationMode"];
-
 $modelFile = __DIR__ . "/output/model.json";
 $modelChecksum = __DIR__ . "/output/model-checksum.txt";
 
