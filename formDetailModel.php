@@ -91,17 +91,17 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtBrand placeholder="Ex.: Dell, Hewlett-Packard, LENOVO, etc" required value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td><input type=text name=txtBrand placeholder="<?php echo $translations["PLACEHOLDER_MODEL_BRAND"] ?>" required value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdModel value="<?php echo $idModel; ?>">
 					<input type=hidden name=txtOldModel value="<?php echo $oldModel; ?>">
-					<td><input type=text name=txtModel placeholder="Ex.: 9010, 6005, etc" required value="<?php echo $model; ?>"></td>
+					<td><input type=text name=txtModel placeholder="<?php echo $translations["PLACEHOLDER_MODEL_MODEL"] ?>" required value="<?php echo $model; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtFwVersion placeholder="Ex.: A30, 1.17, etc" required value="<?php echo $fwVersion; ?>"></td>
+					<td><input type=text name=txtFwVersion placeholder="<?php echo $translations["PLACEHOLDER_MODEL_FW_VERSION"] ?>" required value="<?php echo $fwVersion; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label"><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>

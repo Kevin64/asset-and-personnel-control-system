@@ -18,15 +18,15 @@ if (isset($_SESSION["privilegeLevel"])) {
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtBrand placeholder="Ex.: Dell, Hewlett-Packard, LENOVO, etc" required></td>
+						<td><input type=text name=txtBrand placeholder="<?php echo $translations["PLACEHOLDER_MODEL_BRAND"] ?>" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtModel placeholder="Ex.: 9010, 6005, etc" required></td>
+						<td><input type=text name=txtModel placeholder="<?php echo $translations["PLACEHOLDER_MODEL_MODEL"] ?>" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
-						<td><input type=text name=txtFwVersion placeholder="Ex.: A30, 1.17, etc" required></td>
+						<td><input type=text name=txtFwVersion placeholder="<?php echo $translations["PLACEHOLDER_MODEL_FW_VERSION"] ?>" required></td>
 					</tr>
 					<tr>
 						<td id="label"><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>

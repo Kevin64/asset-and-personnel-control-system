@@ -7,7 +7,8 @@ $send = null;
 $idAsset = null;
 $assetFK = null;
 $oldAssetNumber = null;
-$printed = false;
+$printedDelivery = false;
+$printedMaintenances = false;
 
 if (isset($_POST["txtSend"]))
 	$send = $_POST["txtSend"];
@@ -170,7 +171,7 @@ if ($send != 1) {
 					</td>
 					<input type=hidden name=txtIdAsset value="<?php echo $idAsset; ?>">
 					<input type=hidden name=txtOldAssetNumber value="<?php echo $oldAssetNumber; ?>">
-					<td colspan=5><input type=text name=txtAssetNumber placeholder="Ex.: 123456" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
+					<td colspan=5><input type=text name=txtAssetNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NUMBER"] ?>" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id="label">
@@ -193,7 +194,7 @@ if ($send != 1) {
 					<td id="label">
 						<?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark>
 					</td>
-					<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="Ex.: 4413" maxlength="5" required value="<?php echo $roomNumber; ?>" <?php if ($roomNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_ROOM_NUMBER"] ?>" maxlength="5" required value="<?php echo $roomNumber; ?>" <?php if ($roomNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id="label">
@@ -221,19 +222,26 @@ if ($send != 1) {
 								<label>
 									<?php
 									echo $resultUsers[$dbAgentArray["USERNAME"]];
+									$printedDelivery = true;
 									?>
 								</label>
-						<?php
+							<?php
 							}
 						}
 						?>
+						<label>
+							<?php
+							if ($printedDelivery != true)
+								echo "-";
+							?>
+						</label>
 					</td>
 				</tr>
 				<tr>
 					<td id="label">
 						<?php echo $translations["NOTE"] ?>
 					</td>
-					<td colspan=5><textarea name=txtNote cols=20 rows=2 placeholder="Opcional: Campo dedicado para observações e notas referente ao bem patrimonial"><?php echo $note; ?></textarea>
+					<td colspan=5><textarea name=txtNote cols=20 rows=2 placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NOTE"] ?>"><?php echo $note; ?></textarea>
 					</td>
 				</tr>
 		</table>
@@ -315,7 +323,7 @@ if ($send != 1) {
 								<?php
 								if ($resultFormatPrevious[$dbMaintenancesArray["AGENT_ID"]] == $resultUsers["id"]) {
 									echo $resultUsers[$dbAgentArray["USERNAME"]];
-									$printed = true;
+									$printedMaintenances = true;
 									break;
 								}
 								?>
@@ -325,7 +333,7 @@ if ($send != 1) {
 						?>
 						<label>
 							<?php
-							if ($printed != true)
+							if ($printedMaintenances != true)
 								echo "-";
 							?>
 						</label>
