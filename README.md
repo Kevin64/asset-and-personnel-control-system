@@ -12,7 +12,7 @@ The APCS system proposes a simplified management of IT assets and personnel for 
 ## Installation
 
 The following instructions will be using Apache as the web server in a Linux host. After you install and configure the required software, follow the steps below.
-1. Download the latest release package.
+1. Download the latest release package into a folder (e.g. Downloads).
 2. Open the terminal and type:
   - $ cd Downloads
   - $ sudo mkdir /var/www/apcs
@@ -37,4 +37,5 @@ The following instructions will be using Apache as the web server in a Linux hos
   - $ sudo a2dissite 000-default.conf
   - $ sudo a2ensite apcs.conf
   - $ sudo systemctl restart apache2
-5. Open your browser and type http://localhost at the address bar, to test if the procedure worked.
+
+6. Open your browser and type http://localhost/setup/setup.php in the address bar, to create the first admin user.
