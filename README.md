@@ -37,4 +37,4 @@ The following instructions will be using Apache as the web server in a Linux hos
   - $ sudo a2dissite 000-default.conf
   - $ sudo a2ensite apcs.conf
   - $ sudo systemctl restart apache2
-  - 
+5. Open your browser and type http://localhost at the address bar, to test if the procedure worked.
