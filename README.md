@@ -21,5 +21,20 @@ The following instructions will be using Apache as the web server in a Linux hos
   - mysql> CREATE DATABASE IF NOT EXISTS apcs;
   - mysql> exit
   - $ sudo mysql -u root -p apcs < /var/www/apcs/database/database.sql
+  - $ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/apcs.conf
+  - $ sudo nano /etc/apache2/sites-available/apcs.conf
+3. Copy the content below into the apcs.conf file
+    <VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/apcs
+        <FilesMatch ".+\.ph(ar|p|tml)$">
+            SetHandler "proxy:unix:/run/php/php8.0-fpm.sock|fcgi://localhost"
+        </FilesMatch>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+4. Back in the terminal
+  - $ sudo a2dissite 000-default.conf
+  - $ sudo a2ensite apcs.conf
+  - $ sudo systemctl restart apache2
   - 
-3. 
