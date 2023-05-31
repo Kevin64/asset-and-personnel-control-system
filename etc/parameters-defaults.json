@@ -1,4 +1,7 @@
 {
+    "__comment1__": "SecureBootStates and VirtualizationTechnologyStates values are: 0 for 'Not supported', 1 for 'Disabled' and 2 for 'Enabled'",
+    "__comment2__": "ServiceTypes values are: 0 for 'Formatting' and 1 for 'Maintenance'",
+
     "Parameters": {
         "Buildings": [
             "Building0",

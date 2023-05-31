@@ -1,15 +1,18 @@
 {
+    "__comment1__": "URLs must have http:// or https:// at the beginning",
+    "__comment2__": "Value for LocationCoordinates key must be set or the foot text will be broken",
+
     "Locale": "America/Sao_Paulo",
     "OrgData": {
         "OrganizationFullName": "Company Name",
         "OrganizationAcronym": "Co",
-        "OrganizationURL": "www.example.site1.com",
+        "OrganizationURL": "https://www.example.site1.com",
         "DepartamentFullName": "Department Name",
         "DepartamentAcronym": "Dep",
-        "DepartamentURL": "www.example.site2.com",
+        "DepartamentURL": "https://www.example.site2.com",
         "SubDepartamentFullName": "Subdepartment Name",
         "SubDepartamentAcronym": "SubDep",
-        "SubDepartamentURL": "www.example.site3.com",
+        "SubDepartamentURL": "https://www.example.site3.com",
         "Email": "email@domain.com",
         "Phone": "12345678",
         "LocationCoordinates": "<ENTER YOUR ORG COORDINATES HERE AS XX.XXXXXXXXXX,YY.YYYYYYYYYY, OR LEAVE IT BLANK>"
