@@ -6,10 +6,6 @@ $lastDeliveryDate = $_GET[$dbAssetArray["LAST_DELIVERY_DATE"]];
 $deliveredToRegistrationNumber = $_GET[$dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
 $lastDeliveryMadeBy = $_GET[$dbAssetArray["LAST_DELIVERY_MADE_BY"]];
 
-$delivDate = substr($lastDeliveryDate, 0, 10);
-$explodedDate = explode("/", $delivDate);
-$lastDeliveryDate = $explodedDate[2] . "-" . $explodedDate[1] . "-" . $explodedDate[0];
-
 $queryGetAsset = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 $total = mysqli_num_rows($queryGetAsset);
 
