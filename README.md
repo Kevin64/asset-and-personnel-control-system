@@ -1,6 +1,6 @@
 # Asset and Personnel Control System (APCS)
 
-The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with the AIR and FOP softwares for all its features to work properly.
+The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with the [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) softwares for all its features to work properly.
 
 ## Requirements
 
