@@ -4,15 +4,15 @@ The APCS system proposes a simplified management of IT assets and personnel for 
 
 ## Requirements
 
-- Linux or Windows
-- Apache or IIS
-- PHP 8.0 (with MySQLi extension installed)
-- MySQL 8.0
+- **Host OS:** Linux or Windows
+- **Web Server:** Apache or IIS
+- **PHP version:** 8.0 (with MySQLi extension installed)
+- **MySQL version:** 8.0
 
 ## Installation
 
-The following instructions will be using Apache as the web server in a Linux host. After you install and configure the required software, follow the steps below.
-1. Download the latest release package into a folder (e.g. Downloads).
+The following instructions will be using Apache as the web server in a Debian-based Linux host. After you install and configure the required software, follow the steps below.
+1. Download the [latest release](https://github.com/Kevin64/asset-and-personnel-control-system/releases/latest) package into a folder (e.g. Downloads).
 2. Open the terminal and type:
 ```bash
 $ cd Downloads
@@ -21,12 +21,12 @@ $ sudo unzip APCS* -d /var/www/apcs
 $ sudo cp /var/www/apcs/etc/db-config-defaults.json /var/www/apcs/etc/db-config.json
 $ sudo cp /var/www/apcs/etc/parameters-defaults.json /var/www/apcs/etc/parameters.json
 $ sudo mysql -u root -p
-mysql> CREATE DATABASE IF NOT EXISTS apcs;
+mysql> CREATE DATABASE IF NOT EXISTS apcsdb;
 mysql> exit
-$ sudo mysql -u root -p apcs < /var/www/apcs/database/database.sql
+$ sudo mysql -u root -p apcsdb < /var/www/apcs/database/database.sql
 $ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/apcs.conf
 ```
-3. Open `apcs.conf` file and copy the contents below into it, modifying the server port, ServerAdmin, and other virtual host details if desired.
+3. Open `apcs.conf` file and copy the contents below into it, modifying the server port, ServerAdmin, and other virtual host details if desired:
 ```bash
 $ sudo nano /etc/apache2/sites-available/apcs.conf
 ```
@@ -38,13 +38,13 @@ $ sudo nano /etc/apache2/sites-available/apcs.conf
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-4. In terminal, disable the default Apache site and enable APCS' one.
+4. Disable the default Apache site and enable APCS' one:
 ```bash
 $ sudo a2dissite 000-default.conf
 $ sudo a2ensite apcs.conf
 $ sudo systemctl restart apache2
 ```
-5. Modify the `db-config.json` file, entering your database access credentials, organization identity data and locale:
+5. Modify the `db-config.json` file, entering your database access credentials in `DbSettings`, organization identity data in `OrgData` and `Locale`:
 ```bash
 $ sudo nano /var/www/apcs/etc/db-config.json
 ```
@@ -52,9 +52,13 @@ $ sudo nano /var/www/apcs/etc/db-config.json
 ```bash
 $ sudo nano /var/www/apcs/etc/parameters.json
 ```
-7. Open your browser and type `http://localhost/setup/setup.php` in the address bar, to create the first administrator user.
-8. After the admin creation, delete the `setup` folder.
+7. Set permissions for `/var/www/apcs/output`, allowing [AIR](https://github.com/Kevin64/asset-information-and-registration) to generate JSON files:
+```bash
+$ sudo chmod 777 /var/www/apcs/output/
+```
+8. Open your browser and type `http://localhost/setup/setup.php` in the address bar, to create the first administrator user.
+9. After the admin creation, delete the `setup` folder:
 ```bash
 $ sudo rm -r /var/www/apcs/setup
 ```
-9. Your system is ready to use. Type `http://localhost/index.php` in the address bar, to start using it.
+10. Your system is ready to use. Type `http://localhost/index.php` in the address bar, to start using it.
