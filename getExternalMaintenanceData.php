@@ -29,9 +29,9 @@ $mediaOperationMode = $_GET[$dbAssetArray["MEDIA_OPERATION_MODE"]];
 $secureBoot = $_GET[$dbAssetArray["SECURE_BOOT"]];
 $virtualizationTechnology = $_GET[$dbAssetArray["VIRTUALIZATION_TECHNOLOGY"]];
 $tpmVersion = $_GET[$dbAssetArray["TPM_VERSION"]];
-$batteryChange = $_GET[$dbAssetArray["BATTERY_CHANGE"]];
-$ticketNumber = $_GET[$dbAssetArray["TICKET_NUMBER"]];
-$agent = $_GET[$dbAssetArray["AGENT_ID"]];
+$batteryChange = $_GET[$dbMaintenancesArray["BATTERY_CHANGE"]];
+$ticketNumber = $_GET[$dbMaintenancesArray["TICKET_NUMBER"]];
+$agent = $_GET[$dbMaintenancesArray["AGENT_ID"]];
 
 $serviceType = $serviceTypesArray[1];
 
