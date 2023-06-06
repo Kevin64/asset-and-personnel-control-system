@@ -6,6 +6,7 @@ $language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
 $lang_file = '/lang/' . $language . '.json';
 $lang_file_content = file_get_contents(__DIR__ . $lang_file);
 $translations = json_decode($lang_file_content, true);
+$line = null;
 
 $jsonFileDb = file_get_contents(__DIR__ . "/etc/db-config.json");
 $jsonFileParameters = file_get_contents(__DIR__ . "/etc/parameters.json");
@@ -59,3 +60,10 @@ $dbIP = $dbSettingsArray["DbIP"];
 $dbPort = $dbSettingsArray["DbPort"];
 
 $connection = mysqli_connect($dbIP, $dbUser, $dbpassword, $dbName, $dbPort) or die($translations["ERROR_CONNECTING_DATABASE"] . mysqli_error($connection));
+
+if ($file = fopen("etc/version", "r")) {
+	while (!feof($file)) {
+		$line = fgets($file);
+	}
+	fclose($file);
+}

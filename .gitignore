@@ -6,3 +6,4 @@ phpinfo.php
 output/
 etc/db-config.json
 etc/parameters.json
+vendor/

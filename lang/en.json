@@ -44,10 +44,11 @@
     "BUILDING": "Building",
     "CHANGE_AGENT_PASSWORD": "Change agent password",
     "CHANGE_PASSWORD": "Change password",
+    "CLICK_HERE_TO_DOWNLOAD": "Click here to download",
     "COMPUTER_DATA": "Equipment data",
     "CURRENT_PASSWORD": "Current password",
     "DELIVERED_TO_REGISTRATION_NUMBER": "Last delivery recipient registration number",
-    "DEVELOPERS_TEXT": "The APCS system proposes a simplified management of IT assets and personnel for small organizations. Created, developed and maintained by Kevin Costa, using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. <br> &nbsp;&nbsp; ► Asset and Personnel Control System - APCS<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system>Repository (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system/blob/main/LICENSE>License (MIT)</a><br><br> This system must be used in conjunction with the AIR and FOP softwares for all its features to work properly.<br> &nbsp;&nbsp; ► Asset Information and Registration - AIR<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-information-and-registration>Repository (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/asset-information-and-registration/blob/master/LICENSE>License (MIT)</a><br> &nbsp;&nbsp; ► Features Overlay Presentation - FOP<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/features-overlay-presentation>Repository (GitHub)</a><br> &nbsp;&nbsp; • <a id=linksameline href=https://github.com/Kevin64/features-overlay-presentation/blob/master/LICENSE>License (MIT)</a>",
+    "DEVELOPERS_TEXT": "The APCS system proposes a simplified management of IT assets and personnel for small organizations. Created, developed and maintained by Kevin Costa, using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. <br> &nbsp;&nbsp; ► Asset and Personnel Control System - APCS<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a target=_blank id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system>Repository (GitHub)</a><br> &nbsp;&nbsp; • <a target=_blank id=linksameline href=https://github.com/Kevin64/asset-and-personnel-control-system/blob/main/LICENSE>License (MIT)</a><br><br> This system must be used in conjunction with the AIR and FOP softwares for all its features to work properly.<br> &nbsp;&nbsp; ► Asset Information and Registration - AIR<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a target=_blank id=linksameline href=https://github.com/Kevin64/asset-information-and-registration>Repository (GitHub)</a><br> &nbsp;&nbsp; • <a target=_blank id=linksameline href=https://github.com/Kevin64/asset-information-and-registration/blob/master/LICENSE>License (MIT)</a><br> &nbsp;&nbsp; ► Features Overlay Presentation - FOP<br> &nbsp;&nbsp; • Copyright © 2023 Kevin Vinícius Teixeira Costa<br> &nbsp;&nbsp; • <a target=_blank id=linksameline href=https://github.com/Kevin64/features-overlay-presentation>Repository (GitHub)</a><br> &nbsp;&nbsp; • <a target=_blank id=linksameline href=https://github.com/Kevin64/features-overlay-presentation/blob/master/LICENSE>License (MIT)</a>",
     "DISABLED": "Disabled",
     "DISCARDED_ASSET_QUESTION": "Asset sent for disposal?",
     "EMPLOYEE": "Employees",
@@ -135,6 +136,7 @@
     "NEED_FORMATTING_FIRST": "A formatting record is required first!",
     "NEW_ASSET_REGISTERING_DATA": "Computer successfully registered!",
     "NEW_PASSWORD": "New password",
+    "NEW_VERSION_AVAILABLE": "New version available",
     "NO": "No",
     "NONE": "None",
     "NOTE": "Observation",
@@ -232,5 +234,6 @@
         "NAME": "Virtualization Technology"
     },
     "WEBSERVER_VERSION": "Web Server software: ",
-    "YES": "Yes"
+    "YES": "Yes",
+    "YOUR_SYSTEM_IS_UP_TO_DATE": "Your system is up-to-date!"
 }
