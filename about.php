@@ -25,7 +25,7 @@ require_once("updateChecker.php");
 					<?php if (version_compare($line, $gitHubVersion) >= 0) { ?>
 						<font color=<?php echo $colorArray["UPDATED"]; ?>><?php echo $translations["YOUR_SYSTEM_IS_UP_TO_DATE"]; ?></font>
 					<?php } else { ?>
-						<font color=<?php echo $colorArray["UPDATE_AVAILABLE"]; ?>><?php echo $translations["UPDATE_AVAILABLE"] . ": "; ?></b></font><?php echo $release["tag_name"] . " - ";
+						<font color=<?php echo $colorArray["UPDATE_AVAILABLE"]; ?>><?php echo $translations["UPDATE_AVAILABLE"] . " "; ?></b></font><?php echo $release["tag_name"] . " - ";
 																							?><a target=_blank id=linksameline href=<?php echo $release["html_url"]; ?>><?php echo $translations["CLICK_HERE_TO_DOWNLOAD"] ?></a><?php } ?>
 				</p>
 			</fieldset>

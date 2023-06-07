@@ -10,7 +10,7 @@
         "NOT_IN_USE": "red",
         "SUCCESS_EXPORT_BACKGROUND": "blue",
         "SUCCESS_REGISTER_BACKGROUND": "green",
-        "UPDATE_AVAILABLE": "GoldenRod",
+        "UPDATE_AVAILABLE": "CornflowerBlue",
         "UPDATED": "lime"
     },
     "DB_AGENT": {
