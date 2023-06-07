@@ -6,6 +6,7 @@ $language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
 $lang_file = '/lang/' . $language . '.json';
 $lang_file_content = file_get_contents(__DIR__ . $lang_file);
 $translations = json_decode($lang_file_content, true);
+$gitHubVersion = null;
 $line = null;
 
 $jsonFileDb = file_get_contents(__DIR__ . "/etc/db-config.json");

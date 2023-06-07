@@ -1,6 +1,3 @@
-<?php
-require_once("connection.php");
-?>
 <div id="menu">
 	<nav>
 		<ul>

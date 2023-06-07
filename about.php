@@ -1,11 +1,8 @@
 <?php
 require_once("top.php");
 require_once("menu.php");
-require_once __DIR__ . '/vendor/autoload.php';
+require_once("updateChecker.php");
 
-$client = new \Github\Client();
-$release = $client->api('repo')->releases()->latest('Kevin64', 'asset-and-personnel-control-system');
-$gitHubVersion = substr($release["tag_name"], 1);
 ?>
 
 <div id="container">
@@ -24,10 +21,11 @@ $gitHubVersion = substr($release["tag_name"], 1);
 					<b><?php echo $translations["WEBSERVER_VERSION"] ?></b><?php echo $_SERVER["SERVER_SOFTWARE"]; ?><br>
 					<b><?php echo $translations["PHP_VERSION"] ?></b><?php echo phpversion(); ?><br>
 					<b><?php echo $translations["MYSQL_VERSION"] ?></b><?php echo mysqli_get_server_info($connection); ?><br>
+					<b><?php echo $translations["UPDATES"] ?></b>
 					<?php if (version_compare($line, $gitHubVersion) >= 0) { ?>
-						<b><?php echo $translations["YOUR_SYSTEM_IS_UP_TO_DATE"]; ?></b>
+						<font color=<?php echo $colorArray["UPDATED"]; ?>><?php echo $translations["YOUR_SYSTEM_IS_UP_TO_DATE"]; ?></font>
 					<?php } else { ?>
-						<b><?php echo $translations["NEW_VERSION_AVAILABLE"] . ": "; ?></b><?php echo $release["tag_name"] . " - ";
+						<font color=<?php echo $colorArray["UPDATE_AVAILABLE"]; ?>><?php echo $translations["UPDATE_AVAILABLE"] . ": "; ?></b></font><?php echo $release["tag_name"] . " - ";
 																							?><a target=_blank id=linksameline href=<?php echo $release["html_url"]; ?>><?php echo $translations["CLICK_HERE_TO_DOWNLOAD"] ?></a><?php } ?>
 				</p>
 			</fieldset>

@@ -1,13 +1,17 @@
 {
     "APCS": "Asset and Personnel Control System - APCS",
+    "GITHUB_REPO_NAME": "asset-and-personnel-control-system",
+    "GITHUB_REPO_OWNER": "Kevin64",
     "COLOR": {
         "ERROR": "red",
         "IN_USE": "green",
         "MISSING_DATA_BACKGROUND": "firebrick",
         "MISSING_DATA_FOREGROUND": "white",
         "NOT_IN_USE": "red",
-        "SUCCESS_EXPORT": "blue",
-        "SUCCESS_REGISTER": "green"
+        "SUCCESS_EXPORT_BACKGROUND": "blue",
+        "SUCCESS_REGISTER_BACKGROUND": "green",
+        "UPDATE_AVAILABLE": "GoldenRod",
+        "UPDATED": "lime"
     },
     "DB_AGENT": {
         "AGENTS_TABLE": "agent",

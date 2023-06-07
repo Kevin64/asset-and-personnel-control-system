@@ -25,7 +25,7 @@ if (mysqli_num_rows($query) == 0) {
 		if ($verifyPasswordAlt) {
 			if ($password == $currentPassword) {
 				$queryChangePassword = mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["PASSWORD"] . " = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
-				$message = "<font color=" . $colorArray["SUCCESS_REGISTER"] . ">" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
+				$message = "<font color=" . $colorArray["SUCCESS_REGISTER_BACKGROUND"] . ">" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
 			} else {
 				$message = "<font color=" . $colorArray["ERROR"] . ">" . $translations["OLD_PASSWORD_NOT_MATCH"] . "</font>";
 			}
@@ -35,7 +35,7 @@ if (mysqli_num_rows($query) == 0) {
 	} else {
 		if ($verifyPasswordAlt) {
 			$queryChangePassword = mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["PASSWORD"] . " = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
-			$message = "<font color=". $colorArray["SUCCESS_REGISTER"] . ">" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
+			$message = "<font color=". $colorArray["SUCCESS_REGISTER_BACKGROUND"] . ">" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
 		} else {
 			$message = "<font color=" . $colorArray["ERROR"] . ">" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
 		}

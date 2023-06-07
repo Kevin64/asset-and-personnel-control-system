@@ -4,8 +4,6 @@
 
 <?php
 
-require_once("connection.php");
-
 $userAgent = !empty($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
 
 $android = str_contains($userAgent, "Android");
@@ -17,6 +15,8 @@ $devices = array($android, $iphone, $ipad);
 if (!isset($_SESSION)) {
 	session_start();
 }
+
+require_once("connection.php");
 
 ?>
 

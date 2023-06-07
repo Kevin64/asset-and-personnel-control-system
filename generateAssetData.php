@@ -60,7 +60,7 @@ if (isset($_GET["assetNumber"])) {
 		<title></title>
 	</head>
 
-	<body bgcolor=<?php echo $colorArray["SUCCESS_EXPORT"] ?>>
+	<body bgcolor=<?php echo $colorArray["SUCCESS_EXPORT_BACKGROUND"] ?>>
 		<center>
 			<font size=3 color=white><b><?php echo $messageSuccess; ?></b></font>
 		</center>

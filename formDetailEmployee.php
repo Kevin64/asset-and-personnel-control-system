@@ -59,7 +59,7 @@ if ($send != 1) {
 			if ($num_rows > 0 && $employeeRegistrationNumber != $oldEmployeeRegistrationNumber) {
 				echo "<font color=" . $colorArray["ERROR"] . ">" . $translations["EMPLOYEE_ALREADY_EXIST"] . "</font><br><br>";
 			} else {
-				echo "<font color=" . $colorArray["SUCCESS_REGISTER"] . ">" . $translations["SUCCESS_UPDATE_EMPLOYEE_DATA"] . "</font><br><br>";
+				echo "<font color=" . $colorArray["SUCCESS_REGISTER_BACKGROUND"] . ">" . $translations["SUCCESS_UPDATE_EMPLOYEE_DATA"] . "</font><br><br>";
 			}
 		}
 		?>

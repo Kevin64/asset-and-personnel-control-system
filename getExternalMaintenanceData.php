@@ -52,7 +52,7 @@ if ($total >= 1) {
 		<title></title>
 	</head>
 
-	<body bgcolor=<?php echo $colorArray["SUCCESS_REGISTER"] ?>>
+	<body bgcolor=<?php echo $colorArray["SUCCESS_REGISTER_BACKGROUND"] ?>>
 		<center>
 			<hr style="height:0pt; visibility:hidden;" />
 			<font size=3 color=white><b><?php echo $message; ?></b></font>

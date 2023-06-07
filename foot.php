@@ -46,8 +46,8 @@ require_once("connection.php");
 	</div>
 	<div>
 		<div id="foot-down" style="font-size:14px;">
-			<b><?php echo $json_constants_array["APCS"] ?></b><br>
-			<b><?php echo $translations["APCS_VERSION"] ?></b><?php echo $line ?><br>
+			<b><?php echo $json_constants_array["APCS"]; ?></b><br>
+			<b><?php echo $translations["APCS_VERSION"]; ?></b><?php echo $line; ?><br>
 		</div>
 	</div>
 </div>
