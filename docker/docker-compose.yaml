@@ -1,0 +1,39 @@
+version: "3.2"
+services:
+  php:
+    build: './php/'
+    networks:
+      - backend
+    volumes:
+      - ..:/var/www/html/
+    links:
+      - 'mysql'
+  apache:
+    build: './apache/'
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ..:/var/www/html/
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    environment:
+      MYSQL_DATABASE: apcsdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ../database:/docker-entrypoint-initdb.d
+networks:
+  frontend:
+  backend:

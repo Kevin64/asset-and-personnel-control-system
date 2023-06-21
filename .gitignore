@@ -3,7 +3,5 @@
 *.cmd
 phpinfo.php
 .vscode/
-output/
 etc/db-config.json
 etc/parameters.json
-vendor/
