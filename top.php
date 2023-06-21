@@ -1,3 +1,11 @@
+<?php
+
+if (!isset($_SESSION)) {
+	session_start();
+}
+
+?>
+
 <!DOCTYPE html>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +19,6 @@ $iphone = str_contains($userAgent, "iPhone");
 $ipad = str_contains($userAgent, "iPad");
 
 $devices = array($android, $iphone, $ipad);
-
-if (!isset($_SESSION)) {
-	session_start();
-}
 
 require_once("connection.php");
 
