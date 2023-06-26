@@ -1,6 +1,6 @@
 # Asset and Personnel Control System (APCS)
 
-The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with the [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) softwares for all its features to work properly.
+The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with the [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) software for all its features to work properly.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ $ sudo systemctl restart apache2
 ```bash
 $ sudo nano /var/www/apcs/etc/db-config.json
 ```
-6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The default values for `FirmwareTypes`, `TpmTypes`, `MediaOperationTypes`, `SecureBootStates`, `VirtualizationTechnologyStates` and `ServiceType` covers a good chunk of real world possibilities, and it is not recommended changing it, because [AIR](https://github.com/Kevin64/asset-information-and-registration) depends on these values:
+6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The default values for `FirmwareTypes`, `TpmTypes`, `MediaOperationTypes`, `SecureBootStates`, `VirtualizationTechnologyStates` and `ServiceType` cover a good chunk of real world possibilities, and it is not recommended changing it, because [AIR](https://github.com/Kevin64/asset-information-and-registration) depends on these values:
 ```bash
 $ sudo nano /var/www/apcs/etc/parameters.json
 ```
