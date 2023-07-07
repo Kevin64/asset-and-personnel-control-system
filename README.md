@@ -6,7 +6,7 @@ The APCS system proposes a simplified management of IT assets and personnel for 
 
 - **Host OS:** Linux or Windows
 - **Web Server:** Apache or IIS
-- **PHP version:** 8.0 (with MySQLi extension installed)
+- **PHP version:** 8.1 (with MySQLi extension installed)
 - **MySQL version:** 8.0
 
 ## Installation
