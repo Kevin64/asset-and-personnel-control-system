@@ -62,7 +62,7 @@ $dbPort = $dbSettingsArray["DbPort"];
 
 $connection = mysqli_connect($dbIP, $dbUser, $dbpassword, $dbName, $dbPort) or die($translations["ERROR_CONNECTING_DATABASE"] . mysqli_error($connection));
 
-if ($file = fopen("etc/version", "r")) {
+if ($file = fopen(__DIR__ . "/etc/version", "r")) {
 	while (!feof($file)) {
 		$line = fgets($file);
 	}

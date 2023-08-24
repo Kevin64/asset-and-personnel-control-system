@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^api/asset/([0-9]{0,6})$ api/asset.php?assetNumber=$1 [L]
+RewriteRule ^api/agent/([0-9a-zA-Z]*)$ api/agent.php?username=$1 [NC,L]
+RewriteRule ^api/model/([0-9a-zA-Z]*)$ api/model.php?model=$1 [NC,L]
