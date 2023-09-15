@@ -11,10 +11,12 @@
         "SUCCESS_EXPORT_BACKGROUND": "blue",
         "SUCCESS_REGISTER_BACKGROUND": "green",
         "UPDATE_AVAILABLE": "CornflowerBlue",
-        "UPDATED": "lime"
+        "UPDATED": "lime",
+        "OPERATIONAL": "lime",
+        "NON_OPERATIONAL": "firebrick"
     },
     "DB_AGENT": {
-        "AGENTS_TABLE": "agent",
+        "AGENTS_TABLE": "apcs_agent",
         "BLOCKED": "blocked",
         "LAST_LOGIN_DATE": "lastLoginDate",
         "PASSWORD": "password",
@@ -24,7 +26,7 @@
     "DB_ASSET": {
         "AD_REGISTERED": "adRegistered",
         "ASSET_NUMBER": "assetNumber",
-        "ASSET_TABLE": "asset",
+        "ASSET_TABLE": "apcs_asset",
         "BRAND": "brand",
         "BUILDING": "building",
         "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
@@ -43,7 +45,11 @@
         "NOTE": "note",
         "OPERATING_SYSTEM": "operatingSystem",
         "PROCESSOR": "processor",
-        "RAM": "ram",
+        "RAM_AMOUNT": "ramAmount",
+        "RAM_TYPE": "ramType",
+        "RAM_FREQUENCY": "ramFrequency",
+        "TOTAL_RAM_SLOTS": "totalRamSlots",
+        "OCCUPIED_RAM_SLOTS": "occupiedRamSlots",
         "ROOM_NUMBER": "roomNumber",
         "SEAL_NUMBER": "sealNumber",
         "SECURE_BOOT": "secureBoot",
@@ -59,7 +65,7 @@
     },
     "DB_EMPLOYEE": {
         "EMAIL": "email",
-        "EMPLOYEE_TABLE": "employee",
+        "EMPLOYEE_TABLE": "apcs_employee",
         "NAME": "name",
         "PHONE_EXTENSION": "phoneExtension",
         "PHONE_NUMBER": "phoneNumber",
@@ -72,7 +78,7 @@
         "AGENT_ID": "agentId",
         "ASSET_NUMBER_FK": "assetNumberFK",
         "BATTERY_CHANGE": "batteryChange",
-        "MAINTENANCES_TABLE": "maintenances",
+        "MAINTENANCES_TABLE": "apcs_maintenances",
         "PREVIOUS_SERVICE_DATES": "previousServiceDates",
         "SERVICE_TYPE": "serviceType",
         "TICKET_NUMBER": "ticketNumber"
@@ -83,8 +89,17 @@
         "FW_VERSION": "fwVersion",
         "MEDIA_OPERATION_MODE": "mediaOperationMode",
         "MODEL": "model",
-        "MODEL_TABLE": "model",
+        "MODEL_TABLE": "apcs_model",
         "TPM_VERSION": "tpmVersion"
+    },
+    "DB_STORAGE_LIST": {
+        "CONNECTION": "connection",
+        "MODEL": "model",
+        "SERIAL_NUMBER": "serialNumber",
+        "SIZE": "size",
+        "SMART_STATUS": "smartStatus",
+        "STORAGE_LIST_TABLE": "apcs_asset_storage",
+        "TYPE": "type"
     },
     "IMG": {
         "FAVICON": "img/favicon.png",

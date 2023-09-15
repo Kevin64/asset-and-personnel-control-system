@@ -73,7 +73,9 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["MODEL"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["MODEL"] ?>"><?php echo $translations["MODEL"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SERIAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SERIAL_NUMBER"] ?>"><?php echo $translations["SERIAL_NUMBER"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["PROCESSOR"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["PROCESSOR"] ?>"><?php echo $translations["PROCESSOR"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["RAM"] ?>"><?php echo $translations["RAM"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["RAM_AMOUNT"] ?>"><?php echo $translations["RAM_AMOUNT"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["RAM_TYPE"] ?>"><?php echo $translations["RAM_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == "ram") echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["RAM_FREQUENCY"] ?>"><?php echo $translations["RAM_FREQUENCY"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STORAGE_SIZE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STORAGE_SIZE"] ?>"><?php echo $translations["STORAGE_SIZE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["OPERATING_SYSTEM"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["OPERATING_SYSTEM"] ?>"><?php echo $translations["OPERATING_SYSTEM"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["HOSTNAME"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["HOSTNAME"] ?>"><?php echo $translations["HOSTNAME"] ?></option>
@@ -110,7 +112,7 @@ if ($send != 1) {
 	}
 	?>
 	<form action="eraseSelectedAsset.php" method="post">
-		<table id="assetData" cellspacing=0>
+		<table id="assetData">
 			<thead id="header_">
 					<?php
 					if (isset($_SESSION["privilegeLevel"])) {

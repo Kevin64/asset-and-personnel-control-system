@@ -2,6 +2,9 @@ RewriteEngine on
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^api/asset/([0-9]{0,6})$ api/asset.php?assetNumber=$1 [L]
-RewriteRule ^api/agent/([0-9a-zA-Z]*)$ api/agent.php?username=$1 [NC,L]
-RewriteRule ^api/model/([0-9a-zA-Z]*)$ api/model.php?model=$1 [NC,L]
+RewriteRule ^api/getAsset/([0-9]{0,6})$ api/getAsset.php?assetNumber=$1 [L]
+RewriteRule ^api/getAgent/([0-9a-zA-Z]*)$ api/getAgent.php?username=$1 [NC,L]
+RewriteRule ^api/getModel/([0-9a-zA-Z]*)$ api/getModel.php?model=$1 [NC,L]
+RewriteRule ^api/setAsset/([0-9]{0,6})/([0-9]{0,8})$ api/setAsset.php?assetNumber=$1&sealNumber=$2 [L]
+RewriteRule ^api/setAgent/([0-9a-zA-Z]*)$ api/setAgent.php?username=$1 [NC,L]
+RewriteRule ^api/setModel/([0-9a-zA-Z]*)$ api/setModel.php?model=$1 [NC,L]

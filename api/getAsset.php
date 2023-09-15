@@ -1,10 +1,10 @@
 <?php
 
-header("Content-Type:application/json");
+header("Content-Type:application/json; charset=UTF-8");
 
 if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 	$assetNumber = $_GET["assetNumber"];
-	include("../connection.php");
+	require("../connection.php");
 	$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 	if (mysqli_num_rows($query) > 0) {
@@ -25,3 +25,5 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 		echo $jsonCmd;
 	}
 }
+
+?>

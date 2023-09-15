@@ -79,16 +79,18 @@ if ($send != 1) {
 				$employeeRoom = $result[$dbEmployeeArray["ROOM_NUMBER"]];
 			?>
 				<tr>
-					<td colspan=2 id=spacer><?php echo $translations["EMPLOYEE_DATA"] ?></td>
+					<td colspan=3 id=spacer><?php echo $translations["EMPLOYEE_DATA"] ?></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdEmployee value="<?php echo $idEmployee; ?>">
 					<input type=hidden name=txtOldEmployeeRegistrationNumber value="<?php echo $oldEmployeeRegistrationNumber; ?>">
+					
 					<td><input type=text name=txtEmployeeRegistrationNumber maxlength="8" required value="<?php echo $employeeRegistrationNumber; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?><mark id=asterisk>*</mark></td>
+					
 					<td>
 						<select name=txtEmployeeType required <?php if ($employeeType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<?php
@@ -102,56 +104,62 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_NAME"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_NAME"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=text name=txtName required value="<?php echo $employeeName; ?>" <?php if ($employeeName == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_EMAIL"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_EMAIL"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=email name=txtEmail required value="<?php echo $employeeEmail; ?>" <?php if ($employeeEmail == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_PHONE_EXTENSION"] ?></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_PHONE_EXTENSION"] ?></td>
+					
 					<td><input type=text name=txtPhoneExtension maxLength=4 value="<?php echo $employeePhoneExtension; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=text name=txtPhoneNumber minLength=11 maxLength=11 required value="<?php echo $employeePhoneNumber; ?>" <?php if ($employeePhoneNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_SECTOR"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_SECTOR"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=text name=txtSector required value="<?php echo $employeeSector; ?>" <?php if ($employeeSector == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["EMPLOYEE_ROOM"] ?></td>
+					<td id=lblFixed><?php echo $translations["EMPLOYEE_ROOM"] ?></td>
+					
 					<td><input type=text name=txtRoomNumber maxLength=4 value="<?php echo $employeeRoom; ?>"></td>
 				</tr>
 				<tr>
-					<td colspan=2 id=spacer><?php echo $translations["MRBS_TEMPLATE"] ?></td>
+					<td colspan=3 id=spacer><?php echo $translations["MRBS_TEMPLATE"] ?></td>
 				</tr>
 				<tr>
 					<?php
 					if ($employeeRegistrationNumber == "" || $employeeType == null || $employeeName == "" || $employeeEmail == "" || $employeePhoneNumber == "" || $employeeSector == "") {
 					?>
-						<td colspan=2 style=color:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
+						<td colspan=3 style=color:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
 					<?php
 					} else {
 					?>
-						<td colspan=2><br><?php echo "<h4>" . $employeeName . " - " . $employeeSector; ?></br></td>
+						<td colspan=3><br><?php echo "<h4>" . $employeeName . " - " . $employeeSector; ?></br></td>
 				</tr>
 				<tr>
-					<td colspan=2><br><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] . ": " . $employeeRegistrationNumber; ?></td>
+					<td colspan=3><br><?php echo $translations["EMPLOYEE_REGISTRATION_NUMBER"] . ": " . $employeeRegistrationNumber; ?></td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] . ": " . $translations["EMPLOYEE_TYPE"][$employeeType]; ?></td>
+					<td colspan=3><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] . ": " . $translations["EMPLOYEE_TYPE"][$employeeType]; ?></td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["EMPLOYEE_SECTOR"] . ": " . $employeeSector; ?> </td>
+					<td colspan=3><?php echo $translations["EMPLOYEE_SECTOR"] . ": " . $employeeSector; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["EMPLOYEE_PHONE_NUMBER_SHORT"] . ": " . $employeePhoneNumber; ?> </td>
+					<td colspan=3><?php echo $translations["EMPLOYEE_PHONE_NUMBER_SHORT"] . ": " . $employeePhoneNumber; ?> </td>
 				</tr>
 				<tr>
-					<td colspan=2><?php echo $translations["EMPLOYEE_EMAIL"] . ": " . $employeeEmail; ?> </td>
+					<td colspan=3><?php echo $translations["EMPLOYEE_EMAIL"] . ": " . $employeeEmail; ?> </td>
 				</tr>
 			<?php
 					}
@@ -159,7 +167,7 @@ if ($send != 1) {
 				if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {
 			?>
 			<tr>
-				<td colspan=2 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
+				<td colspan=3 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
 			</tr>
 		<?php
 				}

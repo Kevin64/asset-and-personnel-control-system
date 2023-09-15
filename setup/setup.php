@@ -9,15 +9,15 @@ require_once("connection.php");
         <label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
         <table id="formFields">
             <tr>
-                <td id=label><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
+                <td id=lblFixed><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
                 <td><input type=text name=txtUser required></td>
             </tr>
             <tr>
-                <td id=label><?php echo $translations["PASSWORD"] ?><mark id=asterisk>*</mark></td>
+                <td id=lblFixed><?php echo $translations["PASSWORD"] ?><mark id=asterisk>*</mark></td>
                 <td><input type=password name=txtPassword required></td>
             </tr>
             <tr>
-                <td id=label><?php echo $translations["PRIVILEGE"]["NAME"] ?><mark id=asterisk>*</mark></td>
+                <td id=lblFixed><?php echo $translations["PRIVILEGE"]["NAME"] ?><mark id=asterisk>*</mark></td>
                 <td>
                     <select name=txtPrivilegeLevel>
                         <option value=<?php echo $privilegeLevelsArray["ADMINISTRATOR_LEVEL"] ?>> <?php echo $translations["PRIVILEGE"][0] ?></option>

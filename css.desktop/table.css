@@ -11,22 +11,18 @@
 	#modelData td,
 	#employeeData td,
 	#userData td {
-		border: 1px solid gainsboro;
+		border: 1px solid transparent;
 	}
 
 	#assetData thead th,
 	#modelData thead th,
 	#employeeData thead th,
 	#userData thead th {
-		background-color: gainsboro;
+		background-color: var(--light-spacer);
 	}
 
 	#data:hover {
-		background-color: rgb(249, 202, 20);
-	}
-
-	#header_ {
-		background-color: gainsboro;
+		background-color: var(--light-band);
 	}
 
 	#filterAsset,
@@ -37,15 +33,19 @@
 	}
 
 	#bodyPreviousMaintenance {
-		background-color: aliceblue;
+		background-color: var(--light-backcolor);
 	}
 
 	#bodyPreviousMaintenance label {
-		color: darkblue;
+		color: var(--light-subtle-darkcolor);
 	}
 
 	#headerPreviousMaintenance {
-		background-color: powderblue;
+		background-color: var(--light-table-header);
+	}
+
+	a {
+		color: var(--light-backcolor-foot);
 	}
 }
 
@@ -62,22 +62,18 @@
 	#modelData td,
 	#employeeData td,
 	#userData td {
-		border: 1px solid rgb(80, 80, 80);
+		border: 1px solid transparent;
 	}
 
 	#assetData thead th,
 	#modelData thead th,
 	#employeeData thead th,
 	#userData thead th {
-		background-color: rgb(80, 80, 80);
+		background-color: var(--dark-spacer);
 	}
 
 	#data:hover {
-		background-color: rgb(0, 87, 158);
-	}
-
-	#header_ {
-		background-color: rgb(80, 80, 80);
+		background-color: var(--dark-band);
 	}
 
 	#filterAsset,
@@ -88,15 +84,19 @@
 	}
 
 	#bodyPreviousMaintenance {
-		background-color: black;
+		background-color: var(--dark-backcolor);
 	}
 
 	#bodyPreviousMaintenance label {
-		color: white;
+		color: var(--dark-subtle-lightcolor);
 	}
 
 	#headerPreviousMaintenance {
-		background-color: rgb(0, 87, 158);
+		background-color: var(--dark-table-header);
+	}
+
+	a {
+		color: var(--dark-backcolor-foot);
 	}
 }
 
@@ -117,23 +117,17 @@
 	margin-left: 0px;
 }
 
-#assetData thead th,
-#modelData thead th,
-#employeeData thead th,
-#userData thead th {
+#assetData thead,
+#modelData thead,
+#employeeData thead,
+#userData thead,
+#storageData thead {
 	position: sticky;
 	top: 0;
 	z-index: 1;
 }
 
-#modelData {
-	width: 1000px;
-	border: 1px solid gray;
-	border-radius: 15px;
-	padding: 10px;
-	margin-left: 100px;
-}
-
+#modelData,
 #employeeData {
 	width: 1000px;
 	border: 1px solid gray;
@@ -154,11 +148,6 @@
 	height: 30px;
 	font-weight: bold;
 	text-align: center;
-	color: steelblue;
-}
-
-a {
-	color: steelblue;
 }
 
 #data {
@@ -189,4 +178,9 @@ input[type=text] {
 #inactive {
 	font-style: italic;
 	opacity: 0.4;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: underline;
 }

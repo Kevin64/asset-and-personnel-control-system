@@ -39,12 +39,14 @@ require_once("connection.php");
 	<?php
 	} else {
 	?>
+		<link rel="stylesheet" href="css.desktop/colors.css">
 		<link rel="stylesheet" href="css.desktop/table.css">
 		<link rel="stylesheet" href="css.desktop/styles.css">
 		<link rel="stylesheet" href="css.desktop/forms.css">
 		<link rel="stylesheet" href="css.desktop/menu.css">
 		<link rel="stylesheet" href="css.desktop/input.css">
 		<link rel="stylesheet" href="css.desktop/animation.css">
+		<link rel="stylesheet" href="css.desktop/overlay.css">
 	<?php
 	}
 	?>

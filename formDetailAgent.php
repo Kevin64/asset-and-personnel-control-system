@@ -66,16 +66,18 @@ if ($send != 1) {
 				$blocked = $result[$dbAgentArray["BLOCKED"]];
 			?>
 				<tr>
-					<td colspan=2 id=spacer><?php echo $translations["AGENT_DATA"] ?></td>
+					<td colspan=3 id=spacer><?php echo $translations["AGENT_DATA"] ?></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdUser value="<?php echo $idUser; ?>">
 					<input type=hidden name=txtOldUsername value="<?php echo $oldUsername; ?>">
+					
 					<td><input type=text name=txtUser required value="<?php echo $username; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["PRIVILEGE"]["NAME"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["PRIVILEGE"]["NAME"] ?><mark id=asterisk>*</mark></td>
+					
 					<td>
 						<select name=txtPrivilegeLevel required onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> id=inactive disabled <?php } ?>>
 							<?php
@@ -89,13 +91,15 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id="label">
+					<td id=lblFixed>
 						<?php echo $translations["BLOCKED_AGENT"] ?>
 					</td>
+					
 					<td colspan=5><input type=checkbox class=chkBox name=chkBoxBlocked value="1" <?php echo ($blocked == 1 ? "checked" : ""); ?> <?php if ($_SESSION["id"] == $idUser) { ?> id=inactive disabled <?php } ?>></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["LAST_LOGIN_DATE"] ?></td>
+					<td id=lblFixed><?php echo $translations["LAST_LOGIN_DATE"] ?></td>
+					
 					<td><?php echo $lastLoginDate; ?></td>
 				</tr>
 			<?php
@@ -103,7 +107,7 @@ if ($send != 1) {
 			if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {
 			?>
 				<tr>
-					<td colspan=2 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
+					<td colspan=3 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
 				</tr>
 			<?php
 			}

@@ -11,7 +11,8 @@ require_once("connection.php");
 		<input type=hidden name=txtStatus value="0">
 		<table id="formFields">
 			<tr>
-				<td id=label><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
+				<td id=lblFixed><?php echo $translations["USERNAME"] ?><mark id=asterisk>*</mark></td>
+				
 				<?php
 				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 				?>
@@ -28,22 +29,25 @@ require_once("connection.php");
 			if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 			?>
 				<tr>
-					<td id=label><?php echo $translations["CURRENT_PASSWORD"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["CURRENT_PASSWORD"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=password name=txtCurrentPassword required></td>
 				</tr>
 			<?php
 			}
 			?>
 			<tr>
-				<td id=label><?php echo $translations["NEW_PASSWORD"] ?><mark id=asterisk>*</mark></td>
+				<td id=lblFixed><?php echo $translations["NEW_PASSWORD"] ?><mark id=asterisk>*</mark></td>
+				
 				<td><input type=password name=txtPassword1 required></td>
 			</tr>
 			<tr>
-				<td id=label><?php echo $translations["REPEAT_NEW_PASSWORD"] ?><mark id=asterisk>*</mark></td>
+				<td id=lblFixed><?php echo $translations["REPEAT_NEW_PASSWORD"] ?><mark id=asterisk>*</mark></td>
+				
 				<td><input type=password name=txtPassword2 required></td>
 			</tr>
 			<tr>
-				<td colspan=2><br>
+				<td colspan=3><br>
 					<input id="updateButton" type=submit value="<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>">
 				</td>
 			</tr>

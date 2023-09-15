@@ -131,16 +131,17 @@
 }
 
 input[type=text],
+input[type=number],
 input[type=date],
 input[type=email],
 input[type=password],
 input[type=submit],
 select,
 textarea {
-	border: 2px;
+	border: 1px;
 	border-style: solid;
 	text-align: center;
-	border-radius: 8px;
+	border-radius: 6px;
 	padding: 7px;
 }
 
@@ -157,13 +158,26 @@ input[type=submit]:hover {
 }
 
 #formFields input[type=text],
+#formFields input[type=number],
 #formFields input[type=date],
 #formFields input[type=email],
 #formFields input[type=password],
 #formFields select,
 #formFields textarea {
 	box-sizing: border-box;
-	width: 100%;
+	width: 98%;
+	margin-top: 5px;
+}
+
+#formFields tr {
+	border: none;
+}
+
+#formFields td{
+	border-right: 1px dashed gray;
+	border-left: 1px dashed gray;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #eraseButton {

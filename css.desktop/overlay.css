@@ -1,0 +1,90 @@
+@media (prefers-color-scheme: light) {
+    #overlay td {
+        border-color: var(--light-border);
+    }
+
+    #window {
+        background-color: var(--light-backcolor);
+        border-color: var(--light-backcolor);
+    }
+
+    #title {
+        background-color: var(--light-background);
+        border-color: var(--light-backcolor);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #overlay td {
+        border-color: var(--dark-border);
+    }
+
+    #window {
+        background-color: var(--dark-backcolor);
+        border-color: var(--dark-backcolor);
+    }
+
+    #title {
+        background-color: var(--dark-background);
+        border-color: var(--dark-backcolor);
+    }
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    backdrop-filter: blur(7px);
+}
+
+#window {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 50%;
+    height: 25%;
+    border: 1px solid;
+    overflow: auto;
+}
+
+#closeButton {
+    position: absolute;
+    top: 320px;
+    right: 480px;
+}
+
+#overlay table {
+    table-layout: fixed;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    width: 98%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+
+#overlay td {
+    border: 1px solid;
+}
+
+#title {
+    font-size: 25px;
+    border: 1px solid;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 3px;
+    margin-top: 310px;
+}

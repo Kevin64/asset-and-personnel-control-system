@@ -1,6 +1,6 @@
 <?php
 
-header("Content-Type:application/json");
+header("Content-Type:application/json; charset=UTF-8");
 
 if (isset($_GET["username"]) && $_GET["username"] != "") {
 	$username = $_GET["username"];

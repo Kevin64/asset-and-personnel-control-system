@@ -5,3 +5,4 @@ phpinfo.php
 .vscode/
 etc/db-config.json
 etc/parameters.json
+output/

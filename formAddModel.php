@@ -14,22 +14,26 @@ if (isset($_SESSION["privilegeLevel"])) {
 				<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 				<table id="formFields">
 					<tr>
-						<td colspan=2 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>
+						<td colspan=3 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
+						<td id=lblFixed><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
+						
 						<td><input type=text name=txtBrand placeholder="<?php echo $translations["PLACEHOLDER_MODEL_BRAND"] ?>" required></td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
+						<td id=lblFixed><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
+						
 						<td><input type=text name=txtModel placeholder="<?php echo $translations["PLACEHOLDER_MODEL_MODEL"] ?>" required></td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
+						<td id=lblFixed><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
+						
 						<td><input type=text name=txtFwVersion placeholder="<?php echo $translations["PLACEHOLDER_MODEL_FW_VERSION"] ?>" required></td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>
+						<td id=lblFixed><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>
+						
 						<td>
 							<select name=txtFwType required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -44,7 +48,8 @@ if (isset($_SESSION["privilegeLevel"])) {
 						</td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
+						<td id=lblFixed><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
+						
 						<td>
 							<select name=txtTpmVersion required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -59,7 +64,8 @@ if (isset($_SESSION["privilegeLevel"])) {
 						</td>
 					</tr>
 					<tr>
-						<td id="label"><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
+						<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
+						
 						<td>
 							<select name=txtMediaOperationMode required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -74,7 +80,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><br>
+						<td colspan=3 align="center"><br>
 							<input id="registerButton" type="submit" value="<?php echo $translations["LABEL_REGISTER_BUTTON"] ?>">
 						</td>
 					</tr>

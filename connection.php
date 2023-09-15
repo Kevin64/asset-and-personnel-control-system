@@ -2,10 +2,12 @@
 
 require("functions.php");
 
-$language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
-$lang_file = '/lang/' . $language . '.json';
-$lang_file_content = file_get_contents(__DIR__ . $lang_file);
-$translations = json_decode($lang_file_content, true);
+if(isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
+	$language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
+	$lang_file = '/lang/' . $language . '.json';
+	$lang_file_content = file_get_contents(__DIR__ . $lang_file);
+	$translations = json_decode($lang_file_content, true);
+}
 $gitHubVersion = null;
 $line = null;
 
@@ -26,6 +28,9 @@ $mediaOpTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "Medi
 $secureBootArray = gatherJsonTypes($json_parameters_array, "Parameters", "SecureBootStates");
 $virtualizationTechnologyArray = gatherJsonTypes($json_parameters_array, "Parameters", "VirtualizationTechnologyStates");
 $serviceTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "ServiceTypes");
+$ramTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "RamTypes");
+$storageTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "StorageTypes");
+$connectionTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "ConnectionTypes");
 $orgDataArray = gatherJsonTypes($json_config_array_db, "OrgData", null);
 $dbSettingsArray = gatherJsonTypes($json_config_array_db, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array_db, "PrivilegeLevels", null);
@@ -38,6 +43,7 @@ $dbMaintenancesArray = gatherJsonTypes($json_constants_array, "DB_MAINTENANCES",
 $dbAgentArray = gatherJsonTypes($json_constants_array, "DB_AGENT", null);
 $dbEmployeeArray = gatherJsonTypes($json_constants_array, "DB_EMPLOYEE", null);
 $dbModelArray = gatherJsonTypes($json_constants_array, "DB_MODEL", null);
+$dbStorageListArray = gatherJsonTypes($json_constants_array, "DB_STORAGE_LIST", null);
 
 $orgFullName = $orgDataArray["OrganizationFullName"];
 $orgAcronym = $orgDataArray["OrganizationAcronym"];

@@ -87,24 +87,28 @@ if ($send != 1) {
 				$mediaOperationMode = $result[$dbModelArray["MEDIA_OPERATION_MODE"]];
 			?>
 				<tr>
-					<td colspan=2 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>
+					<td colspan=3 id=spacer><?php echo $translations["MODEL_DATA"] ?></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=text name=txtBrand placeholder="<?php echo $translations["PLACEHOLDER_MODEL_BRAND"] ?>" required value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdModel value="<?php echo $idModel; ?>">
 					<input type=hidden name=txtOldModel value="<?php echo $oldModel; ?>">
+					
 					<td><input type=text name=txtModel placeholder="<?php echo $translations["PLACEHOLDER_MODEL_MODEL"] ?>" required value="<?php echo $model; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["FW_VERSION"] ?><mark id=asterisk>*</mark></td>
+					
 					<td><input type=text name=txtFwVersion placeholder="<?php echo $translations["PLACEHOLDER_MODEL_FW_VERSION"] ?>" required value="<?php echo $fwVersion; ?>"></td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["FW_TYPE"] ?><mark id=asterisk>*</mark></td>
+					
 					<td>
 						<?php
 						?>
@@ -120,7 +124,8 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
+					
 					<td>
 						<select name=txtTpmVersion required <?php if ($tpmVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<?php
@@ -134,7 +139,8 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id="label"><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
+					<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
+					
 					<td>
 						<select name=txtMediaOperationMode required <?php if ($mediaOperationMode == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<?php
@@ -153,7 +159,7 @@ if ($send != 1) {
 			if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["LIMITED_LEVEL"]) {
 			?>
 				<tr>
-					<td colspan=2 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
+					<td colspan=3 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
 				</tr>
 			<?php
 			}

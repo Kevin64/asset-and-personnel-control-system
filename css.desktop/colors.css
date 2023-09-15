@@ -1,0 +1,26 @@
+:root {
+    --asterisk: red;
+    --dark-band: rgb(0, 87, 158);
+    --light-band: rgb(249, 202, 20);
+    --dark-backcolor: rgb(32, 32, 32);
+    --dark-forecolor: white;
+    --dark-subtle-lightcolor: #c0c0c0;
+    --light-backcolor: rgb(248, 248, 248);
+    --light-forecolor: black;
+    --light-subtle-darkcolor: #2f4f4f;
+    --dark-backcolor-foot: gray;
+    --light-backcolor-foot: rgb(25, 81, 133);
+    --dark-forecolor-foot: white;
+    --light-forecolor-foot: white;
+    --dark-background: black;
+    --light-background: white;
+    --light-spacer: gainsboro;
+    --dark-spacer: rgb(80, 80, 80);
+    --light-overlay-transparency: rgba(255, 255, 255, 0.7);
+    --dark-overlay-transparency: rgba(0, 0, 0, 0.7);
+    --light-border: black;
+    --dark-border: white;
+    --operational: rgb(0, 120, 215);
+    --dark-table-header: var(--dark-spacer);
+    --light-table-header: var(--light-spacer);
+}
