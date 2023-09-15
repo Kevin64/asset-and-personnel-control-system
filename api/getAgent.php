@@ -9,12 +9,7 @@ if (isset($_GET["username"]) && $_GET["username"] != "") {
 
 	if (mysqli_num_rows($query) > 0) {
 		while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-			$row_array["id"] = $row["id"];
-			$row_array["username"] = $row[$dbAgentArray["USERNAME"]];
-			$row_array["password"] = $row[$dbAgentArray["PASSWORD"]];
-			$row_array["privilegeLevel"] = $row[$dbAgentArray["PRIVILEGE_LEVEL"]];
-			$row_array["lastLoginDate"] = $row[$dbAgentArray["LAST_LOGIN_DATE"]];
-			$jsonCmd = json_encode($row_array, JSON_UNESCAPED_UNICODE);
+			$jsonCmd = json_encode($row, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 		}
 		echo $jsonCmd;
 	}

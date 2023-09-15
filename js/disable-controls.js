@@ -19,10 +19,10 @@ $(document).ready(function() {
         chkbox.closest('#formFields').find('select').css('font-style', 'italic');
         chkbox.closest('#formFields').find('textarea').css('font-style', 'italic');
         
-        $('#headerPreviousMaintenance').css('opacity', opacity);
-        $('#headerPreviousMaintenance').css('font-style', 'italic');
-        $('#bodyPreviousMaintenance td').css('opacity', opacity);
-        $('#bodyPreviousMaintenance td').css('font-style', 'italic');
+        $('#headerTable').css('opacity', opacity);
+        $('#headerTable').css('font-style', 'italic');
+        $('#bodyTable td').css('opacity', opacity);
+        $('#bodyTable td').css('font-style', 'italic');
         //chkbox.closest('#formFields').css('font-style', 'italic');        
 
         chkbox.parents().siblings('#formFields').find('input[type=text]').prop('readonly', true);
@@ -56,10 +56,10 @@ $(document).ready(function() {
         chkbox.closest('#formFields').find('textarea').css('font-style', '');
         //chkbox.closest('#formFields').css('font-style', '');
 
-        $('#headerPreviousMaintenance').css('opacity', '');
-        $('#headerPreviousMaintenance').css('font-style', '');
-        $('#bodyPreviousMaintenance td').css('opacity', '');
-        $('#bodyPreviousMaintenance td').css('font-style', '');
+        $('#headerTable').css('opacity', '');
+        $('#headerTable').css('font-style', '');
+        $('#bodyTable td').css('opacity', '');
+        $('#bodyTable td').css('font-style', '');
 
         chkbox.parents().siblings('#formFields').find('input[type=text]').prop('readonly', false);
         chkbox.parents().siblings('#formFields').find('input[type=date]').prop('readonly', false);
@@ -93,10 +93,10 @@ $(document).ready(function() {
         chkbox.closest('#formFields').find('textarea').css('font-style', 'italic');
         //chkbox.closest('#formFields').css('font-style', 'italic');
 
-        $('#headerPreviousMaintenance').css('opacity', opacity);
-        $('#headerPreviousMaintenance').css('font-style', 'italic');
-        $('#bodyPreviousMaintenance td').css('opacity', opacity);
-        $('#bodyPreviousMaintenance td').css('font-style', 'italic');
+        $('#headerTable').css('opacity', opacity);
+        $('#headerTable').css('font-style', 'italic');
+        $('#bodyTable td').css('opacity', opacity);
+        $('#bodyTable td').css('font-style', 'italic');
 
         chkbox.parents().siblings('#formFields').find('input[type=text]').prop('readonly', true);
         chkbox.parents().siblings('#formFields').find('input[type=date]').prop('readonly', true);
@@ -128,10 +128,10 @@ $(document).ready(function() {
         chkbox.closest('#formFields').find('textarea').css('font-style', '');
         //chkbox.closest('#formFields').css('font-style', '');
 
-        $('#headerPreviousMaintenance').css('opacity', '');
-        $('#headerPreviousMaintenance').css('font-style', '');
-        $('#bodyPreviousMaintenance td').css('opacity', '');
-        $('#bodyPreviousMaintenance td').css('font-style', '');
+        $('#headerTable').css('opacity', '');
+        $('#headerTable').css('font-style', '');
+        $('#bodyTable td').css('opacity', '');
+        $('#bodyTable td').css('font-style', '');
 
         chkbox.parents().siblings('#formFields').find('input[type=text]').prop('readonly', false);
         chkbox.parents().siblings('#formFields').find('input[type=date]').prop('readonly', false);

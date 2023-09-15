@@ -22,6 +22,7 @@ $timezone = gatherJsonTypes($json_config_array_db, "Locale", null);
 date_default_timezone_set($timezone);
 $buildingArray = gatherJsonTypes($json_parameters_array, "Parameters", "Buildings");
 $hwTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "HardwareTypes");
+$operatingSystemArchArray = gatherJsonTypes($json_parameters_array, "Parameters", "OperatingSystemArchTypes");
 $fwTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "FirmwareTypes");
 $tpmTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "TpmTypes");
 $mediaOpTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "MediaOperationTypes");

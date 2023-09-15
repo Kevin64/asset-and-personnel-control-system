@@ -20,7 +20,11 @@ if (isset($_POST)) {
 	$model = $dbAssetArray["MODEL"];
 	$serialNumber = $dbAssetArray["SERIAL_NUMBER"];
 	$processor = $dbAssetArray["PROCESSOR"];
-	$ram = $dbAssetArray["RAM"];
+	$ramAmount = $dbAssetArray["RAM_AMOUNT"];
+	$ramType = $dbAssetArray["RAM_TYPE"];
+	$ramFrequency = $dbAssetArray["RAM_FREQUENCY"];
+	$ramOccupiedSlots = $dbAssetArray["RAM_OCCUPIED_SLOTS"];
+	$ramTotalSlots = $dbAssetArray["RAM_TOTAL_SLOTS"];
 	$storageSize = $dbAssetArray["STORAGE_SIZE"];
 	$operatingSystem = $dbAssetArray["OPERATING_SYSTEM"];
 	$hostname = $dbAssetArray["HOSTNAME"];
@@ -32,7 +36,8 @@ if (isset($_POST)) {
 	$hwType = $dbAssetArray["HW_TYPE"];
 	$fwType = $dbAssetArray["FW_TYPE"];
 	$storageType = $dbAssetArray["STORAGE_TYPE"];
-	$videoCard = $dbAssetArray["VIDEO_CARD"];
+	$videoCardName = $dbAssetArray["VIDEO_CARD_NAME"];
+	$videoCardRam = $dbAssetArray["VIDEO_CARD_RAM"];
 	$mediaOperationMode = $dbAssetArray["MEDIA_OPERATION_MODE"];
 	$secureBoot = $dbAssetArray["SECURE_BOOT"];
 	$virtualizationTechnology = $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"];
@@ -61,7 +66,11 @@ if (isset($_POST)) {
 			$model . " = '$newAsset[$model]', " .
 			$serialNumber . " = '$newAsset[$serialNumber]', " .
 			$processor . " = '$newAsset[$processor]', " .
-			$ram . " = '$newAsset[$ram]', " .
+			$ramAmount . " = '$newAsset[$ramAmount]', " .
+			$ramType . " = '$newAsset[$ramType]', " .
+			$ramFrequency . " = '$newAsset[$ramFrequency]', " .
+			$ramOccupiedSlots . " = '$newAsset[$ramOccupiedSlots]', " .
+			$ramTotalSlots . " = '$newAsset[$ramTotalSlots]', " .
 			$storageSize . " = '$newAsset[$storageSize]', " .
 			$operatingSystem . " = '$newAsset[$operatingSystem]', " .
 			$hostname . " = '$newAsset[$hostname]', " .
@@ -73,7 +82,9 @@ if (isset($_POST)) {
 			$hwType . " = '$newAsset[$hwType]', " .
 			$fwType . " = '$newAsset[$fwType]', " .
 			$storageType . " = '$newAsset[$storageType]', " .
-			$videoCard . " = '$newAsset[$videoCard]', " .
+			$videoCardName . " = '$newAsset[$videoCardName]', " .
+			$videoCardRam . " = '$newAsset[$videoCardRam]', " .
+			$videoCardRam . " = '$newAsset[$videoCardRam]', " .
 			$mediaOperationMode . " = '$newAsset[$mediaOperationMode]', " .
 			$secureBoot . " = '$newAsset[$secureBoot]', " .
 			$virtualizationTechnology . " = '$newAsset[$virtualizationTechnology]', " .
@@ -81,7 +92,7 @@ if (isset($_POST)) {
 			where " . $assetNumber . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	} else {
-		$query = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$roomNumber,$building,$adRegistered,$standard,$serviceDate,$brand,$model,$serialNumber,$processor,$ram,$storageSize,$operatingSystem,$hostname,$fwVersion,$macAddress,$ipAddress,$inUse,$tag,$hwType,$fwType,$storageType,$videoCard,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$roomNumber]','$newAsset[$building]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$serviceDate]','$newAsset[$brand]','$newAsset[$model]','$newAsset[$serialNumber]','$newAsset[$processor]','$newAsset[$ram]','$newAsset[$storageSize]','$newAsset[$operatingSystem]','$newAsset[$hostname]','$newAsset[$fwVersion]','$newAsset[$macAddress]','$newAsset[$ipAddress]','$newAsset[$inUse]','$newAsset[$tag]','$newAsset[$hwType]','$newAsset[$fwType]','$newAsset[$storageType]','$newAsset[$videoCard]','$newAsset[$mediaOperationMode]','$newAsset[$secureBoot]','$newAsset[$virtualizationTechnology]','$newAsset[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$roomNumber,$building,$adRegistered,$standard,$serviceDate,$brand,$model,$serialNumber,$processor,$ramAmount,$ramType,$ramFrequency,$ramOccupiedSlots,$ramTotalSlots,$storageSize,$operatingSystem,$hostname,$fwVersion,$macAddress,$ipAddress,$inUse,$tag,$hwType,$fwType,$storageType,$videoCardName,$videoCardRam,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$roomNumber]','$newAsset[$building]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$serviceDate]','$newAsset[$brand]','$newAsset[$model]','$newAsset[$serialNumber]','$newAsset[$processor]','$newAsset[$ramAmount]','$newAsset[$ramType]','$newAsset[$ramFrequency]','$newAsset[$ramOccupiedSlots]','$newAsset[$ramTotalSlots]','$newAsset[$storageSize]','$newAsset[$operatingSystem]','$newAsset[$hostname]','$newAsset[$fwVersion]','$newAsset[$macAddress]','$newAsset[$ipAddress]','$newAsset[$inUse]','$newAsset[$tag]','$newAsset[$hwType]','$newAsset[$fwType]','$newAsset[$storageType]','$newAsset[$videoCardName]','$newAsset[$videoCardRam]','$newAsset[$mediaOperationMode]','$newAsset[$secureBoot]','$newAsset[$virtualizationTechnology]','$newAsset[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	}
 	$queryFormatPrevious = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$previousServiceDates,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$newAsset[$serviceDate]','$newAsset[$serviceType]','$newAsset[$batteryChange]','$newAsset[$ticketNumber]','$newAsset[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	echo "Ativo adicionado";

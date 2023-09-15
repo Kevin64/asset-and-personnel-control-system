@@ -32,15 +32,12 @@
 		color: black;
 	}
 
-	#bodyPreviousMaintenance {
+	#bodyTable {
 		background-color: var(--light-backcolor);
-	}
-
-	#bodyPreviousMaintenance label {
 		color: var(--light-subtle-darkcolor);
 	}
 
-	#headerPreviousMaintenance {
+	#headerTable {
 		background-color: var(--light-table-header);
 	}
 
@@ -83,15 +80,12 @@
 		color: white;
 	}
 
-	#bodyPreviousMaintenance {
+	#bodyTable {
 		background-color: var(--dark-backcolor);
-	}
-
-	#bodyPreviousMaintenance label {
 		color: var(--dark-subtle-lightcolor);
 	}
 
-	#headerPreviousMaintenance {
+	#headerTable {
 		background-color: var(--dark-table-header);
 	}
 
@@ -170,8 +164,8 @@ input[type=text] {
 	width: 350px;
 }
 
-#bodyPreviousMaintenance td,
-#headerPreviousMaintenance td {
+#bodyTable td,
+#headerTable td {
 	border: 1px solid;
 }
 
