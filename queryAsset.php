@@ -100,7 +100,7 @@ if ($send != 1) {
 			</tr>
 		</table>
 	</form>
-	<br><br>
+	<br>
 	<?php
 	if (!isset($totalSearch)) {
 	?>

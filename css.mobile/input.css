@@ -1,203 +1,97 @@
 @media (prefers-color-scheme: light) {
-	input {
-		background-color: white;
-		border-color: black;
-		color: black;
-	}
-
-	#registerButton {
-		border-color: black;
-		background-color: white;
-	}
-
-	#registerButton:hover {
-		color: black;
-		border-color: black;
-	}
-
-	#eraseButton {
-		border-color: black;
-		background-color: white;
-	}
-
-	#eraseButton:hover {
-		border-color: black;
-	}
-
-	#updateButton {
-		border-color: black;
-		background-color: white;
-	}
-
-	#updateButton:hover {
-		color: black;
-	}
-
-	#searchButton {
-		border-color: black;
-		background-color: white;
-	}
-
-	#searchButton:hover {
-		color: black;
-	}
-
-	select,
-	option,
-	textarea {
-		background-color: white;
-		color: black;
-	}
 
 	input,
 	select,
+	option,
 	textarea {
-		box-shadow: 0px 0px 5px rgb(0, 0, 0, .3);
-		transition: all .4s ease-in-out;
+		background-color: var(--light-input-backcolor);
+		box-shadow: 0px 0px 10px var(--light-box-shadow);
+		color: var(--light-input-forecolor);
+		transition: all .3s ease-in-out;
+	}
+
+	#formFields td {
+		border-color: var(--light-section-header);
 	}
 
 	input:hover,
 	select:hover,
 	textarea:hover {
-		box-shadow: 0px 0px 5px rgb(0, 0, 0, 1);
-		transition: all .4s ease-in-out;
+		box-shadow: 0px 0px 15px var(--light-box-shadow-hover);
+		transition: all .3s ease-in-out;
 	}
 }
 
 @media (prefers-color-scheme: dark) {
-	input {
-		background-color: black;
-		border-color: white;
-		color: white;
-	}
-
-	#registerButton {
-		border-color: white;
-		background-color: black;
-	}
-
-	#registerButton:hover {
-		color: white;
-		border-color: white;
-	}
-
-	#eraseButton {
-		border-color: white;
-		background-color: black;
-	}
-
-	#eraseButton:hover {
-		border-color: white;
-	}
-
-	#updateButton {
-		border-color: white;
-		background-color: black;
-	}
-
-	#updateButton:hover {
-		color: white;
-	}
-
-	#searchButton {
-		border-color: white;
-		background-color: black;
-	}
-
-	#searchButton:hover {
-		color: white;
-	}
-
-	select,
-	option,
-	textarea {
-		background-color: black;
-		color: white;
-	}
 
 	input,
 	select,
+	option,
 	textarea {
-		box-shadow: 0px 0px 5px rgb(255, 255, 255, .3);
-		transition: all .4s ease-in-out;
+		background-color: var(--dark-input-backcolor);
+		box-shadow: 0px 0px 10px var(--dark-box-shadow);
+		color: var(--dark-input-forecolor);
+		transition: all .3s ease-in-out;
+	}
+
+	#formFields td {
+		border-color: var(--dark-section-header);
 	}
 
 	input:hover,
 	select:hover,
 	textarea:hover {
-		box-shadow: 0px 0px 5px rgb(255, 255, 255, 1);
-		transition: all .4s ease-in-out;
+		box-shadow: 0px 0px 15px var(--dark-box-shadow-hover);
+		transition: all .3s ease-in-out;
 	}
 }
 
 input[type=text],
+input[type=number],
 input[type=date],
 input[type=email],
 input[type=password],
 input[type=submit],
+input[type=button],
 select,
 textarea {
-	border: 2px;
+	border-radius: 6px;
 	border-style: solid;
-	text-align: center;
-	border-radius: 8px;
+	border-width: 0px;
 	padding: 7px;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
-input[type=submit] {
+input[type=submit],
+input[type=button] {
 	border-radius: 30px;
 }
 
-input[type=submit] {
+input[type=submit],
+input[type=button] {
 	width: auto;
 }
 
-input[type=submit]:hover {
-	background-color: gray;
-}
-
 #formFields input[type=text],
+#formFields input[type=number],
 #formFields input[type=date],
 #formFields input[type=email],
 #formFields input[type=password],
 #formFields select,
 #formFields textarea {
 	box-sizing: border-box;
-	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	width: 98%;
 }
 
-#eraseButton {
-	width: auto;
-	color: red;
-}
-
-#eraseButton:hover {
-	background-color: darkred;
-	color: white;
-}
-
-#registerButton {
-	width: auto;
-	color: green;
-}
-
-#registerButton:hover {
-	background-color: darkgreen;
-}
-
-#updateButton {
-	color: green;
-}
-
-#updateButton:hover {
-	background-color: darkgreen;
-}
-
-#searchButton {
-	width: auto;
-	color: orange;
-}
-
-#searchButton:hover {
-	background-color: darkorange;
+#formFields td {
+	border-left-style: solid;
+	border-right-style: solid;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
 }

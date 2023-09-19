@@ -1,19 +1,10 @@
-span {
-	padding: 30px;
-	color: white;
-	font-size: 1.0em;
-	font-variant: small-caps;
-	cursor: pointer;
-	display: block;
-}
-
 .slide {
 	clear: both;
-	width: 100%;
 	max-height: 0;
 	overflow: hidden;
 	text-align: center;
 	transition: max-height .4s ease;
+	width: 100%;
 }
 
 #hov:hover+.slide,
@@ -21,8 +12,4 @@ span {
 	display: block;
 	max-height: 250px;
 	width: 90px;
-}
-
-#data:hover {
-	transition: all .2s ease-in-out;
 }

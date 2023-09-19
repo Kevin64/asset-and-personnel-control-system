@@ -1,63 +1,70 @@
 @media (prefers-color-scheme: light) {
-	body {
-		background: white;
-		color: black;
-		border: black;
+	:root {
+		color-scheme: light;
 	}
 
-	#container {
-		border: black;
+	body {
+		background: var(--light-background);
+		color: var(--light-forecolor);
 	}
 
 	#top,
 	#middle {
-		background-color: #f2f2f2;
+		background-color: var(--light-backcolor);
 	}
 
-	#spacer {
-		background-color: gainsboro;
-		color: black;
+	#section-header {
+		background-color: var(--light-section-header);
+		color: var(--light-table-header-forecolor);
+	}
+
+	#h-separator {
+		border-top-color: var(--light-section-header);
 	}
 
 	#foot-up,
 	#foot-down {
-		background-color: rgb(25, 81, 133);
-		color: white;
+		background: var(--light-backcolor-foot);
+		color: var(--light-forecolor-foot);
 	}
 
 	#band {
-		background-color: rgb(249, 202, 20);
+		background-color: var(--light-band);
 	}
 }
 
 @media (prefers-color-scheme: dark) {
-	body {
-		background: black;
-		color: white;
-		border: white;
+	:root {
+		color-scheme: dark;
 	}
 
-	#container {
-		border: white;
+	body {
+		background: var(--dark-background);
+		color: var(--dark-forecolor);
 	}
 
 	#top,
 	#middle {
-		background-color: rgb(44, 44, 44);
+		background-color: var(--dark-backcolor);
 	}
 
-	#spacer {
-		background-color: rgb(80, 80, 80);
-		color: white;
+	#section-header {
+		background-color: var(--dark-section-header);
+		color: var(--dark-table-header-forecolor);
+	}
+
+	#h-separator {
+		border-top-color: var(--dark-section-header);
 	}
 
 	#foot-up,
 	#foot-down {
-		background: gray;
+		background: var(--dark-backcolor-foot);
+		color: var(--dark-forecolor-foot);
 	}
 
 	#band {
-		background-color: rgb(0, 87, 158);
+		background-color: var(--dark-band);
 	}
 }
 
@@ -87,57 +94,61 @@ select {
 }
 
 table {
-	font-size: 10pt;
 	border-style: hidden;
 	border-width: 0px;
+	font-size: 10pt;
 }
 
 #container {
-	width: auto;
-	height: 200px;
-	position: relative;
-	margin: 0 auto;
-	padding: 0px;
 	border: 0px solid;
 	border-radius: 5px;
 	box-shadow: 0px 0px 0px;
+	height: 200px;
+	margin: 0 auto;
+	padding: 0px;
+	position: relative;
+	width: auto;
 }
 
 #top {
-	width: auto;
-	text-align: center;
 	border-radius: 15px;
+	text-align: center;
+	width: auto;
 }
 
 #middle {
-	width: auto;
 	height: auto;
-	text-align: center;
-	vertical-align: middle;
 	padding-bottom: 20px;
 	padding-top: 20px;
+	text-align: center;
+	vertical-align: middle;
+	width: auto;
 }
 
 #foot-up {
-	width: auto;
 	text-align: center;
+	width: auto;
 }
 
 #foot-down {
-	width: auto;
-	text-align: center;
 	border-radius: 0 0 15px 15px;
 	margin-bottom: 5px;
+	text-align: center;
+	width: auto;
 }
 
-#spacer {
+#section-header {
 	font-weight: bold;
 	text-align: center;
-	border: 1px solid;
+}
+
+#h-separator {
+	border-style: dotted;
+	border-width: 1px;
 }
 
 #band {
-	font-size:2px;
+	font-size: 2px;
 	width: auto;
 }
 

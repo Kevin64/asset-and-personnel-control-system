@@ -4,48 +4,47 @@
 	#modelData,
 	#employeeData,
 	#userData {
-		border-color: black;
+		border-color: var(--light-table-header);
 	}
 
 	#assetData td,
 	#modelData td,
 	#employeeData td,
 	#userData td {
-		border: 1px solid gainsboro;
+		border: 1px solid transparent;
 	}
 
 	#assetData thead th,
 	#modelData thead th,
 	#employeeData thead th,
 	#userData thead th {
-		background-color: gainsboro;
+		background-color: var(--light-section-header);
 	}
 
 	#data:hover {
-		background-color: rgb(249, 202, 20);
-	}
-
-	#header_ {
-		background-color: gainsboro;
-	}
-
-	#filterAsset,
-	#filterEmployee,
-	#filterModel {
-		background-color: white;
-		color: black;
+		background-color: var(--light-band);
 	}
 
 	#bodyTable {
-		background-color: aliceblue;
-	}
-
-	#bodyTable label {
-		color: darkblue;
+		background-color: var(--light-backcolor);
+		color: var(--light-subtle-darkcolor);
 	}
 
 	#headerTable {
-		background-color: powderblue;
+		background-color: var(--light-table-header);
+		color: var(--light-table-header-forecolor);
+	}
+
+	#header_ tr>th>a {
+		color: var(--light-table-header-forecolor);
+	}
+
+	#tableList:hover {
+		background-color: var(--light-band);
+	}
+
+	a {
+		color: var(--light-forecolor);
 	}
 }
 
@@ -55,125 +54,91 @@
 	#modelData,
 	#employeeData,
 	#userData {
-		border-color: white;
+		border-color: var(--dark-table-header);
 	}
 
 	#assetData td,
 	#modelData td,
 	#employeeData td,
 	#userData td {
-		border: 1px solid rgb(80, 80, 80);
+		border: 1px solid transparent;
 	}
 
 	#assetData thead th,
 	#modelData thead th,
 	#employeeData thead th,
 	#userData thead th {
-		background-color: rgb(80, 80, 80);
+		background-color: var(--dark-section-header);
 	}
 
 	#data:hover {
-		background-color: rgb(0, 87, 158);
-	}
-
-	#header_ {
-		background-color: rgb(80, 80, 80);
-	}
-
-	#filterAsset,
-	#filterEmployee,
-	#filterModel {
-		background-color: black;
-		color: white;
+		background-color: var(--dark-band);
 	}
 
 	#bodyTable {
-		background-color: black;
-	}
-
-	#bodyTable label {
-		color: white;
+		background-color: var(--dark-backcolor);
+		color: var(--dark-subtle-lightcolor);
 	}
 
 	#headerTable {
-		background-color: rgb(0, 87, 158);
+		background-color: var(--dark-table-header);
+		color: var(--dark-table-header-forecolor);
+	}
+
+	#header_ tr>th>a {
+		color: var(--dark-table-header-forecolor);
+	}
+
+	#tableList:hover {
+		background-color: var(--dark-band);
+	}
+
+	a {
+		color: var(--dark-forecolor);
 	}
 }
 
 .unselectable {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
 	user-select: none;
 }
 
-#assetData {
-	width: 100%;
-	border: 0px solid;
-	border-radius: 15px;
-	padding: 0px;
+#assetData,
+#modelData,
+#employeeData,
+#userData {
+	border-radius: 0px;
+	border-style: solid;
+	border-width: 1px;
 	margin-left: auto;
-	margin-right: auto;
+	/* margin-right: auto; */
+	padding: 0px;
+	width: 100%;
 }
 
-#assetData thead th,
-#modelData thead th,
-#employeeData thead th,
-#userData thead th {
+#assetData thead,
+#modelData thead,
+#employeeData thead,
+#userData thead,
+#storageData thead {
 	position: sticky;
 	top: 0;
 	z-index: 1;
 }
 
-#modelData {
-	width: 100%;
-	border: 0px solid;
-	border-radius: 15px;
-	padding: 0px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#employeeData {
-	width: 100%;
-	border: 0px solid;
-	border-radius: 15px;
-	padding: 0px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#userData {
-	width: 100%;
-	border: 0px solid;
-	border-radius: 15px;
-	padding: 0px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#header_ {
-	height: 30px;
-	font-weight: bold;
-	text-align: center;
-	color: steelblue;
-}
-
-a {
-	color: steelblue;
-}
-
+#header_,
 #data {
 	height: 30px;
 	text-align: center;
 }
 
 #tbSearch {
-	width: auto;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 0px;
+	width: 100%;
 }
 
 input[type=text] {
@@ -194,4 +159,13 @@ input[type=text] {
 #inactive {
 	font-style: italic;
 	opacity: 0.4;
+}
+
+#tableList:hover {
+	transition: all .2s ease-in-out;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: underline;
 }

@@ -1,91 +1,74 @@
-
 @media (prefers-color-scheme: light) {
 	#menu ul {
-		border-color: black;
-		background-color: rgb(25, 81, 133);
-	}
-
-	#menu li a,
-	li span {
-		color: white;
+		background-color: var(--light-backcolor-foot);
 	}
 
 	#menu ul>li {
-		border-color: white;
-		background-color: rgb(25, 81, 133);
+		background-color: var(--light-backcolor-foot);
 	}
 
 	#menu ul>li:hover {
-		background-color: cadetblue;
+		background-color: var(--light-background);
+		color: var(--light-forecolor);
 	}
 
-	#menu li:hover ol {
-		background-color: rgb(25, 81, 133);
-		color: black;
+	#menu a:hover {
+		color: var(--light-forecolor);
+	}
+
+	#menu li a,
+	#menu li {
+		color: white;
 	}
 
 	#menu ol a:hover {
-		background-color: cadetblue;
+		background-color: var(--light-background);
 	}
 
 	#menu li ol {
-		border-color: white;
-		background: rgb(25, 81, 133);
-		color: white;
-		box-shadow: 0px 10px 30px black;
-	}
-
-	#menu ol a {
-		color: white;
+		background: var(--light-backcolor-foot);
+		box-shadow: 0px 10px 30px var(--shadow-color);
 	}
 
 	#menu ol a:hover {
-		border-color: rgb(249, 202, 20);
+		border-color: var(--light-band);
 	}
 }
 
 @media (prefers-color-scheme: dark) {
 	#menu ul {
-		border-color: white;
-		background-color: grey;
-	}
-
-	#menu li a,
-	li span {
-		color: white;
+		background-color: var(--dark-backcolor-foot);
 	}
 
 	#menu ul>li {
-		border-color: white;
-		background-color: grey;
+		background-color: var(--dark-backcolor-foot);
 	}
 
 	#menu ul>li:hover {
-		background-color: black;
+		background-color: var(--dark-background);
+		color: var(--dark-forecolor);
 	}
 
-	#menu li:hover ol {
-		background-color: grey;
+	#menu a:hover {
+		color: var(--dark-forecolor);
+	}
+
+	#menu li a,
+	#menu li {
 		color: white;
 	}
 
 	#menu ol a:hover {
-		background-color: black;
+		background-color: var(--dark-background);
 	}
 
 	#menu li ol {
-		border-color: white;
-		background-color: grey;
-		color: white;
-		box-shadow: 0px 10px 30px black;
-	}
-
-	#menu ol a {
-		color: white;
+		background-color: var(--dark-backcolor-foot);
+		box-shadow: 0px 10px 30px var(--shadow-color);
 	}
 
 	#menu ol a:hover {
-		border-color: rgb(0, 87, 158);
+		border-color: var(--dark-band);
 	}
 }
 
@@ -95,66 +78,59 @@
 }
 
 #menu ul,
-li,
-span,
-a {
-	z-index: 2;
+#menu li,
+#menu span,
+#menu a {
 	display: block;
 	overflow: hidden;
+	z-index: 2;
 }
 
 #menu ul {
-	z-index: 2;
 	border-radius: 15px 15px 0 0;
-	list-style-type: none;
 	display: flex;
 	justify-content: center;
-}
-
-#menu ul>li {
+	list-style-type: none;
 	z-index: 2;
-	border-left: 1px solid;
-	display: list-item;
 }
 
 #menu ul>li>a {
 	font-variant: small-caps;
 }
 
-#menu ul>li:hover {
-	z-index: 2;
-	transition: all .5s;
-}
-
 #menu ul>li {
-	z-index: 2;
 	border-left: none;
 	transition: all .5s;
+	z-index: 2;
 }
 
 #menu li a,
-li span {
-	z-index: 2;
-	padding: 10px 5px;
-	width: auto;
+#menu li span {
 	cursor: pointer;
-	text-decoration: none;
+	padding: 10px 5px;
 	text-align: center;
+	text-decoration: none;
+	width: auto;
+	z-index: 2;
+}
+
+#menu span {
+	font-variant: small-caps;
 }
 
 #menu li ol {
-	z-index: 2;
-	width: 90px;
 	position: fixed;
+	width: 90px;
+	z-index: 2;
 }
 
 #menu ol a {
-	padding: 10px 1px;
 	border-left: 4px solid transparent;
 	border-right: 4px solid transparent;
+	padding: 10px 1px;
 }
 
 #menu ol a:hover {
-	transition: all .5s ease-in-out;
 	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
 }

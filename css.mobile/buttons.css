@@ -1,0 +1,43 @@
+#eraseButton {
+	color: var(--erase-button-forecolor);
+	margin: 10px;
+}
+
+#eraseButton:hover {
+	background-color: var(--erase-button-hover-backcolor);
+	color: var(--all-button-hover-forecolor);
+	cursor: pointer;
+}
+
+#registerButton {
+	color: var(--add-button-forecolor);
+	margin: 10px;
+}
+
+#registerButton:hover {
+	background-color: var(--add-button-hover-backcolor);
+	color: var(--all-button-hover-forecolor);
+	cursor: pointer;
+}
+
+#updateButton {
+	color: var(--add-button-forecolor);
+	margin: 10px;
+}
+
+#updateButton:hover {
+	background-color: var(--add-button-hover-backcolor);
+	color: var(--all-button-hover-forecolor);
+	cursor: pointer;
+}
+
+#searchButton {
+	color: var(--search-button-forecolor);
+	margin: 10px;
+}
+
+#searchButton:hover {
+	background-color: var(--search-button-hover-backcolor);
+	color: var(--all-button-hover-forecolor);
+	cursor: pointer;
+}
