@@ -99,11 +99,11 @@ if ($send != 1) {
 		mysqli_stmt_bind_param($q, "ssssssssssssssssssssssssssssssssssssssss", $discarded, $building, $roomNumber, $deliveredToRegistrationNumber, $lastDeliveryDate, $standard, $note, $serviceDate, $adRegistered, $brand, $model, $serialNumber, $processor, $ramAmount, $ramType, $ramFrequency, $ramOccupiedSlots, $ramTotalSlots, $storageSize, $operatingSystemName, $operatingSystemVersion, $operatingSystemBuild, $operatingSystemArch, $hostname, $fwVersion, $inUse, $sealNumber, $tag, $hwType, $fwType, $storageType, $macAddress, $ipAddress, $videoCardName, $videoCardRam, $mediaOperationMode, $secureBoot, $virtualizationTechnology, $tpmVersion, $idAsset);
 
 		mysqli_stmt_execute($q);
-
-		header("Location: formDetailAsset.php?id=$idAsset");
 	}
 	$query = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 	$queryFormatPrevious = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT_ID"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["ASSET_NUMBER_FK"] . "") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+
+	header("Location: formDetailAsset.php?id=$idAsset");
 }
 ?>
 <div id="middle" <?php if (isset($_SESSION["privilegeLevel"])) {
@@ -123,7 +123,6 @@ if ($send != 1) {
 			}
 		}
 		?>
-		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {
@@ -173,7 +172,7 @@ if ($send != 1) {
 			?>
 
 				<tr>
-					<td colspan=7 id=spacer><?php echo $translations["ASSET_DATA"] ?></td>
+					<td colspan=7 id=section-header><?php echo $translations["ASSET_DATA"] ?></td>
 				</tr>
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
@@ -189,20 +188,17 @@ if ($send != 1) {
 				}
 				?>
 				<tr>
-					<td id=lblFixed><?php echo $translations["ASSET_NUMBER"] ?><mark id=asterisk>*</mark></td>
-
+					<td id=lblFixed><?php echo $translations["ASSET_NUMBER"] ?></td>
 					<input type=hidden name=txtIdAsset value="<?php echo $idAsset; ?>">
 					<input type=hidden name=txtOldAssetNumber value="<?php echo $oldAssetNumber; ?>">
 					<td colspan=5><input type=text name=txtAssetNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NUMBER"] ?>" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["SEAL_NUMBER"] ?></td>
-
 					<td><input type="text" name="txtSealNumber" value="<?php echo $sealNumber; ?>"></td>
 				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["BUILDING"] ?><mark id=asterisk>*</mark></td>
-
+					<td id=lblFixed><?php echo $translations["BUILDING"] ?></td>
 					<td colspan=5>
 						<select id="formFields" name="txtBuilding" required <?php if ($building == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -218,13 +214,11 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark></td>
-
+					<td id=lblFixed><?php echo $translations["ASSET_ROOM"] ?></td>
 					<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_ROOM_NUMBER"] ?>" maxlength="5" required value="<?php echo $roomNumber; ?>" <?php if ($roomNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["IN_USE"] ?></td>
-
 					<td>
 						<select name="txtInUse" <?php if ($inUse == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -236,7 +230,6 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["HW_TYPE"] ?></td>
-
 					<td>
 						<select name="txtHwType" <?php if ($hwType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -253,7 +246,6 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["TAG"] ?></td>
-
 					<td>
 						<select name="txtTag" <?php if ($tag == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -264,7 +256,6 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["AD_REGISTERED"] ?></td>
-
 					<td>
 						<select name="txtAdRegistered" <?php if ($adRegistered == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -279,7 +270,6 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["STANDARD"] ?></td>
-
 					<td colspan=5>
 						<select name="txtStandard" <?php if ($standard == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -297,17 +287,14 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
-
 					<td colspan=5><input type=text name=txtDeliveredToRegistrationNumber maxlength="8" value="<?php echo $deliveredToRegistrationNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
-
 					<td colspan=5><input type=date name=txtLastDeliveryDate value="<?php echo $lastDeliveryDate; ?>"></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
-
 					<td colspan=5><label name=txtLastDeliveryMadeBy style=line-height:40px;font-size:12pt></label>
 						<?php
 						if (isset($queryUsers))
@@ -328,55 +315,46 @@ if ($send != 1) {
 						<label>
 							<?php
 							if ($printedDelivery != true)
-								echo "-";
+								echo $json_constants_array["DASH"];
 							?>
 						</label>
 					</td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["NOTE"] ?></td>
-
 					<td colspan=5><textarea name=txtNote cols=20 rows=2 placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NOTE"] ?>"><?php echo $note; ?></textarea>
 					</td>
 				</tr>
 		</table>
 		<table id="formFields">
 			<tr>
-				<td colspan="3" id=spacer><?php echo $translations["COMPUTER_DATA"] ?></td>
+				<td colspan="3" id=section-header><?php echo $translations["COMPUTER_DATA"] ?></td>
 			</tr>
 			<tr>
 				<td><input type=hidden name=txtServiceDate value="<?php echo $serviceDate; ?>"></td>
 			</tr>
-
-
 			<tr>
 				<td id=lblFixed><?php echo $translations["BRAND"] ?></td>
-
 				<td><input type=text name=txtBrand value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["MODEL"] ?></td>
-
 				<td><input type=text name=txtModel value="<?php echo $model; ?>" <?php if ($model == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["SERIAL_NUMBER"] ?></td>
-
 				<td><input type=text name=txtSerialNumber value="<?php echo $serialNumber; ?>" <?php if ($serialNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["PROCESSOR"] ?></td>
-
 				<td><input type=text name=txtProcessor value="<?php echo $processor; ?>" <?php if ($processor == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["RAM_AMOUNT"] . " (MB)" ?></td>
-
 				<td><input type=number name=txtRamAmount value="<?php echo $ramAmount; ?>" <?php if ($ramAmount == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["RAM_TYPE"] ?></td>
-
 				<td>
 					<select name="txtRamType" <?php if ($ramType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -392,32 +370,26 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["RAM_FREQUENCY"] . " (MHz)" ?></td>
-
 				<td><input type=number name=txtRamFrequency value="<?php echo $ramFrequency; ?>" <?php if ($ramFrequency == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["RAM_OCCUPIED_SLOTS"] ?></td>
-
 				<td><input type=number name=txtRamOccupiedSlots value="<?php echo $ramOccupiedSlots; ?>" <?php if ($ramOccupiedSlots == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["RAM_TOTAL_SLOTS"] ?></td>
-
 				<td><input type=number name=txtRamTotalSlots value="<?php echo $ramTotalSlots; ?>" <?php if ($ramTotalSlots == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["STORAGE_SIZE"] . " (MB)" ?></td>
-
 				<td><input type=number name=txtStorageSize value="<?php echo $storageSize; ?>" <?php if ($storageSize == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["STORAGE_TYPE"] ?></td>
-
 				<td><input type=text name=txtStorageType value="<?php echo $storageType; ?>" <?php if ($storageType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
-
 				<td>
 					<select name="txtMediaOperationMode" <?php if ($mediaOperationMode == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -434,32 +406,26 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["VIDEO_CARD_NAME"] ?></td>
-
 				<td><input type=text name=txtVideoCardName value="<?php echo $videoCardName; ?>" <?php if ($videoCardName == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["VIDEO_CARD_RAM"] . " (MB)" ?></td>
-
 				<td><input type=number name=txtVideoCardRam value="<?php echo $videoCardRam; ?>" <?php if ($videoCardRam == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_NAME"] ?></td>
-
 				<td><input type=text name=txtOperatingSystemName value="<?php echo $operatingSystemName; ?>" <?php if ($operatingSystemName == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_VERSION"] ?></td>
-
 				<td><input type=text name=txtOperatingSystemVersion value="<?php echo $operatingSystemVersion; ?>" <?php if ($operatingSystemVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_BUILD"] ?></td>
-
 				<td><input type=text name=txtOperatingSystemBuild value="<?php echo $operatingSystemBuild; ?>" <?php if ($operatingSystemBuild == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_ARCH"] ?></td>
-
 				<td><select name="txtOperatingSystemArch" <?php if ($operatingSystemArch == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
 						<?php
@@ -474,22 +440,18 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["HOSTNAME"] ?></td>
-
 				<td><input type=text name=txtHostname value="<?php echo $hostname; ?>" <?php if ($hostname == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["MAC_ADDRESS"] ?></td>
-
 				<td><input type="text" name="txtMacAddress" value="<?php echo $macAddress; ?>" <?php if ($macAddress == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["IP_ADDRESS"] ?></td>
-
 				<td><input type="text" name="txtIpAddress" value="<?php echo $ipAddress ?>" required <?php if ($ipAddress == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["FW_TYPE"] ?></td>
-
 				<td><select name="txtFwType" <?php if ($fwType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
 						<?php
@@ -504,12 +466,10 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["FW_VERSION"] ?></td>
-
 				<td><input type=text name=txtFwVersion value="<?php echo $fwVersion; ?>" <?php if ($fwVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["SECURE_BOOT"]["NAME"] ?></td>
-
 				<td>
 					<select name="txtSecureBoot" <?php if ($secureBoot == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -526,7 +486,6 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></td>
-
 				<td>
 					<select name="txtVirtualizationTechnology" <?php if ($virtualizationTechnology == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -544,7 +503,6 @@ if ($send != 1) {
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["TPM_VERSION"] ?></td>
-
 				<td>
 					<select name="txtTpmVersion" <?php if ($tpmVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
 						<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -563,7 +521,7 @@ if ($send != 1) {
 			}
 		?>
 		<tr>
-			<td colspan=7 align=center><br><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
+			<td id=h-separator colspan=7 align=center><input id="updateButton" type=submit value=<?php echo $translations["LABEL_UPDATE_BUTTON"] ?>></td>
 		</tr>
 		<?php
 		?>

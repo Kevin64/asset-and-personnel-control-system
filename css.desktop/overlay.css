@@ -31,60 +31,59 @@
 }
 
 #overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
     backdrop-filter: blur(7px);
+    bottom: 0;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
 }
 
 #window {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 50%;
-    height: 25%;
     border: 1px solid;
+    bottom: 0;
+    height: 25%;
+    left: 0;
+    margin: auto;
     overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
 }
 
 #closeButton {
     position: absolute;
-    top: 320px;
     right: 480px;
+    top: 320px;
 }
 
 #overlay table {
-    table-layout: fixed;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 10px;
-    width: 98%;
     border: 1px solid;
     border-collapse: collapse;
+    bottom: 0;
+    left: 0;
+    margin: 10px;
+    position: absolute;
+    right: 0;
+    table-layout: fixed;
+    top: 0;
+    width: 98%;
 }
-
 
 #overlay td {
     border: 1px solid;
 }
 
 #title {
-    font-size: 25px;
     border: 1px solid;
-    margin: 0 auto;
     display: inline-block;
-    padding: 3px;
+    font-size: 25px;
+    margin: 0 auto;
     margin-top: 310px;
+    padding: 3px;
 }

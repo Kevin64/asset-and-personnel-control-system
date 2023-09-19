@@ -39,16 +39,10 @@ if (isset($_SESSION["privilegeLevel"])) {
 ?>
 
 		<div id="middle">
-			<table>
-				<form action=queryAgent.php method=post>
-					<input type=hidden name=txtSend value=1>
-				</form>
-			</table>
-			<br><br>
 			<h2><?php echo $translations["AGENT_LIST"] ?> (<?php echo $totalusers; ?>)
 			</h2><br>
 			<form action="eraseSelectedAgent.php" method="post">
-				<table id="userData" cellspacing=0>
+				<table id="userData" cellspacing=1>
 					<thead id="header_">
 						<th><img src="<?php echo $imgArray["TRASH"] ?>" width="22" height="29"></th>
 						<th><a href="?orderBy=<?php echo $dbAgentArray["USERNAME"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["USERNAME"] ?></a>
@@ -77,7 +71,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 							if ($explodedDate[0] != "")
 								$lastLoginDate = $explodedDate[2] . "/" . $explodedDate[1] . "/" . $explodedDate[0] . " " . $formatDate2;
 						?>
-							<tr id="data">
+							<tr id=tableList>
 								<td><input type="checkbox" name="chkDelete[]" value="<?php echo $idUser; ?>" onclick="var input = document.getElementById('eraseButton'); if(this.checked){ input.disabled=false;}else{input.disabled=true;}" <?php if ($_SESSION["id"] == $idUser) { ?> disabled <?php } ?> <?php if ($blocked == 1) { ?> disabled <?php } ?>>
 								</td>
 								<td><a href="formDetailAgent.php?id=<?php echo $idUser; ?>" <?php if ($blocked == 1) { ?> id=inactive <?php } ?>><?php echo $username; ?></a></td>
@@ -108,7 +102,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 						}
 				?>
 				<tr>
-					<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
+					<td id=h-separator colspan=7 align="center"><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 				</tr>
 				</table>
 			</form>

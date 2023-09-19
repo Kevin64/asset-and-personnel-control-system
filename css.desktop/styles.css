@@ -13,8 +13,13 @@
 		background-color: var(--light-backcolor);
 	}
 
-	#spacer {
-		background-color: var(--light-spacer);
+	#section-header {
+		background-color: var(--light-section-header);
+		color: var(--light-table-header-forecolor);
+	}
+
+	#h-separator {
+		border-top-color: var(--light-section-header);
 	}
 
 	#foot-up,
@@ -24,7 +29,7 @@
 	}
 
 	#band {
-		background-color:var(--light-band);
+		background-color: var(--light-band);
 	}
 }
 
@@ -32,7 +37,7 @@
 	:root {
 		color-scheme: dark;
 	}
-	
+
 	body {
 		background: var(--dark-background);
 		color: var(--dark-forecolor);
@@ -43,8 +48,13 @@
 		background-color: var(--dark-backcolor);
 	}
 
-	#spacer {
-		background-color: var(--dark-spacer);
+	#section-header {
+		background-color: var(--dark-section-header);
+		color: var(--dark-table-header-forecolor);
+	}
+
+	#h-separator {
+		border-top-color: var(--dark-section-header);
 	}
 
 	#foot-up,
@@ -54,7 +64,7 @@
 	}
 
 	#band {
-		background-color:var(--dark-band);
+		background-color: var(--dark-band);
 	}
 }
 
@@ -84,57 +94,61 @@ select {
 }
 
 table {
-	font-size: 18px;
 	border-style: hidden;
 	border-width: 0px;
+	font-size: 18px;
 }
 
 #container {
-	width: 1200px;
-	height: 200px;
-	position: relative;
-	margin: 0 auto;
-	padding: 0px;
 	border: 0px solid;
 	border-radius: 5px;
 	box-shadow: 0px 0px 0px;
+	height: 200px;
+	margin: 0 auto;
+	padding: 0px;
+	position: relative;
+	width: 1200px;
 }
 
 #top {
-	width: 1202px;
-	text-align: center;
 	border-radius: 15px;
+	text-align: center;
+	width: 1202px;
 }
 
 #middle {
-	width: 1200px;
 	height: auto;
-	text-align: center;
-	vertical-align: middle;
 	padding-bottom: 20px;
 	padding-top: 20px;
+	text-align: center;
+	vertical-align: middle;
+	width: 1200px;
 }
 
 #foot-up {
-	width: 1200px;
 	text-align: center;
+	width: 1200px;
 }
 
 #foot-down {
-	width: 1200px;
-	text-align: center;
 	border-radius: 0 0 15px 15px;
 	margin-bottom: 5px;
+	text-align: center;
+	width: 1200px;
 }
 
-#spacer {
+#section-header {
 	font-weight: bold;
 	text-align: center;
-	border: 1px solid;
+}
+
+#h-separator {
+	border-style: dotted;
+	border-width: 1px;
 }
 
 #band {
-	font-size:2px;
+	font-size: 2px;
 	width: 1200px;
 }
 
@@ -143,5 +157,5 @@ table {
 }
 
 #linksameline {
-    display: inline;
+	display: inline;
 }

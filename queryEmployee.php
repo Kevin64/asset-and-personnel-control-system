@@ -36,8 +36,8 @@ $totalEmployees = mysqli_num_rows($query);
 ?>
 
 <div id="middle">
-	<table id="tbSearch">
-		<form action=queryEmployee.php method=post>
+	<form action=queryEmployee.php method=post>
+		<table id="tbSearch">
 			<input type=hidden name=txtSend value=1>
 			<tr>
 				<td align=center><?php echo $translations["SEARCH_FOR"] ?></td>
@@ -53,19 +53,19 @@ $totalEmployees = mysqli_num_rows($query);
 					<input style="width:335px" type=text name=txtSearch> <input id="searchButton" type=submit value="OK">
 				</td>
 			</tr>
-		</form>
-		<?php
-		if (isset($_POST["txtSearch"])) {
-			if (isset($_POST["rdCriterion"])) {
-				$value = $_POST["rdCriterion"];
+			<?php
+			if (isset($_POST["txtSearch"])) {
+				if (isset($_POST["rdCriterion"])) {
+					$value = $_POST["rdCriterion"];
+				}
 			}
-		}
-		?>
-	</table>
+			?>
+		</table>
+	</form>
 	<br><br>
 	<h2><?php echo $translations["EMPLOYEE_LIST"] ?> (<?php echo $totalEmployees; ?>)</h2><br>
 	<form action="eraseSelectedEmployee.php" method="post">
-		<table id="employeeData" cellspacing=0>
+		<table id="employeeData" cellspacing=1>
 			<thead id="header_">
 				<?php
 				if (isset($_SESSION["privilegeLevel"])) {
@@ -96,7 +96,7 @@ $totalEmployees = mysqli_num_rows($query);
 					$sector = $result[$dbEmployeeArray["SECTOR"]];
 					$employeeType = $result[$dbEmployeeArray["TYPE"]];
 				?>
-					<tr id="data">
+					<tr id=tableList>
 						<?php
 						if (isset($_SESSION["privilegeLevel"])) {
 							if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
@@ -135,7 +135,7 @@ $totalEmployees = mysqli_num_rows($query);
 					if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 			?>
 				<tr>
-					<td colspan=7 align="center"><br><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
+					<td id=h-separator colspan=7 align="center"><input id="eraseButton" type="submit" value="<?php echo $translations["LABEL_ERASE_BUTTON"] ?>" disabled></td>
 				</tr>
 		<?php
 					}

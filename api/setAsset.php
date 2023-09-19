@@ -26,7 +26,10 @@ if (isset($_POST)) {
 	$ramOccupiedSlots = $dbAssetArray["RAM_OCCUPIED_SLOTS"];
 	$ramTotalSlots = $dbAssetArray["RAM_TOTAL_SLOTS"];
 	$storageSize = $dbAssetArray["STORAGE_SIZE"];
-	$operatingSystem = $dbAssetArray["OPERATING_SYSTEM"];
+	$operatingSystemName = $dbAssetArray["OPERATING_SYSTEM_NAME"];
+	$operatingSystemVersion = $dbAssetArray["OPERATING_SYSTEM_VERSION"];
+	$operatingSystemBuild = $dbAssetArray["OPERATING_SYSTEM_BUILD"];
+	$operatingSystemArch = $dbAssetArray["OPERATING_SYSTEM_ARCH"];
 	$hostname = $dbAssetArray["HOSTNAME"];
 	$fwVersion = $dbAssetArray["FW_VERSION"];
 	$macAddress = $dbAssetArray["MAC_ADDRESS"];
@@ -72,7 +75,10 @@ if (isset($_POST)) {
 			$ramOccupiedSlots . " = '$newAsset[$ramOccupiedSlots]', " .
 			$ramTotalSlots . " = '$newAsset[$ramTotalSlots]', " .
 			$storageSize . " = '$newAsset[$storageSize]', " .
-			$operatingSystem . " = '$newAsset[$operatingSystem]', " .
+			$operatingSystemName . " = '$newAsset[$operatingSystemName]', " .
+			$operatingSystemVersion . " = '$newAsset[$operatingSystemVersion]', " .
+			$operatingSystemBuild . " = '$newAsset[$operatingSystemBuild]', " .
+			$operatingSystemArch . " = '$newAsset[$operatingSystemArch]', " .
 			$hostname . " = '$newAsset[$hostname]', " .
 			$fwVersion . " = '$newAsset[$fwVersion]', " .
 			$macAddress . " = '$newAsset[$macAddress]', " .
@@ -84,7 +90,6 @@ if (isset($_POST)) {
 			$storageType . " = '$newAsset[$storageType]', " .
 			$videoCardName . " = '$newAsset[$videoCardName]', " .
 			$videoCardRam . " = '$newAsset[$videoCardRam]', " .
-			$videoCardRam . " = '$newAsset[$videoCardRam]', " .
 			$mediaOperationMode . " = '$newAsset[$mediaOperationMode]', " .
 			$secureBoot . " = '$newAsset[$secureBoot]', " .
 			$virtualizationTechnology . " = '$newAsset[$virtualizationTechnology]', " .
@@ -92,7 +97,7 @@ if (isset($_POST)) {
 			where " . $assetNumber . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	} else {
-		$query = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$roomNumber,$building,$adRegistered,$standard,$serviceDate,$brand,$model,$serialNumber,$processor,$ramAmount,$ramType,$ramFrequency,$ramOccupiedSlots,$ramTotalSlots,$storageSize,$operatingSystem,$hostname,$fwVersion,$macAddress,$ipAddress,$inUse,$tag,$hwType,$fwType,$storageType,$videoCardName,$videoCardRam,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$roomNumber]','$newAsset[$building]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$serviceDate]','$newAsset[$brand]','$newAsset[$model]','$newAsset[$serialNumber]','$newAsset[$processor]','$newAsset[$ramAmount]','$newAsset[$ramType]','$newAsset[$ramFrequency]','$newAsset[$ramOccupiedSlots]','$newAsset[$ramTotalSlots]','$newAsset[$storageSize]','$newAsset[$operatingSystem]','$newAsset[$hostname]','$newAsset[$fwVersion]','$newAsset[$macAddress]','$newAsset[$ipAddress]','$newAsset[$inUse]','$newAsset[$tag]','$newAsset[$hwType]','$newAsset[$fwType]','$newAsset[$storageType]','$newAsset[$videoCardName]','$newAsset[$videoCardRam]','$newAsset[$mediaOperationMode]','$newAsset[$secureBoot]','$newAsset[$virtualizationTechnology]','$newAsset[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$roomNumber,$building,$adRegistered,$standard,$serviceDate,$brand,$model,$serialNumber,$processor,$ramAmount,$ramType,$ramFrequency,$ramOccupiedSlots,$ramTotalSlots,$storageSize,$operatingSystemName,$operatingSystemVersion,$operatingSystemBuild,$operatingSystemArch,$hostname,$fwVersion,$macAddress,$ipAddress,$inUse,$tag,$hwType,$fwType,$storageType,$videoCardName,$videoCardRam,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$roomNumber]','$newAsset[$building]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$serviceDate]','$newAsset[$brand]','$newAsset[$model]','$newAsset[$serialNumber]','$newAsset[$processor]','$newAsset[$ramAmount]','$newAsset[$ramType]','$newAsset[$ramFrequency]','$newAsset[$ramOccupiedSlots]','$newAsset[$ramTotalSlots]','$newAsset[$storageSize]','$newAsset[$operatingSystemName]','$newAsset[$operatingSystemVersion]','$newAsset[$operatingSystemBuild]','$newAsset[$operatingSystemArch]','$newAsset[$hostname]','$newAsset[$fwVersion]','$newAsset[$macAddress]','$newAsset[$ipAddress]','$newAsset[$inUse]','$newAsset[$tag]','$newAsset[$hwType]','$newAsset[$fwType]','$newAsset[$storageType]','$newAsset[$videoCardName]','$newAsset[$videoCardRam]','$newAsset[$mediaOperationMode]','$newAsset[$secureBoot]','$newAsset[$virtualizationTechnology]','$newAsset[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	}
 	$queryFormatPrevious = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$previousServiceDates,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$newAsset[$serviceDate]','$newAsset[$serviceType]','$newAsset[$batteryChange]','$newAsset[$ticketNumber]','$newAsset[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	echo "Ativo adicionado";

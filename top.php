@@ -30,15 +30,19 @@ require_once("connection.php");
 	<?php
 	if (in_array(true, $devices)) {
 	?>
+		<link rel="stylesheet" href="css.mobile/buttons.css">
+		<link rel="stylesheet" href="css.mobile/colors.css">
 		<link rel="stylesheet" href="css.mobile/table.css">
 		<link rel="stylesheet" href="css.mobile/styles.css">
 		<link rel="stylesheet" href="css.mobile/forms.css">
 		<link rel="stylesheet" href="css.mobile/menu.css">
 		<link rel="stylesheet" href="css.mobile/input.css">
 		<link rel="stylesheet" href="css.mobile/animation.css">
+		<link rel="stylesheet" href="css.mobile/overlay.css">
 	<?php
 	} else {
 	?>
+		<link rel="stylesheet" href="css.desktop/buttons.css">
 		<link rel="stylesheet" href="css.desktop/colors.css">
 		<link rel="stylesheet" href="css.desktop/table.css">
 		<link rel="stylesheet" href="css.desktop/styles.css">
@@ -52,7 +56,8 @@ require_once("connection.php");
 	?>
 	<meta charset="utf-8">
 	<title>.:: <?php echo $translations["APCS"] ?> ::.</title>
-	<link rel="icon" href="<?php echo $imgArray["FAVICON"] ?>" type="image/x-icon" />
+	<link href="<?php echo $imgArray["FAVICON_LIGHT_MODE"] ?>" rel="icon" media="(prefers-color-scheme: light)" type="image/png" />
+	<link href="<?php echo $imgArray["FAVICON_DARK_MODE"] ?>" rel="icon" media="(prefers-color-scheme: dark)" type="image/png" />
 </head>
 
 <body>

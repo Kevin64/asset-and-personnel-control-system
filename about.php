@@ -23,10 +23,9 @@ require_once("updateChecker.php");
 					<b><?php echo $translations["MYSQL_VERSION"] ?></b><?php echo mysqli_get_server_info($connection); ?><br>
 					<b><?php echo $translations["UPDATES"] ?></b>
 					<?php if (version_compare($line, $gitHubVersion) >= 0) { ?>
-						<font color=<?php echo $colorArray["UPDATED"]; ?>><?php echo $translations["YOUR_SYSTEM_IS_UP_TO_DATE"]; ?></font>
+						<label style="color:var(--updated-forecolor);"><?php echo $translations["YOUR_SYSTEM_IS_UP_TO_DATE"]; ?></label>
 					<?php } else { ?>
-						<font color=<?php echo $colorArray["UPDATE_AVAILABLE"]; ?>><?php echo $translations["UPDATE_AVAILABLE"] . " "; ?></b></font><?php echo $release["tag_name"] . " - ";
-																							?><a target=_blank id=linksameline href=<?php echo $release["html_url"]; ?>><?php echo $translations["CLICK_HERE_TO_DOWNLOAD"] ?></a><?php } ?>
+						<label style="color:var(--update-available-forecolor);"><?php echo $translations["UPDATE_AVAILABLE"] . " "; ?></label><?php echo $release["tag_name"] . " - "; ?><a target=_blank id=linksameline href=<?php echo $release["html_url"]; ?>><?php echo $translations["CLICK_HERE_TO_DOWNLOAD"] ?></a><?php } ?>
 				</p>
 			</fieldset>
 		<?php } ?>
