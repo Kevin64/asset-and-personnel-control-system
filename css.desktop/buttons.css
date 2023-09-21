@@ -1,3 +1,43 @@
+@media(prefers-color-scheme: light) {
+	#eraseButton:disabled,
+	#eraseButton[disabled],
+	#eraseButton[disabled]:hover,
+	#registerButton:disabled,
+	#registerButton[disabled],
+	#registerButton[disabled]:hover,
+	#updateButton:disabled,
+	#updateButton[disabled],
+	#updateButton[disabled]:hover,
+	#searchButton:disabled,
+	#searchButton[disabled],
+	#searchButton[disabled]:hover {
+		background-color: var(--light-disabled-button-backcolor);
+		box-shadow: 0px 0px 3px var(--light-box-shadow-hover);
+		color: var(--light-disabled-button-forecolor);
+		cursor: default;
+	}
+}
+
+@media(prefers-color-scheme: dark) {
+	#eraseButton:disabled,
+	#eraseButton[disabled],
+	#eraseButton[disabled]:hover,
+	#registerButton:disabled,
+	#registerButton[disabled],
+	#registerButton[disabled]:hover,
+	#updateButton:disabled,
+	#updateButton[disabled],
+	#updateButton[disabled]:hover,
+	#searchButton:disabled,
+	#searchButton[disabled],
+	#searchButton[disabled]:hover {
+		background-color: var(--dark-disabled-button-backcolor);
+		box-shadow: 0px 0px 3px var(--dark-box-shadow-hover);
+		color: var(--dark-disabled-button-forecolor);
+		cursor: default;
+	}
+}
+
 #eraseButton {
 	color: var(--erase-button-forecolor);
 	margin: 10px;

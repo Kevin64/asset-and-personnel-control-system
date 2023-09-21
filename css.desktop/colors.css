@@ -12,6 +12,8 @@
     --dark-border: white;
     --dark-box-shadow: rgb(255, 255, 255, .3);
     --dark-box-shadow-hover: rgb(255, 255, 255, 1);
+    --dark-disabled-button-backcolor: rgb(32, 32, 32);
+    --dark-disabled-button-forecolor: gray;
     --dark-forecolor: white;
     --dark-forecolor-foot: white;
     --dark-input-backcolor: black;
@@ -19,7 +21,7 @@
     --dark-overlay-transparency: rgba(0, 0, 0, 0.7);
     --dark-section-header: rgb(70, 70, 70);
     --dark-subtle-lightcolor: #c0c0c0;
-    --dark-table-header: var(--dark-section-header);
+    --dark-table-header: rgb(70, 70, 70);
     --dark-table-header-forecolor: white;
     --erase-button-forecolor: red;
     --erase-button-hover-backcolor: darkred;
@@ -34,6 +36,8 @@
     --light-border: black;
     --light-box-shadow: rgb(0, 0, 0, .3);
     --light-box-shadow-hover: rgb(0, 0, 0, 1);
+    --light-disabled-button-backcolor: rgb(248, 248, 248);
+    --light-disabled-button-forecolor: gray;
     --light-forecolor: black;
     --light-forecolor-foot: white;
     --light-input-backcolor: white;
@@ -41,7 +45,7 @@
     --light-overlay-transparency: rgba(255, 255, 255, 0.7);
     --light-section-header: rgb(25, 81, 133);
     --light-subtle-darkcolor: #2f4f4f;
-    --light-table-header: var(--light-section-header);
+    --light-table-header: rgb(25, 81, 133);
     --light-table-header-forecolor: white;
     --non-operational-forecolor: firebrick;
     --not-in-use-forecolor: red;

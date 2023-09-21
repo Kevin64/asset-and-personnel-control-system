@@ -71,7 +71,7 @@ if ($send != 1) {
 																													} ?>>
 	<form action="editModel.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2><?php echo $translations["MODEL_DETAIL"] ?></h2><br>
+		<h2><?php echo $translations["MODEL_EDIT"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $model != $oldModel) {
