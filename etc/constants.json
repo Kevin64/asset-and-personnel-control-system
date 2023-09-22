@@ -52,8 +52,8 @@
         "SERIAL_NUMBER": "serialNumber",
         "SERVICE_DATE": "serviceDate",
         "STANDARD": "standard",
-        "STORAGE_SIZE": "storageSize",
-        "STORAGE_TYPE": "storageType",
+        "STORAGE_TOTAL_SIZE": "storageTotalSize",
+        "STORAGE_SUMMARY": "storageSummary",
         "TAG": "tag",
         "TPM_VERSION": "tpmVersion",
         "VIDEO_CARD_NAME": "videoCardName",
@@ -75,7 +75,7 @@
         "AGENT_ID": "agentId",
         "ASSET_NUMBER_FK": "assetNumberFK",
         "BATTERY_CHANGE": "batteryChange",
-        "MAINTENANCES_TABLE": "apcs_maintenances",
+        "MAINTENANCES_TABLE": "apcs_asset_maintenances",
         "PREVIOUS_SERVICE_DATES": "previousServiceDates",
         "SERVICE_TYPE": "serviceType",
         "TICKET_NUMBER": "ticketNumber"
@@ -90,11 +90,13 @@
         "TPM_VERSION": "tpmVersion"
     },
     "DB_STORAGE_LIST": {
+        "ASSET_NUMBER_FK": "assetNumberFK",
         "CONNECTION": "connection",
         "MODEL": "model",
         "SERIAL_NUMBER": "serialNumber",
         "SIZE": "size",
         "SMART_STATUS": "smartStatus",
+        "STORAGE_ID": "storageId",
         "STORAGE_LIST_TABLE": "apcs_asset_storage",
         "TYPE": "type"
     },

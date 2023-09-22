@@ -7,8 +7,7 @@ $delete = $_POST["chkDelete"];
 
 if (isset($delete)) {
 	for ($i = 0; $i < count($delete); $i++) {
-		$query2 = mysqli_query($connection, "delete from " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " where id in (select main from (select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".id as main from " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " inner join (select " . $dbAssetArray["ASSET_NUMBER"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$delete[$i]') as a on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".assetNumberFK) as m)") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
-		$query = mysqli_query($connection, "delete from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$delete[$i]'") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
+		$query = mysqli_query($connection, "delete " . $dbAssetArray["ASSET_TABLE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . " from " . $dbAssetArray["ASSET_TABLE"] . " inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " inner join " . $dbStorageListArray["STORAGE_LIST_TABLE"] . " on " . $dbAssetArray["ASSET_TABLE"] . "." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["ASSET_NUMBER_FK"] . " AND " . $dbAssetArray["ASSET_TABLE"] . "." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["ASSET_NUMBER_FK"] . " where " . $dbAssetArray["ASSET_TABLE"] . ".id = '$delete[$i]'") or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
 	}
 }
 

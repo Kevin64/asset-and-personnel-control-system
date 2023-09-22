@@ -23,7 +23,7 @@ if ($send != 1) {
 
 	$queryFormatPrevious = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["PREVIOUS_SERVICE_DATES"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT_ID"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryStorageList = mysqli_query($connection, "select " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["TYPE"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["SIZE"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["CONNECTION"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["MODEL"] . "," . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["SERIAL_NUMBER"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["SMART_STATUS"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbStorageListArray["STORAGE_LIST_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbStorageListArray["STORAGE_LIST_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryStorageList = mysqli_query($connection, "select " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["STORAGE_ID"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["TYPE"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["SIZE"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["CONNECTION"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["MODEL"] . "," . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["SERIAL_NUMBER"] . ", " . $dbStorageListArray["STORAGE_LIST_TABLE"] . "." . $dbStorageListArray["SMART_STATUS"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbStorageListArray["STORAGE_LIST_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbStorageListArray["STORAGE_LIST_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 }
 ?>
 <div id="middle" <?php if (isset($_SESSION["privilegeLevel"])) {
@@ -72,7 +72,7 @@ if ($send != 1) {
 				$ramFrequency = $result[$dbAssetArray["RAM_FREQUENCY"]];
 				$ramTotalSlots = $result[$dbAssetArray["RAM_TOTAL_SLOTS"]];
 				$ramOccupiedSlots = $result[$dbAssetArray["RAM_OCCUPIED_SLOTS"]];
-				$storageSize = $result[$dbAssetArray["STORAGE_SIZE"]];
+				$storageTotalSize = $result[$dbAssetArray["STORAGE_TOTAL_SIZE"]];
 				$operatingSystemName = $result[$dbAssetArray["OPERATING_SYSTEM_NAME"]];
 				$operatingSystemVersion = $result[$dbAssetArray["OPERATING_SYSTEM_VERSION"]];
 				$operatingSystemBuild = $result[$dbAssetArray["OPERATING_SYSTEM_BUILD"]];
@@ -86,7 +86,6 @@ if ($send != 1) {
 				$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
 				$fwVersion = $result[$dbAssetArray["FW_VERSION"]];
 				$fwType = $result[$dbAssetArray["FW_TYPE"]];
-				$storageType = $result[$dbAssetArray["STORAGE_TYPE"]];
 				$videoCardName = $result[$dbAssetArray["VIDEO_CARD_NAME"]];
 				$videoCardRam = $result[$dbAssetArray["VIDEO_CARD_RAM"]];
 				$mediaOperationMode = $result[$dbAssetArray["MEDIA_OPERATION_MODE"]];
@@ -448,27 +447,24 @@ if ($send != 1) {
 								?></td>
 			</tr>
 			<tr>
-				<td id=lblFixed><?php echo $translations["STORAGE_SIZE"] ?></td>
-				<td id=lblData><?php if ($storageSize == "") {
+				<td id=lblFixed><?php echo $translations["STORAGE_TOTAL_SIZE"] ?></td>
+				<td id=lblData><?php if ($storageTotalSize == "") {
 									echo $json_constants_array["DASH"];
 								} else {
-									if ($storageSize / 1024 >= 1024) {
-										echo floor($storageSize / 1024 / 1024) . " TB";
-									} else if ($storageSize / 1024 < 1024 && $storageSize / 1024 >= 1) {
-										echo floor($storageSize / 1024) . " GB";
+									if ($storageTotalSize / 1024 >= 1024) {
+										echo floor($storageTotalSize / 1024 / 1024) . " TB";
+									} else if ($storageTotalSize / 1024 < 1024 && $storageTotalSize / 1024 >= 1) {
+										echo floor($storageTotalSize / 1024) . " GB";
 									} else {
-										echo floor($storageSize) . " MB";
+										echo floor($storageTotalSize) . " MB";
 									}
 								} ?></td>
 			</tr>
 			<tr>
-				<td id=lblFixed><?php echo $translations["STORAGE_TYPE"] ?></td>
-				<td id=lblData><?php if ($storageType == "") {
-									echo $json_constants_array["DASH"];
-								} else {
-									echo $storageType; ?>&nbsp;&nbsp;<a id=linksameline onclick="on()">Detalhes</a>
-				<?php
-								} ?></td>
+				<td id=lblFixed><?php echo $translations["STORAGE_SUMMARY"] ?></td>
+				<td id=lblData>
+					<a id=linksameline onclick="on()">Detalhes</a>
+				</td>
 			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
@@ -678,6 +674,9 @@ if ($send != 1) {
 				<thead id=headerTable>
 					<tr>
 						<th>
+							<?php echo $translations["STORAGE_ID"] ?>
+						</th>
+						<th>
 							<?php echo $translations["STORAGE_LIST_TYPE"] ?>
 						</th>
 						<th>
@@ -702,6 +701,11 @@ if ($send != 1) {
 					while ($resultStorageList = mysqli_fetch_array($queryStorageList)) {
 					?>
 						<tr id=bodyTable>
+							<td>
+								<?php
+								echo $resultStorageList[$dbStorageListArray["STORAGE_ID"]];
+								?>
+							</td>
 							<td>
 								<?php
 								foreach ($storageTypesArray as $str1 => $str2) {

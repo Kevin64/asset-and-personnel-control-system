@@ -1,6 +1,7 @@
 CREATE TABLE `apcsdb`.`apcs_asset_storage` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `assetNumberFK` INT NULL DEFAULT NULL;
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `storageId` TINYINT NULL DEFAULT NULL,
   `type` TINYINT NULL DEFAULT NULL,
   `size` BIGINT NULL DEFAULT NULL,
   `connection` TINYINT NULL DEFAULT NULL,
@@ -13,10 +14,12 @@ CREATE TABLE `apcsdb`.`apcs_asset_storage` (
 
 ALTER TABLE `apcsdb`.`asset` 
 CHANGE COLUMN `ram` `ramAmount` INT NULL DEFAULT NULL ;
+CHANGE COLUMN `storageType` `storageSummary` VARCHAR(100) NULL DEFAULT NULL ;
 ADD COLUMN `ramType` TINYINT NULL DEFAULT NULL AFTER `ramAmount`,
 ADD COLUMN `ramFrequency` INT NULL DEFAULT NULL AFTER `ramType`,
 ADD COLUMN `ramTotalSlots` TINYINT NULL DEFAULT NULL AFTER `ramFrequency`,
 ADD COLUMN `ramOccupiedSlots` TINYINT NULL DEFAULT NULL AFTER `totalRamSlots`,
+CHANGE COLUMN `storageSize` `storageTotalSize` INT NULL DEFAULT NULL ;
 UPDATE apcsdb.asset SET ramAmount=ramAmount*1024;
 RENAME TO  `apcsdb`.`apcs_asset` ;
 
@@ -41,3 +44,6 @@ CHANGE COLUMN `operatingSystem` `operatingSystemName` VARCHAR(20) NULL DEFAULT N
 ALTER TABLE `apcsdb`.`apcs_asset` 
 ADD COLUMN `videoCardRam` INT NULL DEFAULT NULL AFTER `videoCardName`,
 CHANGE COLUMN `videoCard` `videoCardName` VARCHAR(100) NULL DEFAULT NULL ;
+
+ALTER TABLE `apcsdb`.`apcs_maintenances` 
+RENAME TO  `apcsdb`.`apcs_asset_maintenances` ;
