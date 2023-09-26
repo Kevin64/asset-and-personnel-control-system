@@ -1,13 +1,11 @@
 {
     "APCS": "Asset and Personnel Control System - APCS",
-    "GITHUB_REPO_NAME": "asset-and-personnel-control-system",
-    "GITHUB_REPO_OWNER": "Kevin64",
-    "DASH": "-",
     "COLOR": {
         "ERROR": "red",
         "IN_USE": "green",
         "NOT_IN_USE": "red"
     },
+    "DASH": "-",
     "DB_AGENT": {
         "AGENTS_TABLE": "apcs_agent",
         "BLOCKED": "blocked",
@@ -19,46 +17,85 @@
     "DB_ASSET": {
         "AD_REGISTERED": "adRegistered",
         "ASSET_NUMBER": "assetNumber",
+        "ASSET_NUMBER_FK": "assetNumberFK",
         "ASSET_TABLE": "apcs_asset",
-        "BRAND": "brand",
-        "BUILDING": "building",
-        "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
         "DISCARDED": "discarded",
-        "FW_TYPE": "fwType",
-        "FW_VERSION": "fwVersion",
-        "HOSTNAME": "hostname",
-        "HW_TYPE": "hwType",
+        "FIRMWARE": {
+            "FIRMWARE_TABLE": "apcs_asset_firmware",
+            "TYPE": "type",
+            "VERSION": "version",
+            "MEDIA_OPERATION_MODE": "mediaOperationMode",
+            "SECURE_BOOT": "secureBoot",
+            "TPM_VERSION": "tpmVersion",
+            "VIRTUALIZATION_TECHNOLOGY": "virtualizationTechnology"
+        },
+        "HARDWARE": {
+            "BRAND": "brand",
+            "MODEL": "model",
+            "TYPE": "type",
+            "PROCESSOR": "processor",
+            "SERIAL_NUMBER": "serialNumber",
+            "HARDWARE_TABLE": "apcs_asset_hardware",
+            "RAM": {
+                "AMOUNT": "amount",
+                "FREQUENCY": "frequency",
+                "OCCUPIED_SLOTS": "occupiedSlots",
+                "RAM_TABLE": "apcs_asset_ram",
+                "TOTAL_SLOTS": "totalSlots",
+                "TYPE": "type"
+            },
+            "STORAGE": {
+                "CONNECTION": "connection",
+                "MODEL": "model",
+                "SERIAL_NUMBER": "serialNumber",
+                "SIZE": "size",
+                "SMART_STATUS": "smartStatus",
+                "STORAGE_ID": "storageId",
+                "STORAGE_TABLE": "apcs_asset_storage",
+                "TYPE": "type"
+            },
+            "VIDEO_CARD": {
+                "GPU_ID": "gpuId",
+                "NAME": "name",
+                "RAM": "vRam",
+                "VIDEO_CARD_TABLE": "apcs_asset_video_card"
+            }
+        },
         "IN_USE": "inUse",
-        "IP_ADDRESS": "ipAddress",
-        "LAST_DELIVERY_DATE": "lastDeliveryDate",
-        "LAST_DELIVERY_MADE_BY": "lastDeliveryMadeBy",
-        "MAC_ADDRESS": "macAddress",
-        "MEDIA_OPERATION_MODE": "mediaOperationMode",
-        "MODEL": "model",
+        "LOCATION": {
+            "BUILDING": "building",
+            "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
+            "LAST_DELIVERY_DATE": "lastDeliveryDate",
+            "LAST_DELIVERY_MADE_BY": "lastDeliveryMadeBy",
+            "LOCATION_TABLE": "apcs_asset_location",
+            "ROOM_NUMBER": "roomNumber"
+        },
+        "MAINTENANCES": {
+            "AGENT_ID": "agentId",
+            "BATTERY_CHANGE": "batteryChange",
+            "MAINTENANCES_TABLE": "apcs_asset_maintenances",
+            "SERVICE_DATE": "serviceDate",
+            "SERVICE_TYPE": "serviceType",
+            "TICKET_NUMBER": "ticketNumber"
+        },
+        "NETWORK": {
+            "HOSTNAME": "hostname",
+            "IP_ADDRESS": "ipAddress",
+            "MAC_ADDRESS": "macAddress",
+            "NETWORK_TABLE": "apcs_asset_network"
+        },
         "NOTE": "note",
-        "OPERATING_SYSTEM_NAME": "operatingSystemName",
-        "OPERATING_SYSTEM_VERSION": "operatingSystemVersion",
-        "OPERATING_SYSTEM_BUILD": "operatingSystemBuild",
-        "OPERATING_SYSTEM_ARCH": "operatingSystemArch",
-        "PROCESSOR": "processor",
-        "RAM_AMOUNT": "ramAmount",
-        "RAM_TYPE": "ramType",
-        "RAM_FREQUENCY": "ramFrequency",
-        "RAM_OCCUPIED_SLOTS": "ramOccupiedSlots",
-        "RAM_TOTAL_SLOTS": "ramTotalSlots",
-        "ROOM_NUMBER": "roomNumber",
+        "OPERATING_SYSTEM": {
+            "ARCH": "arch",
+            "BUILD": "build",
+            "NAME": "name",
+            "OPERATING_SYSTEM_TABLE": "apcs_asset_operating_system",
+            "VERSION": "version"
+        },
         "SEAL_NUMBER": "sealNumber",
-        "SECURE_BOOT": "secureBoot",
-        "SERIAL_NUMBER": "serialNumber",
-        "SERVICE_DATE": "serviceDate",
         "STANDARD": "standard",
         "STORAGE_TOTAL_SIZE": "storageTotalSize",
-        "STORAGE_SUMMARY": "storageSummary",
-        "TAG": "tag",
-        "TPM_VERSION": "tpmVersion",
-        "VIDEO_CARD_NAME": "videoCardName",
-        "VIDEO_CARD_RAM": "videoCardRam",
-        "VIRTUALIZATION_TECHNOLOGY": "virtualizationTechnology"
+        "TAG": "tag"
     },
     "DB_EMPLOYEE": {
         "EMAIL": "email",
@@ -71,15 +108,6 @@
         "SECTOR": "sector",
         "TYPE": "type"
     },
-    "DB_MAINTENANCES": {
-        "AGENT_ID": "agentId",
-        "ASSET_NUMBER_FK": "assetNumberFK",
-        "BATTERY_CHANGE": "batteryChange",
-        "MAINTENANCES_TABLE": "apcs_asset_maintenances",
-        "PREVIOUS_SERVICE_DATES": "previousServiceDates",
-        "SERVICE_TYPE": "serviceType",
-        "TICKET_NUMBER": "ticketNumber"
-    },
     "DB_MODEL": {
         "BRAND": "brand",
         "FW_TYPE": "fwType",
@@ -89,20 +117,11 @@
         "MODEL_TABLE": "apcs_model",
         "TPM_VERSION": "tpmVersion"
     },
-    "DB_STORAGE_LIST": {
-        "ASSET_NUMBER_FK": "assetNumberFK",
-        "CONNECTION": "connection",
-        "MODEL": "model",
-        "SERIAL_NUMBER": "serialNumber",
-        "SIZE": "size",
-        "SMART_STATUS": "smartStatus",
-        "STORAGE_ID": "storageId",
-        "STORAGE_LIST_TABLE": "apcs_asset_storage",
-        "TYPE": "type"
-    },
+    "GITHUB_REPO_NAME": "asset-and-personnel-control-system",
+    "GITHUB_REPO_OWNER": "Kevin64",
     "IMG": {
-        "FAVICON_LIGHT_MODE": "img/favicon_light_mode.png",
         "FAVICON_DARK_MODE": "img/favicon_dark_mode.png",
+        "FAVICON_LIGHT_MODE": "img/favicon_light_mode.png",
         "OPEN_LINK": "img/open_link.png",
         "TRASH": "img/trash.png"
     }

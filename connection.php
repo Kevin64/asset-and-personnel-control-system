@@ -17,7 +17,7 @@ $jsonFileConstants = file_get_contents(__DIR__ . "/etc/constants.json");
 $json_config_array_db = json_decode($jsonFileDb, true);
 $json_parameters_array = json_decode($jsonFileParameters, true);
 $json_constants_array = json_decode($jsonFileConstants, true);
-
+/* ------------------------------------------------------------------------------------------------- */
 $timezone = gatherJsonTypes($json_config_array_db, "Locale", null);
 date_default_timezone_set($timezone);
 $buildingArray = gatherJsonTypes($json_parameters_array, "Parameters", "Buildings");
@@ -32,20 +32,29 @@ $serviceTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "Serv
 $ramTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "RamTypes");
 $storageTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "StorageTypes");
 $connectionTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "ConnectionTypes");
+/* ------------------------------------------------------------------------------------------------- */
 $orgDataArray = gatherJsonTypes($json_config_array_db, "OrgData", null);
 $dbSettingsArray = gatherJsonTypes($json_config_array_db, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array_db, "PrivilegeLevels", null);
 $entityTypesArray = gatherJsonTypes($json_config_array_db, "EntityTypes", null);
 $employeeTypesArray = gatherJsonTypes($json_config_array_db, "EmployeeTypes", null);
-$imgArray = gatherJsonTypes($json_constants_array, "IMG", null);
-$colorArray = gatherJsonTypes($json_constants_array, "COLOR", null);
-$dbAssetArray = gatherJsonTypes($json_constants_array, "DB_ASSET", null);
-$dbMaintenancesArray = gatherJsonTypes($json_constants_array, "DB_MAINTENANCES", null);
-$dbAgentArray = gatherJsonTypes($json_constants_array, "DB_AGENT", null);
-$dbEmployeeArray = gatherJsonTypes($json_constants_array, "DB_EMPLOYEE", null);
-$dbModelArray = gatherJsonTypes($json_constants_array, "DB_MODEL", null);
-$dbStorageListArray = gatherJsonTypes($json_constants_array, "DB_STORAGE_LIST", null);
-
+/* ------------------------------------------------------------------------------------------------- */
+$imgArray = $json_constants_array["IMG"];
+$colorArray = $json_constants_array["COLOR"];
+$dbAssetArray = $json_constants_array["DB_ASSET"];
+$dbOperatingSystemArray = $json_constants_array["DB_ASSET"]["OPERATING_SYSTEM"];
+$dbRamArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["RAM"];
+$dbLocationArray = $json_constants_array["DB_ASSET"]["LOCATION"];
+$dbFirmwareArray = $json_constants_array["DB_ASSET"]["FIRMWARE"];
+$dbHardwareArray = $json_constants_array["DB_ASSET"]["HARDWARE"];
+$dbStorageArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["STORAGE"];
+$dbVideoCardArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["VIDEO_CARD"];
+$dbNetworkArray = $json_constants_array["DB_ASSET"]["NETWORK"];
+$dbMaintenancesArray = $json_constants_array["DB_ASSET"]["MAINTENANCES"];
+$dbAgentArray = $json_constants_array["DB_AGENT"];
+$dbEmployeeArray = $json_constants_array["DB_EMPLOYEE"];
+$dbModelArray = $json_constants_array["DB_MODEL"];
+/* ------------------------------------------------------------------------------------------------- */
 $orgFullName = $orgDataArray["OrganizationFullName"];
 $orgAcronym = $orgDataArray["OrganizationAcronym"];
 $orgURL = $orgDataArray["OrganizationURL"];

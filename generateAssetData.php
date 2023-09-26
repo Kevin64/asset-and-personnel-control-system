@@ -20,7 +20,7 @@ if (isset($_GET["assetNumber"])) {
 
 	while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 		$row_array["assetNumber"] = $row[$dbAssetArray["ASSET_NUMBER"]];
-		$row_array["building"] = $row[$dbAssetArray["BUILDING"]];
+		$row_array["building"] = $row[$dbLocationArray["BUILDING"]];
 		$row_array["roomNumber"] = $row[$dbAssetArray["ROOM_NUMBER"]];
 		$row_array["standard"] = $row[$dbAssetArray["STANDARD"]];
 		$row_array["adRegistered"] = $row[$dbAssetArray["AD_REGISTERED"]];

@@ -9,7 +9,7 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 	$assetNumber = $_GET["assetNumber"];
 	require("../connection.php");
 	$queryAsset = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
-	$queryStorageList = mysqli_query($connection, "select * from " . $dbStorageListArray["STORAGE_LIST_TABLE"] . " where " . $dbStorageListArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$queryStorageList = mysqli_query($connection, "select * from " . $dbStorageArray["STORAGE_TABLE"] . " where " . $dbStorageArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 	if (mysqli_num_rows($queryAsset) > 0) {
 		$row1 = mysqli_fetch_array($queryAsset, MYSQLI_ASSOC);

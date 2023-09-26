@@ -84,7 +84,7 @@ if ($send != 1) {
 
 	if ($num_rows == 0) {
 
-		$q = mysqli_prepare($connection, "update " . $dbAssetArray["ASSET_TABLE"] . " set " . $dbAssetArray["ASSET_NUMBER"] . " = ?, " . $dbAssetArray["DISCARDED"] . " = ?, " . $dbAssetArray["BUILDING"] . " = ?, " . $dbAssetArray["ROOM_NUMBER"] . " = ?, " . $dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"] . " = ?, " . $dbAssetArray["LAST_DELIVERY_DATE"] . " = ?, " . $dbAssetArray["STANDARD"] . " = ?, " . $dbAssetArray["NOTE"] . " = ?, " . $dbAssetArray["SERVICE_DATE"] . " = ?, " . $dbAssetArray["AD_REGISTERED"] . " = ?, " . $dbAssetArray["BRAND"] . " = ?, " . $dbAssetArray["MODEL"] . " = ?, " . $dbAssetArray["SERIAL_NUMBER"] . " = ?, " . $dbAssetArray["PROCESSOR"] . " = ?, " . $dbAssetArray["RAM_AMOUNT"] . " = ?, " . $dbAssetArray["RAM_TYPE"] . " = ?, " . $dbAssetArray["RAM_FREQUENCY"] . " = ?, " . $dbAssetArray["RAM_OCCUPIED_SLOTS"] . " = ?, " . $dbAssetArray["RAM_TOTAL_SLOTS"] . " = ?, " . $dbAssetArray["STORAGE_TOTAL_SIZE"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_NAME"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_VERSION"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_BUILD"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_ARCH"] . " = ?, " . $dbAssetArray["HOSTNAME"] . " = ?, " . $dbAssetArray["FW_VERSION"] . " = ?, " . $dbAssetArray["IN_USE"] . " = ?, " . $dbAssetArray["SEAL_NUMBER"] . " = ?, " . $dbAssetArray["TAG"] . " = ?, " . $dbAssetArray["HW_TYPE"] . " = ?, " . $dbAssetArray["FW_TYPE"] . " = ?, " . $dbAssetArray["MAC_ADDRESS"] . " = ?, " . $dbAssetArray["IP_ADDRESS"] . " = ?, " . $dbAssetArray["VIDEO_CARD_NAME"] . " = ?, " . $dbAssetArray["MEDIA_OPERATION_MODE"] . " = ?, " . $dbAssetArray["SECURE_BOOT"] . " = ?, " . $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] . " = ?, " . $dbAssetArray["TPM_VERSION"] . " = ? where id = ?");
+		$q = mysqli_prepare($connection, "update " . $dbAssetArray["ASSET_TABLE"] . " set " . $dbAssetArray["ASSET_NUMBER"] . " = ?, " . $dbAssetArray["DISCARDED"] . " = ?, " . $dbLocationArray["BUILDING"] . " = ?, " . $dbLocationArray["ROOM_NUMBER"] . " = ?, " . $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"] . " = ?, " . $dbLocationArray["LAST_DELIVERY_DATE"] . " = ?, " . $dbAssetArray["STANDARD"] . " = ?, " . $dbAssetArray["NOTE"] . " = ?, " . $dbAssetArray["SERVICE_DATE"] . " = ?, " . $dbAssetArray["AD_REGISTERED"] . " = ?, " . $dbAssetArray["BRAND"] . " = ?, " . $dbAssetArray["MODEL"] . " = ?, " . $dbAssetArray["SERIAL_NUMBER"] . " = ?, " . $dbAssetArray["PROCESSOR"] . " = ?, " . $dbAssetArray["RAM"]["AMOUNT"] . " = ?, " . $dbAssetArray["RAM"]["TYPE"] . " = ?, " . $dbAssetArray["RAM"]["FREQUENCY"] . " = ?, " . $dbAssetArray["RAM"]["OCCUPIED_SLOTS"] . " = ?, " . $dbAssetArray["RAM"]["TOTAL_SLOTS"] . " = ?, " . $dbAssetArray["STORAGE_TOTAL_SIZE"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["NAME"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["VERSION"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["BUILD"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["ARCH"] . " = ?, " . $dbAssetArray["HOSTNAME"] . " = ?, " . $dbAssetArray["FIRMWARE"]["FW_VERSION"] . " = ?, " . $dbAssetArray["IN_USE"] . " = ?, " . $dbAssetArray["SEAL_NUMBER"] . " = ?, " . $dbAssetArray["TAG"] . " = ?, " . $dbAssetArray["HW_TYPE"] . " = ?, " . $dbAssetArray["FIRMWARE"]["FW_TYPE"] . " = ?, " . $dbAssetArray["MAC_ADDRESS"] . " = ?, " . $dbAssetArray["IP_ADDRESS"] . " = ?, " . $dbAssetArray["VIDEO_CARD"]["NAME"] . " = ?, " . $dbAssetArray["FIRMWARE"]["MEDIA_OPERATION_MODE"] . " = ?, " . $dbAssetArray["FIRMWARE"]["SECURE_BOOT"] . " = ?, " . $dbAssetArray["FIRMWARE"]["VIRTUALIZATION_TECHNOLOGY"] . " = ?, " . $dbAssetArray["FIRMWARE"]["TPM_VERSION"] . " = ? where id = ?");
 
 		mysqli_stmt_bind_param($q, "sssssssssssssssssssssssssssssssssssssssss", $assetNumber, $discarded, $building, $roomNumber, $deliveredToRegistrationNumber, $lastDeliveryDate, $standard, $note, $serviceDate, $adRegistered, $brand, $model, $serialNumber, $processor, $ramAmount, $ramType, $ramFrequency, $ramOccupiedSlots, $ramTotalSlots, $storageTotalSize, $operatingSystemName, $operatingSystemVersion, $operatingSystemBuild, $operatingSystemArch, $hostname, $fwVersion, $inUse, $sealNumber, $tag, $hwType, $fwType, $macAddress, $ipAddress, $videoCardName, $videoCardRam, $mediaOperationMode, $secureBoot, $virtualizationTechnology, $tpmVersion, $idAsset);
 
@@ -93,7 +93,7 @@ if ($send != 1) {
 		mysqli_query($connection, "update " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " set " . $dbMaintenancesArray["ASSET_NUMBER_FK"] . " = '$assetNumber' where " . $dbMaintenancesArray["ASSET_NUMBER_FK"] . " = '$oldAssetNumber'") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $assetNumber == $oldAssetNumber) {
 
-		$q = mysqli_prepare($connection, "update " . $dbAssetArray["ASSET_TABLE"] . " set " . $dbAssetArray["DISCARDED"] . " = ?, " . $dbAssetArray["BUILDING"] . " = ?, " . $dbAssetArray["ROOM_NUMBER"] . " = ?, " . $dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"] . " = ?, " . $dbAssetArray["LAST_DELIVERY_DATE"] . " = ?, " . $dbAssetArray["STANDARD"] . " = ?, " . $dbAssetArray["NOTE"] . " = ?, " . $dbAssetArray["SERVICE_DATE"] . " = ?, " . $dbAssetArray["AD_REGISTERED"] . " = ?, " . $dbAssetArray["BRAND"] . " = ?, " . $dbAssetArray["MODEL"] . " = ?, " . $dbAssetArray["SERIAL_NUMBER"] . " = ?, " . $dbAssetArray["PROCESSOR"] . " = ?, " . $dbAssetArray["RAM_AMOUNT"] . " = ?, " . $dbAssetArray["RAM_TYPE"] . " = ?, " . $dbAssetArray["RAM_FREQUENCY"] . " = ?, " . $dbAssetArray["RAM_OCCUPIED_SLOTS"] . " = ?, " . $dbAssetArray["RAM_TOTAL_SLOTS"] . " = ?, " . $dbAssetArray["STORAGE_TOTAL_SIZE"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_NAME"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_VERSION"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_BUILD"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM_ARCH"] . " = ?, " . $dbAssetArray["HOSTNAME"] . " = ?, " . $dbAssetArray["FW_VERSION"] . " = ?, " . $dbAssetArray["IN_USE"] . " = ?, " . $dbAssetArray["SEAL_NUMBER"] . " = ?, " . $dbAssetArray["TAG"] . " = ?, " . $dbAssetArray["HW_TYPE"] . " = ?, " . $dbAssetArray["FW_TYPE"] . " = ?, " . $dbAssetArray["MAC_ADDRESS"] . " = ?, " . $dbAssetArray["IP_ADDRESS"] . " = ?, " . $dbAssetArray["VIDEO_CARD_NAME"] . " = ?, " . $dbAssetArray["VIDEO_CARD_RAM"] . " = ?, " . $dbAssetArray["MEDIA_OPERATION_MODE"] . " = ?, " . $dbAssetArray["SECURE_BOOT"] . " = ?, " . $dbAssetArray["VIRTUALIZATION_TECHNOLOGY"] . " = ?, " . $dbAssetArray["TPM_VERSION"] . " = ? where id = ?") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
+		$q = mysqli_prepare($connection, "update " . $dbAssetArray["ASSET_TABLE"] . " set " . $dbAssetArray["DISCARDED"] . " = ?, " . $dbLocationArray["BUILDING"] . " = ?, " . $dbLocationArray["ROOM_NUMBER"] . " = ?, " . $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"] . " = ?, " . $dbLocationArray["LAST_DELIVERY_DATE"] . " = ?, " . $dbAssetArray["STANDARD"] . " = ?, " . $dbAssetArray["NOTE"] . " = ?, " . $dbAssetArray["SERVICE_DATE"] . " = ?, " . $dbAssetArray["AD_REGISTERED"] . " = ?, " . $dbAssetArray["BRAND"] . " = ?, " . $dbAssetArray["MODEL"] . " = ?, " . $dbAssetArray["SERIAL_NUMBER"] . " = ?, " . $dbAssetArray["PROCESSOR"] . " = ?, " . $dbAssetArray["RAM"]["AMOUNT"] . " = ?, " . $dbAssetArray["RAM"]["TYPE"] . " = ?, " . $dbAssetArray["RAM"]["FREQUENCY"] . " = ?, " . $dbAssetArray["RAM"]["OCCUPIED_SLOTS"] . " = ?, " . $dbAssetArray["RAM"]["TOTAL_SLOTS"] . " = ?, " . $dbAssetArray["STORAGE_TOTAL_SIZE"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["NAME"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["VERSION"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["BUILD"] . " = ?, " . $dbAssetArray["OPERATING_SYSTEM"]["ARCH"] . " = ?, " . $dbAssetArray["HOSTNAME"] . " = ?, " . $dbAssetArray["FIRMWARE"]["FW_VERSION"] . " = ?, " . $dbAssetArray["IN_USE"] . " = ?, " . $dbAssetArray["SEAL_NUMBER"] . " = ?, " . $dbAssetArray["TAG"] . " = ?, " . $dbAssetArray["HW_TYPE"] . " = ?, " . $dbAssetArray["FIRMWARE"]["FW_TYPE"] . " = ?, " . $dbAssetArray["MAC_ADDRESS"] . " = ?, " . $dbAssetArray["IP_ADDRESS"] . " = ?, " . $dbAssetArray["VIDEO_CARD"]["NAME"] . " = ?, " . $dbAssetArray["VIDEO_CARD"]["RAM"] . " = ?, " . $dbAssetArray["FIRMWARE"]["MEDIA_OPERATION_MODE"] . " = ?, " . $dbAssetArray["FIRMWARE"]["SECURE_BOOT"] . " = ?, " . $dbAssetArray["FIRMWARE"]["VIRTUALIZATION_TECHNOLOGY"] . " = ?, " . $dbAssetArray["FIRMWARE"]["TPM_VERSION"] . " = ? where id = ?") or die($translations["ERROR_UPDATE_ASSET_DATA"] . mysqli_error($connection));
 
 		mysqli_stmt_bind_param($q, "ssssssssssssssssssssssssssssssssssssssss", $discarded, $building, $roomNumber, $deliveredToRegistrationNumber, $lastDeliveryDate, $standard, $note, $serviceDate, $adRegistered, $brand, $model, $serialNumber, $processor, $ramAmount, $ramType, $ramFrequency, $ramOccupiedSlots, $ramTotalSlots, $storageTotalSize, $operatingSystemName, $operatingSystemVersion, $operatingSystemBuild, $operatingSystemArch, $hostname, $fwVersion, $inUse, $sealNumber, $tag, $hwType, $fwType, $macAddress, $ipAddress, $videoCardName, $videoCardRam, $mediaOperationMode, $secureBoot, $virtualizationTechnology, $tpmVersion, $idAsset);
 
@@ -129,44 +129,44 @@ if ($send != 1) {
 				$assetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
 				$oldAssetNumber = $result[$dbAssetArray["ASSET_NUMBER"]];
 				$discarded = $result[$dbAssetArray["DISCARDED"]];
-				$building = $result[$dbAssetArray["BUILDING"]];
-				$roomNumber = $result[$dbAssetArray["ROOM_NUMBER"]];
-				$deliveredToRegistrationNumber = $result[$dbAssetArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
-				$lastDeliveryDate = $result[$dbAssetArray["LAST_DELIVERY_DATE"]];
-				$lastDeliveryMadeBy = $result[$dbAssetArray["LAST_DELIVERY_MADE_BY"]];
+				$building = $result[$dbLocationArray["BUILDING"]];
+				$roomNumber = $result[$dbLocationArray["ROOM_NUMBER"]];
+				$deliveredToRegistrationNumber = $result[$dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
+				$lastDeliveryDate = $result[$dbLocationArray["LAST_DELIVERY_DATE"]];
+				$lastDeliveryMadeBy = $result[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
 				$note = $result[$dbAssetArray["NOTE"]];
-				$serviceDate = $result[$dbAssetArray["SERVICE_DATE"]];
+				$serviceDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
 				$standard = $result[$dbAssetArray["STANDARD"]];
 				$adRegistered = $result[$dbAssetArray["AD_REGISTERED"]];
-				$brand = $result[$dbAssetArray["BRAND"]];
-				$model = $result[$dbAssetArray["MODEL"]];
-				$serialNumber = $result[$dbAssetArray["SERIAL_NUMBER"]];
-				$processor = $result[$dbAssetArray["PROCESSOR"]];
-				$ramAmount = $result[$dbAssetArray["RAM_AMOUNT"]];
-				$ramType = $result[$dbAssetArray["RAM_TYPE"]];
-				$ramFrequency = $result[$dbAssetArray["RAM_FREQUENCY"]];
-				$ramOccupiedSlots = $result[$dbAssetArray["RAM_OCCUPIED_SLOTS"]];
-				$ramTotalSlots = $result[$dbAssetArray["RAM_TOTAL_SLOTS"]];
+				$brand = $result[$dbHardwareArray["BRAND"]];
+				$model = $result[$dbHardwareArray["MODEL"]];
+				$serialNumber = $result[$dbHardwareArray["SERIAL_NUMBER"]];
+				$processor = $result[$dbHardwareArray["PROCESSOR"]];
+				$ramAmount = $result[$dbRamArray["AMOUNT"]];
+				$ramType = $result[$$dbRamArray["TYPE"]];
+				$ramFrequency = $result[$dbRamArray["FREQUENCY"]];
+				$ramOccupiedSlots = $result[$dbRamArray["OCCUPIED_SLOTS"]];
+				$ramTotalSlots = $result[$dbRamArray["TOTAL_SLOTS"]];
 				$storageTotalSize = $result[$dbAssetArray["STORAGE_TOTAL_SIZE"]];
-				$operatingSystemName = $result[$dbAssetArray["OPERATING_SYSTEM_NAME"]];
-				$operatingSystemVersion = $result[$dbAssetArray["OPERATING_SYSTEM_VERSION"]];
-				$operatingSystemBuild = $result[$dbAssetArray["OPERATING_SYSTEM_BUILD"]];
-				$operatingSystemArch = $result[$dbAssetArray["OPERATING_SYSTEM_ARCH"]];
-				$hostname = $result[$dbAssetArray["HOSTNAME"]];
+				$operatingSystemName = $result[$dbOperatingSystemArray["NAME"]];
+				$operatingSystemVersion = $result[$dbOperatingSystemArray["VERSION"]];
+				$operatingSystemBuild = $result[$dbOperatingSystemArray["BUILD"]];
+				$operatingSystemArch = $result[$dbOperatingSystemArray["ARCH"]];
+				$hostname = $result[$dbNetworkArray["HOSTNAME"]];
 				$inUse = $result[$dbAssetArray["IN_USE"]];
 				$sealNumber = $result[$dbAssetArray["SEAL_NUMBER"]];
 				$tag = $result[$dbAssetArray["TAG"]];
-				$hwType = $result[$dbAssetArray["HW_TYPE"]];
-				$macAddress = $result[$dbAssetArray["MAC_ADDRESS"]];
-				$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
-				$fwVersion = $result[$dbAssetArray["FW_VERSION"]];
-				$fwType = $result[$dbAssetArray["FW_TYPE"]];
-				$videoCardName = $result[$dbAssetArray["VIDEO_CARD_NAME"]];
-				$videoCardRam = $result[$dbAssetArray["VIDEO_CARD_RAM"]];
-				$mediaOperationMode = $result[$dbAssetArray["MEDIA_OPERATION_MODE"]];
-				$secureBoot = $result[$dbAssetArray["SECURE_BOOT"]];
-				$virtualizationTechnology = $result[$dbAssetArray["VIRTUALIZATION_TECHNOLOGY"]];
-				$tpmVersion = $result[$dbAssetArray["TPM_VERSION"]];
+				$hwType = $result[$dbHardwareArray["HW_TYPE"]];
+				$macAddress = $result[$dbNetworkArray["MAC_ADDRESS"]];
+				$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
+				$fwVersion = $result[$dbFirmwareArray["FW_VERSION"]];
+				$fwType = $result[$dbFirmwareArray["FW_TYPE"]];
+				$videoCardName = $result[$dbVideoCardArray["NAME"]];
+				$videoCardRam = $result[$dbVideoCardArray["RAM"]];
+				$mediaOperationMode = $result[$dbFirmwareArray["MEDIA_OPERATION_MODE"]];
+				$secureBoot = $result[$dbFirmwareArray["SECURE_BOOT"]];
+				$virtualizationTechnology = $result[$dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"]];
+				$tpmVersion = $result[$dbFirmwareArray["TPM_VERSION"]];
 			?>
 
 				<tr>

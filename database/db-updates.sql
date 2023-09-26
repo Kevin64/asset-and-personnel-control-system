@@ -1,3 +1,73 @@
+CREATE TABLE `apcsdb`.`apcs_asset_ram` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `amount` INT NULL DEFAULT NULL,
+  `type` TINYINT NULL DEFAULT NULL,
+  `frequency` INT NULL DEFAULT NULL,
+  `occupiedSlots` TINYINT NULL DEFAULT NULL,
+  `totalSlots` TINYINT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+  CREATE TABLE `apcsdb`.`apcs_asset_operating_system` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `name` VARCHAR(50) NULL DEFAULT NULL,
+  `version` VARCHAR(25) NULL DEFAULT NULL,
+  `build` VARCHAR(25) NULL DEFAULT NULL,
+  `arch` TINYINT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+  CREATE TABLE `apcsdb`.`apcs_asset_firmware` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `fwType` TINYINT NULL DEFAULT NULL,
+  `fwVersion` VARCHAR(100) NULL DEFAULT NULL,
+  `mediaOperationMode` TINYINT NULL DEFAULT NULL,
+  `secureBoot` TINYINT NULL DEFAULT NULL,
+  `virtualizationTechnology` TINYINT NULL DEFAULT NULL,
+  `tpmVersion` TINYINT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `apcsdb`.`apcs_asset_location` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `building` TINYINT NULL DEFAULT NULL,
+  `roomNumber` VARCHAR(10) NULL DEFAULT NULL,
+  `deliveredToRegistrationNumber` VARCHAR(20) NULL DEFAULT NULL,
+  `lastDeliveryMadeBy` VARCHAR(50) NULL DEFAULT NULL,
+  `lastDeliveryDate` VARCHAR(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `apcsdb`.`apcs_asset_video_card` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `gpuId` TINYINT NULL DEFAULT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `vRam` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `apcsdb`.`apcs_asset_hardware` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `brand` VARCHAR(100) NULL DEFAULT NULL,
+  `type` TINYINT NULL DEFAULT NULL,
+  `model` VARCHAR(100) NULL DEFAULT NULL,
+  `processor` VARCHAR(100) NULL DEFAULT NULL,
+  `serialNumber` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `apcsdb`.`apcs_asset_network` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `macAddress` VARCHAR(18) NULL DEFAULT NULL,
+  `ipAddress` VARCHAR(16) NULL DEFAULT NULL,
+  `hostname` VARCHAR(30) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+
+
+
+
 CREATE TABLE `apcsdb`.`apcs_asset_storage` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
@@ -47,3 +117,10 @@ CHANGE COLUMN `videoCard` `videoCardName` VARCHAR(100) NULL DEFAULT NULL ;
 
 ALTER TABLE `apcsdb`.`apcs_maintenances` 
 RENAME TO  `apcsdb`.`apcs_asset_maintenances` ;
+
+ALTER TABLE `apcsdb`.`apcs_asset_firmware` 
+CHANGE COLUMN `fwType` `type` TINYINT NULL DEFAULT NULL ,
+CHANGE COLUMN `fwVersion` `version` VARCHAR(100) NULL DEFAULT NULL ;
+
+ALTER TABLE `apcsdb`.`apcs_asset_maintenances` 
+CHANGE COLUMN `previousServiceDates` `serviceDate` VARCHAR(10) NULL DEFAULT NULL ;

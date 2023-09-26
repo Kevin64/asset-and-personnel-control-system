@@ -1,0 +1,86 @@
+{
+    "adRegistered": "0",
+    "assetNumber": "260000",
+    "discarded": "0",
+    "firmware": {
+        "mediaOperationMode": "2",
+        "secureBoot": "2",
+        "tpmVersion": "2",
+        "type": "1",
+        "version": "1.12",
+        "virtualizationTechnology": "2"
+    },
+    "hardware": {
+        "brand": "ASUS",
+        "model": "ROG X790 TUF Gaming",
+        "processor": "Intel Core i9-13900K CPU @ 5.00GHz 5100 MHz (16C/32T)",
+        "serialNumber": "9988776655",
+        "type": "0",
+        "ram": {
+            "amount": "32768",
+            "frequency": "6400",
+            "occupiedSlots": "4",
+            "totalSlots": "4",
+            "type": "3"
+        },
+        "storage": [
+            {
+                "connection": "1",
+                "model": "NVMe Model 1",
+                "serialNumber": "SN num 2023",
+                "size": "1048576",
+                "smartStatus": "OK",
+                "storageId": "0",
+                "type": "1"
+            },
+            {
+                "connection": "0",
+                "model": "SATA Model 2",
+                "serialNumber": "SN num 2020",
+                "size": "262144",
+                "smartStatus": "Pred Fail",
+                "storageId": "1",
+                "type": "0"
+            }
+        ],
+        "videoCard": [
+            {
+                "gpuId": "0",
+                "name": "GeForce RTX 4060",
+                "vRam": "8192"
+            },
+            {
+                "gpuId": "1",
+                "name": "Radeon RX 7900 XTX",
+                "vRam": "16384"
+            }
+        ]
+    },
+    "inUse": "1",
+    "location": {
+        "building": "0",
+        "roomNumber": "3333"
+    },
+    "maintenances": {
+        "agentId": "3",
+        "batteryChange": "0",
+        "serviceDate": "2023-09-21",
+        "serviceType": "0",
+        "ticketNumber": "929291"
+    },
+    "network": {
+        "hostname": "PC-123456",
+        "ipAddress": "192.168.76.100",
+        "macAddress": "AA:BB:CC:DD:EE:FF"
+    },
+    "operatingSystem": {
+        "arch": "1",
+        "build": "10.0.22621.2000",
+        "name": "Windows 11 Pro",
+        "version": "22H2"
+    },
+    "sealNumber": "43211234",
+    "standard": "0",
+    "storageTotalSize": "453",
+    "tag": "0"
+}
