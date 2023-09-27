@@ -36,9 +36,9 @@ if (isset($sort) and $sort == "desc") {
 }
 
 if ($send != 1) {
-	$queryActive = mysqli_query($connection, "select t1.id, t1.assetNumber, t1.discarded, t2.building, t2.roomNumber, t1.standard, t3.brand, t3.model, t4.ipAddress, t5.serviceDate from (select * from apcs_asset where discarded = 0) as t1 inner join apcs_asset_location as t2 inner join apcs_asset_hardware as t3 inner join apcs_asset_network as t4 inner join apcs_asset_maintenances as t5 on t1.assetNumber = t2.assetNumberFK AND t1.assetNumber = t3.assetNumberFK AND t1.assetNumber = t4.assetNumberFK AND t1.assetNumber = t5.assetNumberFK group by t1.assetNumber;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryActive = mysqli_query($connection, "select t1.id, t1." . $dbAssetArray["ASSET_NUMBER"] . ", t1." . $dbAssetArray["DISCARDED"] . ", t2." . $dbLocationArray["BUILDING"] . ", t2." . $dbLocationArray["ROOM_NUMBER"] . ", t1." . $dbAssetArray["STANDARD"] . ", t3." . $dbHardwareArray["BRAND"] . ", t3." . $dbHardwareArray["MODEL"] . ", t4." . $dbNetworkArray["IP_ADDRESS"] . ", t5." . $dbMaintenanceArray["SERVICE_DATE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 0) as t1 inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 inner join " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " as t5 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . " group by t1." . $dbAssetArray["ASSET_NUMBER"] . ";") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryDiscarded = mysqli_query($connection, "select t1.id, t1.assetNumber, t1.discarded, t2.building, t2.roomNumber, t1.standard, t3.brand, t3.model, t4.ipAddress, t5.serviceDate from (select * from apcs_asset where discarded = 1) as t1 inner join apcs_asset_location as t2 inner join apcs_asset_hardware as t3 inner join apcs_asset_network as t4 inner join apcs_asset_maintenances as t5 on t1.assetNumber = t2.assetNumberFK AND t1.assetNumber = t3.assetNumberFK AND t1.assetNumber = t4.assetNumberFK AND t1.assetNumber = t5.assetNumberFK group by t1.assetNumber;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryDiscarded = mysqli_query($connection, "select t1.id, t1." . $dbAssetArray["ASSET_NUMBER"] . ", t1." . $dbAssetArray["DISCARDED"] . ", t2." . $dbLocationArray["BUILDING"] . ", t2." . $dbLocationArray["ROOM_NUMBER"] . ", t1." . $dbAssetArray["STANDARD"] . ", t3." . $dbHardwareArray["BRAND"] . ", t3." . $dbHardwareArray["MODEL"] . ", t4." . $dbNetworkArray["IP_ADDRESS"] . ", t5." . $dbMaintenanceArray["SERVICE_DATE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 1) as t1 inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 inner join " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " as t5 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . " group by t1." . $dbAssetArray["ASSET_NUMBER"] . ";") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
@@ -69,7 +69,7 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbLocationArray["BUILDING"]) echo "selected='selected'"; ?>value="<?php echo $dbLocationArray["BUILDING"] ?>"><?php echo $translations["BUILDING"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["AD_REGISTERED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["AD_REGISTERED"] ?>"><?php echo $translations["AD_REGISTERED"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STANDARD"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STANDARD"] ?>"><?php echo $translations["STANDARD"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbMaintenancesArray["SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbMaintenancesArray["SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbMaintenanceArray["SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbMaintenanceArray["SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["BRAND"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["BRAND"] ?>"><?php echo $translations["BRAND"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["MODEL"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["MODEL"] ?>"><?php echo $translations["MODEL"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["SERIAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["SERIAL_NUMBER"] ?>"><?php echo $translations["SERIAL_NUMBER"] ?></option>
@@ -151,7 +151,7 @@ if ($send != 1) {
 			<?php
 					}
 			?>
-			<th><a href="?orderBy=<?php echo $dbMaintenancesArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
+			<th><a href="?orderBy=<?php echo $dbMaintenanceArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
 			</thead>
 			<tbody>
 				<?php
@@ -165,7 +165,7 @@ if ($send != 1) {
 					$brand = $result[$dbHardwareArray["BRAND"]];
 					$model = $result[$dbHardwareArray["MODEL"]];
 					$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
-					$serviceDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
+					$serviceDate = $result[$dbMaintenanceArray["SERVICE_DATE"]];
 
 					$formatDate = substr($serviceDate, 0, 10);
 					$explodedDate = explode("-", $formatDate);
@@ -221,7 +221,7 @@ if ($send != 1) {
 						$standard = $result[$dbAssetArray["STANDARD"]];
 						$brand = $result[$dbHardwareArray["BRAND"]];
 						$model = $result[$dbHardwareArray["MODEL"]];
-						$serviceDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
+						$serviceDate = $result[$dbMaintenanceArray["SERVICE_DATE"]];
 						$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
 
 						$formatDate = substr($serviceDate, 0, 10);

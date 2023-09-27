@@ -33,7 +33,7 @@ if ($send != 1) {
 
 	$queryAssetLocation = mysqli_query($connection, "select " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["BUILDING"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LAST_DELIVERY_DATE"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LAST_DELIVERY_MADE_BY"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["ROOM_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbLocationArray["LOCATION_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbLocationArray["LOCATION_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetMaintenances = mysqli_query($connection, "select " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_DATE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["SERVICE_TYPE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["BATTERY_CHANGE"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["TICKET_NUMBER"] . ", " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . "." . $dbMaintenancesArray["AGENT_ID"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenancesArray["MAINTENANCES_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetMaintenances = mysqli_query($connection, "select " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . "." . $dbMaintenanceArray["SERVICE_DATE"] . ", " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . "." . $dbMaintenanceArray["SERVICE_TYPE"] . ", " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . "." . $dbMaintenanceArray["BATTERY_CHANGE"] . ", " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . "." . $dbMaintenanceArray["TICKET_NUMBER"] . ", " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . "." . $dbMaintenanceArray["AGENT_ID"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryAssetNetwork = mysqli_query($connection, "select " . $dbNetworkArray["NETWORK_TABLE"] . "." . $dbNetworkArray["MAC_ADDRESS"] . ", " . $dbNetworkArray["NETWORK_TABLE"] . "." . $dbNetworkArray["IP_ADDRESS"] . ", " . $dbNetworkArray["NETWORK_TABLE"] . "." . $dbNetworkArray["HOSTNAME"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbNetworkArray["NETWORK_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbNetworkArray["NETWORK_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
@@ -273,7 +273,7 @@ if ($send != 1) {
 						<tr id=bodyTable>
 							<td>
 								<?php
-								$previousMaintenancesDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
+								$previousMaintenancesDate = $result[$dbMaintenanceArray["SERVICE_DATE"]];
 								$datePM = substr($previousMaintenancesDate, 0, 10);
 								$explodedDateA = explode($json_constants_array["DASH"], $datePM);
 								$previousMaintenancesDate = $explodedDateA[2] . "/" . $explodedDateA[1] . "/" . $explodedDateA[0];
@@ -283,14 +283,14 @@ if ($send != 1) {
 							<td>
 								<?php
 								foreach ($serviceTypesArray as $str) {
-									if ($result[$dbMaintenancesArray["SERVICE_TYPE"]] == $str)
+									if ($result[$dbMaintenanceArray["SERVICE_TYPE"]] == $str)
 										echo $translations["SERVICE_TYPE"][$str];
 								}
 								?>
 							</td>
 							<td>
 								<?php
-								$previousMaintenancesBattery = $result[$dbMaintenancesArray["BATTERY_CHANGE"]];
+								$previousMaintenancesBattery = $result[$dbMaintenanceArray["BATTERY_CHANGE"]];
 								if ($previousMaintenancesBattery != "" && $previousMaintenancesBattery == "1") {
 									echo $translations["BATTERY_REPLACED"];
 								} else if ($previousMaintenancesBattery == "0") {
@@ -302,7 +302,7 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								$previousMaintenancesTicket = $result[$dbMaintenancesArray["TICKET_NUMBER"]];
+								$previousMaintenancesTicket = $result[$dbMaintenanceArray["TICKET_NUMBER"]];
 								if ($previousMaintenancesTicket != "")
 									echo $previousMaintenancesTicket;
 								else
@@ -314,7 +314,7 @@ if ($send != 1) {
 								if (isset($queryUsers))
 									mysqli_data_seek($queryUsers, 0);
 								while ($resultUsers = mysqli_fetch_array($queryUsers)) {
-									if ($result[$dbMaintenancesArray["AGENT_ID"]] == $resultUsers["id"]) {
+									if ($result[$dbMaintenanceArray["AGENT_ID"]] == $resultUsers["id"]) {
 										echo $resultUsers[$dbAgentArray["USERNAME"]];
 										$printedMaintenances = true;
 										break;
@@ -688,24 +688,7 @@ if ($send != 1) {
 				}
 		?>
 		</table>
-		<tr>
-			<td id=lblFixed><?php echo $translations["STORAGE_TOTAL_SIZE"] ?></td>
-			<td id=lblData><?php if ($storageTotalSize == "") {
-								echo $json_constants_array["DASH"];
-							} else {
-								if ($storageTotalSize / 1024 >= 1024) {
-									echo floor($storageTotalSize / 1024 / 1024) . " TB";
-								} else if ($storageTotalSize / 1024 < 1024 && $storageTotalSize / 1024 >= 1) {
-									echo floor($storageTotalSize / 1024) . " GB";
-								} else {
-									echo floor($storageTotalSize) . " MB";
-								}
-							} ?></td>
-		</tr>
-
-
 		<?php
-
 		if (isset($_SESSION["privilegeLevel"])) {
 			if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 		?>

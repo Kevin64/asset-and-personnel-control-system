@@ -22,20 +22,18 @@
         "DISCARDED": "discarded",
         "FIRMWARE": {
             "FIRMWARE_TABLE": "apcs_asset_firmware",
-            "TYPE": "type",
-            "VERSION": "version",
             "MEDIA_OPERATION_MODE": "mediaOperationMode",
             "SECURE_BOOT": "secureBoot",
             "TPM_VERSION": "tpmVersion",
+            "TYPE": "type",
+            "VERSION": "version",
             "VIRTUALIZATION_TECHNOLOGY": "virtualizationTechnology"
         },
         "HARDWARE": {
             "BRAND": "brand",
-            "MODEL": "model",
-            "TYPE": "type",
-            "PROCESSOR": "processor",
-            "SERIAL_NUMBER": "serialNumber",
             "HARDWARE_TABLE": "apcs_asset_hardware",
+            "MODEL": "model",
+            "PROCESSOR": "processor",
             "RAM": {
                 "AMOUNT": "amount",
                 "FREQUENCY": "frequency",
@@ -44,6 +42,7 @@
                 "TOTAL_SLOTS": "totalSlots",
                 "TYPE": "type"
             },
+            "SERIAL_NUMBER": "serialNumber",
             "STORAGE": {
                 "CONNECTION": "connection",
                 "MODEL": "model",
@@ -54,6 +53,7 @@
                 "STORAGE_TABLE": "apcs_asset_storage",
                 "TYPE": "type"
             },
+            "TYPE": "type",
             "VIDEO_CARD": {
                 "GPU_ID": "gpuId",
                 "NAME": "name",

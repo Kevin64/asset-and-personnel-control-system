@@ -110,6 +110,7 @@
     "FORMATTING": "Formatting",
     "FW_TYPE": "Firmware type",
     "FW_VERSION": "Firmware version",
+    "GPU_ID": "Video card number",
     "HOMEPAGE": "Home page",
     "HOSTNAME": "Hostname",
     "HW_TYPE": "Computer type",

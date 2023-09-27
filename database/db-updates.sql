@@ -124,3 +124,42 @@ CHANGE COLUMN `fwVersion` `version` VARCHAR(100) NULL DEFAULT NULL ;
 
 ALTER TABLE `apcsdb`.`apcs_asset_maintenances` 
 CHANGE COLUMN `previousServiceDates` `serviceDate` VARCHAR(10) NULL DEFAULT NULL ;
+
+
+
+
+
+
+
+ALTER TABLE `apcsdb`.`apcs_asset` 
+DROP COLUMN `tpmVersion`,
+DROP COLUMN `virtualizationTechnology`,
+DROP COLUMN `secureBoot`,
+DROP COLUMN `mediaOperationMode`,
+DROP COLUMN `videoCardRam`,
+DROP COLUMN `videoCardName`,
+DROP COLUMN `fwType`,
+DROP COLUMN `fwVersion`,
+DROP COLUMN `hwType`,
+DROP COLUMN `ipAddress`,
+DROP COLUMN `macAddress`,
+DROP COLUMN `hostname`,
+DROP COLUMN `operatingSystemArch`,
+DROP COLUMN `operatingSystemBuild`,
+DROP COLUMN `operatingSystemVersion`,
+DROP COLUMN `operatingSystemName`,
+DROP COLUMN `ramOccupiedSlots`,
+DROP COLUMN `ramTotalSlots`,
+DROP COLUMN `ramFrequency`,
+DROP COLUMN `ramType`,
+DROP COLUMN `ramAmount`,
+DROP COLUMN `processor`,
+DROP COLUMN `serialNumber`,
+DROP COLUMN `model`,
+DROP COLUMN `brand`,
+DROP COLUMN `serviceDateOld`,
+DROP COLUMN `lastDeliveryDate`,
+DROP COLUMN `lastDeliveryMadeBy`,
+DROP COLUMN `deliveredToRegistrationNumber`,
+DROP COLUMN `roomNumber`,
+DROP COLUMN `building`;

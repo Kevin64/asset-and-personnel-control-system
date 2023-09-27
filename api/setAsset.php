@@ -14,7 +14,7 @@ if (isset($_POST)) {
 	$sealNumber = $dbAssetArray["SEAL_NUMBER"];
 	$adRegistered = $dbAssetArray["AD_REGISTERED"];
 	$standard = $dbAssetArray["STANDARD"];
-	$serviceDate = $dbMaintenancesArray["SERVICE_DATE"];
+	$serviceDate = $dbMaintenanceArray["SERVICE_DATE"];
 	$inUse = $dbAssetArray["IN_USE"];
 	$tag = $dbAssetArray["TAG"];
 	$storageTotalSize = $dbAssetArray["STORAGE_TOTAL_SIZE"];
@@ -61,12 +61,12 @@ if (isset($_POST)) {
 	$roomNumber = $dbLocationArray["ROOM_NUMBER"];
 	$building = $dbLocationArray["BUILDING"];
 
-	$maintenancesTable = $dbMaintenancesArray["MAINTENANCES_TABLE"];
-	$serviceDate = $dbMaintenancesArray["SERVICE_DATE"];
-	$serviceType = $dbMaintenancesArray["SERVICE_TYPE"];
-	$batteryChange = $dbMaintenancesArray["BATTERY_CHANGE"];
-	$ticketNumber = $dbMaintenancesArray["TICKET_NUMBER"];
-	$agentId = $dbMaintenancesArray["AGENT_ID"];
+	$maintenancesTable = $dbMaintenanceArray["MAINTENANCES_TABLE"];
+	$serviceDate = $dbMaintenanceArray["SERVICE_DATE"];
+	$serviceType = $dbMaintenanceArray["SERVICE_TYPE"];
+	$batteryChange = $dbMaintenanceArray["BATTERY_CHANGE"];
+	$ticketNumber = $dbMaintenanceArray["TICKET_NUMBER"];
+	$agentId = $dbMaintenanceArray["AGENT_ID"];
 
 	$networkTable = $dbNetworkArray["NETWORK_TABLE"];
 	$hostname = $dbNetworkArray["HOSTNAME"];
