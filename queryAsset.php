@@ -36,8 +36,9 @@ if (isset($sort) and $sort == "desc") {
 }
 
 if ($send != 1) {
-	$queryActive = mysqli_query($connection, "select * from (select * from " . $dbAssetArray["ASSET_TABLE"] . " order by $orderBy $sort) T where " . $dbAssetArray["DISCARDED"] . " = 0") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
-	$queryDiscarded = mysqli_query($connection, "select * from (select * from " . $dbAssetArray["ASSET_TABLE"] . " order by $orderBy $sort) T where " . $dbAssetArray["DISCARDED"] . " = 1") or die($translations["ERROR_QUERY_ASSET"] . mysqli_error($connection));
+	$queryActive = mysqli_query($connection, "select t1.id, t1.assetNumber, t1.discarded, t2.building, t2.roomNumber, t1.standard, t3.brand, t3.model, t4.ipAddress, t5.serviceDate from (select * from apcs_asset where discarded = 0) as t1 inner join apcs_asset_location as t2 inner join apcs_asset_hardware as t3 inner join apcs_asset_network as t4 inner join apcs_asset_maintenances as t5 on t1.assetNumber = t2.assetNumberFK AND t1.assetNumber = t3.assetNumberFK AND t1.assetNumber = t4.assetNumberFK AND t1.assetNumber = t5.assetNumberFK group by t1.assetNumber;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+
+	$queryDiscarded = mysqli_query($connection, "select t1.id, t1.assetNumber, t1.discarded, t2.building, t2.roomNumber, t1.standard, t3.brand, t3.model, t4.ipAddress, t5.serviceDate from (select * from apcs_asset where discarded = 1) as t1 inner join apcs_asset_location as t2 inner join apcs_asset_hardware as t3 inner join apcs_asset_network as t4 inner join apcs_asset_maintenances as t5 on t1.assetNumber = t2.assetNumberFK AND t1.assetNumber = t3.assetNumberFK AND t1.assetNumber = t4.assetNumberFK AND t1.assetNumber = t5.assetNumberFK group by t1.assetNumber;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
@@ -68,7 +69,7 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbLocationArray["BUILDING"]) echo "selected='selected'"; ?>value="<?php echo $dbLocationArray["BUILDING"] ?>"><?php echo $translations["BUILDING"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["AD_REGISTERED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["AD_REGISTERED"] ?>"><?php echo $translations["AD_REGISTERED"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STANDARD"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STANDARD"] ?>"><?php echo $translations["STANDARD"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbMaintenancesArray["SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbMaintenancesArray["SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["BRAND"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["BRAND"] ?>"><?php echo $translations["BRAND"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["MODEL"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["MODEL"] ?>"><?php echo $translations["MODEL"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["SERIAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["SERIAL_NUMBER"] ?>"><?php echo $translations["SERIAL_NUMBER"] ?></option>
@@ -163,15 +164,8 @@ if ($send != 1) {
 					$standard = $result[$dbAssetArray["STANDARD"]];
 					$brand = $result[$dbHardwareArray["BRAND"]];
 					$model = $result[$dbHardwareArray["MODEL"]];
-					$inUse = $result[$dbAssetArray["IN_USE"]];
-					$serviceDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
 					$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
-
-					if ($inUse == "0") {
-						$color = $colorArray["NOT_IN_USE"];
-					} else {
-						$color = $colorArray["IN_USE"];
-					}
+					$serviceDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
 
 					$formatDate = substr($serviceDate, 0, 10);
 					$explodedDate = explode("-", $formatDate);
@@ -188,8 +182,7 @@ if ($send != 1) {
 							}
 						}
 						?>
-						<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } else { ?> style="color: <?php echo $color;
-																																								} ?>"><?php echo $assetNumber; ?></a></td>
+						<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $assetNumber; ?></a></td>
 						<?php
 						if (!in_array(true, $devices)) {
 						?>
@@ -226,11 +219,10 @@ if ($send != 1) {
 						$building = $result[$dbLocationArray["BUILDING"]];
 						$roomNumber = $result[$dbLocationArray["ROOM_NUMBER"]];
 						$standard = $result[$dbAssetArray["STANDARD"]];
-						$brand = $result[$dbAssetArray["BRAND"]];
-						$model = $result[$dbAssetArray["MODEL"]];
-						$inUse = $result[$dbAssetArray["IN_USE"]];
-						$serviceDate = $result[$dbAssetArray["SERVICE_DATE"]];
-						$ipAddress = $result[$dbAssetArray["IP_ADDRESS"]];
+						$brand = $result[$dbHardwareArray["BRAND"]];
+						$model = $result[$dbHardwareArray["MODEL"]];
+						$serviceDate = $result[$dbMaintenancesArray["SERVICE_DATE"]];
+						$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
 
 						$formatDate = substr($serviceDate, 0, 10);
 						$explodedDate = explode("-", $formatDate);
@@ -247,8 +239,7 @@ if ($send != 1) {
 								}
 							}
 							?>
-							<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } else { ?> style="color: <?php echo $color;
-																																									} ?>"><?php echo $assetNumber; ?></a></td>
+							<td><a href="formDetailAsset.php?id=<?php echo $idAsset; ?>" <?php if ($discarded == 1) { ?> id=inactive <?php } ?>><?php echo $assetNumber; ?></a></td>
 							<?php
 							if (!in_array(true, $devices)) {
 							?>
