@@ -9,6 +9,7 @@ $assetFK = null;
 $oldAssetNumber = null;
 $printedDelivery = false;
 $printedMaintenances = false;
+$totalStorageSize = 0;
 
 $queryUsers = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . "") or die($translations["ERROR_QUERY_AGENT"] . mysqli_error($connection));
 
@@ -57,10 +58,100 @@ if ($send != 1) {
 		}
 	</script>
 
-
+	<div id="overlay">
+		<div id=title><?php echo $translations["FIXED_STORAGE_MEDIA_LIST"]; ?></div>
+		<button id="closeButton" onclick="off()"><?php echo $translations["CLOSE"]; ?></button>
+		<div id="window">
+			<table id=storageData>
+				<thead id=headerTable>
+					<tr>
+						<th>
+							<?php echo $translations["STORAGE_ID"] ?>
+						</th>
+						<th>
+							<?php echo $translations["STORAGE_LIST_TYPE"] ?>
+						</th>
+						<th>
+							<?php echo $translations["STORAGE_LIST_SIZE"] ?>
+						</th>
+						<th>
+							<?php echo $translations["STORAGE_LIST_CONNECTION"] ?>
+						</th>
+						<th>
+							<?php echo $translations["STORAGE_LIST_MODEL"] ?>
+						</th>
+						<th>
+							<?php echo $translations["STORAGE_LIST_SERIAL_NUMBER"] ?>
+						</th>
+						<th>
+							<?php echo $translations["STORAGE_LIST_SMART"] ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					while ($result = mysqli_fetch_array($queryAssetStorage)) {
+					?>
+						<tr id=bodyTable>
+							<td>
+								<?php
+								echo $result[$dbStorageArray["STORAGE_ID"]];
+								?>
+							</td>
+							<td>
+								<?php
+								foreach ($storageTypesArray as $str1 => $str2) {
+									if ($result[$dbStorageArray["TYPE"]] == $str1)
+										echo $str2;
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								$totalStorageSize += $result[$dbStorageArray["SIZE"]];
+								if ($result[$dbStorageArray["SIZE"]] / 1024 >= 1024) {
+									echo floor($result[$dbStorageArray["SIZE"]] / 1024 / 1024) . " TB";
+								} else if ($result[$dbStorageArray["SIZE"]] / 1024 < 1024 && $result[$dbStorageArray["SIZE"]] / 1024 >= 1) {
+									echo floor($result[$dbStorageArray["SIZE"]] / 1024) . " GB";
+								} else {
+									echo floor($result[$dbStorageArray["SIZE"]]) . " MB";
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								foreach ($connectionTypesArray as $str1 => $str2) {
+									if ($result[$dbStorageArray["CONNECTION"]] == $str1)
+										echo $str2;
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								echo $result[$dbStorageArray["MODEL"]];
+								?>
+							</td>
+							<td>
+								<?php
+								echo $result[$dbStorageArray["SERIAL_NUMBER"]];
+								?>
+							</td>
+							<td>
+								<?php
+								echo $result[$dbStorageArray["SMART_STATUS"]];
+								?>
+							</td>
+						</tr>
+					<?php
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 	<form id="formGeneral">
-		<h2><?php echo $translations["ASSET_DETAIL"] ?></h2><br>
+		<h1><?php echo $translations["ASSET_DETAIL"] ?></h1><br>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($queryAsset)) {
@@ -339,6 +430,15 @@ if ($send != 1) {
 				<thead>
 					<td colspan="3" id=section-header><?php echo $translations["COMPUTER_DATA"] ?></td>
 				</thead>
+				<tr id=subHeaderTable>
+					<td colspan="2">
+						<label>
+							<?php
+							echo $translations["GENERAL"];
+							?>
+						</label>
+					</td>
+				</tr>
 				<?php
 				while ($result = mysqli_fetch_array($queryAssetHardware)) {
 					$brand = $result[$dbHardwareArray["BRAND"]];
@@ -396,6 +496,15 @@ if ($send != 1) {
 										} else {
 											echo $processor;
 										} ?></td>
+					</tr>
+					<tr id=subHeaderTable>
+						<td colspan="2">
+							<label>
+								<?php
+								echo $translations["RAM"];
+								?>
+							</label>
+						</td>
 					</tr>
 				<?php
 				}
@@ -456,6 +565,15 @@ if ($send != 1) {
 										}
 										?></td>
 					</tr>
+					<tr id=subHeaderTable>
+						<td colspan="2">
+							<label>
+								<?php
+								echo $translations["VIDEO_CARD"];
+								?>
+							</label>
+						</td>
+					</tr>
 				<?php
 				}
 				while ($result = mysqli_fetch_array($queryAssetVideoCard)) {
@@ -488,10 +606,42 @@ if ($send != 1) {
 				<?php
 				}
 				?>
+				<tr id=subHeaderTable>
+					<td colspan="2">
+						<label>
+							<?php
+							echo $translations["STORAGE"];
+							?>
+						</label>
+					</td>
+				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["STORAGE_SUMMARY"] ?></td>
+					<td id=lblFixed><?php echo $translations["INSTALLED_STORAGE_DRIVES"] ?></td>
 					<td id=lblData>
-						<a id=linksameline onclick="on()">Detalhes</a>
+						<a id=linksameline onclick="on()"><?php echo $translations["DETAILS"]; ?></a>
+					</td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["STORAGE_TOTAL_SIZE"] ?></td>
+					<td id=lblData>
+						<?php
+						if ($totalStorageSize / 1024 >= 1024) {
+							echo $totalStorageSize / 1024 / 1024 . " TB";
+						} else if ($totalStorageSize / 1024 < 1024 && $totalStorageSize / 1024 >= 1) {
+							echo $totalStorageSize / 1024 . " GB";
+						} else {
+							echo $totalStorageSize . " MB";
+						}
+						?>
+					</td>
+				</tr>
+				<tr id=subHeaderTable>
+					<td colspan="2">
+						<label>
+							<?php
+							echo $translations["FIRMWARE"];
+							?>
+						</label>
 					</td>
 				</tr>
 				<?php
@@ -601,6 +751,15 @@ if ($send != 1) {
 											}
 										} ?></td>
 					</tr>
+					<tr id=subHeaderTable>
+						<td colspan="2">
+							<label>
+							<?php
+							echo $translations["NETWORK"];
+							?>
+							</label>
+						</td>
+					</tr>
 				<?php
 				}
 
@@ -632,6 +791,15 @@ if ($send != 1) {
 										} else {
 											echo $ipAddress;
 										} ?></td>
+					</tr>
+					<tr id=subHeaderTable>
+						<td colspan="2">
+							<label>
+							<?php
+							echo $translations["OPERATING_SYSTEM"];
+							?>
+							</label>
+						</td>
 					</tr>
 				<?php
 				}
@@ -701,96 +869,6 @@ if ($send != 1) {
 		?>
 		</table>
 	</form>
-	<div id="overlay">
-		<div id=title>Lista de mídias de armazenamento fixas</div>
-		<button id="closeButton" onclick="off()">Fechar</button>
-		<div id="window">
-			<table id=storageData>
-				<thead id=headerTable>
-					<tr>
-						<th>
-							<?php echo $translations["STORAGE_ID"] ?>
-						</th>
-						<th>
-							<?php echo $translations["STORAGE_LIST_TYPE"] ?>
-						</th>
-						<th>
-							<?php echo $translations["STORAGE_LIST_SIZE"] ?>
-						</th>
-						<th>
-							<?php echo $translations["STORAGE_LIST_CONNECTION"] ?>
-						</th>
-						<th>
-							<?php echo $translations["STORAGE_LIST_MODEL"] ?>
-						</th>
-						<th>
-							<?php echo $translations["STORAGE_LIST_SERIAL_NUMBER"] ?>
-						</th>
-						<th>
-							<?php echo $translations["STORAGE_LIST_SMART"] ?>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					while ($result = mysqli_fetch_array($queryAssetStorage)) {
-					?>
-						<tr id=bodyTable>
-							<td>
-								<?php
-								echo $result[$dbStorageArray["STORAGE_ID"]];
-								?>
-							</td>
-							<td>
-								<?php
-								foreach ($storageTypesArray as $str1 => $str2) {
-									if ($result[$dbStorageArray["TYPE"]] == $str1)
-										echo $str2;
-								}
-								?>
-							</td>
-							<td>
-								<?php
-								if ($result[$dbStorageArray["SIZE"]] / 1024 >= 1024) {
-									echo floor($result[$dbStorageArray["SIZE"]] / 1024 / 1024) . " TB";
-								} else if ($result[$dbStorageArray["SIZE"]] / 1024 < 1024 && $result[$dbStorageArray["SIZE"]] / 1024 >= 1) {
-									echo floor($result[$dbStorageArray["SIZE"]] / 1024) . " GB";
-								} else {
-									echo floor($result[$dbStorageArray["SIZE"]]) . " MB";
-								}
-								?>
-							</td>
-							<td>
-								<?php
-								foreach ($connectionTypesArray as $str1 => $str2) {
-									if ($result[$dbStorageArray["CONNECTION"]] == $str1)
-										echo $str2;
-								}
-								?>
-							</td>
-							<td>
-								<?php
-								echo $result[$dbStorageArray["MODEL"]];
-								?>
-							</td>
-							<td>
-								<?php
-								echo $result[$dbStorageArray["SERIAL_NUMBER"]];
-								?>
-							</td>
-							<td>
-								<?php
-								echo $result[$dbStorageArray["SMART_STATUS"]];
-								?>
-							</td>
-						</tr>
-					<?php
-					}
-					?>
-				</tbody>
-			</table>
-		</div>
-	</div>
 </div>
 <?php
 require_once("foot.php");

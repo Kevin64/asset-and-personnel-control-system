@@ -39,8 +39,8 @@ if (isset($_SESSION["privilegeLevel"])) {
 ?>
 
 		<div id="middle">
-			<h2><?php echo $translations["AGENT_LIST"] ?> (<?php echo $totalusers; ?>)
-			</h2><br>
+			<h1><?php echo $translations["AGENT_LIST"] ?> (<?php echo $totalusers; ?>)
+			</h1><br>
 			<form action="eraseSelectedAgent.php" method="post">
 				<table id="userData" cellspacing=1>
 					<thead id="header_">

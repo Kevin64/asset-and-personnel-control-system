@@ -16,7 +16,7 @@ if ($send != 1) {
 
 <div id="middle">
 	<form id="formGeneral">
-		<h2><?php echo $translations["AGENT_DETAIL"] ?></h2><br>
+		<h1><?php echo $translations["AGENT_DETAIL"] ?></h1><br>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {

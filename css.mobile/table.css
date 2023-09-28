@@ -115,9 +115,10 @@
 	border-style: solid;
 	border-width: 1px;
 	margin-left: auto;
-	/* margin-right: auto; */
 	padding: 0px;
 	width: 100%;
+
+	/*  */
 }
 
 #assetData thead,
@@ -154,6 +155,16 @@ input[type=text] {
 #bodyTable td,
 #headerTable td {
 	border: 1px solid;
+}
+
+#subHeaderTable td {
+	border-bottom: 1px dotted;
+	border-top: 2px solid;
+}
+
+#subHeaderTable label {
+	font-size: larger;
+	font-weight: bold;
 }
 
 #inactive {

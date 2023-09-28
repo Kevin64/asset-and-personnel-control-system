@@ -104,13 +104,13 @@ if ($send != 1) {
 	<?php
 	if (!isset($totalSearch)) {
 	?>
-		<h3><?php echo $translations["ASSET_ACTIVE"] ?> (<?php echo $totalActive; ?>)</h3>
-		<h3><?php echo $translations["ASSETS_DISCARDED"] ?> (<?php echo $totalDiscarded; ?>)</h3><br>
+		<h1><?php echo $translations["ASSET_ACTIVE"] ?> (<?php echo $totalActive; ?>)</h1>
+		<h1><?php echo $translations["ASSETS_DISCARDED"] ?> (<?php echo $totalDiscarded; ?>)</h1><br>
 	<?php
 	} else {
 		$queryActive = $querySearch;
 	?>
-		<h3><?php echo $translations["RESULTING_ASSETS"] ?> (<?php echo $totalSearch; ?>)</h3><br>
+		<h1><?php echo $translations["RESULTING_ASSETS"] ?> (<?php echo $totalSearch; ?>)</h1><br>
 	<?php
 	}
 	?>

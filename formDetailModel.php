@@ -22,7 +22,7 @@ if ($send != 1) {
 						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["LIMITED_LEVEL"]) { ?> class="readonly" <?php }
 																													} ?>>
 	<form id="formGeneral">
-		<h2><?php echo $translations["MODEL_DETAIL"] ?></h2><br>
+		<h1><?php echo $translations["MODEL_DETAIL"] ?></h1><br>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($query)) {

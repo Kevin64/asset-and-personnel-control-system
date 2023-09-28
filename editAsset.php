@@ -136,7 +136,7 @@ if ($send != 1) {
 	<script src="js/disable-controls.js"></script>
 	<form action="editAsset.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h2><?php echo $translations["ASSET_EDIT"] ?></h2><br>
+		<h1><?php echo $translations["ASSET_EDIT"] ?></h1><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $assetNumber != $oldAssetNumber) {
@@ -368,6 +368,9 @@ if ($send != 1) {
 					$ramTotalSlots = $result[$dbRamArray["TOTAL_SLOTS"]];
 					$ramOccupiedSlots = $result[$dbRamArray["OCCUPIED_SLOTS"]];
 			?>
+			<tr>
+				RAM
+			</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["RAM_AMOUNT"] . " (MB)" ?></td>
 					<td><input type=number name=txtRamAmount value="<?php echo $ramAmount; ?>"></td>
@@ -415,7 +418,7 @@ if ($send != 1) {
 					<td><input type=number name=txtVideoCardRam value="<?php echo $videoCardRam; ?>"></td>
 				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["GPU_ID"] ?></td>
+					<td id=lblFixed><?php echo $translations["VIDEO_CARD_ID"] ?></td>
 					<td><input type=number name=txtGpuId value="<?php echo $videoCardGpuId; ?>"></td>
 				</tr>
 			<?php

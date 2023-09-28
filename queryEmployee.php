@@ -63,7 +63,7 @@ $totalEmployees = mysqli_num_rows($query);
 		</table>
 	</form>
 	<br><br>
-	<h2><?php echo $translations["EMPLOYEE_LIST"] ?> (<?php echo $totalEmployees; ?>)</h2><br>
+	<h1><?php echo $translations["EMPLOYEE_LIST"] ?> (<?php echo $totalEmployees; ?>)</h1><br>
 	<form action="eraseSelectedEmployee.php" method="post">
 		<table id="employeeData" cellspacing=1>
 			<thead id="header_">

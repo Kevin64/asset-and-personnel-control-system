@@ -65,7 +65,7 @@ $totalRooms = mysqli_num_rows($query);
 		</table>
 	</form>
 	<br><br>
-	<h2><?php echo $translations["MODEL_LIST"] . " " ?>(<?php echo $totalRooms; ?>)</h2><br>
+	<h1><?php echo $translations["MODEL_LIST"] . " " ?>(<?php echo $totalRooms; ?>)</h1><br>
 	<form action="eraseSelectedModel.php" method="post">
 		<table id="modelData" cellspacing=1>
 			<thead id="header_">

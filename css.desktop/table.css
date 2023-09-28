@@ -155,6 +155,16 @@ input[type=text] {
 	border: 1px solid;
 }
 
+#subHeaderTable td {
+	border-bottom: 1px dotted;
+	border-top: 2px solid;
+}
+
+#subHeaderTable label {
+	font-size: larger;
+	font-weight: bold;
+}
+
 #inactive {
 	font-style: italic;
 	opacity: 0.4;
