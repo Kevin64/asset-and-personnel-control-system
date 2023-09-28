@@ -319,6 +319,15 @@ if ($send != 1) {
 			<tr>
 				<td colspan="3" id=section-header><?php echo $translations["COMPUTER_DATA"] ?></td>
 			</tr>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["GENERAL"];
+						?>
+					</label>
+				</td>
+			</tr>
 			<?php
 				while ($result = mysqli_fetch_array($queryAssetHardware)) {
 					$brand = $result[$dbHardwareArray["BRAND"]];
@@ -360,7 +369,17 @@ if ($send != 1) {
 					<td><input type=text name=txtProcessor value="<?php echo $processor; ?>"></td>
 				</tr>
 			<?php
-				}
+				} ?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["RAM"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<?php
 				while ($result = mysqli_fetch_array($queryAssetRam)) {
 					$ramAmount = $result[$dbRamArray["AMOUNT"]];
 					$ramType = $result[$dbRamArray["TYPE"]];
@@ -368,9 +387,6 @@ if ($send != 1) {
 					$ramTotalSlots = $result[$dbRamArray["TOTAL_SLOTS"]];
 					$ramOccupiedSlots = $result[$dbRamArray["OCCUPIED_SLOTS"]];
 			?>
-			<tr>
-				RAM
-			</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["RAM_AMOUNT"] . " (MB)" ?></td>
 					<td><input type=number name=txtRamAmount value="<?php echo $ramAmount; ?>"></td>
@@ -403,7 +419,17 @@ if ($send != 1) {
 					<td><input type=number name=txtRamTotalSlots value="<?php echo $ramTotalSlots; ?>"></td>
 				</tr>
 			<?php
-				}
+				} ?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["VIDEO_CARD"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<?php
 				while ($result = mysqli_fetch_array($queryAssetVideoCard)) {
 					$videoCardName = $result[$dbVideoCardArray["NAME"]];
 					$videoCardRam = $result[$dbVideoCardArray["RAM"]];
@@ -422,7 +448,17 @@ if ($send != 1) {
 					<td><input type=number name=txtGpuId value="<?php echo $videoCardGpuId; ?>"></td>
 				</tr>
 			<?php
-				}
+				} ?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["OPERATING_SYSTEM"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<?php
 				while ($result = mysqli_fetch_array($queryAssetOperatingSystem)) {
 					$operatingSystemName = $result[$dbOperatingSystemArray["NAME"]];
 					$operatingSystemVersion = $result[$dbOperatingSystemArray["VERSION"]];
@@ -456,7 +492,17 @@ if ($send != 1) {
 						</select></td>
 				</tr>
 			<?php
-				}
+				} ?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["NETWORK"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<?php
 				while ($result = mysqli_fetch_array($queryAssetNetwork)) {
 					$hostname = $result[$dbNetworkArray["HOSTNAME"]];
 					$macAddress = $result[$dbNetworkArray["MAC_ADDRESS"]];
@@ -475,7 +521,17 @@ if ($send != 1) {
 					<td><input type="text" name="txtIpAddress" value="<?php echo $ipAddress ?>" required <?php if ($ipAddress == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
 				</tr>
 			<?php
-				}
+				} ?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["FIRMWARE"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<?php
 				while ($result = mysqli_fetch_array($queryAssetFirmware)) {
 					$fwVersion = $result[$dbFirmwareArray["VERSION"]];
 					$fwType = $result[$dbFirmwareArray["TYPE"]];
