@@ -162,7 +162,6 @@ if ($send != 1) {
 				$note = $result[$dbAssetArray["NOTE"]];
 				$standard = $result[$dbAssetArray["STANDARD"]];
 				$adRegistered = $result[$dbAssetArray["AD_REGISTERED"]];
-				$storageTotalSize = $result[$dbAssetArray["STORAGE_TOTAL_SIZE"]];
 				$inUse = $result[$dbAssetArray["IN_USE"]];
 				$sealNumber = $result[$dbAssetArray["SEAL_NUMBER"]];
 				$tag = $result[$dbAssetArray["TAG"]];
@@ -258,9 +257,6 @@ if ($send != 1) {
 			while ($result = mysqli_fetch_array($queryAssetLocation)) {
 				$building = $result[$dbLocationArray["BUILDING"]];
 				$roomNumber = $result[$dbLocationArray["ROOM_NUMBER"]];
-				$deliveredToRegistrationNumber = $result[$dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
-				$lastDeliveryDate = $result[$dbLocationArray["LAST_DELIVERY_DATE"]];
-				$lastDeliveryMadeBy = $result[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["BUILDING"] ?></td>
@@ -291,583 +287,599 @@ if ($send != 1) {
 									} ?></td>
 					</td>
 				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
-					<td id=lblData><?php if ($deliveredToRegistrationNumber == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										echo $deliveredToRegistrationNumber;
-									} ?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
-					<td id=lblData><?php if ($lastDeliveryDate == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										echo $lastDeliveryDate;
-									} ?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
-					<td id=lblData><label name=txtLastDeliveryMadeBy style=line-height:40px;font-size:12pt></label>
-						<?php
-						if (isset($queryUsers))
-							mysqli_data_seek($queryUsers, 0);
-						while ($resultUsers = mysqli_fetch_array($queryUsers)) {
-							if ($lastDeliveryMadeBy == $resultUsers["id"]) {
-						?>
-								<label>
-									<?php
-									echo $resultUsers[$dbAgentArray["USERNAME"]];
-									$printedDelivery = true;
-									?>
-								</label>
-						<?php
-							}
+			<?php
+			}
+
+					if (isset($_SESSION["privilegeLevel"])) {
+						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+					?>
+							<tr>
+								<td id=h-separator colspan=7 align=center><input id="updateButton" type=button onclick="location.href='editAsset.php?id=<?php echo $idAsset ?>'" value=<?php echo $translations["LABEL_EDIT_BUTTON"] ?>></td>
+							</tr>
+					<?php
 						}
+					}
+					?>
+		</table>
+		<br>
+		<label id=asteriskWarning><?php echo $translations["USE_AIR_TO_EDIT"] ?></label>
+		<table>
+			<thead>
+				<td colspan=5 id=section-header><?php echo $translations["PERFORMED_MAINTENANCES_TITLE"] ?></td>
+				<tr id=headerTable>
+					<th>
+						<?php echo $translations["PERFORMED_MAINTENANCES_DATE"] ?>
+					</th>
+					<th>
+						<?php echo $translations["PERFORMED_MAINTENANCES_SERVICE"] ?>
+					</th>
+					<th>
+						<?php echo $translations["PERFORMED_MAINTENANCES_BATTERY"] ?>
+					</th>
+					<th>
+						<?php echo $translations["PERFORMED_MAINTENANCES_TICKET"] ?>
+					</th>
+					<th>
+						<?php echo $translations["PERFORMED_MAINTENANCES_AGENT"] ?>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				while ($result = mysqli_fetch_array($queryAssetMaintenances)) { ?>
+					<tr id=bodyTable>
+						<td>
+							<?php
+							$previousMaintenancesDate = $result[$dbMaintenanceArray["SERVICE_DATE"]];
+							$datePM = substr($previousMaintenancesDate, 0, 10);
+							$explodedDateA = explode($json_constants_array["DASH"], $datePM);
+							$previousMaintenancesDate = $explodedDateA[2] . "/" . $explodedDateA[1] . "/" . $explodedDateA[0];
+							echo $previousMaintenancesDate;
+							?>
+						</td>
+						<td>
+							<?php
+							foreach ($serviceTypesArray as $str) {
+								if ($result[$dbMaintenanceArray["SERVICE_TYPE"]] == $str)
+									echo $translations["SERVICE_TYPE"][$str];
+							}
+							?>
+						</td>
+						<td>
+							<?php
+							$previousMaintenancesBattery = $result[$dbMaintenanceArray["BATTERY_CHANGE"]];
+							if ($previousMaintenancesBattery != "" && $previousMaintenancesBattery == "1") {
+								echo $translations["BATTERY_REPLACED"];
+							} else if ($previousMaintenancesBattery == "0") {
+								echo $translations["BATTERY_NOT_REPLACED"];
+							} else {
+								echo $json_constants_array["DASH"];
+							}
+							?>
+						</td>
+						<td>
+							<?php
+							$previousMaintenancesTicket = $result[$dbMaintenanceArray["TICKET_NUMBER"]];
+							if ($previousMaintenancesTicket != "")
+								echo $previousMaintenancesTicket;
+							else
+								echo $json_constants_array["DASH"];
+							?>
+						</td>
+						<td>
+							<?php
+							if (isset($queryUsers))
+								mysqli_data_seek($queryUsers, 0);
+							while ($resultUsers = mysqli_fetch_array($queryUsers)) {
+								if ($result[$dbMaintenanceArray["AGENT_ID"]] == $resultUsers["id"]) {
+									echo $resultUsers[$dbAgentArray["USERNAME"]];
+									$printedMaintenances = true;
+									break;
+								}
+							?>
+							<?php
+							}
+							?>
+							<?php
+							if ($printedMaintenances == false)
+								echo $json_constants_array["DASH"];
+							?>
+						</td>
+					</tr>
+				<?php
+				}
+				?>
+			</tbody>
+		</table>
+		<table id="formFields">
+			<tbody>
+				<?php
+				while ($result = mysqli_fetch_array($queryAssetLocation)) {
+					$deliveredToRegistrationNumber = $result[$dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
+					$lastDeliveryDate = $result[$dbLocationArray["LAST_DELIVERY_DATE"]];
+					$lastDeliveryMadeBy = $result[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
+				?>
+					<tr>
+						<td id=lblFixed><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
+						<td id=lblData><?php if ($deliveredToRegistrationNumber == "") {
+											echo $json_constants_array["DASH"];
+										} else {
+											echo $deliveredToRegistrationNumber;
+										} ?></td>
+					</tr>
+					<tr>
+						<td id=lblFixed><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
+						<td id=lblData><?php if ($lastDeliveryDate == "") {
+											echo $json_constants_array["DASH"];
+										} else {
+											echo $lastDeliveryDate;
+										} ?></td>
+					</tr>
+					<tr>
+						<td id=lblFixed><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
+						<td id=lblData><label name=txtLastDeliveryMadeBy style=line-height:40px;font-size:12pt></label>
+							<?php
+							if (isset($queryUsers))
+								mysqli_data_seek($queryUsers, 0);
+							while ($resultUsers = mysqli_fetch_array($queryUsers)) {
+								if ($lastDeliveryMadeBy == $resultUsers["id"]) {
+							?>
+									<label>
+										<?php
+										echo $resultUsers[$dbAgentArray["USERNAME"]];
+										$printedDelivery = true;
+										?>
+									</label>
+							<?php
+								}
+							}
+							?>
+							<label>
+								<?php
+								if ($printedDelivery != true)
+									echo $json_constants_array["DASH"];
+								?>
+							</label>
+						</td>
+					</tr>
+					
+				<?php
+				}
+				?>
+			</tbody>
+		</table>
+		<table id="formFields">
+			<thead>
+				<td colspan="3" id=section-header><?php echo $translations["COMPUTER_DATA"] ?></td>
+			</thead>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["GENERAL"];
 						?>
+					</label>
+				</td>
+			</tr>
+			<?php
+			while ($result = mysqli_fetch_array($queryAssetHardware)) {
+				$brand = $result[$dbHardwareArray["BRAND"]];
+				$model = $result[$dbHardwareArray["MODEL"]];
+				$serialNumber = $result[$dbHardwareArray["SERIAL_NUMBER"]];
+				$processor = $result[$dbHardwareArray["PROCESSOR"]];
+				$hwType = $result[$dbHardwareArray["TYPE"]];
+			?>
+				<tr>
+					<td id=lblFixed><?php echo $translations["HW_TYPE"] ?></td>
+					<td id=lblData><?php if ($hwType == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($hwTypesArray as $str1 => $str2) {
+											if ($str1 == $hwType) {
+												echo $str2;
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["BRAND"] ?></td>
+					<td id=lblData><?php if ($brand == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $brand;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["MODEL"] ?></td>
+					<td id=lblData><?php if ($model == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $model;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["SERIAL_NUMBER"] ?></td>
+					<td id=lblData><?php if ($serialNumber == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $serialNumber;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["PROCESSOR"] ?></td>
+					<td id=lblData><?php if ($processor == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $processor;
+									} ?></td>
+				</tr>
+				<tr id=subHeaderTable>
+					<td colspan="2">
 						<label>
 							<?php
-							if ($printedDelivery != true)
-								echo $json_constants_array["DASH"];
+							echo $translations["RAM"];
 							?>
 						</label>
 					</td>
 				</tr>
 			<?php
 			}
+			while ($result = mysqli_fetch_array($queryAssetRam)) {
+				$ramAmount = $result[$dbRamArray["AMOUNT"]];
+				$ramType = $result[$dbRamArray["TYPE"]];
+				$ramFrequency = $result[$dbRamArray["FREQUENCY"]];
+				$ramTotalSlots = $result[$dbRamArray["TOTAL_SLOTS"]];
+				$ramOccupiedSlots = $result[$dbRamArray["OCCUPIED_SLOTS"]];
 			?>
-			<table>
-				<thead>
-					<td colspan=5 id=section-header><?php echo $translations["PERFORMED_MAINTENANCES_TITLE"] ?></td>
-					<tr id=headerTable>
-						<th>
-							<?php echo $translations["PERFORMED_MAINTENANCES_DATE"] ?>
-						</th>
-						<th>
-							<?php echo $translations["PERFORMED_MAINTENANCES_SERVICE"] ?>
-						</th>
-						<th>
-							<?php echo $translations["PERFORMED_MAINTENANCES_BATTERY"] ?>
-						</th>
-						<th>
-							<?php echo $translations["PERFORMED_MAINTENANCES_TICKET"] ?>
-						</th>
-						<th>
-							<?php echo $translations["PERFORMED_MAINTENANCES_AGENT"] ?>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					while ($result = mysqli_fetch_array($queryAssetMaintenances)) { ?>
-						<tr id=bodyTable>
-							<td>
-								<?php
-								$previousMaintenancesDate = $result[$dbMaintenanceArray["SERVICE_DATE"]];
-								$datePM = substr($previousMaintenancesDate, 0, 10);
-								$explodedDateA = explode($json_constants_array["DASH"], $datePM);
-								$previousMaintenancesDate = $explodedDateA[2] . "/" . $explodedDateA[1] . "/" . $explodedDateA[0];
-								echo $previousMaintenancesDate;
-								?>
-							</td>
-							<td>
-								<?php
-								foreach ($serviceTypesArray as $str) {
-									if ($result[$dbMaintenanceArray["SERVICE_TYPE"]] == $str)
-										echo $translations["SERVICE_TYPE"][$str];
-								}
-								?>
-							</td>
-							<td>
-								<?php
-								$previousMaintenancesBattery = $result[$dbMaintenanceArray["BATTERY_CHANGE"]];
-								if ($previousMaintenancesBattery != "" && $previousMaintenancesBattery == "1") {
-									echo $translations["BATTERY_REPLACED"];
-								} else if ($previousMaintenancesBattery == "0") {
-									echo $translations["BATTERY_NOT_REPLACED"];
-								} else {
-									echo $json_constants_array["DASH"];
-								}
-								?>
-							</td>
-							<td>
-								<?php
-								$previousMaintenancesTicket = $result[$dbMaintenanceArray["TICKET_NUMBER"]];
-								if ($previousMaintenancesTicket != "")
-									echo $previousMaintenancesTicket;
-								else
-									echo $json_constants_array["DASH"];
-								?>
-							</td>
-							<td>
-								<?php
-								if (isset($queryUsers))
-									mysqli_data_seek($queryUsers, 0);
-								while ($resultUsers = mysqli_fetch_array($queryUsers)) {
-									if ($result[$dbMaintenanceArray["AGENT_ID"]] == $resultUsers["id"]) {
-										echo $resultUsers[$dbAgentArray["USERNAME"]];
-										$printedMaintenances = true;
-										break;
+				<tr>
+					<td id=lblFixed><?php echo $translations["RAM_AMOUNT"] ?></td>
+					<td id=lblData><?php if ($ramAmount == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										if ($ramAmount / 1024 >= 1024) {
+											echo floor($ramAmount / 1024 / 1024) . " TB";
+										} else if ($ramAmount / 1024 < 1024 && $ramAmount / 1024 > 1) {
+											echo floor($ramAmount / 1024) . " GB";
+										} else {
+											echo floor($ramAmount) . " MB";
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["RAM_TYPE"] ?></td>
+					<td id=lblData><?php if ($ramType == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($ramTypesArray as $str1 => $str2) {
+											if ($str1 == $ramType) {
+												echo $str2;
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["RAM_FREQUENCY"] ?></td>
+					<td id=lblData><?php if ($ramFrequency == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $ramFrequency . " MHz";
 									}
-								?>
-								<?php
-								}
-								?>
-								<?php
-								if ($printedMaintenances == false)
-									echo $json_constants_array["DASH"];
-								?>
-							</td>
-						</tr>
+									?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["RAM_SLOTS"] ?></td>
+					<td id=lblData><?php if ($ramOccupiedSlots == "" || $ramTotalSlots == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $ramOccupiedSlots . " / " . $ramTotalSlots;
+									}
+									?></td>
+				</tr>
+				<tr id=subHeaderTable>
+					<td colspan="2">
+						<label>
+							<?php
+							echo $translations["VIDEO_CARD"];
+							?>
+						</label>
+					</td>
+				</tr>
+			<?php
+			}
+			while ($result = mysqli_fetch_array($queryAssetVideoCard)) {
+				$videoCardName = $result[$dbVideoCardArray["NAME"]];
+				$videoCardRam = $result[$dbVideoCardArray["RAM"]];
+				$videoCardGpuId = $result[$dbVideoCardArray["GPU_ID"]];
+			?>
+				<tr>
+					<td id=lblFixed><?php echo $translations["VIDEO_CARD_NAME"] . " " . $videoCardGpuId + 1; ?></td>
+					<td id=lblData><?php if ($videoCardName == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $videoCardName;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["VIDEO_CARD_RAM"] . " " . $videoCardGpuId + 1;  ?></td>
+					<td id=lblData><?php if ($videoCardRam == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										if ($videoCardRam / 1024 >= 1024) {
+											echo floor($videoCardRam / 1024 / 1024) . " TB";
+										} else if ($videoCardRam / 1024 < 1024 && $videoCardRam / 1024 >= 1) {
+											echo floor($videoCardRam / 1024) . " GB";
+										} else {
+											echo floor($videoCardRam) . " MB";
+										}
+									} ?></td>
+				</tr>
+			<?php
+			}
+			?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["STORAGE"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["INSTALLED_STORAGE_DRIVES"] ?></td>
+				<td id=lblData>
+					<a id=linksameline onclick="on()"><?php echo $translations["DETAILS"]; ?></a>
+				</td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["STORAGE_TOTAL_SIZE"] ?></td>
+				<td id=lblData>
 					<?php
+					if ($totalStorageSize / 1024 >= 1024) {
+						echo $totalStorageSize / 1024 / 1024 . " TB";
+					} else if ($totalStorageSize / 1024 < 1024 && $totalStorageSize / 1024 >= 1) {
+						echo $totalStorageSize / 1024 . " GB";
+					} else {
+						echo $totalStorageSize . " MB";
 					}
 					?>
-					</tr>
-				</tbody>
-			</table>
-			<table id="formFields">
-				<thead>
-					<td colspan="3" id=section-header><?php echo $translations["COMPUTER_DATA"] ?></td>
-				</thead>
-				<tr id=subHeaderTable>
-					<td colspan="2">
-						<label>
-							<?php
-							echo $translations["GENERAL"];
-							?>
-						</label>
-					</td>
-				</tr>
-				<?php
-				while ($result = mysqli_fetch_array($queryAssetHardware)) {
-					$brand = $result[$dbHardwareArray["BRAND"]];
-					$model = $result[$dbHardwareArray["MODEL"]];
-					$serialNumber = $result[$dbHardwareArray["SERIAL_NUMBER"]];
-					$processor = $result[$dbHardwareArray["PROCESSOR"]];
-					$hwType = $result[$dbHardwareArray["TYPE"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["HW_TYPE"] ?></td>
-						<td id=lblData><?php if ($hwType == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($hwTypesArray as $str1 => $str2) {
-												if ($str1 == $hwType) {
-													echo $str2;
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["BRAND"] ?></td>
-						<td id=lblData><?php if ($brand == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $brand;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["MODEL"] ?></td>
-						<td id=lblData><?php if ($model == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $model;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["SERIAL_NUMBER"] ?></td>
-						<td id=lblData><?php if ($serialNumber == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $serialNumber;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["PROCESSOR"] ?></td>
-						<td id=lblData><?php if ($processor == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $processor;
-										} ?></td>
-					</tr>
-					<tr id=subHeaderTable>
-						<td colspan="2">
-							<label>
-								<?php
-								echo $translations["RAM"];
-								?>
-							</label>
-						</td>
-					</tr>
-				<?php
-				}
-				while ($result = mysqli_fetch_array($queryAssetRam)) {
-					$ramAmount = $result[$dbRamArray["AMOUNT"]];
-					$ramType = $result[$dbRamArray["TYPE"]];
-					$ramFrequency = $result[$dbRamArray["FREQUENCY"]];
-					$ramTotalSlots = $result[$dbRamArray["TOTAL_SLOTS"]];
-					$ramOccupiedSlots = $result[$dbRamArray["OCCUPIED_SLOTS"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["RAM_AMOUNT"] ?></td>
-						<td id=lblData><?php if ($ramAmount == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											if ($ramAmount / 1024 >= 1024) {
-												echo floor($ramAmount / 1024 / 1024) . " TB";
-											} else if ($ramAmount / 1024 < 1024 && $ramAmount / 1024 > 1) {
-												echo floor($ramAmount / 1024) . " GB";
-											} else {
-												echo floor($ramAmount) . " MB";
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["RAM_TYPE"] ?></td>
-						<td id=lblData><?php if ($ramType == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($ramTypesArray as $str1 => $str2) {
-												if ($str1 == $ramType) {
-													echo $str2;
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["RAM_FREQUENCY"] ?></td>
-						<td id=lblData><?php if ($ramFrequency == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $ramFrequency . " MHz";
-										}
-										?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["RAM_SLOTS"] ?></td>
-						<td id=lblData><?php if ($ramOccupiedSlots == "" || $ramTotalSlots == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $ramOccupiedSlots . " / " . $ramTotalSlots;
-										}
-										?></td>
-					</tr>
-					<tr id=subHeaderTable>
-						<td colspan="2">
-							<label>
-								<?php
-								echo $translations["VIDEO_CARD"];
-								?>
-							</label>
-						</td>
-					</tr>
-				<?php
-				}
-				while ($result = mysqli_fetch_array($queryAssetVideoCard)) {
-					$videoCardName = $result[$dbVideoCardArray["NAME"]];
-					$videoCardRam = $result[$dbVideoCardArray["RAM"]];
-					$videoCardGpuId = $result[$dbVideoCardArray["GPU_ID"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["VIDEO_CARD_NAME"] . " " . $videoCardGpuId + 1; ?></td>
-						<td id=lblData><?php if ($videoCardName == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $videoCardName;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["VIDEO_CARD_RAM"] . " " . $videoCardGpuId + 1;  ?></td>
-						<td id=lblData><?php if ($videoCardRam == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											if ($videoCardRam / 1024 >= 1024) {
-												echo floor($videoCardRam / 1024 / 1024) . " TB";
-											} else if ($videoCardRam / 1024 < 1024 && $videoCardRam / 1024 >= 1) {
-												echo floor($videoCardRam / 1024) . " GB";
-											} else {
-												echo floor($videoCardRam) . " MB";
-											}
-										} ?></td>
-					</tr>
-				<?php
-				}
-				?>
-				<tr id=subHeaderTable>
-					<td colspan="2">
-						<label>
-							<?php
-							echo $translations["STORAGE"];
-							?>
-						</label>
-					</td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["INSTALLED_STORAGE_DRIVES"] ?></td>
-					<td id=lblData>
-						<a id=linksameline onclick="on()"><?php echo $translations["DETAILS"]; ?></a>
-					</td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["STORAGE_TOTAL_SIZE"] ?></td>
-					<td id=lblData>
+				</td>
+			</tr>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
 						<?php
-						if ($totalStorageSize / 1024 >= 1024) {
-							echo $totalStorageSize / 1024 / 1024 . " TB";
-						} else if ($totalStorageSize / 1024 < 1024 && $totalStorageSize / 1024 >= 1) {
-							echo $totalStorageSize / 1024 . " GB";
-						} else {
-							echo $totalStorageSize . " MB";
-						}
+						echo $translations["FIRMWARE"];
 						?>
-					</td>
+					</label>
+				</td>
+			</tr>
+			<?php
+			while ($result = mysqli_fetch_array($queryAssetFirmware)) {
+				$fwVersion = $result[$dbFirmwareArray["VERSION"]];
+				$fwType = $result[$dbFirmwareArray["TYPE"]];
+				$mediaOperationMode = $result[$dbFirmwareArray["MEDIA_OPERATION_MODE"]];
+				$secureBoot = $result[$dbFirmwareArray["SECURE_BOOT"]];
+				$virtualizationTechnology = $result[$dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"]];
+				$tpmVersion = $result[$dbFirmwareArray["TPM_VERSION"]];
+			?>
+				<tr>
+					<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
+					<td id=lblData><?php if ($mediaOperationMode == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($mediaOpTypesArray as $str1 => $str2) {
+											if ($str1 == $mediaOperationMode) {
+												echo $str2;
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["FW_TYPE"] ?></td>
+					<td id=lblData><?php if ($fwType == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($fwTypesArray as $str1 => $str2) {
+											if ($str1 == $fwType) {
+												echo $str2;
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["FW_VERSION"] ?></td>
+					<td id=lblData><?php if ($fwVersion == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $fwVersion;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["SECURE_BOOT"]["NAME"] ?></td>
+					<td id=lblData><?php if ($secureBoot == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($secureBootArray as $str) {
+											if ($str == $secureBoot) {
+												echo $translations["SECURE_BOOT"][$str];
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></td>
+					<td id=lblData><?php if ($virtualizationTechnology == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($virtualizationTechnologyArray as $str) {
+											if ($str == $virtualizationTechnology) {
+												echo $translations["VIRTUALIZATION_TECHNOLOGY"][$str];
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["TPM_VERSION"] ?></td>
+					<td id=lblData><?php if ($tpmVersion == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($tpmTypesArray as $str1 => $str2) {
+											if ($str1 == $tpmVersion) {
+												echo $str2;
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
 				</tr>
 				<tr id=subHeaderTable>
 					<td colspan="2">
 						<label>
-							<?php
-							echo $translations["FIRMWARE"];
-							?>
-						</label>
-					</td>
-				</tr>
-				<?php
-				while ($result = mysqli_fetch_array($queryAssetFirmware)) {
-					$fwVersion = $result[$dbFirmwareArray["VERSION"]];
-					$fwType = $result[$dbFirmwareArray["TYPE"]];
-					$mediaOperationMode = $result[$dbFirmwareArray["MEDIA_OPERATION_MODE"]];
-					$secureBoot = $result[$dbFirmwareArray["SECURE_BOOT"]];
-					$virtualizationTechnology = $result[$dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"]];
-					$tpmVersion = $result[$dbFirmwareArray["TPM_VERSION"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
-						<td id=lblData><?php if ($mediaOperationMode == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($mediaOpTypesArray as $str1 => $str2) {
-												if ($str1 == $mediaOperationMode) {
-													echo $str2;
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["FW_TYPE"] ?></td>
-						<td id=lblData><?php if ($fwType == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($fwTypesArray as $str1 => $str2) {
-												if ($str1 == $fwType) {
-													echo $str2;
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["FW_VERSION"] ?></td>
-						<td id=lblData><?php if ($fwVersion == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $fwVersion;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["SECURE_BOOT"]["NAME"] ?></td>
-						<td id=lblData><?php if ($secureBoot == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($secureBootArray as $str) {
-												if ($str == $secureBoot) {
-													echo $translations["SECURE_BOOT"][$str];
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></td>
-						<td id=lblData><?php if ($virtualizationTechnology == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($virtualizationTechnologyArray as $str) {
-												if ($str == $virtualizationTechnology) {
-													echo $translations["VIRTUALIZATION_TECHNOLOGY"][$str];
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["TPM_VERSION"] ?></td>
-						<td id=lblData><?php if ($tpmVersion == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($tpmTypesArray as $str1 => $str2) {
-												if ($str1 == $tpmVersion) {
-													echo $str2;
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-					<tr id=subHeaderTable>
-						<td colspan="2">
-							<label>
 							<?php
 							echo $translations["NETWORK"];
 							?>
-							</label>
-						</td>
-					</tr>
-				<?php
-				}
+						</label>
+					</td>
+				</tr>
+			<?php
+			}
 
-				while ($result = mysqli_fetch_array($queryAssetNetwork)) {
-					$hostname = $result[$dbNetworkArray["HOSTNAME"]];
-					$macAddress = $result[$dbNetworkArray["MAC_ADDRESS"]];
-					$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["HOSTNAME"] ?></td>
-						<td id=lblData><?php if ($hostname == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $hostname;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["MAC_ADDRESS"] ?></td>
-						<td id=lblData><?php if ($macAddress == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $macAddress;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["IP_ADDRESS"] ?></td>
-						<td id=lblData><?php if ($ipAddress == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $ipAddress;
-										} ?></td>
-					</tr>
-					<tr id=subHeaderTable>
-						<td colspan="2">
-							<label>
+			while ($result = mysqli_fetch_array($queryAssetNetwork)) {
+				$hostname = $result[$dbNetworkArray["HOSTNAME"]];
+				$macAddress = $result[$dbNetworkArray["MAC_ADDRESS"]];
+				$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
+			?>
+				<tr>
+					<td id=lblFixed><?php echo $translations["HOSTNAME"] ?></td>
+					<td id=lblData><?php if ($hostname == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $hostname;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["MAC_ADDRESS"] ?></td>
+					<td id=lblData><?php if ($macAddress == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $macAddress;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["IP_ADDRESS"] ?></td>
+					<td id=lblData><?php if ($ipAddress == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $ipAddress;
+									} ?></td>
+				</tr>
+				<tr id=subHeaderTable>
+					<td colspan="2">
+						<label>
 							<?php
 							echo $translations["OPERATING_SYSTEM"];
 							?>
-							</label>
-						</td>
-					</tr>
-				<?php
-				}
-				while ($result = mysqli_fetch_array($queryAssetOperatingSystem)) {
-					$operatingSystemName = $result[$dbOperatingSystemArray["NAME"]];
-					$operatingSystemVersion = $result[$dbOperatingSystemArray["VERSION"]];
-					$operatingSystemBuild = $result[$dbOperatingSystemArray["BUILD"]];
-					$operatingSystemArch = $result[$dbOperatingSystemArray["ARCH"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_NAME"] ?></td>
-						<td id=lblData><?php if ($operatingSystemName == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $operatingSystemName;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_VERSION"] ?></td>
-						<td id=lblData><?php if ($operatingSystemVersion == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $operatingSystemVersion;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_BUILD"] ?></td>
-						<td id=lblData><?php if ($operatingSystemBuild == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $operatingSystemBuild;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_ARCH"] ?></td>
-						<td id=lblData><?php if ($operatingSystemArch == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											$b = false;
-											foreach ($operatingSystemArchArray as $str1 => $str2) {
-												if ($str1 == $operatingSystemArch) {
-													echo $str2 . "-bit";
-													$b = true;
-													break;
-												}
-											}
-											if ($b == false) {
-												echo $translations["UNKNOWN"];
-											}
-										} ?></td>
-					</tr>
-			</table>
-		<?php
-				}
-		?>
-		</table>
-		<?php
-		if (isset($_SESSION["privilegeLevel"])) {
-			if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-		?>
-				<tr>
-					<td id=h-separator colspan=7 align=center><input id="updateButton" type=button onclick="location.href='editAsset.php?id=<?php echo $idAsset ?>'" value=<?php echo $translations["LABEL_EDIT_BUTTON"] ?>></td>
+						</label>
+					</td>
 				</tr>
-		<?php
+			<?php
 			}
-		}
-		?>
+			while ($result = mysqli_fetch_array($queryAssetOperatingSystem)) {
+				$operatingSystemName = $result[$dbOperatingSystemArray["NAME"]];
+				$operatingSystemVersion = $result[$dbOperatingSystemArray["VERSION"]];
+				$operatingSystemBuild = $result[$dbOperatingSystemArray["BUILD"]];
+				$operatingSystemArch = $result[$dbOperatingSystemArray["ARCH"]];
+			?>
+				<tr>
+					<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_NAME"] ?></td>
+					<td id=lblData><?php if ($operatingSystemName == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $operatingSystemName;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_VERSION"] ?></td>
+					<td id=lblData><?php if ($operatingSystemVersion == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $operatingSystemVersion;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_BUILD"] ?></td>
+					<td id=lblData><?php if ($operatingSystemBuild == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $operatingSystemBuild;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_ARCH"] ?></td>
+					<td id=lblData><?php if ($operatingSystemArch == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										$b = false;
+										foreach ($operatingSystemArchArray as $str1 => $str2) {
+											if ($str1 == $operatingSystemArch) {
+												echo $str2 . "-bit";
+												$b = true;
+												break;
+											}
+										}
+										if ($b == false) {
+											echo $translations["UNKNOWN"];
+										}
+									} ?></td>
+				</tr>
 		</table>
+	<?php
+			}
+	?>
+	</table>
+
+	</table>
 	</form>
 </div>
 <?php

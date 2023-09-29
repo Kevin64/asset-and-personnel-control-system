@@ -166,4 +166,3 @@ DROP COLUMN `building`;
 DROP COLUMN `storageTotalSize`;
 
 ALTER TABLE `apcsdb`.`apcs_employee` 
-CHANGE COLUMN `roomNumber` `room` VARCHAR(5) NULL DEFAULT NULL ;

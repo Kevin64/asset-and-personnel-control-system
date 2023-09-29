@@ -17,9 +17,6 @@ if (isset($_POST)) {
 	$serviceDate = $dbMaintenanceArray["SERVICE_DATE"];
 	$inUse = $dbAssetArray["IN_USE"];
 	$tag = $dbAssetArray["TAG"];
-	$storageTotalSize = $dbAssetArray["STORAGE_TOTAL_SIZE"];
-
-	//$storageSummary = $dbAssetArray["STORAGE_SUMMARY"];
 
 	$firmwareTable = $dbFirmwareArray["FIRMWARE_TABLE"];
 	$fwVersion = $dbFirmwareArray["VERSION"];
@@ -98,7 +95,6 @@ if (isset($_POST)) {
 			$sealNumber . " = '$newAsset[$sealNumber]', " .
 			$adRegistered . " = '$newAsset[$adRegistered]', " .
 			$standard . " = '$newAsset[$standard]', " .
-			$storageTotalSize . " = '$newAsset[$storageTotalSize]', " .
 			$inUse . " = '$newAsset[$inUse]', " .
 			$tag . " = '$newAsset[$tag]'
 			where " . $assetNumber . " = '$newAsset[$assetNumber]';
@@ -167,7 +163,7 @@ if (isset($_POST)) {
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	} else {
-		$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$storageTotalSize,$inUse,$tag) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$storageTotalSize]','$newAsset[$inUse]','$newAsset[$tag]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$inUse,$tag) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$inUse]','$newAsset[$tag]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 		$queryAssetFirmware = mysqli_query($connection, "insert into " . $firmwareTable . " ($assetNumberFK,$fwVersion,$fwType,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$firmwareJsonSection[$fwVersion]','$firmwareJsonSection[$fwType]','$firmwareJsonSection[$mediaOperationMode]','$firmwareJsonSection[$secureBoot]','$firmwareJsonSection[$virtualizationTechnology]','$firmwareJsonSection[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
@@ -191,11 +187,6 @@ if (isset($_POST)) {
 
 		$queryAssetOperatingSystem = mysqli_query($connection, "insert into " . $operatingSystemTable . " ($assetNumberFK,$operatingSystemName,$operatingSystemVersion,$operatingSystemBuild,$operatingSystemArch) values ('$newAsset[$assetNumber]','$operatingSystemJsonSection[$operatingSystemName]','$operatingSystemJsonSection[$operatingSystemVersion]','$operatingSystemJsonSection[$operatingSystemBuild]','$operatingSystemJsonSection[$operatingSystemArch]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	}
-	// foreach ($newAsset[$storageSummary] as $item) {
-	// 	$query = mysqli_query($connection, "insert into " . $storageListTable . " ($assetNumberStorageFK,$storageId,$storageType,$storageSize,$storageConnection,$storageModel,$storageSerialNumber,$storageSmart) values ('$newAsset[$assetNumber]','$item[$storageId]','$item[$storageType]','$item[$storageSize]','$item[$storageConnection]','$item[$storageModel]','$item[$storageSerialNumber]','$item[$storageSmart]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
-	// }
-
-	// $queryFormatPrevious = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$previousServiceDates,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$newAsset[$serviceDate]','$newAsset[$serviceType]','$newAsset[$batteryChange]','$newAsset[$ticketNumber]','$newAsset[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	echo "Ativo adicionado\n";
 	header("Connection: close");
 }

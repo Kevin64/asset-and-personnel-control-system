@@ -14,8 +14,6 @@
         "brand": "ASUS",
         "model": "ROG X790 TUF Gaming",
         "processor": "Intel Core i9-13900K CPU @ 5.00GHz 5100 MHz (16C/32T)",
-        "serialNumber": "9988776655",
-        "type": "0",
         "ram": {
             "amount": "32768",
             "frequency": "6400",
@@ -23,6 +21,7 @@
             "totalSlots": "4",
             "type": "3"
         },
+        "serialNumber": "9988776655",
         "storage": [
             {
                 "connection": "1",
@@ -43,6 +42,7 @@
                 "type": "0"
             }
         ],
+        "type": "0",
         "videoCard": [
             {
                 "gpuId": "0",
@@ -81,6 +81,5 @@
     },
     "sealNumber": "43211234",
     "standard": "0",
-    "storageTotalSize": "453",
     "tag": "0"
 }
