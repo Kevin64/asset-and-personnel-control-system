@@ -6,6 +6,7 @@ require_once("connection.php");
 $send = null;
 $orderBy = null;
 $rdCriterion = null;
+$rdCriterionTable = null;
 $search = null;
 
 if (isset($_POST["txtSend"]))
@@ -43,7 +44,39 @@ if ($send != 1) {
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
 } else {
-	$querySearch = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where $rdCriterion like '%$search%'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	if($_POST["rdCriterion"] == $dbAssetArray["ASSET_NUMBER"] || $_POST["rdCriterion"] == $dbAssetArray["DISCARDED"] || $_POST["rdCriterion"] == $dbAssetArray["STANDARD"] || $_POST["rdCriterion"] == $dbAssetArray["AD_REGISTERED"] || $_POST["rdCriterion"] == $dbAssetArray["IN_USE"] || $_POST["rdCriterion"] == $dbAssetArray["SEAL_NUMBER"] || $_POST["rdCriterion"] == $dbAssetArray["TAG"] || $_POST["rdCriterion"] == $dbAssetArray["NOTE"]) {
+		$tableChoice = "(select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbFirmwareArray["TYPE"] ||  $_POST["rdCriterion"] == $dbFirmwareArray["VERSION"] || $_POST["rdCriterion"] == $dbFirmwareArray["MEDIA_OPERATION_MODE"] || $_POST["rdCriterion"] == $dbFirmwareArray["SECURE_BOOT"] || $_POST["rdCriterion"] == $dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"] || $_POST["rdCriterion"] == $dbFirmwareArray["TPM_VERSION"]) {
+		$tableChoice = "(select * from " . $dbFirmwareArray["FIRMWARE_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbHardwareArray["BRAND"] || $_POST["rdCriterion"] == $dbHardwareArray["TYPE"] || $_POST["rdCriterion"] == $dbHardwareArray["MODEL"] || $_POST["rdCriterion"] == $dbHardwareArray["PROCESSOR"] || $_POST["rdCriterion"] == $dbHardwareArray["SERIAL_NUMBER"]) {
+		$tableChoice = "(select * from " . $dbHardwareArray["HARDWARE_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbRamArray["AMOUNT"] || $_POST["rdCriterion"] == $dbRamArray["TYPE"] || $_POST["rdCriterion"] == $dbRamArray["FREQUENCY"] || $_POST["rdCriterion"] == $dbRamArray["OCCUPIED_SLOTS"] || $_POST["rdCriterion"] == $dbRamArray["TOTAL_SLOTS"]) {
+		$tableChoice = "(select * from " . $dbRamArray["RAM_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbStorageArray["STORAGE_ID"] || $_POST["rdCriterion"] == $dbStorageArray["TYPE"] || $_POST["rdCriterion"] == $dbStorageArray["SIZE"] || $_POST["rdCriterion"] == $dbStorageArray["CONNECTION"] || $_POST["rdCriterion"] == $dbStorageArray["MODEL"] || $_POST["rdCriterion"] == $dbStorageArray["SERIAL_NUMBER"] || $_POST["rdCriterion"] == $dbStorageArray["SMART_STATUS"]) {
+		$tableChoice = "(select * from " . $dbStorageArray["STORAGE_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbVideoCardArray["RAM"] || $_POST["rdCriterion"] == $dbVideoCardArray["NAME"] || $_POST["rdCriterion"] == $dbVideoCardArray["GPU_ID"]) {
+		$tableChoice = "(select * from " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbLocationArray["BUILDING"] || $_POST["rdCriterion"] == $dbLocationArray["ROOM_NUMBER"] || $_POST["rdCriterion"] == $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"] || $_POST["rdCriterion"] == $dbLocationArray["LAST_DELIVERY_MADE_BY"] || $_POST["rdCriterion"] == $dbLocationArray["LAST_DELIVERY_DATE"]) {
+		$tableChoice = "(select * from " . $dbLocationArray["LOCATION_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbMaintenanceArray["SERVICE_DATE"] || $_POST["rdCriterion"] == $dbMaintenanceArray["SERVICE_TYPE"] || $_POST["rdCriterion"] == $dbMaintenanceArray["BATTERY_CHANGE"] || $_POST["rdCriterion"] == $dbMaintenanceArray["TICKET_NUMBER"] || $_POST["rdCriterion"] == $dbMaintenanceArray["AGENT_ID"]) {
+		$tableChoice = "(select * from " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbNetworkArray["MAC_ADDRESS"] || $_POST["rdCriterion"] == $dbNetworkArray["IP_ADDRESS"] || $_POST["rdCriterion"] == $dbNetworkArray["HOSTNAME"]) {
+		$tableChoice = "(select * from " . $dbNetworkArray["NETWORK_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+	else if($_POST["rdCriterion"] == $dbOperatingSystemArray["NAME"] || $_POST["rdCriterion"] == $dbOperatingSystemArray["VERSION"] || $_POST["rdCriterion"] == $dbOperatingSystemArray["BUILD"] || $_POST["rdCriterion"] == $dbOperatingSystemArray["ARCH"]) {
+		$tableChoice = "(select * from " . $dbOperatingSystemArray["OPERATING_SYSTEM_TABLE"] . " where " . $rdCriterion . " like '%$search%')";
+	}
+
+	$querySearch = mysqli_query($connection, "select t1.id, t1." . $dbAssetArray["ASSET_NUMBER"] . ", t1." . $dbAssetArray["DISCARDED"] . ", t2." . $dbLocationArray["BUILDING"] . ", t2." . $dbLocationArray["ROOM_NUMBER"] . ", t1." . $dbAssetArray["STANDARD"] . ", t3." . $dbHardwareArray["BRAND"] . ", t3." . $dbHardwareArray["MODEL"] . ", t4." . $dbNetworkArray["IP_ADDRESS"] . ", t5." . $dbMaintenanceArray["SERVICE_DATE"] . " from " . $tableChoice . " as t1 inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 inner join " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " as t5 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . " group by t1." . $dbAssetArray["ASSET_NUMBER"] . ";") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	
 	$totalSearch = mysqli_num_rows($querySearch);
 }
 
