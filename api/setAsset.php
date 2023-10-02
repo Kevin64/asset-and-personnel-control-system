@@ -57,6 +57,9 @@ if (isset($_POST)) {
 	$locationTable = $dbLocationArray["LOCATION_TABLE"];
 	$roomNumber = $dbLocationArray["ROOM_NUMBER"];
 	$building = $dbLocationArray["BUILDING"];
+	$deliveredToRegistrationNumber = $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"];
+	$lastDeliveryMadeBy = $dbLocationArray["LAST_DELIVERY_MADE_BY"];
+	$lastDeliveryDate = $dbLocationArray["LAST_DELIVERY_DATE"];
 
 	$maintenancesTable = $dbMaintenanceArray["MAINTENANCES_TABLE"];
 	$serviceDate = $dbMaintenanceArray["SERVICE_DATE"];
@@ -142,7 +145,10 @@ if (isset($_POST)) {
 
 		$queryAssetLocation = mysqli_query($connection, "update " . $locationTable . " set " .
 			$roomNumber . " = '$locationJsonSection[$roomNumber]', " .
-			$building . " = '$locationJsonSection[$building]'
+			$building . " = '$locationJsonSection[$building]', " .
+			$deliveredToRegistrationNumber . " = '$locationJsonSection[$deliveredToRegistrationNumber]', " .
+			$lastDeliveryMadeBy . " = '$locationJsonSection[$lastDeliveryMadeBy]', " .
+			$lastDeliveryDate . " = '$locationJsonSection[$lastDeliveryDate]'
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
@@ -179,7 +185,7 @@ if (isset($_POST)) {
 			$queryAssetVideoCard = mysqli_query($connection, "insert into " . $videoCardTable . " ($assetNumberFK,$videoCardName,$videoCardRam,$videoCardGpuId) values ('$newAsset[$assetNumber]','$item[$videoCardName]','$item[$videoCardRam]','$item[$videoCardGpuId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 		}
 
-		$queryAssetLocation = mysqli_query($connection, "insert into " . $locationTable . " ($assetNumberFK,$roomNumber,$building) values ('$newAsset[$assetNumber]','$locationJsonSection[$roomNumber]','$locationJsonSection[$building]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		$queryAssetLocation = mysqli_query($connection, "insert into " . $locationTable . " ($assetNumberFK,$roomNumber,$building,$deliveredToRegistrationNumber,$lastDeliveryMadeBy,$lastDeliveryDate) values ('$newAsset[$assetNumber]','$locationJsonSection[$roomNumber]','$locationJsonSection[$building]','$locationJsonSection[$deliveredToRegistrationNumber]','$locationJsonSection[$lastDeliveryMadeBy]','$locationJsonSection[$lastDeliveryDate]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 		$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$maintenancesJsonSection[$serviceDate]','$maintenancesJsonSection[$serviceType]','$maintenancesJsonSection[$batteryChange]','$maintenancesJsonSection[$ticketNumber]','$maintenancesJsonSection[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
@@ -188,5 +194,7 @@ if (isset($_POST)) {
 		$queryAssetOperatingSystem = mysqli_query($connection, "insert into " . $operatingSystemTable . " ($assetNumberFK,$operatingSystemName,$operatingSystemVersion,$operatingSystemBuild,$operatingSystemArch) values ('$newAsset[$assetNumber]','$operatingSystemJsonSection[$operatingSystemName]','$operatingSystemJsonSection[$operatingSystemVersion]','$operatingSystemJsonSection[$operatingSystemBuild]','$operatingSystemJsonSection[$operatingSystemArch]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 	}
 	echo "Ativo adicionado\n";
+	http_response_code(201);
+	header("Location: api/getAsset.php?assetNumber=" . $newAsset[$assetNumber]);
 	header("Connection: close");
 }

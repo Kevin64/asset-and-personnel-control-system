@@ -59,15 +59,20 @@
     "inUse": "1",
     "location": {
         "building": "0",
-        "roomNumber": "3333"
+        "roomNumber": "3333",
+        "deliveredToRegistrationNumber": null,
+        "lastDeliveryMadeBy": null,
+        "lastDeliveryDate": null
     },
-    "maintenances": {
-        "agentId": "3",
-        "batteryChange": "0",
-        "serviceDate": "2023-09-21",
-        "serviceType": "0",
-        "ticketNumber": "929291"
-    },
+    "maintenances": [
+        {
+            "agentId": "3",
+            "batteryChange": "0",
+            "serviceDate": "2023-09-21",
+            "serviceType": "0",
+            "ticketNumber": "929291"
+        }
+    ],
     "network": {
         "hostname": "PC-123456",
         "ipAddress": "192.168.76.100",

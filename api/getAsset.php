@@ -31,54 +31,53 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 
 	if (mysqli_num_rows($queryAsset) > 0) {
 		$row1 = mysqli_fetch_array($queryAsset, MYSQLI_ASSOC);
-		$i = 0;
 		$row1["firmware"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetFirmware, MYSQLI_ASSOC)) {
 			$row1["firmware"] = $row2;
-			$i++;
 		}
 		$row1["hardware"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetHardware, MYSQLI_ASSOC)) {
 			$row1["hardware"] = $row2;
-			$i++;
 		}
 		$row1["hardware"]["ram"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetRam, MYSQLI_ASSOC)) {
 			$row1["hardware"]["ram"] = $row2;
-			$i++;
 		}
+		$i = 0;
 		$row1["hardware"]["storage"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetStorage, MYSQLI_ASSOC)) {
 			$row1["hardware"]["storage"][$i] = array();
 			$row1["hardware"]["storage"][$i] = $row2;
 			$i++;
 		}
+		$i = 0;
 		$row1["hardware"]["videoCard"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetVideoCard, MYSQLI_ASSOC)) {
-			$row1["hardware"]["videoCard"] = $row2;
+			$row1["hardware"]["videoCard"][$i] = array();
+			$row1["hardware"]["videoCard"][$i] = $row2;
 			$i++;
 		}
 		$row1["location"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetLocation, MYSQLI_ASSOC)) {
 			$row1["location"] = $row2;
-			$i++;
 		}
+		$i = 0;
 		$row1["maintenances"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetMaintenance, MYSQLI_ASSOC)) {
-			$row1["maintenances"] = $row2;
+			$row1["maintenances"][$i] = array();
+			$row1["maintenances"][$i] = $row2;
 			$i++;
 		}
 		$row1["network"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetNetwork, MYSQLI_ASSOC)) {
 			$row1["network"] = $row2;
-			$i++;
 		}
 		$row1["operatingSystem"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetOperatingSystem, MYSQLI_ASSOC)) {
 			$row1["operatingSystem"] = $row2;
-			$i++;
 		}
 		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		http_response_code(200);
 		echo $jsonFinal;
 	}
 }
