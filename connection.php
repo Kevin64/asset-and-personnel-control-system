@@ -38,6 +38,7 @@ $dbSettingsArray = gatherJsonTypes($json_config_array_db, "DbSettings", null);
 $privilegeLevelsArray = gatherJsonTypes($json_config_array_db, "PrivilegeLevels", null);
 $entityTypesArray = gatherJsonTypes($json_config_array_db, "EntityTypes", null);
 $employeeTypesArray = gatherJsonTypes($json_config_array_db, "EmployeeTypes", null);
+$roleTypesArray = gatherJsonTypes($json_config_array_db, "RoleTypes", null);
 /* ------------------------------------------------------------------------------------------------- */
 $imgArray = $json_constants_array["IMG"];
 $colorArray = $json_constants_array["COLOR"];

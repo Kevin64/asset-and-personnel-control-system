@@ -165,4 +165,7 @@ DROP COLUMN `roomNumber`,
 DROP COLUMN `building`;
 DROP COLUMN `storageTotalSize`;
 
-ALTER TABLE `apcsdb`.`apcs_employee` 
+ALTER TABLE `apcsdb`.`apcs_agent` 
+ADD COLUMN `name` VARCHAR(45) NULL DEFAULT NULL AFTER `password`,
+ADD COLUMN `surname` VARCHAR(45) NULL DEFAULT NULL AFTER `name`,
+ADD COLUMN `role` TINYINT NULL DEFAULT NULL AFTER `surname`;

@@ -12,7 +12,10 @@
         "LAST_LOGIN_DATE": "lastLoginDate",
         "PASSWORD": "password",
         "PRIVILEGE_LEVEL": "privilegeLevel",
-        "USERNAME": "username"
+        "USERNAME": "username",
+        "NAME": "name",
+        "SURNAME": "surname",
+        "ROLE": "role"
     },
     "DB_ASSET": {
         "AD_REGISTERED": "adRegistered",

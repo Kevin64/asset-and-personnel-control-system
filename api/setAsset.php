@@ -168,6 +168,8 @@ if (isset($_POST)) {
 			$operatingSystemVersion . " = '$operatingSystemJsonSection[$operatingSystemVersion]'
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
+			echo "Ativo atualizado\n";
+			http_response_code(200);
 	} else {
 		$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$inUse,$tag) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$inUse]','$newAsset[$tag]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
@@ -192,9 +194,8 @@ if (isset($_POST)) {
 		$queryAssetNetwork = mysqli_query($connection, "insert into " . $networkTable . " ($assetNumberFK,$hostname,$ipAddress,$macAddress) values ('$newAsset[$assetNumber]','$networkJsonSection[$hostname]','$networkJsonSection[$ipAddress]','$networkJsonSection[$macAddress]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 		$queryAssetOperatingSystem = mysqli_query($connection, "insert into " . $operatingSystemTable . " ($assetNumberFK,$operatingSystemName,$operatingSystemVersion,$operatingSystemBuild,$operatingSystemArch) values ('$newAsset[$assetNumber]','$operatingSystemJsonSection[$operatingSystemName]','$operatingSystemJsonSection[$operatingSystemVersion]','$operatingSystemJsonSection[$operatingSystemBuild]','$operatingSystemJsonSection[$operatingSystemArch]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		echo "Ativo adicionado\n";
+		http_response_code(201);
 	}
-	echo "Ativo adicionado\n";
-	http_response_code(201);
-	header("Location: api/getAsset.php?assetNumber=" . $newAsset[$assetNumber]);
 	header("Connection: close");
 }

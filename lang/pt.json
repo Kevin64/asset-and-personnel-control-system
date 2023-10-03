@@ -19,6 +19,8 @@
     "AGENT_DETAIL": "Detalhes do agente",
     "AGENT_EDIT": "Edição do agente",
     "AGENT_LIST": "Lista de agentes",
+    "AGENT_NAME": "Nome do agente",
+    "AGENT_SURNAME": "Sobrenome do agente",
     "AGENT_NOT_EXIST": "Agente não existe!",
     "APCS": "Sistema de Controle de Ativos e Pessoal",
     "APCS_EMAIL": "E-mail: ",
@@ -205,6 +207,12 @@
     "REPEAT_NEW_PASSWORD": "Repita a nova senha",
     "RESTRICTED_ACCESS": "Acesso restrito",
     "RESULTING_ASSETS": "Ativos resultantes",
+    "ROLE_TYPES": {
+        "0": "Analista em TI",
+        "1": "Técnico em TI",
+        "2": "Assistente Administrativo",
+        "NAME": "Cargo do agente"
+    },
     "SEAL_NUMBER": "Número do lacre",
     "SEARCH_FOR": "Pesquisar por:",
     "SECURE_BOOT": {

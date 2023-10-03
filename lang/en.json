@@ -19,6 +19,8 @@
     "AGENT_DETAIL": "Agent details",
     "AGENT_EDIT": "Agent edit",
     "AGENT_LIST": "View list of agents",
+    "AGENT_NAME": "Agent's name",
+    "AGENT_SURNAME": "Agent's surname",
     "AGENT_NOT_EXIST": "Agent does not exist!",
     "APCS": "Asset and Personnel Control System",
     "APCS_EMAIL": "E-mail: ",
@@ -205,6 +207,12 @@
     "REPEAT_NEW_PASSWORD": "Repeat new password",
     "RESTRICTED_ACCESS": "Restricted access",
     "RESULTING_ASSETS": "Resulting assets",
+    "ROLE_TYPES": {
+        "0": "IT Analist",
+        "1": "IT Technician",
+        "2": "Administrative Assistant",
+        "NAME": "Agent's role"
+    },
     "SEAL_NUMBER": "Seal number",
     "SEARCH_FOR": "Search for:",
     "SECURE_BOOT": {

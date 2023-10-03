@@ -23,7 +23,7 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 	
 	$queryAssetLocation = mysqli_query($connection, "select " . $dbLocationArray["BUILDING"] . "," . $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"] . "," . $dbLocationArray["LAST_DELIVERY_DATE"] . "," . $dbLocationArray["LAST_DELIVERY_MADE_BY"] . "," . $dbLocationArray["ROOM_NUMBER"] . " from " . $dbLocationArray["LOCATION_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
-	$queryAssetMaintenance = mysqli_query($connection, "select " . $dbMaintenanceArray["AGENT_ID"] . "," . $dbMaintenanceArray["BATTERY_CHANGE"] . "," . $dbMaintenanceArray["SERVICE_DATE"] . "," . $dbMaintenanceArray["SERVICE_TYPE"] . "," . $dbMaintenanceArray["TICKET_NUMBER"] . " from " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$queryAssetMaintenance = mysqli_query($connection, "select " . $dbMaintenanceArray["AGENT_ID"] . "," . $dbMaintenanceArray["BATTERY_CHANGE"] . "," . $dbMaintenanceArray["SERVICE_DATE"] . "," . $dbMaintenanceArray["SERVICE_TYPE"] . "," . $dbMaintenanceArray["TICKET_NUMBER"] . " from " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber' order by " . $dbMaintenanceArray["SERVICE_DATE"] . " desc") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
 	$queryAssetNetwork = mysqli_query($connection, "select " . $dbNetworkArray["HOSTNAME"] . "," . $dbNetworkArray["IP_ADDRESS"] . "," . $dbNetworkArray["MAC_ADDRESS"] . " from " . $dbNetworkArray["NETWORK_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
@@ -78,6 +78,12 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 		}
 		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 		http_response_code(200);
+		echo $jsonFinal;
+	}
+	else {
+		$row1 = array("message" => "Not Found");
+		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		http_response_code(404);
 		echo $jsonFinal;
 	}
 }

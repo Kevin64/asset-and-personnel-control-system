@@ -372,7 +372,7 @@ if ($send != 1) {
 								mysqli_data_seek($queryUsers, 0);
 							while ($resultUsers = mysqli_fetch_array($queryUsers)) {
 								if ($result[$dbMaintenanceArray["AGENT_ID"]] == $resultUsers["id"]) {
-									echo $resultUsers[$dbAgentArray["USERNAME"]];
+									echo $resultUsers[$dbAgentArray["NAME"]] . " " . $resultUsers[$dbAgentArray["SURNAME"]];
 									$printedMaintenances = true;
 									break;
 								}

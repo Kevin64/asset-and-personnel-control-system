@@ -23,6 +23,8 @@ if ($send != 1) {
 				$idUser = $result["id"];
 				$username = $result[$dbAgentArray["USERNAME"]];
 				$oldUsername = $result[$dbAgentArray["USERNAME"]];
+				$name = $result[$dbAgentArray["NAME"]];
+				$surname = $result[$dbAgentArray["SURNAME"]];
 				$privilegeLevel = $result[$dbAgentArray["PRIVILEGE_LEVEL"]];
 				$lastLoginDate = $result[$dbAgentArray["LAST_LOGIN_DATE"]];
 				$blocked = $result[$dbAgentArray["BLOCKED"]];
@@ -35,6 +37,14 @@ if ($send != 1) {
 					<input type=hidden name=txtIdUser value="<?php echo $idUser; ?>">
 					<input type=hidden name=txtOldUsername value="<?php echo $oldUsername; ?>">
 					<td id=lblData><?php echo $username; ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["AGENT_NAME"] ?></td>
+					<td id=lblData><?php echo $name; ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["AGENT_SURNAME"] ?></td>
+					<td id=lblData><?php echo $surname; ?></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["PRIVILEGE"]["NAME"] ?></td>
