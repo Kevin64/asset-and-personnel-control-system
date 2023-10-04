@@ -5,7 +5,7 @@ header("Content-Type:application/json; charset=UTF-8");
 if (isset($_GET["username"]) && $_GET["username"] != "") {
 	$username = $_GET["username"];
 	include("../connection.php");
-	$query = mysqli_query($connection, "select " . $dbAgentArray["USERNAME"] . ", " . $dbAgentArray["PASSWORD"] . ", " . $dbAgentArray["NAME"] . ", " . $dbAgentArray["SURNAME"] . ", " . $dbAgentArray["ROLE"] . ", " . $dbAgentArray["PRIVILEGE_LEVEL"] . ", " . $dbAgentArray["LAST_LOGIN_DATE"] . ", " . $dbAgentArray["BLOCKED"] . " from " . $dbAgentArray["AGENTS_TABLE"] . " where " . $dbAgentArray["USERNAME"] . " = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$query = mysqli_query($connection, "select id, " . $dbAgentArray["USERNAME"] . ", " . $dbAgentArray["PASSWORD"] . ", " . $dbAgentArray["NAME"] . ", " . $dbAgentArray["SURNAME"] . ", " . $dbAgentArray["ROLE"] . ", " . $dbAgentArray["PRIVILEGE_LEVEL"] . ", " . $dbAgentArray["LAST_LOGIN_DATE"] . ", " . $dbAgentArray["BLOCKED"] . " from " . $dbAgentArray["AGENTS_TABLE"] . " where " . $dbAgentArray["USERNAME"] . " = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 	if (mysqli_num_rows($query) > 0) {
 		while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {

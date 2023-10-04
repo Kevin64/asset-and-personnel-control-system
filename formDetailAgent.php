@@ -39,12 +39,8 @@ if ($send != 1) {
 					<td id=lblData><?php echo $username; ?></td>
 				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["AGENT_NAME"] ?></td>
-					<td id=lblData><?php echo $name; ?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["AGENT_SURNAME"] ?></td>
-					<td id=lblData><?php echo $surname; ?></td>
+					<td id=lblFixed><?php echo $translations["AGENT_COMPLETE_NAME"] ?></td>
+					<td id=lblData><?php echo $name . " " . $surname; ?></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["PRIVILEGE"]["NAME"] ?></td>

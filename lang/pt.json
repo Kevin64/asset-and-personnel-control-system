@@ -15,6 +15,7 @@
     "ADMINISTRATOR_NAME": "Administrador",
     "AGENT": "Agente",
     "AGENT_ALREADY_EXIST": "Agente já existe, escolha outro nome!",
+    "AGENT_COMPLETE_NAME": "Nome completo do agente",
     "AGENT_DATA": "Dados do agente",
     "AGENT_DETAIL": "Detalhes do agente",
     "AGENT_EDIT": "Edição do agente",
