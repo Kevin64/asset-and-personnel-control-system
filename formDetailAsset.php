@@ -9,7 +9,10 @@ $assetFK = null;
 $oldAssetNumber = null;
 $printedDelivery = false;
 $printedMaintenances = false;
+$totalRamSize = 0;
 $totalStorageSize = 0;
+
+$processor = $videoCard = null;
 
 $queryUsers = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . "") or die($translations["ERROR_QUERY_AGENT"] . mysqli_error($connection));
 
@@ -24,9 +27,11 @@ if ($send != 1) {
 
 	$queryAssetFirmware = mysqli_query($connection, "select " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["TYPE"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["VERSION"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["MEDIA_OPERATION_MODE"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["SECURE_BOOT"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["TPM_VERSION"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbFirmwareArray["FIRMWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbFirmwareArray["FIRMWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["BRAND"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["MODEL"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["TYPE"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["PROCESSOR"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["SERIAL_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbHardwareArray["HARDWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["BRAND"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["MODEL"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["TYPE"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["SERIAL_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbHardwareArray["HARDWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["AMOUNT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["FREQUENCY"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["OCCUPIED_SLOTS"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["TOTAL_SLOTS"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["TYPE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbRamArray["RAM_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbRamArray["RAM_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["CPU_ID"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NAME"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["FREQUENCY"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NUMBER_OF_CORES"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NUMBER_OF_THREADS"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["CACHE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbProcessorArray["PROCESSOR_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbProcessorArray["PROCESSOR_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+
+	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["AMOUNT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["FREQUENCY"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["MANUFACTURER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["SERIAL_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["PART_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["SLOT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["TYPE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbRamArray["RAM_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbRamArray["RAM_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryAssetStorage = mysqli_query($connection, "select " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STORAGE_ID"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["TYPE"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["SIZE"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["CONNECTION"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["MODEL"] . "," . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["SERIAL_NUMBER"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["SMART_STATUS"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbStorageArray["STORAGE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbStorageArray["STORAGE_TABLE"] . ".assetNumberFK order by " . $dbStorageArray["STORAGE_ID"]) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
@@ -47,20 +52,288 @@ if ($send != 1) {
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/disable-controls.js"></script>
 	<script>
-		function on() {
-			document.getElementById("overlay").style.display = "block";
+		function overlayProcessorOn() {
+			document.getElementById("processorOverlay").style.display = "block";
 			document.getElementsByTagName("html")[0].style.overflowY = 'hidden';
 		}
 
-		function off() {
-			document.getElementById("overlay").style.display = "none";
+		function overlayProcessorOff() {
+			document.getElementById("processorOverlay").style.display = "none";
+			document.getElementsByTagName("html")[0].style.overflowY = 'auto';
+		}
+
+		function overlayRamOn() {
+			document.getElementById("ramOverlay").style.display = "block";
+			document.getElementsByTagName("html")[0].style.overflowY = 'hidden';
+		}
+
+		function overlayRamOff() {
+			document.getElementById("ramOverlay").style.display = "none";
+			document.getElementsByTagName("html")[0].style.overflowY = 'auto';
+		}
+
+		function overlayVideoCardOn() {
+			document.getElementById("videoCardOverlay").style.display = "block";
+			document.getElementsByTagName("html")[0].style.overflowY = 'hidden';
+		}
+
+		function overlayVideoCardOff() {
+			document.getElementById("videoCardOverlay").style.display = "none";
+			document.getElementsByTagName("html")[0].style.overflowY = 'auto';
+		}
+
+		function overlayStorageOn() {
+			document.getElementById("storageOverlay").style.display = "block";
+			document.getElementsByTagName("html")[0].style.overflowY = 'hidden';
+		}
+
+		function overlayStorageOff() {
+			document.getElementById("storageOverlay").style.display = "none";
 			document.getElementsByTagName("html")[0].style.overflowY = 'auto';
 		}
 	</script>
 
-	<div id="overlay">
+	<div id="processorOverlay">
+		<div id=title><?php echo $translations["FIXED_PROCESSOR_LIST"]; ?></div>
+		<button id="closeButton" onclick="overlayProcessorOff()"><?php echo $translations["CLOSE"]; ?></button>
+		<div id="window">
+			<table id=processorData>
+				<thead id=headerTable>
+					<tr>
+						<th>
+							<?php echo $translations["CPU_ID"] ?>
+						</th>
+						<th>
+							<?php echo $translations["CPU_NAME"] ?>
+						</th>
+						<th>
+							<?php echo $translations["CPU_FREQUENCY"] ?>
+						</th>
+						<th>
+							<?php echo $translations["CPU_NUMBER_OF_CORES"] ?>
+						</th>
+						<th>
+							<?php echo $translations["CPU_NUMBER_OF_THREADS"] ?>
+						</th>
+						<th>
+							<?php echo $translations["CPU_CACHE"] ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					while ($resultProcessor = mysqli_fetch_array($queryAssetProcessor)) {
+						$processorId = $resultProcessor[$dbProcessorArray["CPU_ID"]];
+						$processorName = $resultProcessor[$dbProcessorArray["NAME"]];
+						$processorFrequency = $resultProcessor[$dbProcessorArray["FREQUENCY"]];
+						$processorCores = $resultProcessor[$dbProcessorArray["NUMBER_OF_CORES"]];
+						$processorThreads = $resultProcessor[$dbProcessorArray["NUMBER_OF_THREADS"]];
+						$processorCache = $resultProcessor[$dbProcessorArray["CACHE"]];
+					?>
+						<tr id=bodyTable>
+							<td>
+								<?php
+								echo $processorId;
+								if ($processorId == "0") {
+									$processor = $processorName;
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								echo $processorName;
+								?>
+							</td>
+							<td>
+								<?php
+								echo $processorFrequency . " MHz";
+								?>
+							</td>
+							<td>
+								<?php
+								echo $processorCores;
+								?>
+							</td>
+							<td>
+								<?php
+								echo $processorThreads;
+								?>
+							</td>
+							<td>
+								<?php
+								if ($processorCache / 1024 / 1024 / 1024 >= 1024) {
+									echo floor($processorCache / 1024 / 1024 / 1024 / 1024) . " TB";
+								} else if ($processorCache / 1024 / 1024 / 1024 < 1024 && $processorCache / 1024 / 1024 / 1024 >= 1) {
+									echo floor($processorCache / 1024 / 1024 / 1024) . " GB";
+								} else {
+									echo floor($processorCache / 1024 / 1024) . " MB";
+								}
+								?>
+							</td>
+						</tr>
+					<?php
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="ramOverlay">
+		<div id=title><?php echo $translations["FIXED_RAM_LIST"]; ?></div>
+		<button id="closeButton" onclick="overlayRamOff()"><?php echo $translations["CLOSE"]; ?></button>
+		<div id="window">
+			<table id=ramData>
+				<thead id=headerTable>
+					<tr>
+						<th>
+							<?php echo $translations["RAM_SLOT"] ?>
+						</th>
+						<th>
+							<?php echo $translations["RAM_TYPE"] ?>
+						</th>
+						<th>
+							<?php echo $translations["RAM_AMOUNT"] ?>
+						</th>
+						<th>
+							<?php echo $translations["RAM_FREQUENCY"] ?>
+						</th>
+						<th>
+							<?php echo $translations["RAM_MANUFACTURER"] ?>
+						</th>
+						<th>
+							<?php echo $translations["RAM_SERIAL_NUMBER"] ?>
+						</th>
+						<th>
+							<?php echo $translations["RAM_PART_NUMBER"] ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					while ($resultRam = mysqli_fetch_array($queryAssetRam)) {
+						$ramSlot = $resultRam[$dbRamArray["SLOT"]];
+						$ramType = $resultRam[$dbRamArray["TYPE"]];
+						$ramAmount = $resultRam[$dbRamArray["AMOUNT"]];
+						$ramFrequency = $resultRam[$dbRamArray["FREQUENCY"]];
+						$ramManufacturer = $resultRam[$dbRamArray["MANUFACTURER"]];
+						$ramSerialNumber = $resultRam[$dbRamArray["SERIAL_NUMBER"]];
+						$ramPartNumber = $resultRam[$dbRamArray["PART_NUMBER"]];
+					?>
+						<tr id=bodyTable>
+							<td>
+								<?php
+								echo $ramSlot;
+								?>
+							</td>
+							<td>
+								<?php
+								foreach ($ramTypesArray as $str1 => $str2) {
+									if ($ramType == $str1)
+										echo $str2;
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								$totalRamSize += $ramAmount;
+								if ($ramAmount / 1024 / 1024 / 1024 >= 1024) {
+									echo floor($ramAmount / 1024 / 1024 / 1024 / 1024) . " TB";
+								} else if ($ramAmount / 1024 / 1024 / 1024 < 1024 && $ramAmount / 1024 / 1024 / 1024 >= 1) {
+									echo floor($ramAmount / 1024 / 1024 / 1024) . " GB";
+								} else {
+									echo floor($ramAmount / 1024 / 1024) . " MB";
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								echo $ramFrequency . " MHz";
+								?>
+							</td>
+							<td>
+								<?php
+								echo $ramManufacturer;
+								?>
+							</td>
+							<td>
+								<?php
+								echo $ramSerialNumber;
+								?>
+							</td>
+							<td>
+								<?php
+								echo $ramPartNumber;
+								?>
+							</td>
+						</tr>
+					<?php
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="videoCardOverlay">
+		<div id=title><?php echo $translations["FIXED_VIDEO_CARD_LIST"]; ?></div>
+		<button id="closeButton" onclick="overlayVideoCardOff()"><?php echo $translations["CLOSE"]; ?></button>
+		<div id="window">
+			<table id=videoCardData>
+				<thead id=headerTable>
+					<tr>
+						<th>
+							<?php echo $translations["VIDEO_CARD_ID"] ?>
+						</th>
+						<th>
+							<?php echo $translations["VIDEO_CARD_NAME"] ?>
+						</th>
+						<th>
+							<?php echo $translations["VIDEO_CARD_RAM"] ?>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					while ($resultVideoCard = mysqli_fetch_array($queryAssetVideoCard)) {
+						$videoCardId = $resultVideoCard[$dbVideoCardArray["GPU_ID"]];
+						$videoCardName = $resultVideoCard[$dbVideoCardArray["NAME"]];
+						$videoCardRam = $resultVideoCard[$dbVideoCardArray["RAM"]];
+					?>
+						<tr id=bodyTable>
+							<td>
+								<?php
+								echo $videoCardId;
+								if ($videoCardId == "0") {
+									$videoCard = $videoCardName;
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								echo $videoCardName;
+								?>
+							</td>
+							<td>
+								<?php
+								if ($videoCardRam / 1024 / 1024 / 1024 >= 1024) {
+									echo floor($videoCardRam / 1024 / 1024 / 1024 / 1024) . " TB";
+								} else if ($videoCardRam / 1024 / 1024 / 1024 < 1024 && $videoCardRam / 1024 / 1024 / 1024 >= 1) {
+									echo floor($videoCardRam / 1024 / 1024 / 1024) . " GB";
+								} else {
+									echo floor($videoCardRam / 1024 / 1024) . " MB";
+								}
+								?>
+							</td>
+						</tr>
+					<?php
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="storageOverlay">
 		<div id=title><?php echo $translations["FIXED_STORAGE_MEDIA_LIST"]; ?></div>
-		<button id="closeButton" onclick="off()"><?php echo $translations["CLOSE"]; ?></button>
+		<button id="closeButton" onclick="overlayStorageOff()"><?php echo $translations["CLOSE"]; ?></button>
 		<div id="window">
 			<table id=storageData>
 				<thead id=headerTable>
@@ -90,55 +363,62 @@ if ($send != 1) {
 				</thead>
 				<tbody>
 					<?php
-					while ($result = mysqli_fetch_array($queryAssetStorage)) {
+					while ($resultStorage = mysqli_fetch_array($queryAssetStorage)) {
+						$storageConnection = $resultStorage[$dbStorageArray["CONNECTION"]];
+						$storageModel = $resultStorage[$dbStorageArray["MODEL"]];
+						$storageSerialNumber = $resultStorage[$dbStorageArray["SERIAL_NUMBER"]];
+						$storageSize = $resultStorage[$dbStorageArray["SIZE"]];
+						$storageSmartStatus = $resultStorage[$dbStorageArray["SMART_STATUS"]];
+						$storageStorageId = $resultStorage[$dbStorageArray["STORAGE_ID"]];
+						$storageType = $resultStorage[$dbStorageArray["TYPE"]];
 					?>
 						<tr id=bodyTable>
 							<td>
 								<?php
-								echo $result[$dbStorageArray["STORAGE_ID"]];
+								echo $storageStorageId;
 								?>
 							</td>
 							<td>
 								<?php
 								foreach ($storageTypesArray as $str1 => $str2) {
-									if ($result[$dbStorageArray["TYPE"]] == $str1)
+									if ($storageType == $str1)
 										echo $str2;
 								}
 								?>
 							</td>
 							<td>
 								<?php
-								$totalStorageSize += $result[$dbStorageArray["SIZE"]];
-								if ($result[$dbStorageArray["SIZE"]] / 1024 >= 1024) {
-									echo floor($result[$dbStorageArray["SIZE"]] / 1024 / 1024) . " TB";
-								} else if ($result[$dbStorageArray["SIZE"]] / 1024 < 1024 && $result[$dbStorageArray["SIZE"]] / 1024 >= 1) {
-									echo floor($result[$dbStorageArray["SIZE"]] / 1024) . " GB";
+								$totalStorageSize += $storageSize;
+								if ($storageSize / 1000 / 1000 / 1000 >= 1000) {
+									echo floor($storageSize / 1000 / 1000 / 1000 / 1000) . " TB";
+								} else if ($storageSize / 1000 / 1000 / 1000 < 1000 && $storageSize / 1000 / 1000 / 1000 >= 1) {
+									echo floor($storageSize / 1000 / 1000 / 1000) . " GB";
 								} else {
-									echo floor($result[$dbStorageArray["SIZE"]]) . " MB";
+									echo floor($storageSize / 1000 / 1000) . " MB";
 								}
 								?>
 							</td>
 							<td>
 								<?php
 								foreach ($connectionTypesArray as $str1 => $str2) {
-									if ($result[$dbStorageArray["CONNECTION"]] == $str1)
+									if ($storageConnection == $str1)
 										echo $str2;
 								}
 								?>
 							</td>
 							<td>
 								<?php
-								echo $result[$dbStorageArray["MODEL"]];
+								echo $storageModel;
 								?>
 							</td>
 							<td>
 								<?php
-								echo $result[$dbStorageArray["SERIAL_NUMBER"]];
+								echo $storageSerialNumber;
 								?>
 							</td>
 							<td>
 								<?php
-								echo $result[$dbStorageArray["SMART_STATUS"]];
+								echo $storageSmartStatus;
 								?>
 							</td>
 						</tr>
@@ -149,6 +429,7 @@ if ($send != 1) {
 			</table>
 		</div>
 	</div>
+
 
 	<form id="formGeneral">
 		<h1><?php echo $translations["ASSET_DETAIL"] ?></h1><br>
@@ -254,9 +535,12 @@ if ($send != 1) {
 				</tr>
 			<?php
 			}
-			while ($result = mysqli_fetch_array($queryAssetLocation)) {
-				$building = $result[$dbLocationArray["BUILDING"]];
-				$roomNumber = $result[$dbLocationArray["ROOM_NUMBER"]];
+			while ($resultLocation = mysqli_fetch_array($queryAssetLocation)) {
+				$building = $resultLocation[$dbLocationArray["BUILDING"]];
+				$roomNumber = $resultLocation[$dbLocationArray["ROOM_NUMBER"]];
+				$deliveredToRegistrationNumber = $resultLocation[$dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
+				$lastDeliveryDate = $resultLocation[$dbLocationArray["LAST_DELIVERY_DATE"]];
+				$lastDeliveryMadeBy = $resultLocation[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["BUILDING"] ?></td>
@@ -287,19 +571,19 @@ if ($send != 1) {
 									} ?></td>
 					</td>
 				</tr>
-			<?php
+				<?php
 			}
 
-					if (isset($_SESSION["privilegeLevel"])) {
-						if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
-					?>
-							<tr>
-								<td id=h-separator colspan=7 align=center><input id="updateButton" type=button onclick="location.href='editAsset.php?id=<?php echo $idAsset ?>'" value=<?php echo $translations["LABEL_EDIT_BUTTON"] ?>></td>
-							</tr>
-					<?php
-						}
-					}
-					?>
+			if (isset($_SESSION["privilegeLevel"])) {
+				if ($_SESSION["privilegeLevel"] == $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
+				?>
+					<tr>
+						<td id=h-separator colspan=7 align=center><input id="updateButton" type=button onclick="location.href='editAsset.php?id=<?php echo $idAsset ?>'" value=<?php echo $translations["LABEL_EDIT_BUTTON"] ?>></td>
+					</tr>
+			<?php
+				}
+			}
+			?>
 		</table>
 		<br>
 		<label id=asteriskWarning><?php echo $translations["USE_AIR_TO_EDIT"] ?></label>
@@ -326,11 +610,17 @@ if ($send != 1) {
 			</thead>
 			<tbody>
 				<?php
-				while ($result = mysqli_fetch_array($queryAssetMaintenances)) { ?>
+				while ($resultMaintenances = mysqli_fetch_array($queryAssetMaintenances)) {
+					$agentId = $resultMaintenances[$dbMaintenanceArray["AGENT_ID"]];
+					$batteryChange = $resultMaintenances[$dbMaintenanceArray["BATTERY_CHANGE"]];
+					$serviceDate = $resultMaintenances[$dbMaintenanceArray["SERVICE_DATE"]];
+					$serviceType = $resultMaintenances[$dbMaintenanceArray["SERVICE_TYPE"]];
+					$ticketNumber = $resultMaintenances[$dbMaintenanceArray["TICKET_NUMBER"]];
+				?>
 					<tr id=bodyTable>
 						<td>
 							<?php
-							$previousMaintenancesDate = $result[$dbMaintenanceArray["SERVICE_DATE"]];
+							$previousMaintenancesDate = $serviceDate;
 							$datePM = substr($previousMaintenancesDate, 0, 10);
 							$explodedDateA = explode($json_constants_array["DASH"], $datePM);
 							$previousMaintenancesDate = $explodedDateA[2] . "/" . $explodedDateA[1] . "/" . $explodedDateA[0];
@@ -340,14 +630,14 @@ if ($send != 1) {
 						<td>
 							<?php
 							foreach ($serviceTypesArray as $str) {
-								if ($result[$dbMaintenanceArray["SERVICE_TYPE"]] == $str)
+								if ($serviceType == $str)
 									echo $translations["SERVICE_TYPE"][$str];
 							}
 							?>
 						</td>
 						<td>
 							<?php
-							$previousMaintenancesBattery = $result[$dbMaintenanceArray["BATTERY_CHANGE"]];
+							$previousMaintenancesBattery = $batteryChange;
 							if ($previousMaintenancesBattery != "" && $previousMaintenancesBattery == "1") {
 								echo $translations["BATTERY_REPLACED"];
 							} else if ($previousMaintenancesBattery == "0") {
@@ -359,7 +649,7 @@ if ($send != 1) {
 						</td>
 						<td>
 							<?php
-							$previousMaintenancesTicket = $result[$dbMaintenanceArray["TICKET_NUMBER"]];
+							$previousMaintenancesTicket = $ticketNumber;
 							if ($previousMaintenancesTicket != "")
 								echo $previousMaintenancesTicket;
 							else
@@ -371,7 +661,7 @@ if ($send != 1) {
 							if (isset($queryUsers))
 								mysqli_data_seek($queryUsers, 0);
 							while ($resultUsers = mysqli_fetch_array($queryUsers)) {
-								if ($result[$dbMaintenanceArray["AGENT_ID"]] == $resultUsers["id"]) {
+								if ($agentId == $resultUsers["id"]) {
 									echo $resultUsers[$dbAgentArray["NAME"]] . " " . $resultUsers[$dbAgentArray["SURNAME"]];
 									$printedMaintenances = true;
 									break;
@@ -393,59 +683,49 @@ if ($send != 1) {
 		</table>
 		<table id="formFields">
 			<tbody>
-				<?php
-				while ($result = mysqli_fetch_array($queryAssetLocation)) {
-					$deliveredToRegistrationNumber = $result[$dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
-					$lastDeliveryDate = $result[$dbLocationArray["LAST_DELIVERY_DATE"]];
-					$lastDeliveryMadeBy = $result[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
-				?>
-					<tr>
-						<td id=lblFixed><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
-						<td id=lblData><?php if ($deliveredToRegistrationNumber == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $deliveredToRegistrationNumber;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
-						<td id=lblData><?php if ($lastDeliveryDate == "") {
-											echo $json_constants_array["DASH"];
-										} else {
-											echo $lastDeliveryDate;
-										} ?></td>
-					</tr>
-					<tr>
-						<td id=lblFixed><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
-						<td id=lblData><label name=txtLastDeliveryMadeBy style=line-height:40px;font-size:12pt></label>
-							<?php
-							if (isset($queryUsers))
-								mysqli_data_seek($queryUsers, 0);
-							while ($resultUsers = mysqli_fetch_array($queryUsers)) {
-								if ($lastDeliveryMadeBy == $resultUsers["id"]) {
-							?>
-									<label>
-										<?php
-										echo $resultUsers[$dbAgentArray["USERNAME"]];
-										$printedDelivery = true;
-										?>
-									</label>
-							<?php
-								}
+				<tr>
+					<td id=lblFixed><?php echo $translations["DELIVERED_TO_REGISTRATION_NUMBER"] ?></td>
+					<td id=lblData><?php if ($deliveredToRegistrationNumber == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $deliveredToRegistrationNumber;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["LAST_DELIVERY_DATE"] ?></td>
+					<td id=lblData><?php if ($lastDeliveryDate == "") {
+										echo $json_constants_array["DASH"];
+									} else {
+										echo $lastDeliveryDate;
+									} ?></td>
+				</tr>
+				<tr>
+					<td id=lblFixed><?php echo $translations["LAST_DELIVERY_MADE_BY"] ?></td>
+					<td id=lblData><label name=txtLastDeliveryMadeBy style=line-height:40px;font-size:12pt></label>
+						<?php
+						if (isset($queryUsers))
+							mysqli_data_seek($queryUsers, 0);
+						while ($resultUsers = mysqli_fetch_array($queryUsers)) {
+							if ($lastDeliveryMadeBy == $resultUsers["id"]) {
+						?>
+								<label>
+									<?php
+									echo $resultUsers[$dbAgentArray["USERNAME"]];
+									$printedDelivery = true;
+									?>
+								</label>
+						<?php
 							}
+						}
+						?>
+						<label>
+							<?php
+							if ($printedDelivery != true)
+								echo $json_constants_array["DASH"];
 							?>
-							<label>
-								<?php
-								if ($printedDelivery != true)
-									echo $json_constants_array["DASH"];
-								?>
-							</label>
-						</td>
-					</tr>
-					
-				<?php
-				}
-				?>
+						</label>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<table id="formFields">
@@ -462,12 +742,11 @@ if ($send != 1) {
 				</td>
 			</tr>
 			<?php
-			while ($result = mysqli_fetch_array($queryAssetHardware)) {
-				$brand = $result[$dbHardwareArray["BRAND"]];
-				$model = $result[$dbHardwareArray["MODEL"]];
-				$serialNumber = $result[$dbHardwareArray["SERIAL_NUMBER"]];
-				$processor = $result[$dbHardwareArray["PROCESSOR"]];
-				$hwType = $result[$dbHardwareArray["TYPE"]];
+			while ($resultHardware = mysqli_fetch_array($queryAssetHardware)) {
+				$brand = $resultHardware[$dbHardwareArray["BRAND"]];
+				$model = $resultHardware[$dbHardwareArray["MODEL"]];
+				$serialNumber = $resultHardware[$dbHardwareArray["SERIAL_NUMBER"]];
+				$hwType = $resultHardware[$dbHardwareArray["TYPE"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["HW_TYPE"] ?></td>
@@ -511,123 +790,82 @@ if ($send != 1) {
 										echo $serialNumber;
 									} ?></td>
 				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["PROCESSOR"] ?></td>
-					<td id=lblData><?php if ($processor == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										echo $processor;
-									} ?></td>
-				</tr>
-				<tr id=subHeaderTable>
-					<td colspan="2">
-						<label>
-							<?php
-							echo $translations["RAM"];
-							?>
-						</label>
-					</td>
-				</tr>
-			<?php
-			}
-			while ($result = mysqli_fetch_array($queryAssetRam)) {
-				$ramAmount = $result[$dbRamArray["AMOUNT"]];
-				$ramType = $result[$dbRamArray["TYPE"]];
-				$ramFrequency = $result[$dbRamArray["FREQUENCY"]];
-				$ramTotalSlots = $result[$dbRamArray["TOTAL_SLOTS"]];
-				$ramOccupiedSlots = $result[$dbRamArray["OCCUPIED_SLOTS"]];
-			?>
-				<tr>
-					<td id=lblFixed><?php echo $translations["RAM_AMOUNT"] ?></td>
-					<td id=lblData><?php if ($ramAmount == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										if ($ramAmount / 1024 >= 1024) {
-											echo floor($ramAmount / 1024 / 1024) . " TB";
-										} else if ($ramAmount / 1024 < 1024 && $ramAmount / 1024 > 1) {
-											echo floor($ramAmount / 1024) . " GB";
-										} else {
-											echo floor($ramAmount) . " MB";
-										}
-									} ?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["RAM_TYPE"] ?></td>
-					<td id=lblData><?php if ($ramType == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										$b = false;
-										foreach ($ramTypesArray as $str1 => $str2) {
-											if ($str1 == $ramType) {
-												echo $str2;
-												$b = true;
-												break;
-											}
-										}
-										if ($b == false) {
-											echo $translations["UNKNOWN"];
-										}
-									} ?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["RAM_FREQUENCY"] ?></td>
-					<td id=lblData><?php if ($ramFrequency == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										echo $ramFrequency . " MHz";
-									}
-									?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["RAM_SLOTS"] ?></td>
-					<td id=lblData><?php if ($ramOccupiedSlots == "" || $ramTotalSlots == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										echo $ramOccupiedSlots . " / " . $ramTotalSlots;
-									}
-									?></td>
-				</tr>
-				<tr id=subHeaderTable>
-					<td colspan="2">
-						<label>
-							<?php
-							echo $translations["VIDEO_CARD"];
-							?>
-						</label>
-					</td>
-				</tr>
-			<?php
-			}
-			while ($result = mysqli_fetch_array($queryAssetVideoCard)) {
-				$videoCardName = $result[$dbVideoCardArray["NAME"]];
-				$videoCardRam = $result[$dbVideoCardArray["RAM"]];
-				$videoCardGpuId = $result[$dbVideoCardArray["GPU_ID"]];
-			?>
-				<tr>
-					<td id=lblFixed><?php echo $translations["VIDEO_CARD_NAME"] . " " . $videoCardGpuId + 1; ?></td>
-					<td id=lblData><?php if ($videoCardName == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										echo $videoCardName;
-									} ?></td>
-				</tr>
-				<tr>
-					<td id=lblFixed><?php echo $translations["VIDEO_CARD_RAM"] . " " . $videoCardGpuId + 1;  ?></td>
-					<td id=lblData><?php if ($videoCardRam == "") {
-										echo $json_constants_array["DASH"];
-									} else {
-										if ($videoCardRam / 1024 >= 1024) {
-											echo floor($videoCardRam / 1024 / 1024) . " TB";
-										} else if ($videoCardRam / 1024 < 1024 && $videoCardRam / 1024 >= 1) {
-											echo floor($videoCardRam / 1024) . " GB";
-										} else {
-											echo floor($videoCardRam) . " MB";
-										}
-									} ?></td>
-				</tr>
 			<?php
 			}
 			?>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["PROCESSOR"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["PROCESSOR"] ?></td>
+				<td id=lblData><?php if ($processor == "") {
+									echo $json_constants_array["DASH"];
+								} else {
+									echo $processor;
+								} ?></td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["INSTALLED_PROCESSORS"] ?></td>
+				<td id=lblData>
+					<a id=linksameline onclick="overlayProcessorOn()"><?php echo $translations["DETAILS"]; ?></a>
+				</td>
+			</tr>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["RAM"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["RAM_TOTAL"] ?></td>
+				<td id=lblData><?php
+								if ($totalRamSize / 1024 / 1024 / 1024 >= 1024) {
+									echo floordec($totalRamSize / 1024 / 1024 / 1024 / 1024, 1) . " TB";
+								} else if ($totalRamSize / 1024 / 1024 / 1024 < 1024 && $totalRamSize / 1024 / 1024 / 1024 >= 1) {
+									echo floordec($totalRamSize / 1024 / 1024 / 1024, 1) . " GB";
+								} else {
+									echo floordec($totalRamSize / 1024 / 1024, 1) . " MB";
+								}
+								?></td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["INSTALLED_RAM_BOARDS"] ?></td>
+				<td id=lblData>
+					<a id=linksameline onclick="overlayRamOn()"><?php echo $translations["DETAILS"]; ?></a>
+				</td>
+			</tr>
+			<tr id=subHeaderTable>
+				<td colspan="2">
+					<label>
+						<?php
+						echo $translations["VIDEO_CARD"];
+						?>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["VIDEO_CARD"] ?></td>
+				<td id=lblData><?php if ($videoCard == "") {
+									echo $json_constants_array["DASH"];
+								} else {
+									echo $videoCard;
+								} ?></td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["INSTALLED_VIDEO_CARD_DEVICES"] ?></td>
+				<td id=lblData>
+					<a id=linksameline onclick="overlayVideoCardOn()"><?php echo $translations["DETAILS"]; ?></a>
+				</td>
+			</tr>
 			<tr id=subHeaderTable>
 				<td colspan="2">
 					<label>
@@ -638,23 +876,23 @@ if ($send != 1) {
 				</td>
 			</tr>
 			<tr>
-				<td id=lblFixed><?php echo $translations["INSTALLED_STORAGE_DRIVES"] ?></td>
-				<td id=lblData>
-					<a id=linksameline onclick="on()"><?php echo $translations["DETAILS"]; ?></a>
-				</td>
-			</tr>
-			<tr>
 				<td id=lblFixed><?php echo $translations["STORAGE_TOTAL_SIZE"] ?></td>
 				<td id=lblData>
 					<?php
-					if ($totalStorageSize / 1024 >= 1024) {
-						echo $totalStorageSize / 1024 / 1024 . " TB";
-					} else if ($totalStorageSize / 1024 < 1024 && $totalStorageSize / 1024 >= 1) {
-						echo $totalStorageSize / 1024 . " GB";
+					if ($totalStorageSize / 1000 / 1000 / 1000 >= 1000) {
+						echo floordec($totalStorageSize / 1000 / 1000 / 1000 / 1000, 1) . " TB";
+					} else if ($totalStorageSize / 1000 / 1000 / 1000 < 1000 && $totalStorageSize / 1000 / 1000 / 1000 >= 1) {
+						echo floordec($totalStorageSize / 1000 / 1000 / 1000, 1) . " GB";
 					} else {
-						echo $totalStorageSize . " MB";
+						echo floordec($totalStorageSize / 1000 / 1000, 1) . " MB";
 					}
 					?>
+				</td>
+			</tr>
+			<tr>
+				<td id=lblFixed><?php echo $translations["INSTALLED_STORAGE_DRIVES"] ?></td>
+				<td id=lblData>
+					<a id=linksameline onclick="overlayStorageOn()"><?php echo $translations["DETAILS"]; ?></a>
 				</td>
 			</tr>
 			<tr id=subHeaderTable>
@@ -667,13 +905,13 @@ if ($send != 1) {
 				</td>
 			</tr>
 			<?php
-			while ($result = mysqli_fetch_array($queryAssetFirmware)) {
-				$fwVersion = $result[$dbFirmwareArray["VERSION"]];
-				$fwType = $result[$dbFirmwareArray["TYPE"]];
-				$mediaOperationMode = $result[$dbFirmwareArray["MEDIA_OPERATION_MODE"]];
-				$secureBoot = $result[$dbFirmwareArray["SECURE_BOOT"]];
-				$virtualizationTechnology = $result[$dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"]];
-				$tpmVersion = $result[$dbFirmwareArray["TPM_VERSION"]];
+			while ($resultFirmware = mysqli_fetch_array($queryAssetFirmware)) {
+				$fwVersion = $resultFirmware[$dbFirmwareArray["VERSION"]];
+				$fwType = $resultFirmware[$dbFirmwareArray["TYPE"]];
+				$mediaOperationMode = $resultFirmware[$dbFirmwareArray["MEDIA_OPERATION_MODE"]];
+				$secureBoot = $resultFirmware[$dbFirmwareArray["SECURE_BOOT"]];
+				$virtualizationTechnology = $resultFirmware[$dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"]];
+				$tpmVersion = $resultFirmware[$dbFirmwareArray["TPM_VERSION"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?></td>
@@ -785,10 +1023,10 @@ if ($send != 1) {
 			<?php
 			}
 
-			while ($result = mysqli_fetch_array($queryAssetNetwork)) {
-				$hostname = $result[$dbNetworkArray["HOSTNAME"]];
-				$macAddress = $result[$dbNetworkArray["MAC_ADDRESS"]];
-				$ipAddress = $result[$dbNetworkArray["IP_ADDRESS"]];
+			while ($resultNetwork = mysqli_fetch_array($queryAssetNetwork)) {
+				$hostname = $resultNetwork[$dbNetworkArray["HOSTNAME"]];
+				$macAddress = $resultNetwork[$dbNetworkArray["MAC_ADDRESS"]];
+				$ipAddress = $resultNetwork[$dbNetworkArray["IP_ADDRESS"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["HOSTNAME"] ?></td>
@@ -825,11 +1063,11 @@ if ($send != 1) {
 				</tr>
 			<?php
 			}
-			while ($result = mysqli_fetch_array($queryAssetOperatingSystem)) {
-				$operatingSystemName = $result[$dbOperatingSystemArray["NAME"]];
-				$operatingSystemVersion = $result[$dbOperatingSystemArray["VERSION"]];
-				$operatingSystemBuild = $result[$dbOperatingSystemArray["BUILD"]];
-				$operatingSystemArch = $result[$dbOperatingSystemArray["ARCH"]];
+			while ($resultOperatingSystem = mysqli_fetch_array($queryAssetOperatingSystem)) {
+				$operatingSystemName = $resultOperatingSystem[$dbOperatingSystemArray["NAME"]];
+				$operatingSystemVersion = $resultOperatingSystem[$dbOperatingSystemArray["VERSION"]];
+				$operatingSystemBuild = $resultOperatingSystem[$dbOperatingSystemArray["BUILD"]];
+				$operatingSystemArch = $resultOperatingSystem[$dbOperatingSystemArray["ARCH"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["OPERATING_SYSTEM_NAME"] ?></td>
@@ -873,13 +1111,10 @@ if ($send != 1) {
 										}
 									} ?></td>
 				</tr>
-		</table>
-	<?php
+			<?php
 			}
-	?>
-	</table>
-
-	</table>
+			?>
+		</table>
 	</form>
 </div>
 <?php

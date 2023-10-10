@@ -1,5 +1,9 @@
 @media (prefers-color-scheme: light) {
-    #overlay td {
+
+    #storageOverlay td,
+    #ramOverlay td,
+    #videoCardOverlay td,
+    #processorOverlay td {
         border-color: var(--light-border);
     }
 
@@ -15,7 +19,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    #overlay td {
+
+    #storageOverlay td,
+    #ramOverlay td,
+    #videoCardOverlay td,
+    #processorOverlay td {
         border-color: var(--dark-border);
     }
 
@@ -30,7 +38,10 @@
     }
 }
 
-#overlay {
+#storageOverlay,
+#ramOverlay,
+#videoCardOverlay,
+#processorOverlay {
     backdrop-filter: blur(7px);
     bottom: 0;
     display: none;
@@ -46,7 +57,7 @@
 #window {
     border: 1px solid;
     bottom: 0;
-    height: 25%;
+    height: 18%;
     left: 0;
     margin: auto;
     overflow: auto;
@@ -62,7 +73,10 @@
     top: 65%;
 }
 
-#overlay table {
+#storageOverlay table,
+#ramOverlay table,
+#videoCardOverlay table,
+#processorOverlay table {
     border: 1px solid;
     border-collapse: collapse;
     bottom: 0;
@@ -75,7 +89,10 @@
     width: 98%;
 }
 
-#overlay td {
+#storageOverlay td,
+#ramOverlay td,
+#videoCardOverlay td,
+#processorOverlay td {
     border: 1px solid;
 }
 

@@ -36,13 +36,23 @@
             "BRAND": "brand",
             "HARDWARE_TABLE": "apcs_asset_hardware",
             "MODEL": "model",
-            "PROCESSOR": "processor",
+            "PROCESSOR": {
+                "PROCESSOR_TABLE": "apcs_asset_processor",
+                "CPU_ID": "cpu_id",
+                "NAME": "name",
+                "FREQUENCY": "frequency",
+                "NUMBER_OF_CORES": "numberOfCores",
+                "NUMBER_OF_THREADS": "numberOfThreads",
+                "CACHE": "cache"
+            },
             "RAM": {
                 "AMOUNT": "amount",
                 "FREQUENCY": "frequency",
-                "OCCUPIED_SLOTS": "occupiedSlots",
+                "MANUFACTURER": "manufacturer",
                 "RAM_TABLE": "apcs_asset_ram",
-                "TOTAL_SLOTS": "totalSlots",
+                "SERIAL_NUMBER": "serialNumber",
+                "PART_NUMBER": "partNumber",
+                "SLOT": "slot",
                 "TYPE": "type"
             },
             "SERIAL_NUMBER": "serialNumber",

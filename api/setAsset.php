@@ -30,15 +30,24 @@ if (isset($_POST)) {
 	$brand = $dbHardwareArray["BRAND"];
 	$model = $dbHardwareArray["MODEL"];
 	$serialNumber = $dbHardwareArray["SERIAL_NUMBER"];
-	$processor = $dbHardwareArray["PROCESSOR"];
 	$hwType = $dbHardwareArray["TYPE"];
+
+	$processorTable = $dbProcessorArray["PROCESSOR_TABLE"];
+	$processorId = $dbProcessorArray["CPU_ID"];
+	$processorName = $dbProcessorArray["NAME"];
+	$processorFrequency = $dbProcessorArray["FREQUENCY"];
+	$processorCores = $dbProcessorArray["NUMBER_OF_CORES"];
+	$processorThreads = $dbProcessorArray["NUMBER_OF_THREADS"];
+	$processorCache = $dbProcessorArray["CACHE"];
 
 	$ramTable = $dbRamArray["RAM_TABLE"];
 	$ramAmount = $dbRamArray["AMOUNT"];
 	$ramType = $dbRamArray["TYPE"];
 	$ramFrequency = $dbRamArray["FREQUENCY"];
-	$ramOccupiedSlots = $dbRamArray["OCCUPIED_SLOTS"];
-	$ramTotalSlots = $dbRamArray["TOTAL_SLOTS"];
+	$ramManufacturer = $dbRamArray["MANUFACTURER"];
+	$ramSerialNumber = $dbRamArray["SERIAL_NUMBER"];
+	$ramPartNumber = $dbRamArray["PART_NUMBER"];
+	$ramSlot = $dbRamArray["SLOT"];
 
 	$storageTable = $dbStorageArray["STORAGE_TABLE"];
 	$storageId = $dbStorageArray["STORAGE_ID"];
@@ -82,6 +91,7 @@ if (isset($_POST)) {
 	$assetJsonSection = $newAsset;
 	$firmwareJsonSection = $newAsset["firmware"];
 	$hardwareJsonSection = $newAsset["hardware"];
+	$processorJsonSection = $newAsset["hardware"]["processor"];
 	$ramJsonSection = $newAsset["hardware"]["ram"];
 	$storageJsonSection = $newAsset["hardware"]["storage"];
 	$videoCardJsonSection = $newAsset["hardware"]["videoCard"];
@@ -117,19 +127,21 @@ if (isset($_POST)) {
 			$brand . " = '$hardwareJsonSection[$brand]', " .
 			$model . " = '$hardwareJsonSection[$model]', " .
 			$serialNumber . " = '$hardwareJsonSection[$serialNumber]', " .
-			$processor . " = '$hardwareJsonSection[$processor]', " .
 			$hwType . " = '$hardwareJsonSection[$hwType]'
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
-		$queryAssetRam = mysqli_query($connection, "update " . $ramTable . " set " .
-			$ramAmount . " = '$ramJsonSection[$ramAmount]', " .
-			$ramType . " = '$ramJsonSection[$ramType]', " .
-			$ramFrequency . " = '$ramJsonSection[$ramFrequency]', " .
-			$ramOccupiedSlots . " = '$ramJsonSection[$ramOccupiedSlots]', " .
-			$ramTotalSlots . " = '$ramJsonSection[$ramTotalSlots]'
-			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
-			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
+		$queryProcessorDel = mysqli_query($connection, "delete " . $processorTable . " from " . $processorTable . " inner join " . $assetTable . " on " . $processorTable . "." . $assetNumberFK . " = " . $assetTable . "." . $assetNumber . " where " . $assetTable . "." . $assetNumber . " = " . $newAsset[$assetNumber]) or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
+
+		foreach ($processorJsonSection as $item) {
+			$queryAssetProcessor = mysqli_query($connection, "insert into " . $processorTable . " ($processorId,$processorName,$processorFrequency,$processorCores,$processorThreads,$processorCache) values ('$newAsset[$processorId]','$item[$processorName]','$item[$processorFrequency]','$item[$processorCores]','$item[$processorThreads]','$item[$processorCache]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		}
+
+		$queryRamDel = mysqli_query($connection, "delete " . $ramTable . " from " . $ramTable . " inner join " . $assetTable . " on " . $ramTable . "." . $assetNumberFK . " = " . $assetTable . "." . $assetNumber . " where " . $assetTable . "." . $assetNumber . " = " . $newAsset[$assetNumber]) or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
+
+		foreach ($ramJsonSection as $item) {
+			$queryAssetRam = mysqli_query($connection, "insert into " . $ramTable . " ($ramAmount,$ramType,$ramFrequency,$ramManufacturer,$ramSerialNumber,$ramPartNumber,$ramSlot) values ('$newAsset[$assetNumber]','$item[$ramAmount]','$item[$ramType]','$item[$ramFrequency]','$item[$ramManufacturer]','$item[$ramSerialNumber]','$item[$ramPartNumber]','$item[$ramSlot]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		}
 
 		$queryStorageDel = mysqli_query($connection, "delete " . $storageTable . " from " . $storageTable . " inner join " . $assetTable . " on " . $storageTable . "." . $assetNumberFK . " = " . $assetTable . "." . $assetNumber . " where " . $assetTable . "." . $assetNumber . " = " . $newAsset[$assetNumber]) or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
 
@@ -152,7 +164,9 @@ if (isset($_POST)) {
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
-		$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$maintenancesJsonSection[$serviceDate]','$maintenancesJsonSection[$serviceType]','$maintenancesJsonSection[$batteryChange]','$maintenancesJsonSection[$ticketNumber]','$maintenancesJsonSection[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		foreach ($maintenancesJsonSection as $item) {
+			$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$item[$serviceDate]','$item[$serviceType]','$item[$batteryChange]','$item[$ticketNumber]','$item[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		}
 
 		$queryAssetNetwork = mysqli_query($connection, "update " . $networkTable . " set " .
 			$hostname . " = '$networkJsonSection[$hostname]', " .
@@ -168,16 +182,22 @@ if (isset($_POST)) {
 			$operatingSystemVersion . " = '$operatingSystemJsonSection[$operatingSystemVersion]'
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
-			echo "Ativo atualizado\n";
-			http_response_code(200);
+		echo "Ativo atualizado\n";
+		http_response_code(200);
 	} else {
 		$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$inUse,$tag) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$inUse]','$newAsset[$tag]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 		$queryAssetFirmware = mysqli_query($connection, "insert into " . $firmwareTable . " ($assetNumberFK,$fwVersion,$fwType,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$firmwareJsonSection[$fwVersion]','$firmwareJsonSection[$fwType]','$firmwareJsonSection[$mediaOperationMode]','$firmwareJsonSection[$secureBoot]','$firmwareJsonSection[$virtualizationTechnology]','$firmwareJsonSection[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
-		$queryAssetHardware = mysqli_query($connection, "insert into " . $hardwareTable . " ($assetNumberFK,$brand,$model,$serialNumber,$processor,$hwType) values ('$newAsset[$assetNumber]','$hardwareJsonSection[$brand]','$hardwareJsonSection[$model]','$hardwareJsonSection[$serialNumber]','$hardwareJsonSection[$processor]','$hardwareJsonSection[$hwType]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		$queryAssetHardware = mysqli_query($connection, "insert into " . $hardwareTable . " ($assetNumberFK,$brand,$model,$serialNumber,$hwType) values ('$newAsset[$assetNumber]','$hardwareJsonSection[$brand]','$hardwareJsonSection[$model]','$hardwareJsonSection[$serialNumber]','$hardwareJsonSection[$hwType]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
-		$queryAssetRam = mysqli_query($connection, "insert into " . $ramTable . " ($assetNumberFK,$ramAmount,$ramType,$ramFrequency,$ramOccupiedSlots,$ramTotalSlots) values ('$newAsset[$assetNumber]','$ramJsonSection[$ramAmount]','$ramJsonSection[$ramType]','$ramJsonSection[$ramFrequency]','$ramJsonSection[$ramOccupiedSlots]','$ramJsonSection[$ramTotalSlots]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		foreach ($processorJsonSection as $item) {
+			$queryAssetProcessor = mysqli_query($connection, "insert into " . $processorTable . " ($assetNumberFK,$processorId,$processorName,$processorFrequency,$processorCores,$processorThreads,$processorCache) values ('$newAsset[$assetNumber]','$item[$processorId]','$item[$processorName]','$item[$processorFrequency]','$item[$processorCores]','$item[$processorThreads]','$item[$processorCache]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		}
+
+		foreach ($ramJsonSection as $item) {
+			$queryAssetRam = mysqli_query($connection, "insert into " . $ramTable . " ($assetNumberFK,$ramAmount,$ramType,$ramFrequency,$ramManufacturer,$ramSerialNumber,$ramPartNumber,$ramSlot) values ('$newAsset[$assetNumber]','$item[$ramAmount]','$item[$ramType]','$item[$ramFrequency]','$item[$ramManufacturer]','$item[$ramSerialNumber]','$item[$ramPartNumber]','$item[$ramSlot]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		}
 
 		foreach ($storageJsonSection as $item) {
 			$queryAssetStorage = mysqli_query($connection, "insert into " . $storageTable . " ($assetNumberFK,$storageId,$storageType,$storageSize,$storageConnection,$storageModel,$storageSerialNumber,$storageSmart) values ('$newAsset[$assetNumber]','$item[$storageId]','$item[$storageType]','$item[$storageSize]','$item[$storageConnection]','$item[$storageModel]','$item[$storageSerialNumber]','$item[$storageSmart]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
@@ -189,7 +209,9 @@ if (isset($_POST)) {
 
 		$queryAssetLocation = mysqli_query($connection, "insert into " . $locationTable . " ($assetNumberFK,$roomNumber,$building,$deliveredToRegistrationNumber,$lastDeliveryMadeBy,$lastDeliveryDate) values ('$newAsset[$assetNumber]','$locationJsonSection[$roomNumber]','$locationJsonSection[$building]','$locationJsonSection[$deliveredToRegistrationNumber]','$locationJsonSection[$lastDeliveryMadeBy]','$locationJsonSection[$lastDeliveryDate]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
-		$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$maintenancesJsonSection[$serviceDate]','$maintenancesJsonSection[$serviceType]','$maintenancesJsonSection[$batteryChange]','$maintenancesJsonSection[$ticketNumber]','$maintenancesJsonSection[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		foreach ($maintenancesJsonSection as $item) {
+			$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$item[$serviceDate]','$item[$serviceType]','$item[$batteryChange]','$item[$ticketNumber]','$item[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+		}
 
 		$queryAssetNetwork = mysqli_query($connection, "insert into " . $networkTable . " ($assetNumberFK,$hostname,$ipAddress,$macAddress) values ('$newAsset[$assetNumber]','$networkJsonSection[$hostname]','$networkJsonSection[$ipAddress]','$networkJsonSection[$macAddress]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 

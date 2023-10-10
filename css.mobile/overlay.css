@@ -1,5 +1,6 @@
 @media (prefers-color-scheme: light) {
-    #overlay td {
+    #storageOverlay td,
+    #ramOverlay td {
         border-color: var(--light-border);
     }
 
@@ -15,7 +16,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    #overlay td {
+    #storageOverlay td,
+    #ramOverlay td {
         border-color: var(--dark-border);
     }
 
@@ -30,7 +32,8 @@
     }
 }
 
-#overlay {
+#storageOverlay,
+#ramOverlay {
     backdrop-filter: blur(7px);
     bottom: 0;
     display: none;
@@ -62,7 +65,8 @@
     top: 65%;
 }
 
-#overlay table {
+#storageOverlay table,
+#ramOverlay table {
     border: 1px solid;
     border-collapse: collapse;
     bottom: 0;
@@ -75,7 +79,8 @@
     width: 99%;
 }
 
-#overlay td {
+#storageOverlay td,
+#ramOverlay td {
     border: 1px solid;
 }
 

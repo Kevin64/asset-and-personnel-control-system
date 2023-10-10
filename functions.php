@@ -9,3 +9,7 @@ function gatherJsonTypes($json, $param1, $param2) {
     }
 
 }
+
+function floordec($zahl,$decimals=2){    
+    return floor($zahl*pow(10,$decimals))/pow(10,$decimals);
+}

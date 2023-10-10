@@ -48,6 +48,7 @@ $dbRamArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["RAM"];
 $dbLocationArray = $json_constants_array["DB_ASSET"]["LOCATION"];
 $dbFirmwareArray = $json_constants_array["DB_ASSET"]["FIRMWARE"];
 $dbHardwareArray = $json_constants_array["DB_ASSET"]["HARDWARE"];
+$dbProcessorArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["PROCESSOR"];
 $dbStorageArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["STORAGE"];
 $dbVideoCardArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["VIDEO_CARD"];
 $dbNetworkArray = $json_constants_array["DB_ASSET"]["NETWORK"];

@@ -13,9 +13,11 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 	
 	$queryAssetFirmware = mysqli_query($connection, "select " . $dbFirmwareArray["MEDIA_OPERATION_MODE"] . "," . $dbFirmwareArray["SECURE_BOOT"] . "," . $dbFirmwareArray["TPM_VERSION"] . "," . $dbFirmwareArray["TYPE"] . "," . $dbFirmwareArray["VERSION"] . "," . $dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"] . " from " . $dbFirmwareArray["FIRMWARE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
-	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["BRAND"] . "," . $dbHardwareArray["MODEL"] . "," . $dbHardwareArray["PROCESSOR"] . "," . $dbHardwareArray["SERIAL_NUMBER"] . "," . $dbHardwareArray["TYPE"] . " from " . $dbHardwareArray["HARDWARE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["BRAND"] . "," . $dbHardwareArray["MODEL"] . "," . $dbHardwareArray["SERIAL_NUMBER"] . "," . $dbHardwareArray["TYPE"] . " from " . $dbHardwareArray["HARDWARE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
-	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["AMOUNT"] . "," . $dbRamArray["FREQUENCY"] . "," . $dbRamArray["OCCUPIED_SLOTS"] . "," . $dbRamArray["TOTAL_SLOTS"] . "," . $dbRamArray["TYPE"] . " from " . $dbRamArray["RAM_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+	$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["CPU_ID"] . "," . $dbProcessorArray["NAME"] . "," . $dbProcessorArray["FREQUENCY"] . "," . $dbProcessorArray["NUMBER_OF_CORES"] . "," . $dbProcessorArray["NUMBER_OF_THREADS"] . "," . $dbProcessorArray["CACHE"] . " from " . $dbProcessorArray["PROCESSOR_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+
+	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["AMOUNT"] . "," . $dbRamArray["FREQUENCY"] . "," . $dbRamArray["MANUFACTURER"] . "," . $dbRamArray["TYPE"] . "," . $dbRamArray["SERIAL_NUMBER"] . "," . $dbRamArray["PART_NUMBER"] . "," . $dbRamArray["SLOT"] . " from " . $dbRamArray["RAM_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
 	$queryAssetStorage = mysqli_query($connection, "select " . $dbStorageArray["CONNECTION"] . "," . $dbStorageArray["MODEL"] . "," . $dbStorageArray["SERIAL_NUMBER"] . "," . $dbStorageArray["SIZE"] . "," . $dbStorageArray["SMART_STATUS"] . "," . $dbStorageArray["STORAGE_ID"] . "," . $dbStorageArray["TYPE"] . " from " . $dbStorageArray["STORAGE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 	
@@ -39,9 +41,19 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 		while ($row2 = mysqli_fetch_array($queryAssetHardware, MYSQLI_ASSOC)) {
 			$row1["hardware"] = $row2;
 		}
+		$i = 0;
+		$row1["hardware"]["processor"] = array();
+		while ($row2 = mysqli_fetch_array($queryAssetProcessor, MYSQLI_ASSOC)) {
+			$row1["hardware"]["processor"][$i] = array();
+			$row1["hardware"]["processor"][$i] = $row2;
+			$i++;
+		}
+		$i = 0;
 		$row1["hardware"]["ram"] = array();
 		while ($row2 = mysqli_fetch_array($queryAssetRam, MYSQLI_ASSOC)) {
-			$row1["hardware"]["ram"] = $row2;
+			$row1["hardware"]["ram"][$i] = array();
+			$row1["hardware"]["ram"][$i] = $row2;
+			$i++;
 		}
 		$i = 0;
 		$row1["hardware"]["storage"] = array();

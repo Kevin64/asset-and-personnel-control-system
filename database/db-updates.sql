@@ -1,11 +1,25 @@
+CREATE TABLE `apcsdb`.`apcs_asset_processor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` INT NULL DEFAULT NULL,
+  `cpu_id` TINYINT NULL DEFAULT NULL,
+  `frequency` INT NULL DEFAULT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `numberOfCores` INT NULL DEFAULT NULL,
+  `numberOfThreads` INT NULL DEFAULT NULL,
+  `cache` BIGINT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+
 CREATE TABLE `apcsdb`.`apcs_asset_ram` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
-  `amount` INT NULL DEFAULT NULL,
+  `manufacturer` VARCHAR(100) NULL DEFAULT NULL,
+  `amount` BIGINT NULL DEFAULT NULL,
   `type` TINYINT NULL DEFAULT NULL,
   `frequency` INT NULL DEFAULT NULL,
-  `occupiedSlots` TINYINT NULL DEFAULT NULL,
-  `totalSlots` TINYINT NULL DEFAULT NULL,
+  `slot` VARCHAR(20) NULL DEFAULT NULL,
+  `serialNumber` VARCHAR(100) NULL DEFAULT NULL,
+  `partNumber` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
   CREATE TABLE `apcsdb`.`apcs_asset_operating_system` (
@@ -43,7 +57,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_video_card` (
   `assetNumberFK` INT NULL DEFAULT NULL,
   `gpuId` TINYINT NULL DEFAULT NULL,
   `name` VARCHAR(100) NULL DEFAULT NULL,
-  `vRam` INT NULL DEFAULT NULL,
+  `vRam` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `apcsdb`.`apcs_asset_hardware` (
@@ -52,7 +66,6 @@ CREATE TABLE `apcsdb`.`apcs_asset_hardware` (
   `brand` VARCHAR(100) NULL DEFAULT NULL,
   `type` TINYINT NULL DEFAULT NULL,
   `model` VARCHAR(100) NULL DEFAULT NULL,
-  `processor` VARCHAR(100) NULL DEFAULT NULL,
   `serialNumber` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
