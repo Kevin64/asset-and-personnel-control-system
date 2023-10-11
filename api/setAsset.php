@@ -134,13 +134,13 @@ if (isset($_POST)) {
 		$queryProcessorDel = mysqli_query($connection, "delete " . $processorTable . " from " . $processorTable . " inner join " . $assetTable . " on " . $processorTable . "." . $assetNumberFK . " = " . $assetTable . "." . $assetNumber . " where " . $assetTable . "." . $assetNumber . " = " . $newAsset[$assetNumber]) or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
 
 		foreach ($processorJsonSection as $item) {
-			$queryAssetProcessor = mysqli_query($connection, "insert into " . $processorTable . " ($processorId,$processorName,$processorFrequency,$processorCores,$processorThreads,$processorCache) values ('$newAsset[$processorId]','$item[$processorName]','$item[$processorFrequency]','$item[$processorCores]','$item[$processorThreads]','$item[$processorCache]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+			$queryAssetProcessor = mysqli_query($connection, "insert into " . $processorTable . " ($assetNumberFK,$processorId,$processorName,$processorFrequency,$processorCores,$processorThreads,$processorCache) values ('$newAsset[$assetNumber]','$item[$processorId]','$item[$processorName]','$item[$processorFrequency]','$item[$processorCores]','$item[$processorThreads]','$item[$processorCache]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 		}
 
 		$queryRamDel = mysqli_query($connection, "delete " . $ramTable . " from " . $ramTable . " inner join " . $assetTable . " on " . $ramTable . "." . $assetNumberFK . " = " . $assetTable . "." . $assetNumber . " where " . $assetTable . "." . $assetNumber . " = " . $newAsset[$assetNumber]) or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
 
 		foreach ($ramJsonSection as $item) {
-			$queryAssetRam = mysqli_query($connection, "insert into " . $ramTable . " ($ramAmount,$ramType,$ramFrequency,$ramManufacturer,$ramSerialNumber,$ramPartNumber,$ramSlot) values ('$newAsset[$assetNumber]','$item[$ramAmount]','$item[$ramType]','$item[$ramFrequency]','$item[$ramManufacturer]','$item[$ramSerialNumber]','$item[$ramPartNumber]','$item[$ramSlot]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+			$queryAssetRam = mysqli_query($connection, "insert into " . $ramTable . " ($assetNumberFK,$ramAmount,$ramType,$ramFrequency,$ramManufacturer,$ramSerialNumber,$ramPartNumber,$ramSlot) values ('$newAsset[$assetNumber]','$item[$ramAmount]','$item[$ramType]','$item[$ramFrequency]','$item[$ramManufacturer]','$item[$ramSerialNumber]','$item[$ramPartNumber]','$item[$ramSlot]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 		}
 
 		$queryStorageDel = mysqli_query($connection, "delete " . $storageTable . " from " . $storageTable . " inner join " . $assetTable . " on " . $storageTable . "." . $assetNumberFK . " = " . $assetTable . "." . $assetNumber . " where " . $assetTable . "." . $assetNumber . " = " . $newAsset[$assetNumber]) or die($translations["ERROR_DELETE_ASSET"] . mysqli_error($connection));
