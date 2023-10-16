@@ -64,7 +64,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 50%;
+    width: 60%;
 }
 
 #closeButton {
@@ -84,7 +84,7 @@
     margin: 10px;
     position: absolute;
     right: 0;
-    table-layout: fixed;
+    table-layout: auto;
     top: 0;
     width: 98%;
 }

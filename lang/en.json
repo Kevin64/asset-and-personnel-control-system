@@ -254,7 +254,7 @@
     "STATUS": "Status",
     "STORAGE": "Storage",
     "STORAGE_TOTAL_SIZE": "Total storage",
-    "STORAGE_ID": "Drive number",
+    "STORAGE_ID": "Drive ID",
     "STORAGE_LIST_TYPE": "Type",
     "STORAGE_LIST_SIZE": "Size",
     "STORAGE_LIST_CONNECTION": "Connection",
@@ -285,7 +285,7 @@
     "USE_NAVIGATION_MENU": "Use the menu above to navigate",
     "USERNAME": "Username",
     "VIDEO_CARD": "Video card",
-    "VIDEO_CARD_ID": "Video card number",
+    "VIDEO_CARD_ID": "Video Card ID",
     "VIDEO_CARD_NAME": "Video card",
     "VIDEO_CARD_RAM": "Video memory",
     "VIRTUALIZATION_TECHNOLOGY": {

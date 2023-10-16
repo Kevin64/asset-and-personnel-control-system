@@ -158,12 +158,15 @@ CREATE TABLE `apcsdb_old`.`apcs_model` (
   PRIMARY KEY (`id`)
 );
 
+SET SQL_SAFE_UPDATES=0;
 insert into apcsdb_old.apcs_asset_hardware (`assetNumberFK`,`brand`,`model`,`type`,`serialNumber`) select `assetNumber`,`brand`,`model`,`hwType`,`serialNumber` from apcsdb_old.asset;
 insert into apcsdb_old.apcs_asset_firmware (`assetNumberFK`,`type`,`version`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion`) select `assetNumber`,`fwType`,`fwVersion`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion` from apcsdb_old.asset;
 insert into apcsdb_old.apcs_asset_location (`assetNumberFK`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate`) select `assetNumber`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate` from apcsdb_old.asset;
 insert into apcsdb_old.apcs_asset_maintenances (`assetNumberFK`,`serviceDate`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId`) select `assetNumberFK`,`previousServiceDates`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId` from apcsdb_old.maintenances;
 insert into apcsdb_old.apcs_asset_network (`assetNumberFK`,`macAddress`,`ipAddress`,`hostname`) select `assetNumber`,`macAddress`,`ipAddress`,`hostname` from apcsdb_old.asset;
-#insert into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`) select `assetNumber`,`operatingSystem` from apcsdb_old.asset;
-#insert into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`cpu_id`,`name`) select `assetNumber`,"0",`processor` from apcsdb_old.asset;
-#insert into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`amount`) select `assetNumber`,`ram` from apcsdb_old.asset;
-#insert into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`gpuId`) select `assetNumber`,`videoCard`,"0" from apcsdb_old.asset;
+insert into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`) select `assetNumber`,`operatingSystem` from apcsdb_old.asset;
+insert into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`cpu_id`,`name`) select `assetNumber`,"0",`processor` from apcsdb_old.asset;
+insert into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`amount`) select `assetNumber`,`ram` from apcsdb_old.asset;
+update apcsdb_old.apcs_asset_ram set amount = amount * 1073741824;
+insert into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`gpuId`) select `assetNumber`,`videoCard`,"0" from apcsdb_old.asset;
+SET SQL_SAFE_UPDATES=1;
