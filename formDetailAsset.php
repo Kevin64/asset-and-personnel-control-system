@@ -432,7 +432,7 @@ if ($send != 1) {
 
 
 	<form id="formGeneral">
-		<h1><?php echo $translations["ASSET_DETAIL"] ?></h1><br>
+		<h2><?php echo $translations["ASSET_DETAIL"] ?></h2><br>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($queryAsset)) {

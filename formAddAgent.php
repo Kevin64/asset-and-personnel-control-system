@@ -9,7 +9,7 @@ if (isset($_SESSION["privilegeLevel"])) {
 ?>
 		<div id="middle">
 			<form action=addAgent.php method=post id="formGeneral">
-				<h1><?php echo $translations["ADD_AGENT_FORM"] ?></h1><br>
+				<h2><?php echo $translations["ADD_AGENT_FORM"] ?></h2><br>
 				<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 				<table id="formFields">
 					<tr>

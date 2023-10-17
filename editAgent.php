@@ -57,7 +57,7 @@ if ($send != 1) {
 <div id="middle">
 	<form action="editAgent.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h1><?php echo $translations["AGENT_EDIT"] ?></h1><br>
+		<h2><?php echo $translations["AGENT_EDIT"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $username != $oldUsername) {

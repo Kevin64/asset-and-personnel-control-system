@@ -5,7 +5,7 @@ require_once("connection.php");
 ?>
 
 <div id="middle">
-	<h1><?php echo $translations["CHANGE_AGENT_PASSWORD"] ?></h1><br>
+	<h2><?php echo $translations["CHANGE_AGENT_PASSWORD"] ?></h2><br>
 	<form action="changePassword.php" method="post" id="formGeneral">
 		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<input type=hidden name=txtStatus value="0">

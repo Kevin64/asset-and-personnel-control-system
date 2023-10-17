@@ -117,7 +117,7 @@ if ($send != 1) {
 			$dbAssetArray["SEAL_NUMBER"] . " = '" . $_POST["txtSealNumber"] . "', " .
 			$dbAssetArray["AD_REGISTERED"] . " = '" . $_POST["txtAdRegistered"] . "', " .
 			$dbAssetArray["STANDARD"] . " = '" . $_POST["txtStandard"] . "', " .
-			$dbAssetArray["DISCARDED"] . " = '" . $_POST["chkBoxDiscard"] . "', " .
+			$dbAssetArray["DISCARDED"] . " = '" . $discarded . "', " .
 			$dbAssetArray["NOTE"] . " = '" . $_POST["txtNote"] . "', " .
 			$dbAssetArray["IN_USE"] . " = '" . $_POST["txtInUse"] . "', " .
 			$dbAssetArray["TAG"] . " = '" . $_POST["txtTag"] . "'
@@ -125,9 +125,9 @@ if ($send != 1) {
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
 		$queryAssetLocation = mysqli_query($connection, "update " . $dbLocationArray["LOCATION_TABLE"] . " set " .
-			$dbLocationArray["ROOM_NUMBER"] . " = " . $_POST["txtRoomNumber"] . ", " .
-			$dbLocationArray["BUILDING"] . " = " . $_POST["txtBuilding"] . "
-		where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = " . $_POST["txtAssetNumber"] . ";
+			$dbLocationArray["ROOM_NUMBER"] . " = '" . $_POST["txtRoomNumber"] . "', " .
+			$dbLocationArray["BUILDING"] . " = '" . $_POST["txtBuilding"] . "'
+		where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtAssetNumber"] . "';
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	}
 
@@ -141,7 +141,7 @@ if ($send != 1) {
 	<script src="js/disable-controls.js"></script>
 	<form action="editAsset.php" method="post" id="formGeneral">
 		<input type=hidden name=txtSend value="1">
-		<h1><?php echo $translations["ASSET_EDIT"] ?></h1><br>
+		<h2><?php echo $translations["ASSET_EDIT"] ?></h2><br>
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $assetNumber != $oldAssetNumber) {
