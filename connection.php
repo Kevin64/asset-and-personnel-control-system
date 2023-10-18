@@ -29,7 +29,6 @@ $mediaOpTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "Medi
 $secureBootArray = gatherJsonTypes($json_parameters_array, "Parameters", "SecureBootStates");
 $virtualizationTechnologyArray = gatherJsonTypes($json_parameters_array, "Parameters", "VirtualizationTechnologyStates");
 $serviceTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "ServiceTypes");
-$ramTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "RamTypes");
 $storageTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "StorageTypes");
 $connectionTypesArray = gatherJsonTypes($json_parameters_array, "Parameters", "ConnectionTypes");
 /* ------------------------------------------------------------------------------------------------- */

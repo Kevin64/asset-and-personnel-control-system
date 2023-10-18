@@ -10,6 +10,7 @@
     --dark-background: black;
     --dark-band: rgb(0, 87, 158);
     --dark-border: white;
+    --dark-border-color: rgb(131, 131, 131);
     --dark-box-shadow: rgb(255, 255, 255, .3);
     --dark-box-shadow-hover: rgb(255, 255, 255, 1);
     --dark-disabled-button-backcolor: rgb(32, 32, 32);
@@ -34,6 +35,7 @@
     --light-background: white;
     --light-band: rgb(249, 202, 20);
     --light-border: black;
+    --light-border-color: rgb(173, 173, 173);
     --light-box-shadow: rgb(0, 0, 0, .3);
     --light-box-shadow-hover: rgb(0, 0, 0, 1);
     --light-disabled-button-backcolor: rgb(248, 248, 248);

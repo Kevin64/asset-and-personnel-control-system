@@ -227,9 +227,13 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								foreach ($ramTypesArray as $str1 => $str2) {
-									if ($ramType == $str1)
-										echo $str2;
+								$b = false;
+								if ($ramType == "26") {
+									echo "DDR4";
+								} else if ($ramType == "24") {
+									echo "DDR3";
+								} else {
+									echo "DDR2";
 								}
 								?>
 							</td>

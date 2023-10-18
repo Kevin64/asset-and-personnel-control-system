@@ -1,0 +1,130 @@
+{
+    "adRegistered": "1",
+    "assetNumber": "260000",
+    "discarded": "0",
+    "firmware": {
+        "mediaOperationMode": "1",
+        "secureBoot": "1",
+        "tpmVersion": "1",
+        "type": "0",
+        "version": "2.12",
+        "virtualizationTechnology": "1"
+    },
+    "hardware": {
+        "brand": "Gigabyte",
+        "model": "AORUS X790 Gaming 5",
+        "processor": [
+            {
+                "cpu_id": "0",
+                "name": "Intel Core i7-13700K CPU @ 5.20GHz",
+                "frequency": "5200",
+                "numberOfCores": "8",
+                "numberOfThreads": "16",
+                "cache": "67108864"
+            }
+        ],
+        "ram": [
+            {
+                "amount": "68719476736",
+                "frequency": "6000",
+                "type": "2",
+                "manufacturer": "Samsung",
+                "serialNumber": "SS123SN",
+                "partNumber": "SS123PN",
+                "slot": "DIMM0"
+            },
+            {
+                "amount": "17179869184",
+                "frequency": "5600",
+                "type": "3",
+                "manufacturer": "Kingston",
+                "serialNumber": "KS123SN",
+                "partNumber": "KS123PN",
+                "slot": "DIMM1"
+            },
+            {
+                "amount": "8589934592",
+                "frequency": "5400",
+                "type": "1",
+                "manufacturer": "Hynix",
+                "serialNumber": "HX123SN",
+                "partNumber": "HX123PN",
+                "slot": "DIMM2"
+            }
+        ],
+        "serialNumber": "SNSN123SNSN",
+        "storage": [
+            {
+                "connection": "1",
+                "model": "NVMe Model NEW",
+                "serialNumber": "SN num NEW 2023",
+                "size": "256060514304",
+                "smartStatus": "Pred",
+                "storageId": "0",
+                "type": "0"
+            },
+            {
+                "connection": "0",
+                "model": "SATA Model NEW",
+                "serialNumber": "SN num NEW 2020",
+                "size": "128030257152",
+                "smartStatus": "Ok",
+                "storageId": "1",
+                "type": "1"
+            },
+            {
+                "connection": "0",
+                "model": "SATA Model 3 NEW",
+                "serialNumber": "SN num NEW 2030",
+                "size": "2000409772032",
+                "smartStatus": "OK",
+                "storageId": "2",
+                "type": "0"
+            }
+        ],
+        "type": "3",
+        "videoCard": [
+            {
+                "gpuId": "0",
+                "name": "GeForce RTX 2060",
+                "vRam": "4294967296"
+            },
+            {
+                "gpuId": "1",
+                "name": "Radeon RX 6400 XT",
+                "vRam": "2147483648"
+            }
+        ]
+    },
+    "inUse": "0",
+    "location": {
+        "building": "2",
+        "roomNumber": "666",
+        "deliveredToRegistrationNumber": null,
+        "lastDeliveryMadeBy": null,
+        "lastDeliveryDate": null
+    },
+    "maintenances": [
+        {
+            "agentId": "62",
+            "batteryChange": "1",
+            "serviceDate": "2023-09-30",
+            "serviceType": "1",
+            "ticketNumber": "000111"
+        }
+    ],
+    "network": {
+        "hostname": "PC-260000",
+        "ipAddress": "192.168.76.200",
+        "macAddress": "FF:BB:CC:DD:EE:FF"
+    },
+    "operatingSystem": {
+        "arch": "0",
+        "build": "10.0.14393.5000",
+        "name": "Windows 10 Pro",
+        "version": "1607"
+    },
+    "sealNumber": "SLN123SLN",
+    "standard": "1",
+    "tag": "1"
+}

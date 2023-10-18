@@ -7,7 +7,7 @@ if (isset($_GET["model"]) && $_GET["model"] != "") {
 	if(str_contains($model, "-")) {
 		$model = str_replace("-", " ", $model);
 	}
-	include("../connection.php");
+	include("../../connection.php");
 	$query = mysqli_query($connection, "select " . $dbModelArray["BRAND"] . ", " . $dbModelArray["MODEL"] . ", " . $dbModelArray["FW_VERSION"] . ", " . $dbModelArray["FW_TYPE"] . ", " . $dbModelArray["TPM_VERSION"] . ", " . $dbModelArray["MEDIA_OPERATION_MODE"] . " from " . $dbModelArray["MODEL_TABLE"] . " where " . $dbModelArray["MODEL"] . " = '$model'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 	if (mysqli_num_rows($query) > 0) {
