@@ -2,7 +2,7 @@
 
 header("Content-Type:application/json; charset=UTF-8");
 
-if (isset($_GET["model"]) && $_GET["model"] != "") {
+if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET["model"]) && $_GET["model"] != "") {
 	$model = $_GET["model"];
 	if(str_contains($model, "-")) {
 		$model = str_replace("-", " ", $model);
@@ -23,4 +23,10 @@ if (isset($_GET["model"]) && $_GET["model"] != "") {
 		http_response_code(404);
 		echo $jsonFinal;
 	}
+}
+else {
+	$row1 = array("message" => "Invalid model");
+		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	echo $jsonFinal;
+	http_response_code(400);
 }

@@ -2,10 +2,7 @@
 
 header("Content-Type:application/json; charset=UTF-8");
 
-$jsonCmd1 = null;
-$jsonCmd2 = null;
-
-if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
+if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 	$assetNumber = $_GET["assetNumber"];
 	require("../../connection.php");
 	
@@ -99,7 +96,7 @@ if (isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 		echo $jsonFinal;
 	}
 }
-else if (isset($_POST)) {
+else if (strtoupper($_SERVER["REQUEST_METHOD"]) == "POST") {
 	require("../../connection.php");
 	$json = file_get_contents('php://input');
 	$newAsset = json_decode($json, true);
@@ -318,4 +315,10 @@ else if (isset($_POST)) {
 		http_response_code(201);
 	}
 	header("Connection: close");
+}
+else {
+	$row1 = array("message" => "Invalid asset number");
+		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	echo $jsonFinal;
+	http_response_code(400);
 }
