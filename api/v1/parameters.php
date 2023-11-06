@@ -2,6 +2,25 @@
 
 header("Content-Type:application/json; charset=UTF-8");
 
-$jsonFinal = file_get_contents(__DIR__ . "/../../etc/parameters.json");
-http_response_code(200);
-echo $jsonFinal;
+if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "") {
+    require("../../connection.php");
+
+    $auth = $_SERVER["HTTP_AUTHORIZATION"];
+    $auth_array1 = explode(" ", $auth);
+    $auth_array2 = explode(":", base64_decode($auth_array1[1]));
+    $agent = $auth_array2[0];
+    $password = $auth_array2[1];
+
+    $queryAuthenticate = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " where " . $dbAgentArray["USERNAME"] . " = '$agent'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+    $total = mysqli_num_rows($queryAuthenticate);
+    $row = mysqli_fetch_array($queryAuthenticate);
+    if ($total > 0 && password_verify($password, $row[$dbAgentArray["PASSWORD"]])) {
+        $jsonFinal = file_get_contents(__DIR__ . "/../../etc/parameters.json");
+        http_response_code(200);
+        echo $jsonFinal;
+    } else {
+        http_response_code(401);
+    }
+} else {
+    http_response_code(401);
+}
