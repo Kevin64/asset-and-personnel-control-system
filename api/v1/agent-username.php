@@ -38,8 +38,14 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			http_response_code(400);
 		}
 	} else {
+		$row1 = array("message" => "Unauthorized request");
+		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		echo $jsonFinal;
 		http_response_code(401);
 	}
 } else {
+	$row1 = array("message" => "Unauthorized request");
+	$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	echo $jsonFinal;
 	http_response_code(401);
 }
