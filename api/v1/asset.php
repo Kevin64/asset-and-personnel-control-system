@@ -107,7 +107,6 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 				echo $jsonFinal;
 			}
 		} else if (strtoupper($_SERVER["REQUEST_METHOD"]) == "POST") {
-			require("../../connection.php");
 			$json = file_get_contents('php://input');
 			$newAsset = json_decode($json, true);
 
