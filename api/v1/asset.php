@@ -19,7 +19,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
 			$assetNumber = $_GET["assetNumber"];
 
-			$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . "," . $dbAssetArray["DISCARDED"] . "," . $dbAssetArray["IN_USE"] . "," . $dbAssetArray["NOTE"] . "," . $dbAssetArray["SEAL_NUMBER"] . "," . $dbAssetArray["STANDARD"] . "," . $dbAssetArray["TAG"] . "," . $dbAssetArray["AD_REGISTERED"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+			$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . "," . $dbAssetArray["DISCARDED"] . "," . $dbAssetArray["IN_USE"] . "," . $dbAssetArray["NOTE"] . "," . $dbAssetArray["SEAL_NUMBER"] . "," . $dbAssetArray["STANDARD"] . "," . $dbAssetArray["TAG"] . "," . $dbAssetArray["AD_REGISTERED"] . ", " . $dbAssetArray["HW_UID"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 			$queryAssetFirmware = mysqli_query($connection, "select " . $dbFirmwareArray["MEDIA_OPERATION_MODE"] . "," . $dbFirmwareArray["SECURE_BOOT"] . "," . $dbFirmwareArray["TPM_VERSION"] . "," . $dbFirmwareArray["TYPE"] . "," . $dbFirmwareArray["VERSION"] . "," . $dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"] . " from " . $dbFirmwareArray["FIRMWARE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
@@ -121,6 +121,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			$serviceDate = $dbMaintenanceArray["SERVICE_DATE"];
 			$inUse = $dbAssetArray["IN_USE"];
 			$tag = $dbAssetArray["TAG"];
+			$hwUid = $dbAssetArray["HW_UID"];
 
 			$firmwareTable = $dbFirmwareArray["FIRMWARE_TABLE"];
 			$fwVersion = $dbFirmwareArray["VERSION"];
@@ -213,7 +214,8 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 					$adRegistered . " = '$newAsset[$adRegistered]', " .
 					$standard . " = '$newAsset[$standard]', " .
 					$inUse . " = '$newAsset[$inUse]', " .
-					$tag . " = '$newAsset[$tag]'
+					$tag . " = '$newAsset[$tag]', " .
+					$hwUid . " = '$newAsset[$hwUid]'
 			where " . $assetNumber . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
@@ -290,7 +292,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 				echo "Ativo atualizado\n";
 				http_response_code(200);
 			} else {
-				$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$inUse,$tag) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$inUse]','$newAsset[$tag]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+				$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$inUse,$tag,$hwUid) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$inUse]','$newAsset[$tag]','$newAsset[$hwUid]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 				$queryAssetFirmware = mysqli_query($connection, "insert into " . $firmwareTable . " ($assetNumberFK,$fwVersion,$fwType,$mediaOperationMode,$secureBoot,$virtualizationTechnology,$tpmVersion) values ('$newAsset[$assetNumber]','$firmwareJsonSection[$fwVersion]','$firmwareJsonSection[$fwType]','$firmwareJsonSection[$mediaOperationMode]','$firmwareJsonSection[$secureBoot]','$firmwareJsonSection[$virtualizationTechnology]','$firmwareJsonSection[$tpmVersion]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 

@@ -277,6 +277,7 @@
     "THEME": "Theme",
     "TPM_VERSION": "TPM version",
     "TWO_PASSWORD_NOT_MATCH": "Passwords entered are different!",
+    "HW_UID": "Unique hardware identifier",
     "UNKNOWN": "Unknown",
     "UNSUPPORTED": "Not supported",
     "UPDATED_DATA_SUCCESS": "Data updated successfully!",
