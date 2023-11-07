@@ -1,6 +1,7 @@
 <?php
 
 header("Content-Type:application/json; charset=UTF-8");
+header("WWW-Authenticate: Basic");
 
 if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "") {
     require("../../connection.php");

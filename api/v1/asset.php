@@ -1,6 +1,7 @@
 <?php
 
 header("Content-Type:application/json; charset=UTF-8");
+header("WWW-Authenticate: Basic");
 
 if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "") {
 	require("../../connection.php");
@@ -103,7 +104,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			} else {
 				$row1 = array("message" => "Not Found");
 				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-				http_response_code(404);
+				http_response_code(204);
 				echo $jsonFinal;
 			}
 		} else if (strtoupper($_SERVER["REQUEST_METHOD"]) == "POST") {
