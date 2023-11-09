@@ -25,6 +25,8 @@
             "PCI-E"
         ],
         "RamTypes": [
+            "Free",
+            "N/A",
             "N/A",
             "DDR2",
             "DDR3",

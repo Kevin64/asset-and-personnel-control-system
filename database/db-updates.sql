@@ -90,7 +90,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_storage` (
   `connection` TINYINT NULL DEFAULT NULL,
   `model` VARCHAR(100) NULL DEFAULT NULL,
   `serialNumber` VARCHAR(100) NULL DEFAULT NULL,
-  `smartStatus` VARCHAR(100) NULL DEFAULT NULL,
+  `smartStatus` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
 

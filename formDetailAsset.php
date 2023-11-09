@@ -222,16 +222,8 @@ if ($send != 1) {
 						<tr id=bodyTable>
 							<td>
 								<?php
-								echo $ramSlot;
-								?>
-							</td>
-							<td>
-								<?php
-								$b = false;
-								if ($ramType == "26") {
-									echo $ramTypesArray[3];
-								} else if ($ramType == "24") {
-									echo $ramTypesArray[2];
+								if($ramSlot != "-2") {
+									echo $ramSlot;
 								} else {
 									echo $ramTypesArray[0];
 								}
@@ -239,34 +231,80 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								$totalRamSize += $ramAmount;
-								if ($ramAmount / 1024 / 1024 / 1024 >= 1024) {
-									echo floor($ramAmount / 1024 / 1024 / 1024 / 1024) . " TB";
-								} else if ($ramAmount / 1024 / 1024 / 1024 < 1024 && $ramAmount / 1024 / 1024 / 1024 >= 1) {
-									echo floor($ramAmount / 1024 / 1024 / 1024) . " GB";
-								} else {
-									echo floor($ramAmount / 1024 / 1024) . " MB";
+								$b = false;
+								if ($ramType == "26") {
+									echo $ramTypesArray[5];
+								} else if ($ramType == "24") {
+									echo $ramTypesArray[4];
+								} else if ($ramType == "22") {
+									echo $ramTypesArray[3];
+								} else if ($ramType == "0") {
+									echo $ramTypesArray[2];
+								} else if ($ramType == "2") {
+									echo $ramTypesArray[1];
+								} else if ($ramType == "-2") {
+									echo $ramTypesArray[0];
 								}
 								?>
 							</td>
 							<td>
 								<?php
-								echo $ramFrequency . " MHz";
+								$totalRamSize += $ramAmount;
+								if($ramAmount != "-2") {
+									if ($ramAmount / 1024 / 1024 / 1024 >= 1024) {
+										echo floor($ramAmount / 1024 / 1024 / 1024 / 1024) . " TB";
+									} else if ($ramAmount / 1024 / 1024 / 1024 < 1024 && $ramAmount / 1024 / 1024 / 1024 >= 1) {
+										echo floor($ramAmount / 1024 / 1024 / 1024) . " GB";
+									} else {
+										echo floor($ramAmount / 1024 / 1024) . " MB";
+									}
+								} else {
+									echo $ramTypesArray[0];
+								}
 								?>
 							</td>
 							<td>
 								<?php
-								echo $ramManufacturer;
+								if ($ramFrequency == "-1") {
+									echo $ramTypesArray[1];
+								} else if($ramFrequency != "-2") {
+									echo $ramFrequency . " MHz";
+								} else {
+									echo $ramTypesArray[0];
+								}
 								?>
 							</td>
 							<td>
 								<?php
-								echo $ramSerialNumber;
+								if ($ramManufacturer == "-1") {
+									echo $ramTypesArray[1];
+								} else if($ramManufacturer != "-2") {
+									echo $ramManufacturer;
+								} else {
+									echo $ramTypesArray[0];
+								}
 								?>
 							</td>
 							<td>
 								<?php
-								echo $ramPartNumber;
+								if($ramSerialNumber == "-1") {
+									echo $ramTypesArray[1];									
+								} else if($ramSerialNumber != "-2") {
+									echo $ramSerialNumber;
+								} else {
+									echo $ramTypesArray[0];
+								}
+								?>
+							</td>
+							<td>
+								<?php
+								if($ramPartNumber == "-1") {
+									echo $ramTypesArray[1];									
+								} else if($ramPartNumber != "-2") {
+									echo $ramPartNumber;
+								} else {
+									echo $ramTypesArray[0];
+								}
 								?>
 							</td>
 						</tr>
