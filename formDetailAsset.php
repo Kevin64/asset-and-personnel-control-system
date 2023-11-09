@@ -229,11 +229,11 @@ if ($send != 1) {
 								<?php
 								$b = false;
 								if ($ramType == "26") {
-									echo "DDR4";
+									echo $ramTypesArray[3];
 								} else if ($ramType == "24") {
-									echo "DDR3";
+									echo $ramTypesArray[2];
 								} else {
-									echo "DDR2";
+									echo $ramTypesArray[0];
 								}
 								?>
 							</td>
@@ -422,7 +422,12 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								echo $storageSmartStatus;
+								if($storageSmartStatus == "0")
+									echo "OK";
+								else if($storageSmartStatus == "1")
+									echo "Pred Fail";
+									else if($storageSmartStatus == "-1")
+									echo "N/A";
 								?>
 							</td>
 						</tr>
@@ -1106,7 +1111,7 @@ if ($send != 1) {
 										$b = false;
 										foreach ($operatingSystemArchArray as $str1 => $str2) {
 											if ($str1 == $operatingSystemArch) {
-												echo $str2 . "-bit";
+												echo $str2;
 												$b = true;
 												break;
 											}

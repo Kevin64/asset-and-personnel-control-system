@@ -122,7 +122,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_storage` (
   `connection` tinyint DEFAULT NULL,
   `model` varchar(100) DEFAULT NULL,
   `serialNumber` varchar(100) DEFAULT NULL,
-  `smartStatus` varchar(10) DEFAULT NULL,
+  `smartStatus` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 

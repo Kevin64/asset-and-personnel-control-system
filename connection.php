@@ -12,25 +12,32 @@ $gitHubVersion = null;
 $line = null;
 
 $jsonFileDb = file_get_contents(__DIR__ . "/etc/db-config.json");
+$jsonFileStatesAndTypes = file_get_contents(__DIR__ . "/etc/states-and-types.json");
 $jsonFileParameters = file_get_contents(__DIR__ . "/etc/parameters.json");
 $jsonFileConstants = file_get_contents(__DIR__ . "/etc/constants.json");
+$jsonFileDatabaseColumns = file_get_contents(__DIR__ . "/etc/db-columns.json");
 $json_config_array_db = json_decode($jsonFileDb, true);
+$json_states_and_types_array = json_decode($jsonFileStatesAndTypes, true);
 $json_parameters_array = json_decode($jsonFileParameters, true);
 $json_constants_array = json_decode($jsonFileConstants, true);
+$json_db_columns_array = json_decode($jsonFileDatabaseColumns, true);
 /* ------------------------------------------------------------------------------------------------- */
 $timezone = $json_config_array_db["Locale"];
 date_default_timezone_set($timezone);
+/* ------------------------------------------------------------------------------------------------- */
+$operatingSystemArchArray = $json_states_and_types_array["StatesAndTypes"]["OperatingSystemArchTypes"];
+$fwTypesArray = $json_states_and_types_array["StatesAndTypes"]["FirmwareTypes"];
+$tpmTypesArray = $json_states_and_types_array["StatesAndTypes"]["TpmTypes"];
+$mediaOpTypesArray = $json_states_and_types_array["StatesAndTypes"]["MediaOperationTypes"];
+$secureBootArray = $json_states_and_types_array["StatesAndTypes"]["SecureBootStates"];
+$virtualizationTechnologyArray = $json_states_and_types_array["StatesAndTypes"]["VirtualizationTechnologyStates"];
+$storageTypesArray = $json_states_and_types_array["StatesAndTypes"]["StorageTypes"];
+$connectionTypesArray = $json_states_and_types_array["StatesAndTypes"]["StorageConnectionTypes"];
+$ramTypesArray = $json_states_and_types_array["StatesAndTypes"]["RamTypes"];
+/* ------------------------------------------------------------------------------------------------- */
 $buildingArray = $json_parameters_array["Parameters"]["Buildings"];
 $hwTypesArray = $json_parameters_array["Parameters"]["HardwareTypes"];
-$operatingSystemArchArray = $json_parameters_array["Parameters"]["OperatingSystemArchTypes"];
-$fwTypesArray = $json_parameters_array["Parameters"]["FirmwareTypes"];
-$tpmTypesArray = $json_parameters_array["Parameters"]["TpmTypes"];
-$mediaOpTypesArray = $json_parameters_array["Parameters"]["MediaOperationTypes"];
-$secureBootArray = $json_parameters_array["Parameters"]["SecureBootStates"];
-$virtualizationTechnologyArray = $json_parameters_array["Parameters"]["VirtualizationTechnologyStates"];
 $serviceTypesArray = $json_parameters_array["Parameters"]["ServiceTypes"];
-$storageTypesArray = $json_parameters_array["Parameters"]["StorageTypes"];
-$connectionTypesArray = $json_parameters_array["Parameters"]["ConnectionTypes"];
 /* ------------------------------------------------------------------------------------------------- */
 $orgDataArray = $json_config_array_db["OrgData"];
 $dbSettingsArray = $json_config_array_db["DbSettings"];
@@ -41,20 +48,21 @@ $roleTypesArray = $json_config_array_db["RoleTypes"];
 /* ------------------------------------------------------------------------------------------------- */
 $imgArray = $json_constants_array["IMG"];
 $colorArray = $json_constants_array["COLOR"];
-$dbAssetArray = $json_constants_array["DB_ASSET"];
-$dbOperatingSystemArray = $json_constants_array["DB_ASSET"]["OPERATING_SYSTEM"];
-$dbRamArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["RAM"];
-$dbLocationArray = $json_constants_array["DB_ASSET"]["LOCATION"];
-$dbFirmwareArray = $json_constants_array["DB_ASSET"]["FIRMWARE"];
-$dbHardwareArray = $json_constants_array["DB_ASSET"]["HARDWARE"];
-$dbProcessorArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["PROCESSOR"];
-$dbStorageArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["STORAGE"];
-$dbVideoCardArray = $json_constants_array["DB_ASSET"]["HARDWARE"]["VIDEO_CARD"];
-$dbNetworkArray = $json_constants_array["DB_ASSET"]["NETWORK"];
-$dbMaintenanceArray = $json_constants_array["DB_ASSET"]["MAINTENANCES"];
-$dbAgentArray = $json_constants_array["DB_AGENT"];
-$dbEmployeeArray = $json_constants_array["DB_EMPLOYEE"];
-$dbModelArray = $json_constants_array["DB_MODEL"];
+/* ------------------------------------------------------------------------------------------------- */
+$dbAssetArray = $json_db_columns_array["DB_ASSET"];
+$dbOperatingSystemArray = $json_db_columns_array["DB_ASSET"]["OPERATING_SYSTEM"];
+$dbRamArray = $json_db_columns_array["DB_ASSET"]["HARDWARE"]["RAM"];
+$dbLocationArray = $json_db_columns_array["DB_ASSET"]["LOCATION"];
+$dbFirmwareArray = $json_db_columns_array["DB_ASSET"]["FIRMWARE"];
+$dbHardwareArray = $json_db_columns_array["DB_ASSET"]["HARDWARE"];
+$dbProcessorArray = $json_db_columns_array["DB_ASSET"]["HARDWARE"]["PROCESSOR"];
+$dbStorageArray = $json_db_columns_array["DB_ASSET"]["HARDWARE"]["STORAGE"];
+$dbVideoCardArray = $json_db_columns_array["DB_ASSET"]["HARDWARE"]["VIDEO_CARD"];
+$dbNetworkArray = $json_db_columns_array["DB_ASSET"]["NETWORK"];
+$dbMaintenanceArray = $json_db_columns_array["DB_ASSET"]["MAINTENANCES"];
+$dbAgentArray = $json_db_columns_array["DB_AGENT"];
+$dbEmployeeArray = $json_db_columns_array["DB_EMPLOYEE"];
+$dbModelArray = $json_db_columns_array["DB_MODEL"];
 /* ------------------------------------------------------------------------------------------------- */
 $orgFullName = $orgDataArray["OrganizationFullName"];
 $orgAcronym = $orgDataArray["OrganizationAcronym"];

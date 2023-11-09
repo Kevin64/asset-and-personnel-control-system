@@ -1,0 +1,127 @@
+{
+    "DB_AGENT": {
+        "AGENTS_TABLE": "apcs_agent",
+        "BLOCKED": "blocked",
+        "LAST_LOGIN_DATE": "lastLoginDate",
+        "PASSWORD": "password",
+        "PRIVILEGE_LEVEL": "privilegeLevel",
+        "USERNAME": "username",
+        "NAME": "name",
+        "SURNAME": "surname",
+        "ROLE": "role"
+    },
+    "DB_ASSET": {
+        "AD_REGISTERED": "adRegistered",
+        "ASSET_NUMBER": "assetNumber",
+        "ASSET_NUMBER_FK": "assetNumberFK",
+        "ASSET_TABLE": "apcs_asset",
+        "DISCARDED": "discarded",
+        "FIRMWARE": {
+            "FIRMWARE_TABLE": "apcs_asset_firmware",
+            "MEDIA_OPERATION_MODE": "mediaOperationMode",
+            "SECURE_BOOT": "secureBoot",
+            "TPM_VERSION": "tpmVersion",
+            "TYPE": "type",
+            "VERSION": "version",
+            "VIRTUALIZATION_TECHNOLOGY": "virtualizationTechnology"
+        },
+        "HARDWARE": {
+            "BRAND": "brand",
+            "HARDWARE_TABLE": "apcs_asset_hardware",
+            "MODEL": "model",
+            "PROCESSOR": {
+                "PROCESSOR_TABLE": "apcs_asset_processor",
+                "CPU_ID": "cpu_id",
+                "NAME": "name",
+                "FREQUENCY": "frequency",
+                "NUMBER_OF_CORES": "numberOfCores",
+                "NUMBER_OF_THREADS": "numberOfThreads",
+                "CACHE": "cache"
+            },
+            "RAM": {
+                "AMOUNT": "amount",
+                "FREQUENCY": "frequency",
+                "MANUFACTURER": "manufacturer",
+                "RAM_TABLE": "apcs_asset_ram",
+                "SERIAL_NUMBER": "serialNumber",
+                "PART_NUMBER": "partNumber",
+                "SLOT": "slot",
+                "TYPE": "type"
+            },
+            "SERIAL_NUMBER": "serialNumber",
+            "STORAGE": {
+                "CONNECTION": "connection",
+                "MODEL": "model",
+                "SERIAL_NUMBER": "serialNumber",
+                "SIZE": "size",
+                "SMART_STATUS": "smartStatus",
+                "STORAGE_ID": "storageId",
+                "STORAGE_TABLE": "apcs_asset_storage",
+                "TYPE": "type"
+            },
+            "TYPE": "type",
+            "VIDEO_CARD": {
+                "GPU_ID": "gpuId",
+                "NAME": "name",
+                "RAM": "vRam",
+                "VIDEO_CARD_TABLE": "apcs_asset_video_card"
+            }
+        },
+        "IN_USE": "inUse",
+        "LOCATION": {
+            "BUILDING": "building",
+            "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
+            "LAST_DELIVERY_DATE": "lastDeliveryDate",
+            "LAST_DELIVERY_MADE_BY": "lastDeliveryMadeBy",
+            "LOCATION_TABLE": "apcs_asset_location",
+            "ROOM_NUMBER": "roomNumber"
+        },
+        "MAINTENANCES": {
+            "AGENT_ID": "agentId",
+            "BATTERY_CHANGE": "batteryChange",
+            "MAINTENANCES_TABLE": "apcs_asset_maintenances",
+            "SERVICE_DATE": "serviceDate",
+            "SERVICE_TYPE": "serviceType",
+            "TICKET_NUMBER": "ticketNumber"
+        },
+        "NETWORK": {
+            "HOSTNAME": "hostname",
+            "IP_ADDRESS": "ipAddress",
+            "MAC_ADDRESS": "macAddress",
+            "NETWORK_TABLE": "apcs_asset_network"
+        },
+        "NOTE": "note",
+        "OPERATING_SYSTEM": {
+            "ARCH": "arch",
+            "BUILD": "build",
+            "NAME": "name",
+            "OPERATING_SYSTEM_TABLE": "apcs_asset_operating_system",
+            "VERSION": "version"
+        },
+        "HW_UID": "hwUid",
+        "SEAL_NUMBER": "sealNumber",
+        "STANDARD": "standard",
+        "STORAGE_TOTAL_SIZE": "storageTotalSize",
+        "TAG": "tag"
+    },
+    "DB_EMPLOYEE": {
+        "EMAIL": "email",
+        "EMPLOYEE_TABLE": "apcs_employee",
+        "NAME": "name",
+        "PHONE_EXTENSION": "phoneExtension",
+        "PHONE_NUMBER": "phoneNumber",
+        "REGISTRATION_NUMBER": "registrationNumber",
+        "ROOM_NUMBER": "roomNumber",
+        "SECTOR": "sector",
+        "TYPE": "type"
+    },
+    "DB_MODEL": {
+        "BRAND": "brand",
+        "FW_TYPE": "fwType",
+        "FW_VERSION": "fwVersion",
+        "MEDIA_OPERATION_MODE": "mediaOperationMode",
+        "MODEL": "model",
+        "MODEL_TABLE": "apcs_model",
+        "TPM_VERSION": "tpmVersion"
+    }
+}
