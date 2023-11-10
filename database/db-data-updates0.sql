@@ -91,7 +91,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_operating_system` (
 CREATE TABLE `apcsdb_old`.`apcs_asset_processor` (
   `id` int NOT NULL AUTO_INCREMENT,
   `assetNumberFK` int DEFAULT NULL,
-  `cpu_id` tinyint DEFAULT NULL,
+  `processorId` tinyint DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `frequency` int DEFAULT NULL,
   `numberOfCores` int DEFAULT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_video_card` (
   `assetNumberFK` int DEFAULT NULL,
   `vRam` bigint DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `gpuId` tinyint DEFAULT NULL,
+  `videoCardId` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 

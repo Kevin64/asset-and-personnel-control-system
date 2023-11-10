@@ -31,7 +31,7 @@
             "MODEL": "model",
             "PROCESSOR": {
                 "PROCESSOR_TABLE": "apcs_asset_processor",
-                "CPU_ID": "cpu_id",
+                "CPU_ID": "processorId",
                 "NAME": "name",
                 "FREQUENCY": "frequency",
                 "NUMBER_OF_CORES": "numberOfCores",
@@ -61,7 +61,7 @@
             },
             "TYPE": "type",
             "VIDEO_CARD": {
-                "GPU_ID": "gpuId",
+                "GPU_ID": "videoCardId",
                 "NAME": "name",
                 "RAM": "vRam",
                 "VIDEO_CARD_TABLE": "apcs_asset_video_card"

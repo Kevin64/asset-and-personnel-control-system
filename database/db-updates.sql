@@ -1,7 +1,7 @@
 CREATE TABLE `apcsdb`.`apcs_asset_processor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
-  `cpu_id` TINYINT NULL DEFAULT NULL,
+  `processorId` TINYINT NULL DEFAULT NULL,
   `frequency` INT NULL DEFAULT NULL,
   `name` VARCHAR(100) NULL DEFAULT NULL,
   `numberOfCores` INT NULL DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_location` (
 CREATE TABLE `apcsdb`.`apcs_asset_video_card` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
-  `gpuId` TINYINT NULL DEFAULT NULL,
+  `videoCardId` TINYINT NULL DEFAULT NULL,
   `name` VARCHAR(100) NULL DEFAULT NULL,
   `vRam` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
