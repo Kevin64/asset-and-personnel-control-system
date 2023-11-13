@@ -278,7 +278,7 @@
     "THEME": "Tema",
     "TPM_VERSION": "Versão do TPM",
     "TWO_PASSWORD_NOT_MATCH": "As senhas digitadas são diferentes!",
-    "HW_UID": "Identificador de hardware único",
+    "HW_HASH": "Hash de hardware",
     "UNKNOWN": "Desconhecido",
     "UNSUPPORTED": "Não suportado",
     "UPDATED_DATA_SUCCESS": "Dados atualizados com sucesso!",

@@ -22,6 +22,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset` (
   `tag` tinyint DEFAULT NULL,
   `note` text,
   `hwUid` varchar(64) DEFAULT NULL,
+  `hwHash` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 

@@ -99,6 +99,7 @@
             "VERSION": "version"
         },
         "HW_UID": "hwUid",
+        "HW_HASH": "hwHash",
         "SEAL_NUMBER": "sealNumber",
         "STANDARD": "standard",
         "STORAGE_TOTAL_SIZE": "storageTotalSize",

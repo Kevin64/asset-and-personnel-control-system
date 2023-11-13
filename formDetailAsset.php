@@ -493,7 +493,7 @@ if ($send != 1) {
 				$inUse = $result[$dbAssetArray["IN_USE"]];
 				$sealNumber = $result[$dbAssetArray["SEAL_NUMBER"]];
 				$tag = $result[$dbAssetArray["TAG"]];
-				$hwUid = $result[$dbAssetArray["HW_UID"]]
+				$hwHash = $result[$dbAssetArray["HW_HASH"]]
 			?>
 				<tr>
 					<td colspan=7 id=section-header><?php echo $translations["ASSET_DATA"] ?></td>
@@ -1166,11 +1166,11 @@ if ($send != 1) {
 		<br>
 		<table id="formFields">
 			<tr>
-				<td id=lblFixed><?php echo $translations["HW_UID"] ?></td>
-				<td id=lblData><?php if ($hwUid == "") {
+				<td id=lblFixed><?php echo $translations["HW_HASH"] ?></td>
+				<td id=lblData><?php if ($hwHash == "") {
 									echo $json_constants_array["DASH"];
 								} else {
-									echo $hwUid;
+									echo $hwHash;
 								} ?></td>
 				</td>
 			</tr>
