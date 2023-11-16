@@ -222,7 +222,7 @@ if ($send != 1) {
 						<tr id=bodyTable>
 							<td>
 								<?php
-								if($ramSlot != "-2") {
+								if ($ramSlot != "-2") {
 									echo $ramSlot;
 								} else {
 									echo $ramTypesArray[0];
@@ -250,7 +250,7 @@ if ($send != 1) {
 							<td>
 								<?php
 								$totalRamSize += $ramAmount;
-								if($ramAmount != "-2") {
+								if ($ramAmount != "-2") {
 									if ($ramAmount / 1024 / 1024 / 1024 >= 1024) {
 										echo floor($ramAmount / 1024 / 1024 / 1024 / 1024) . " TB";
 									} else if ($ramAmount / 1024 / 1024 / 1024 < 1024 && $ramAmount / 1024 / 1024 / 1024 >= 1) {
@@ -267,7 +267,7 @@ if ($send != 1) {
 								<?php
 								if ($ramFrequency == "-1") {
 									echo $ramTypesArray[1];
-								} else if($ramFrequency != "-2") {
+								} else if ($ramFrequency != "-2") {
 									echo $ramFrequency . " MHz";
 								} else {
 									echo $ramTypesArray[0];
@@ -278,7 +278,7 @@ if ($send != 1) {
 								<?php
 								if ($ramManufacturer == "-1") {
 									echo $ramTypesArray[1];
-								} else if($ramManufacturer != "-2") {
+								} else if ($ramManufacturer != "-2") {
 									echo $ramManufacturer;
 								} else {
 									echo $ramTypesArray[0];
@@ -287,9 +287,9 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								if($ramSerialNumber == "-1") {
-									echo $ramTypesArray[1];									
-								} else if($ramSerialNumber != "-2") {
+								if ($ramSerialNumber == "-1") {
+									echo $ramTypesArray[1];
+								} else if ($ramSerialNumber != "-2") {
 									echo $ramSerialNumber;
 								} else {
 									echo $ramTypesArray[0];
@@ -298,9 +298,9 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								if($ramPartNumber == "-1") {
-									echo $ramTypesArray[1];									
-								} else if($ramPartNumber != "-2") {
+								if ($ramPartNumber == "-1") {
+									echo $ramTypesArray[1];
+								} else if ($ramPartNumber != "-2") {
 									echo $ramPartNumber;
 								} else {
 									echo $ramTypesArray[0];
@@ -460,11 +460,11 @@ if ($send != 1) {
 							</td>
 							<td>
 								<?php
-								if($storageSmartStatus == "0")
+								if ($storageSmartStatus == "0")
 									echo "OK";
-								else if($storageSmartStatus == "1")
+								else if ($storageSmartStatus == "1")
 									echo "Pred Fail";
-									else if($storageSmartStatus == "-1")
+								else if ($storageSmartStatus == "-1")
 									echo "N/A";
 								?>
 							</td>
@@ -493,7 +493,8 @@ if ($send != 1) {
 				$inUse = $result[$dbAssetArray["IN_USE"]];
 				$sealNumber = $result[$dbAssetArray["SEAL_NUMBER"]];
 				$tag = $result[$dbAssetArray["TAG"]];
-				$hwHash = $result[$dbAssetArray["HW_HASH"]]
+				$hwHash = $result[$dbAssetArray["HW_HASH"]];
+				$assetHash = $result[$dbAssetArray["ASSET_HASH"]];
 			?>
 				<tr>
 					<td colspan=7 id=section-header><?php echo $translations["ASSET_DATA"] ?></td>
@@ -1165,6 +1166,15 @@ if ($send != 1) {
 		</table>
 		<br>
 		<table id="formFields">
+			<tr>
+				<td id=lblFixed><?php echo $translations["ASSET_HASH"] ?></td>
+				<td id=lblData><?php if ($assetHash == "") {
+									echo $json_constants_array["DASH"];
+								} else {
+									echo $assetHash;
+								} ?></td>
+				</td>
+			</tr>
 			<tr>
 				<td id=lblFixed><?php echo $translations["HW_HASH"] ?></td>
 				<td id=lblData><?php if ($hwHash == "") {

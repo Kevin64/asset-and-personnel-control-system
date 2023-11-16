@@ -21,7 +21,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset` (
   `sealNumber` varchar(50) DEFAULT NULL,
   `tag` tinyint DEFAULT NULL,
   `note` text,
-  `hwUid` varchar(64) DEFAULT NULL,
+  `assetHash` varchar(64) DEFAULT NULL,
   `hwHash` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );

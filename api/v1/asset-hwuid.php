@@ -19,13 +19,13 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET["hwUid"]) && $_GET["hwUid"] != "") {
 			$hwUid = $_GET["hwUid"];
 
-			$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["HW_UID"] . " = '$hwUid'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+			$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_HASH"] . " = '$hwUid'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 			$row = mysqli_fetch_array($queryAsset, MYSQLI_ASSOC);
 			$assetNumber = $row["assetNumber"];
 
 			if ($assetNumber != null) {
-				$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . "," . $dbAssetArray["DISCARDED"] . "," . $dbAssetArray["IN_USE"] . "," . $dbAssetArray["NOTE"] . "," . $dbAssetArray["SEAL_NUMBER"] . "," . $dbAssetArray["STANDARD"] . "," . $dbAssetArray["TAG"] . "," . $dbAssetArray["AD_REGISTERED"] . ", " . $dbAssetArray["HW_UID"] . ", " . $dbAssetArray["HW_HASH"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+				$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . "," . $dbAssetArray["DISCARDED"] . "," . $dbAssetArray["IN_USE"] . "," . $dbAssetArray["NOTE"] . "," . $dbAssetArray["SEAL_NUMBER"] . "," . $dbAssetArray["STANDARD"] . "," . $dbAssetArray["TAG"] . "," . $dbAssetArray["AD_REGISTERED"] . ", " . $dbAssetArray["ASSET_HASH"] . ", " . $dbAssetArray["HW_HASH"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 				$queryAssetFirmware = mysqli_query($connection, "select " . $dbFirmwareArray["MEDIA_OPERATION_MODE"] . "," . $dbFirmwareArray["SECURE_BOOT"] . "," . $dbFirmwareArray["TPM_VERSION"] . "," . $dbFirmwareArray["TYPE"] . "," . $dbFirmwareArray["VERSION"] . "," . $dbFirmwareArray["VIRTUALIZATION_TECHNOLOGY"] . " from " . $dbFirmwareArray["FIRMWARE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
@@ -113,6 +113,11 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 					http_response_code(204);
 					echo $jsonFinal;
 				}
+			} else {
+				$row1 = array("message" => "Not Found");
+				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+				http_response_code(204);
+				echo $jsonFinal;
 			}
 		} else if (strtoupper($_SERVER["REQUEST_METHOD"]) == "POST") {
 			$json = file_get_contents('php://input');
@@ -128,7 +133,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			$serviceDate = $dbMaintenanceArray["SERVICE_DATE"];
 			$inUse = $dbAssetArray["IN_USE"];
 			$tag = $dbAssetArray["TAG"];
-			$hwUid = $dbAssetArray["HW_UID"];
+			$hwUid = $dbAssetArray["ASSET_HASH"];
 			$hwHash = $dbAssetArray["HW_HASH"];
 
 			$firmwareTable = $dbFirmwareArray["FIRMWARE_TABLE"];

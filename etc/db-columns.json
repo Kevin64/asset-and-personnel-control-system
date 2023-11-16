@@ -98,7 +98,7 @@
             "OPERATING_SYSTEM_TABLE": "apcs_asset_operating_system",
             "VERSION": "version"
         },
-        "HW_UID": "hwUid",
+        "ASSET_HASH": "assetHash",
         "HW_HASH": "hwHash",
         "SEAL_NUMBER": "sealNumber",
         "STANDARD": "standard",
