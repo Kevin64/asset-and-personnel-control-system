@@ -711,9 +711,15 @@ if ($send != 1) {
 								mysqli_data_seek($queryUsers, 0);
 							while ($resultUsers = mysqli_fetch_array($queryUsers)) {
 								if ($agentId == $resultUsers["id"]) {
-									echo $resultUsers[$dbAgentArray["NAME"]] . " " . $resultUsers[$dbAgentArray["SURNAME"]];
-									$printedMaintenances = true;
-									break;
+									if ($resultUsers[$dbAgentArray["NAME"]] != "") {
+										echo $resultUsers[$dbAgentArray["NAME"]] . " " . $resultUsers[$dbAgentArray["SURNAME"]];
+										$printedMaintenances = true;
+										break;
+									} else {
+										echo $resultUsers[$dbAgentArray["USERNAME"]];
+										$printedMaintenances = true;
+										break;
+									}
 								}
 							?>
 							<?php
@@ -759,7 +765,13 @@ if ($send != 1) {
 						?>
 								<label>
 									<?php
-									echo $resultUsers[$dbAgentArray["USERNAME"]];
+									if ($resultUsers[$dbAgentArray["NAME"]] != "") {
+										echo $resultUsers[$dbAgentArray["NAME"]] . " " . $resultUsers[$dbAgentArray["SURNAME"]];
+										$printedMaintenances = true;
+									} else {
+										echo $resultUsers[$dbAgentArray["USERNAME"]];
+										$printedMaintenances = true;
+									}
 									$printedDelivery = true;
 									?>
 								</label>

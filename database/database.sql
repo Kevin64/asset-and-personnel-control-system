@@ -16,16 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `agent`
+-- Table structure for table `apcs_agent`
 --
 
-DROP TABLE IF EXISTS `agent`;
+DROP TABLE IF EXISTS `apcs_agent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `agent` (
+CREATE TABLE `apcs_agent` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `surname` varchar(45) DEFAULT NULL,
   `privilegeLevel` tinyint DEFAULT NULL,
   `lastLoginDate` varchar(20) DEFAULT NULL,
   `blocked` tinyint DEFAULT NULL,
@@ -34,59 +36,226 @@ CREATE TABLE `agent` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `asset`
+-- Table structure for table `apcs_asset`
 --
 
-DROP TABLE IF EXISTS `asset`;
+DROP TABLE IF EXISTS `apcs_asset`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `asset` (
+CREATE TABLE `apcs_asset` (
   `id` int NOT NULL AUTO_INCREMENT,
   `assetNumber` int DEFAULT NULL,
   `discarded` tinyint DEFAULT NULL,
-  `building` varchar(100) DEFAULT NULL,
-  `roomNumber` varchar(10) DEFAULT NULL,
-  `deliveredToRegistrationNumber` varchar(20) DEFAULT NULL,
-  `lastDeliveryMadeBy` varchar(50) DEFAULT NULL,
-  `lastDeliveryDate` varchar(10) DEFAULT NULL,
-  `note` text,
   `standard` tinyint DEFAULT NULL,
-  `serviceDate` varchar(10) DEFAULT NULL,
   `adRegistered` tinyint DEFAULT NULL,
-  `brand` varchar(100) DEFAULT NULL,
-  `model` varchar(100) DEFAULT NULL,
-  `serialNumber` varchar(100) DEFAULT NULL,
-  `processor` varchar(100) DEFAULT NULL,
-  `ram` varchar(100) DEFAULT NULL,
-  `storageSize` varchar(100) DEFAULT NULL,
-  `operatingSystem` varchar(100) DEFAULT NULL,
-  `hostname` varchar(30) DEFAULT NULL,
   `inUse` tinyint DEFAULT NULL,
   `sealNumber` varchar(50) DEFAULT NULL,
   `tag` tinyint DEFAULT NULL,
-  `macAddress` varchar(18) DEFAULT NULL,
-  `ipAddress` varchar(16) DEFAULT NULL,
-  `hwType` tinyint DEFAULT NULL,
-  `fwVersion` varchar(100) DEFAULT NULL,
-  `fwType` tinyint DEFAULT NULL,
-  `storageType` varchar(100) DEFAULT NULL,
-  `videoCard` varchar(100) DEFAULT NULL,
-  `mediaOperationMode` tinyint DEFAULT NULL,
-  `secureBoot` tinyint DEFAULT NULL,
-  `virtualizationTechnology` tinyint DEFAULT NULL,
-  `tpmVersion` tinyint DEFAULT NULL,
+  `note` text,
+  `assetHash` varchar(64) DEFAULT NULL,
+  `hwHash` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `employee`
+-- Table structure for table `apcs_asset_firmware`
 --
 
-DROP TABLE IF EXISTS `employee`;
+DROP TABLE IF EXISTS `apcs_asset_firmware`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employee` (
+CREATE TABLE `apcs_asset_firmware` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `version` varchar(100) DEFAULT NULL,
+  `mediaOperationMode` tinyint DEFAULT NULL,
+  `secureBoot` tinyint DEFAULT NULL,
+  `virtualizationTechnology` tinyint DEFAULT NULL,
+  `tpmVersion` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_hardware`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_hardware`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_hardware` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `brand` varchar(100) DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `model` varchar(100) DEFAULT NULL,
+  `serialNumber` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_location`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_location` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `building` tinyint DEFAULT NULL,
+  `roomNumber` varchar(10) DEFAULT NULL,
+  `deliveredToRegistrationNumber` varchar(20) DEFAULT NULL,
+  `lastDeliveryMadeBy` varchar(50) DEFAULT NULL,
+  `lastDeliveryDate` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_maintenances`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_maintenances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_maintenances` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `serviceDate` varchar(10) DEFAULT NULL,
+  `serviceType` tinyint DEFAULT NULL,
+  `batteryChange` tinyint DEFAULT NULL,
+  `ticketNumber` int DEFAULT NULL,
+  `agentId` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_network`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_network`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_network` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `macAddress` varchar(18) DEFAULT NULL,
+  `ipAddress` varchar(16) DEFAULT NULL,
+  `hostname` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_operating_system`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_operating_system`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_operating_system` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `version` varchar(25) DEFAULT NULL,
+  `build` varchar(25) DEFAULT NULL,
+  `arch` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_processor`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_processor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_processor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `processorId` tinyint DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `frequency` int DEFAULT NULL,
+  `numberOfCores` int DEFAULT NULL,
+  `numberOfThreads` int DEFAULT NULL,
+  `cache` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_ram`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_ram`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_ram` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `amount` bigint DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `frequency` int DEFAULT NULL,
+  `serialNumber` varchar(100) DEFAULT NULL,
+  `partNumber` varchar(100) DEFAULT NULL,
+  `manufacturer` varchar(100) DEFAULT NULL,
+  `slot` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_storage`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_storage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_storage` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `storageId` tinyint DEFAULT NULL,
+  `type` tinyint DEFAULT NULL,
+  `size` bigint DEFAULT NULL,
+  `connection` tinyint DEFAULT NULL,
+  `model` varchar(100) DEFAULT NULL,
+  `serialNumber` varchar(100) DEFAULT NULL,
+  `smartStatus` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_asset_video_card`
+--
+
+DROP TABLE IF EXISTS `apcs_asset_video_card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_asset_video_card` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assetNumberFK` int DEFAULT NULL,
+  `vRam` bigint DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `videoCardId` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `apcs_employee`
+--
+
+DROP TABLE IF EXISTS `apcs_employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apcs_employee` (
   `id` int NOT NULL AUTO_INCREMENT,
   `registrationNumber` int DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -101,32 +270,13 @@ CREATE TABLE `employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `maintenances`
+-- Table structure for table `apcs_model`
 --
 
-DROP TABLE IF EXISTS `maintenances`;
+DROP TABLE IF EXISTS `apcs_model`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `maintenances` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `assetNumberFK` int DEFAULT NULL,
-  `previousServiceDates` varchar(10) DEFAULT NULL,
-  `serviceType` tinyint DEFAULT NULL,
-  `batteryChange` tinyint DEFAULT NULL,
-  `ticketNumber` int DEFAULT NULL,
-  `agentId` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `model`
---
-
-DROP TABLE IF EXISTS `model`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `model` (
+CREATE TABLE `apcs_model` (
   `id` int NOT NULL AUTO_INCREMENT,
   `brand` varchar(100) DEFAULT NULL,
   `model` varchar(100) DEFAULT NULL,
@@ -147,4 +297,4 @@ CREATE TABLE `model` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-05  9:20:23
+-- Dump completed on 2023-11-22 13:00:03

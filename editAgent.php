@@ -26,10 +26,10 @@ if ($send != 1) {
 		$name = $_POST["txtName"];
 	if (isset($_POST["txtSurname"]))
 		$surname = $_POST["txtSurname"];
-	if (isset($_POST["txtRole"]))
-		$role = $_POST["txtRole"];
 	if (isset($_POST["txtPrivilegeLevel"]))
 		$privilegeLevel = $_POST["txtPrivilegeLevel"];
+	else
+		$privilegeLevel = "0";
 	if (isset($_POST["txtLastLoginDate"]))
 		$lastLoginDate = $_POST["txtLastLoginDate"];
 	if (isset($_POST["chkBoxBlocked"])) {
@@ -43,9 +43,9 @@ if ($send != 1) {
 	$num_rows = mysqli_num_rows($query);
 
 	if ($num_rows == 0) {
-		mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["USERNAME"] . " = '$username', " . $dbAgentArray["NAME"] . " = '$name', " . $dbAgentArray["SURNAME"] . " = '$surname', " . $dbAgentArray["ROLE"] . " = '$role', " . $dbAgentArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_AGENT_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["USERNAME"] . " = '$username', " . $dbAgentArray["NAME"] . " = '$name', " . $dbAgentArray["SURNAME"] . " = '$surname', " . $dbAgentArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_AGENT_DATA"] . mysqli_error($connection));
 	} else if ($num_rows == 1 && $username == $oldUsername) {
-		mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_AGENT_DATA"] . mysqli_error($connection));
+		mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["NAME"] . " = '$name', " . $dbAgentArray["SURNAME"] . " = '$surname', " . $dbAgentArray["PRIVILEGE_LEVEL"] . " = '$privilegeLevel', " . $dbAgentArray["BLOCKED"] . " = '$blocked' where id = '$idUser'") or die($translations["ERROR_UPDATE_AGENT_DATA"] . mysqli_error($connection));
 	}
 
 	$query = mysqli_query($connection, "select * from " . $dbAgentArray["AGENTS_TABLE"] . " where id = '$idUser'") or die($translations["ERROR_SHOW_DETAIL_AGENT"] . mysqli_error($connection));
@@ -76,7 +76,6 @@ if ($send != 1) {
 				$oldUsername = $result[$dbAgentArray["USERNAME"]];
 				$name = $result[$dbAgentArray["NAME"]];
 				$surname = $result[$dbAgentArray["SURNAME"]];
-				$role = $result[$dbAgentArray["ROLE"]];
 				$privilegeLevel = $result[$dbAgentArray["PRIVILEGE_LEVEL"]];
 				$lastLoginDate = $result[$dbAgentArray["LAST_LOGIN_DATE"]];
 				$blocked = $result[$dbAgentArray["BLOCKED"]];
