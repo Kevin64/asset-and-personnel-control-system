@@ -22,27 +22,34 @@ $devices = array($android, $iphone, $ipad);
 	<?php
 	if (in_array(true, $devices)) {
 	?>
+		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/buttons.css">
+		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/colors.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/table.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/styles.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/forms.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/menu.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/input.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/animation.css">
+		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.mobile/overlay.css">
 	<?php
 	} else {
 	?>
+		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/buttons.css">
+		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/colors.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/table.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/styles.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/forms.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/menu.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/input.css">
 		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/animation.css">
+		<link rel="stylesheet" href="<?php __DIR__ ?>/../css.desktop/overlay.css">
 	<?php
 	}
 	?>
 	<meta charset="utf-8">
 	<title>.:: <?php echo $translations["APCS"] ?> ::.</title>
-	<link rel="icon" href="<?php echo $imgArray["FAVICON"] ?>" type="image/x-icon" />
+	<link href="<?php echo $imgArray["FAVICON_LIGHT_MODE"] ?>" rel="icon" media="(prefers-color-scheme: light)" type="image/png" />
+	<link href="<?php echo $imgArray["FAVICON_DARK_MODE"] ?>" rel="icon" media="(prefers-color-scheme: dark)" type="image/png" />
 </head>
 
 <body>

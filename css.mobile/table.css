@@ -117,14 +117,15 @@
 	margin-left: auto;
 	padding: 0px;
 	width: 100%;
-
-	/*  */
 }
 
 #assetData thead,
 #modelData thead,
 #employeeData thead,
 #userData thead,
+#processorData thead,
+#ramData thead,
+#videoCardData thead,
 #storageData thead {
 	position: sticky;
 	top: 0;

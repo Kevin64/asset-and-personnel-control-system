@@ -7,8 +7,7 @@
         "PRIVILEGE_LEVEL": "privilegeLevel",
         "USERNAME": "username",
         "NAME": "name",
-        "SURNAME": "surname",
-        "ROLE": "role"
+        "SURNAME": "surname"
     },
     "DB_ASSET": {
         "AD_REGISTERED": "adRegistered",

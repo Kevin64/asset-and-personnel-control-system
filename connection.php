@@ -1,7 +1,5 @@
 <?php
 
-require("functions.php");
-
 if(isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
 	$language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
 	$lang_file = '/lang/' . $language . '.json';
@@ -44,7 +42,6 @@ $dbSettingsArray = $json_config_array_db["DbSettings"];
 $privilegeLevelsArray = $json_config_array_db["PrivilegeLevels"];
 $entityTypesArray = $json_config_array_db["EntityTypes"];
 $employeeTypesArray = $json_config_array_db["EmployeeTypes"];
-$roleTypesArray = $json_config_array_db["RoleTypes"];
 /* ------------------------------------------------------------------------------------------------- */
 $imgArray = $json_constants_array["IMG"];
 $colorArray = $json_constants_array["COLOR"];

@@ -1,4 +1,4 @@
-CREATE TABLE `apcsdb`.`apcs_asset_processor` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_processor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `processorId` TINYINT NULL DEFAULT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_processor` (
   `cache` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_ram` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_ram` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `amount` BIGINT NULL DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_ram` (
   `slot` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_operating_system` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_operating_system` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `name` VARCHAR(100) NULL DEFAULT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_operating_system` (
   `arch` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-  CREATE TABLE `apcsdb`.`apcs_asset_firmware` (
+  CREATE TABLE `apcsdb_old`.`apcs_asset_firmware` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `type` TINYINT NULL DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_operating_system` (
   `tpmVersion` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_location` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_location` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `building` TINYINT NULL DEFAULT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_location` (
   `lastDeliveryDate` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_video_card` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_video_card` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `videoCardId` TINYINT NULL DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_video_card` (
   `vRam` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_hardware` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_hardware` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `brand` VARCHAR(100) NULL DEFAULT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_hardware` (
   `serialNumber` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_network` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_network` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `macAddress` VARCHAR(18) NULL DEFAULT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `apcsdb`.`apcs_asset_network` (
   `hostname` VARCHAR(30) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb`.`apcs_asset_storage` (
+CREATE TABLE `apcsdb_old`.`apcs_asset_storage` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `storageId` TINYINT NULL DEFAULT NULL,
@@ -88,43 +88,47 @@ CREATE TABLE `apcsdb`.`apcs_asset_storage` (
   `smartStatus` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-ALTER TABLE `apcsdb`.`asset` 
-RENAME TO  `apcsdb`.`apcs_asset` ;
+ALTER TABLE `apcsdb_old`.`asset` 
+RENAME TO  `apcsdb_old`.`apcs_asset` ;
 
-ALTER TABLE `apcsdb`.`agent` 
-RENAME TO  `apcsdb`.`apcs_agent` ;
+ALTER TABLE `apcsdb_old`.`agent` 
+RENAME TO  `apcsdb_old`.`apcs_agent` ;
 
-ALTER TABLE `apcsdb`.`employee` 
-RENAME TO  `apcsdb`.`apcs_employee` ;
+ALTER TABLE `apcsdb_old`.`employee` 
+RENAME TO  `apcsdb_old`.`apcs_employee` ;
 
-ALTER TABLE `apcsdb`.`model` 
-RENAME TO  `apcsdb`.`apcs_model` ;
+ALTER TABLE `apcsdb_old`.`model` 
+RENAME TO  `apcsdb_old`.`apcs_model` ;
 
-ALTER TABLE `apcsdb`.`maintenances` 
-RENAME TO  `apcsdb`.`apcs_asset_maintenances` ;
+ALTER TABLE `apcsdb_old`.`maintenances` 
+RENAME TO  `apcsdb_old`.`apcs_asset_maintenances` ;
 
-ALTER TABLE `apcsdb`.`apcs_agent` 
+ALTER TABLE `apcsdb_old`.`apcs_agent` 
 ADD COLUMN `name` VARCHAR(45) NULL DEFAULT NULL AFTER `password`,
-ADD COLUMN `surname` VARCHAR(45) NULL DEFAULT NULL AFTER `name`,
+ADD COLUMN `surname` VARCHAR(45) NULL DEFAULT NULL AFTER `name`;
 
-ALTER TABLE `apcsdb`.`apcs_asset` 
+ALTER TABLE `apcsdb_old`.`apcs_asset` 
 ADD COLUMN `assetHash` VARCHAR(64) NULL DEFAULT NULL AFTER `note`,
 ADD COLUMN `hwHash` VARCHAR(64) NULL DEFAULT NULL AFTER `assethash`;
 
-ALTER TABLE `apcsdb`.`apcs_asset_maintenances` 
+ALTER TABLE `apcsdb_old`.`apcs_asset_maintenances` 
 CHANGE COLUMN `previousServiceDates` `serviceDate` VARCHAR(10) NULL DEFAULT NULL ;
 --------------------------------------------------------
 SET SQL_SAFE_UPDATES=0;
-insert into apcsdb_old.apcs_asset_hardware (`assetNumberFK`,`brand`,`model`,`type`,`serialNumber`) select `assetNumber`,`brand`,`model`,`hwType`,`serialNumber` from apcsdb_old.asset;
-insert into apcsdb_old.apcs_asset_firmware (`assetNumberFK`,`type`,`version`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion`) select `assetNumber`,`fwType`,`fwVersion`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion` from apcsdb_old.asset;
-insert into apcsdb_old.apcs_asset_location (`assetNumberFK`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate`) select `assetNumber`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate` from apcsdb_old.asset;
-insert into apcsdb_old.apcs_asset_maintenances (`assetNumberFK`,`serviceDate`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId`) select `assetNumberFK`,`previousServiceDates`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId` from apcsdb_old.maintenances;
-insert into apcsdb_old.apcs_asset_network (`assetNumberFK`,`macAddress`,`ipAddress`,`hostname`) select `assetNumber`,`macAddress`,`ipAddress`,`hostname` from apcsdb_old.asset;
-insert into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`) select `assetNumber`,`operatingSystem` from apcsdb_old.asset;
-insert into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`processorId`,`name`) select `assetNumber`,"0",`processor` from apcsdb_old.asset;
-insert into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`amount`) select `assetNumber`, left(`ram`, 1) from apcsdb_old.asset;
+insert into apcsdb_old.apcs_asset_hardware (`assetNumberFK`,`brand`,`model`,`type`,`serialNumber`) select `assetNumber`,`brand`,`model`,`hwType`,`serialNumber` from apcsdb_old.apcs_asset;
+insert into apcsdb_old.apcs_asset_firmware (`assetNumberFK`,`type`,`version`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion`) select `assetNumber`,`fwType`,`fwVersion`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion` from apcsdb_old.apcs_asset;
+insert into apcsdb_old.apcs_asset_location (`assetNumberFK`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate`) select `assetNumber`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate` from apcsdb_old.apcs_asset;
+#insert into apcsdb_old.apcs_asset_maintenances (`assetNumberFK`,`serviceDate`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId`) select `assetNumberFK`,`previousServiceDates`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId` from apcsdb_old.apcs_maintenances;
+insert into apcsdb_old.apcs_asset_network (`assetNumberFK`,`macAddress`,`ipAddress`,`hostname`) select `assetNumber`,`macAddress`,`ipAddress`,`hostname` from apcsdb_old.apcs_asset;
+insert into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`) select `assetNumber`,`operatingSystem` from apcsdb_old.apcs_asset;
+insert into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`processorId`,`name`) select `assetNumber`,"0",`processor` from apcsdb_old.apcs_asset;
+insert into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`amount`) select `assetNumber`, left(`ram`, 1) from apcsdb_old.apcs_asset;
 update apcsdb_old.apcs_asset_ram set amount = amount * 1073741824;
-insert into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`videoCardId`) select `assetNumber`,`videoCard`,"0" from apcsdb_old.asset;
+insert into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`videoCardId`) select `assetNumber`,`videoCard`,"0" from apcsdb_old.apcs_asset;
+
+insert into apcsdb_old.apcs_asset_storage (`assetNumberFK`,`size`) select `assetNumber`, left(`storageSize`, 1) from apcsdb_old.apcs_asset;
+update apcsdb_old.apcs_asset_storage set size = size * 100000000000;
+
 SET SQL_SAFE_UPDATES=1;
 
 ALTER TABLE `apcsdb_old`.`apcs_asset` 

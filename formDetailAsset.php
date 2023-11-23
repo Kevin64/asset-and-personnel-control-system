@@ -2,6 +2,7 @@
 require_once("checkSession.php");
 require_once("top.php");
 require_once("connection.php");
+require_once("functions.php");
 
 $send = null;
 $idAsset = null;

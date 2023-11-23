@@ -18,7 +18,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 	if ($total > 0 && password_verify($password, $row[$dbAgentArray["PASSWORD"]])) {
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET["username"]) && $_GET["username"] != "") {
 			$username = $_GET["username"];
-			$query = mysqli_query($connection, "select id, " . $dbAgentArray["USERNAME"] . ", " . $dbAgentArray["PASSWORD"] . ", " . $dbAgentArray["NAME"] . ", " . $dbAgentArray["SURNAME"] . ", " . $dbAgentArray["ROLE"] . ", " . $dbAgentArray["PRIVILEGE_LEVEL"] . ", " . $dbAgentArray["LAST_LOGIN_DATE"] . ", " . $dbAgentArray["BLOCKED"] . " from " . $dbAgentArray["AGENTS_TABLE"] . " where " . $dbAgentArray["USERNAME"] . " = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+			$query = mysqli_query($connection, "select id, " . $dbAgentArray["USERNAME"] . ", " . $dbAgentArray["PASSWORD"] . ", " . $dbAgentArray["NAME"] . ", " . $dbAgentArray["SURNAME"] . ", " . $dbAgentArray["PRIVILEGE_LEVEL"] . ", " . $dbAgentArray["LAST_LOGIN_DATE"] . ", " . $dbAgentArray["BLOCKED"] . " from " . $dbAgentArray["AGENTS_TABLE"] . " where " . $dbAgentArray["USERNAME"] . " = '$username'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 			if (mysqli_num_rows($query) > 0) {
 				while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {

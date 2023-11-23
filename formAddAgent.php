@@ -18,6 +18,16 @@ if (isset($_SESSION["privilegeLevel"])) {
 						<td><input type=text name=txtUser required></td>
 					</tr>
 					<tr>
+						<td id=lblFixed><?php echo $translations["AGENT_NAME"] ?><mark id=asterisk>*</mark></td>
+
+						<td><input type=text name=txtName required></td>
+					</tr>
+					<tr>
+						<td id=lblFixed><?php echo $translations["AGENT_SURNAME"] ?><mark id=asterisk>*</mark></td>
+
+						<td><input type=text name=txtSurname required></td>
+					</tr>
+					<tr>
 						<td id=lblFixed><?php echo $translations["PASSWORD"] ?><mark id=asterisk>*</mark></td>
 
 						<td><input type=password name=txtPassword required></td>
