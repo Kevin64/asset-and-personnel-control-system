@@ -78,6 +78,7 @@
 #formGeneral td#lblData {
 	text-align: left;
 	width: 55%;
+	word-break: break-word;
 }
 
 #asterisk {

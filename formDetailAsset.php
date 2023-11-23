@@ -752,6 +752,9 @@ if ($send != 1) {
 					<td id=lblData><?php if ($lastDeliveryDate == "") {
 										echo $json_constants_array["DASH"];
 									} else {
+										$datePM = substr($lastDeliveryDate, 0, 10);
+										$explodedDateA = explode($json_constants_array["DASH"], $datePM);
+										$lastDeliveryDate = $explodedDateA[2] . "/" . $explodedDateA[1] . "/" . $explodedDateA[0];
 										echo $lastDeliveryDate;
 									} ?></td>
 				</tr>

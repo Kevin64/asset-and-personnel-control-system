@@ -48,7 +48,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    width: 98%;
+    width: 100%;
     z-index: 2;
 }
 
@@ -62,7 +62,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 100%;
+    width: 95%;
 }
 
 #closeButton {
@@ -82,7 +82,7 @@
     margin: 2px;
     position: absolute;
     right: 0;
-    table-layout: fixed;
+    table-layout: auto;
     top: 0;
     width: 99%;
 }
@@ -99,6 +99,6 @@
     display: inline-block;
     font-size: 15px;
     margin: 0 auto;
-    margin-top: 65%;
+    margin-top: 75%;
     padding: 3px;
 }
