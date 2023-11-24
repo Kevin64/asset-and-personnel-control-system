@@ -1,4 +1,4 @@
-#SELECT LEFT(`operatingSystem`, (LOCATE(',', `operatingSystem`, 1)) - 1) FROM `apcsdb_old`.`asset`;
+#SELECT LEFT(`operatingSystem`, (LOCATE(',', `operatingSystem`, 1)) - 1) FROM `apcsdb_old`.`apcs_asset`;
 
 #DROP TEMPORARY TABLE IF EXISTS TempTable;
 #CREATE TEMPORARY TABLE IF NOT EXISTS TempTable (versionColumn VARCHAR(100)); 

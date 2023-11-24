@@ -120,14 +120,20 @@ insert into apcsdb_old.apcs_asset_firmware (`assetNumberFK`,`type`,`version`,`me
 insert into apcsdb_old.apcs_asset_location (`assetNumberFK`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate`) select `assetNumber`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate` from apcsdb_old.apcs_asset;
 #insert into apcsdb_old.apcs_asset_maintenances (`assetNumberFK`,`serviceDate`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId`) select `assetNumberFK`,`previousServiceDates`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId` from apcsdb_old.apcs_maintenances;
 insert into apcsdb_old.apcs_asset_network (`assetNumberFK`,`macAddress`,`ipAddress`,`hostname`) select `assetNumber`,`macAddress`,`ipAddress`,`hostname` from apcsdb_old.apcs_asset;
-insert into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`) select `assetNumber`,`operatingSystem` from apcsdb_old.apcs_asset;
-insert into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`processorId`,`name`) select `assetNumber`,"0",`processor` from apcsdb_old.apcs_asset;
+insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`,`build`,`version`,`arch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'0' FROM apcs_asset WHERE operatingSystem LIKE '%32 bits';
+insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`,`build`,`version`,`arch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'0' FROM apcs_asset WHERE operatingSystem LIKE '%86)';
+insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`,`build`,`version`,`arch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'1' FROM apcs_asset WHERE operatingSystem LIKE '%64 bits';
+insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`name`,`build`,`version`,`arch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'1' FROM apcs_asset WHERE operatingSystem LIKE '%64)';
+insert IGNORE into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`processorId`,`name`,`frequency`,`numberOfCores`,`numberOfThreads`) SELECT `assetNumber`, '0',`processor`, cast(substring_index(SUBSTRING_INDEX(`processor`, ' MHz', 1),' ', -1) as unsigned), cast(substring_index(SUBSTRING_INDEX(`processor`, 'C/', 1),'(', -1) as unsigned), cast(substring_index(SUBSTRING_INDEX(`processor`, 'T)', 1),'/', -1) as unsigned) FROM `apcsdb_old`.`apcs_asset`;
 insert into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`amount`) select `assetNumber`, left(`ram`, 1) from apcsdb_old.apcs_asset;
 update apcsdb_old.apcs_asset_ram set amount = amount * 1073741824;
-insert into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`videoCardId`) select `assetNumber`,`videoCard`,"0" from apcsdb_old.apcs_asset;
-
+insert IGNORE into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`videoCardId`,`vRam`) SELECT `assetNumber`, `videoCard`, '0', substring_index(substring_index(SUBSTRING_INDEX(`videoCard`, '%B)', 1),'(', -1), ' ', 1) FROM `apcsdb_old`.`apcs_asset` WHERE videoCard LIKE '%GB)';
+update apcsdb_old.apcs_asset_video_card set vRam = vRam * 1073741824 WHERE `name` LIKE '%GB)';
+insert IGNORE into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`name`,`videoCardId`,`vRam`) SELECT `assetNumber`, `videoCard`, '0', substring_index(substring_index(SUBSTRING_INDEX(`videoCard`, '%B)', 1),'(', -1), ' ', 1) FROM `apcsdb_old`.`apcs_asset` WHERE videoCard LIKE '%MB)';
+update apcsdb_old.apcs_asset_video_card set vRam = vRam * 1048576 WHERE `name` LIKE '%MB)';
 insert into apcsdb_old.apcs_asset_storage (`assetNumberFK`,`size`) select `assetNumber`, left(`storageSize`, 1) from apcsdb_old.apcs_asset;
 update apcsdb_old.apcs_asset_storage set size = size * 100000000000;
+
 
 SET SQL_SAFE_UPDATES=1;
 
