@@ -2,8 +2,8 @@ RewriteEngine on
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^api/v1/asset/([0-9]{0,6})$ api/v1/asset.php?assetNumber=$1 [L]
-RewriteRule ^api/v1/asset-hwuid/([0-9a-f]{64})$ api/v1/asset-hwuid.php?hwUid=$1 [L]
+RewriteRule ^api/v1/asset-number/([0-9]{0,6})$ api/v1/asset-number.php?assetNumber=$1 [L]
+RewriteRule ^api/v1/asset-hash/([0-9a-f]{64})$ api/v1/asset-hash.php?assetHash=$1 [L]
 RewriteRule ^api/v1/agent-username/([0-9a-zA-Z]*)$ api/v1/agent-username.php?username=$1 [NC,L]
 RewriteRule ^api/v1/agent-id/([0-9]*)$ api/v1/agent-id.php?id=$1 [NC,L]
 RewriteRule ^api/v1/delivery/([0-9a-zA-Z-]*)$ api/v1/delivery.php?assetNumber=$1 [NC,L]

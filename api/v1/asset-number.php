@@ -16,8 +16,8 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 	$total = mysqli_num_rows($queryAuthenticate);
 	$row = mysqli_fetch_array($queryAuthenticate);
 	if ($total > 0 && password_verify($password, $row[$dbAgentArray["PASSWORD"]])) {
-		if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET["assetNumber"]) && $_GET["assetNumber"] != "") {
-			$assetNumber = $_GET["assetNumber"];
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == "GET" && isset($_GET[$dbAssetArray["ASSET_NUMBER"]]) && $_GET[$dbAssetArray["ASSET_NUMBER"]] != "") {
+			$assetNumber = $_GET[$dbAssetArray["ASSET_NUMBER"]];
 
 			$queryAsset = mysqli_query($connection, "select " . $dbAssetArray["ASSET_NUMBER"] . "," . $dbAssetArray["DISCARDED"] . "," . $dbAssetArray["IN_USE"] . "," . $dbAssetArray["NOTE"] . "," . $dbAssetArray["SEAL_NUMBER"] . "," . $dbAssetArray["STANDARD"] . "," . $dbAssetArray["TAG"] . "," . $dbAssetArray["AD_REGISTERED"] . ", " . $dbAssetArray["ASSET_HASH"] . ", " . $dbAssetArray["HW_HASH"] . " from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
@@ -99,13 +99,13 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 					$row1["operatingSystem"] = $row2;
 				}
 				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-				http_response_code(200);
 				echo $jsonFinal;
+				http_response_code(200);
 			} else {
 				$row1 = array("message" => "Not Found");
 				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-				http_response_code(204);
 				echo $jsonFinal;
+				http_response_code(204);
 			}
 		} else if (strtoupper($_SERVER["REQUEST_METHOD"]) == "POST") {
 			$json = file_get_contents('php://input');

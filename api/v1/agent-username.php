@@ -24,13 +24,13 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 				while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$jsonCmd = json_encode($row, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 				}
-				http_response_code(200);
 				echo $jsonCmd;
+				http_response_code(200);
 			} else {
 				$row1 = array("message" => "Not Found");
 				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-				http_response_code(204);
 				echo $jsonFinal;
+				http_response_code(204);
 			}
 		} else {
 			$row1 = array("message" => "Invalid username");

@@ -17,8 +17,8 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
     $row = mysqli_fetch_array($queryAuthenticate);
     if ($total > 0 && password_verify($password, $row[$dbAgentArray["PASSWORD"]])) {
         $jsonFinal = file_get_contents(__DIR__ . "/../../etc/parameters.json");
-        http_response_code(200);
         echo $jsonFinal;
+        http_response_code(200);
     } else {
         $row1 = array("message" => "Unauthorized request");
         $jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
