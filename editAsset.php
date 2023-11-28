@@ -98,7 +98,7 @@ if ($send != 1) {
 		where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtOldAssetNumber"] . "';
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
-		$queryAssetMaintenance = mysqli_query($connection, "update " . $dbMaintenanceArray["MAINTENANCES_TABLE"] . " set " .
+		$queryAssetMaintenance = mysqli_query($connection, "update " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " set " .
 			$dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtAssetNumber"] . "'
 		where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtOldAssetNumber"] . "';
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));

@@ -78,7 +78,7 @@
         "MAINTENANCES": {
             "AGENT_ID": "agentId",
             "BATTERY_CHANGE": "batteryChange",
-            "MAINTENANCES_TABLE": "apcs_asset_maintenances",
+            "MAINTENANCE_TABLE": "apcs_asset_maintenances",
             "SERVICE_DATE": "serviceDate",
             "SERVICE_TYPE": "serviceType",
             "TICKET_NUMBER": "ticketNumber"
