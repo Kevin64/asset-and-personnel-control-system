@@ -32,24 +32,24 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			} else {
 				$row1 = array("message" => "Not Found");
 				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-				echo $jsonFinal;
 				http_response_code(204);
+				echo $jsonFinal;
 			}
 		} else {
 			$row1 = array("message" => "Invalid model");
 			$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-			echo $jsonFinal;
 			http_response_code(400);
+			echo $jsonFinal;
 		}
 	} else {
 		$row1 = array("message" => "Unauthorized request");
 		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		echo $jsonFinal;
 		http_response_code(401);
+		echo $jsonFinal;
 	}
 } else {
 	$row1 = array("message" => "Unauthorized request");
 	$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-	echo $jsonFinal;
 	http_response_code(401);
+	echo $jsonFinal;
 }

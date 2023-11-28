@@ -105,19 +105,19 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 						$row1["operatingSystem"] = $row2;
 					}
 					$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-					echo $jsonFinal;
 					http_response_code(200);
+					echo $jsonFinal;
 				} else {
 					$row1 = array("message" => "Not Found");
 					$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-					echo $jsonFinal;
 					http_response_code(204);
+					echo $jsonFinal;
 				}
 			} else {
 				$row1 = array("message" => "Not Found");
 				$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-				echo $jsonFinal;
 				http_response_code(204);
+				echo $jsonFinal;
 			}
 		} else if (strtoupper($_SERVER["REQUEST_METHOD"]) == "POST") {
 			$json = file_get_contents('php://input');
@@ -286,7 +286,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 
 				foreach ($maintenancesJsonSection as $item) {
 					if ($item[$serviceType] != "2")
-						$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$item[$serviceDate]','$item[$serviceType]','$item[$batteryChange]','$item[$ticketNumber]','$item[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+						$queryAssetMaintenance = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$item[$serviceDate]','$item[$serviceType]','$item[$batteryChange]','$item[$ticketNumber]','$item[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 				}
 
 				$queryAssetNetwork = mysqli_query($connection, "update " . $networkTable . " set " .
@@ -303,8 +303,8 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 					$operatingSystemVersion . " = '$operatingSystemJsonSection[$operatingSystemVersion]'
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
-				echo "Ativo atualizado\n";
 				http_response_code(200);
+				echo "Ativo atualizado\n";
 			} else {
 				$queryAsset = mysqli_query($connection, "insert into " . $assetTable . " ($assetNumber,$discarded,$sealNumber,$adRegistered,$standard,$inUse,$tag,$assetHash,$hwHash) values ('$newAsset[$assetNumber]','$newAsset[$discarded]','$newAsset[$sealNumber]','$newAsset[$adRegistered]','$newAsset[$standard]','$newAsset[$inUse]','$newAsset[$tag]','$newAsset[$assetHash]','$newAsset[$hwHash]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
@@ -331,31 +331,31 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 				$queryAssetLocation = mysqli_query($connection, "insert into " . $locationTable . " ($assetNumberFK,$roomNumber,$building,$deliveredToRegistrationNumber,$lastDeliveryMadeBy,$lastDeliveryDate) values ('$newAsset[$assetNumber]','$locationJsonSection[$roomNumber]','$locationJsonSection[$building]','$locationJsonSection[$deliveredToRegistrationNumber]','$locationJsonSection[$lastDeliveryMadeBy]','$locationJsonSection[$lastDeliveryDate]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 				foreach ($maintenancesJsonSection as $item) {
-					$queryAssetMaintenances = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$item[$serviceDate]','$item[$serviceType]','$item[$batteryChange]','$item[$ticketNumber]','$item[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
+					$queryAssetMaintenance = mysqli_query($connection, "insert into " . $maintenancesTable . " ($assetNumberFK,$serviceDate,$serviceType,$batteryChange,$ticketNumber,$agentId) values ('$newAsset[$assetNumber]','$item[$serviceDate]','$item[$serviceType]','$item[$batteryChange]','$item[$ticketNumber]','$item[$agentId]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 				}
 
 				$queryAssetNetwork = mysqli_query($connection, "insert into " . $networkTable . " ($assetNumberFK,$hostname,$ipAddress,$macAddress) values ('$newAsset[$assetNumber]','$networkJsonSection[$hostname]','$networkJsonSection[$ipAddress]','$networkJsonSection[$macAddress]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
 
 				$queryAssetOperatingSystem = mysqli_query($connection, "insert into " . $operatingSystemTable . " ($assetNumberFK,$operatingSystemName,$operatingSystemVersion,$operatingSystemBuild,$operatingSystemArch) values ('$newAsset[$assetNumber]','$operatingSystemJsonSection[$operatingSystemName]','$operatingSystemJsonSection[$operatingSystemVersion]','$operatingSystemJsonSection[$operatingSystemBuild]','$operatingSystemJsonSection[$operatingSystemArch]');") or die($translations["ERROR_ADD_DATA"] . mysqli_error($connection));
-				echo "Ativo adicionado\n";
 				http_response_code(201);
+				echo "Ativo adicionado\n";
 			}
 			header("Connection: close");
 		} else {
-			$row1 = array("message" => "Invalid hardware id number");
+			$row1 = array("message" => "Invalid asset hash number");
 			$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-			echo $jsonFinal;
 			http_response_code(400);
+			echo $jsonFinal;
 		}
 	} else {
 		$row1 = array("message" => "Unauthorized request");
 		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		echo $jsonFinal;
 		http_response_code(401);
+		echo $jsonFinal;
 	}
 } else {
 	$row1 = array("message" => "Unauthorized request");
 	$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-	echo $jsonFinal;
 	http_response_code(401);
+	echo $jsonFinal;
 }

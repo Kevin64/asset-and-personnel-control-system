@@ -42,25 +42,25 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 					$lastDeliveryDate . " = '$locationJsonSection[$lastDeliveryDate]'
 			where " . $assetNumberFK . " = '$newAsset[$assetNumber]';
 			") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
-				echo "Ativo atualizado\n";
 				http_response_code(200);
+				echo "Ativo atualizado\n";
 			}
 			header("Connection: close");
 		} else {
 			$row1 = array("message" => "Invalid asset number");
 			$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-			echo $jsonFinal;
 			http_response_code(400);
+			echo $jsonFinal;
 		}
 	} else {
 		$row1 = array("message" => "Unauthorized request");
 		$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		echo $jsonFinal;
 		http_response_code(401);
+		echo $jsonFinal;
 	}
 } else {
 	$row1 = array("message" => "Unauthorized request");
 	$jsonFinal = json_encode($row1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-	echo $jsonFinal;
 	http_response_code(401);
+	echo $jsonFinal;
 }
