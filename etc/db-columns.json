@@ -17,91 +17,90 @@
         "DISCARDED": "discarded",
         "FIRMWARE": {
             "FIRMWARE_TABLE": "apcs_asset_firmware",
-            "MEDIA_OPERATION_MODE": "mediaOperationMode",
-            "SECURE_BOOT": "secureBoot",
-            "TPM_VERSION": "tpmVersion",
-            "TYPE": "type",
-            "VERSION": "version",
-            "VIRTUALIZATION_TECHNOLOGY": "virtualizationTechnology"
+            "MEDIA_OPERATION_MODE": "fwMediaOperationMode",
+            "SECURE_BOOT": "fwSecureBoot",
+            "TPM_VERSION": "fwTpmVersion",
+            "TYPE": "fwType",
+            "VERSION": "fwVersion",
+            "VIRTUALIZATION_TECHNOLOGY": "fwVirtualizationTechnology"
         },
         "HARDWARE": {
-            "BRAND": "brand",
+            "BRAND": "hwBrand",
             "HARDWARE_TABLE": "apcs_asset_hardware",
-            "MODEL": "model",
+            "MODEL": "hwModel",
             "PROCESSOR": {
                 "PROCESSOR_TABLE": "apcs_asset_processor",
-                "CPU_ID": "processorId",
-                "NAME": "name",
-                "FREQUENCY": "frequency",
-                "NUMBER_OF_CORES": "numberOfCores",
-                "NUMBER_OF_THREADS": "numberOfThreads",
-                "CACHE": "cache"
+                "CPU_ID": "procId",
+                "NAME": "procName",
+                "FREQUENCY": "procFrequency",
+                "NUMBER_OF_CORES": "procNumberOfCores",
+                "NUMBER_OF_THREADS": "procNumberOfThreads",
+                "CACHE": "procCache"
             },
             "RAM": {
-                "AMOUNT": "amount",
-                "FREQUENCY": "frequency",
-                "MANUFACTURER": "manufacturer",
+                "AMOUNT": "ramAmount",
+                "FREQUENCY": "ramFrequency",
+                "MANUFACTURER": "ramManufacturer",
                 "RAM_TABLE": "apcs_asset_ram",
-                "SERIAL_NUMBER": "serialNumber",
-                "PART_NUMBER": "partNumber",
-                "SLOT": "slot",
-                "TYPE": "type"
+                "SERIAL_NUMBER": "ramSerialNumber",
+                "PART_NUMBER": "ramPartNumber",
+                "SLOT": "ramSlot",
+                "TYPE": "ramType"
             },
-            "SERIAL_NUMBER": "serialNumber",
+            "SERIAL_NUMBER": "hwSerialNumber",
             "STORAGE": {
-                "CONNECTION": "connection",
-                "MODEL": "model",
-                "SERIAL_NUMBER": "serialNumber",
-                "SIZE": "size",
-                "SMART_STATUS": "smartStatus",
-                "STORAGE_ID": "storageId",
+                "CONNECTION": "storConnection",
+                "MODEL": "storModel",
+                "SERIAL_NUMBER": "storSerialNumber",
+                "SIZE": "storSize",
+                "SMART_STATUS": "storSmartStatus",
+                "STORAGE_ID": "storId",
                 "STORAGE_TABLE": "apcs_asset_storage",
-                "TYPE": "type"
+                "TYPE": "storType"
             },
-            "TYPE": "type",
+            "TYPE": "hwType",
             "VIDEO_CARD": {
-                "GPU_ID": "videoCardId",
-                "NAME": "name",
-                "RAM": "vRam",
+                "GPU_ID": "vcId",
+                "NAME": "vcName",
+                "RAM": "vcRam",
                 "VIDEO_CARD_TABLE": "apcs_asset_video_card"
             }
         },
         "IN_USE": "inUse",
         "LOCATION": {
-            "BUILDING": "building",
-            "DELIVERED_TO_REGISTRATION_NUMBER": "deliveredToRegistrationNumber",
-            "LAST_DELIVERY_DATE": "lastDeliveryDate",
-            "LAST_DELIVERY_MADE_BY": "lastDeliveryMadeBy",
+            "BUILDING": "locBuilding",
+            "DELIVERED_TO_REGISTRATION_NUMBER": "locDeliveredToRegistrationNumber",
+            "LAST_DELIVERY_DATE": "locLastDeliveryDate",
+            "LAST_DELIVERY_MADE_BY": "locLastDeliveryMadeBy",
             "LOCATION_TABLE": "apcs_asset_location",
-            "ROOM_NUMBER": "roomNumber"
+            "ROOM_NUMBER": "locRoomNumber"
         },
         "MAINTENANCES": {
-            "AGENT_ID": "agentId",
-            "BATTERY_CHANGE": "batteryChange",
+            "AGENT_ID": "mainAgentId",
+            "BATTERY_CHANGE": "mainBatteryChange",
             "MAINTENANCE_TABLE": "apcs_asset_maintenances",
-            "SERVICE_DATE": "serviceDate",
-            "SERVICE_TYPE": "serviceType",
-            "TICKET_NUMBER": "ticketNumber"
+            "SERVICE_DATE": "mainServiceDate",
+            "SERVICE_TYPE": "mainServiceType",
+            "TICKET_NUMBER": "mainTicketNumber"
         },
         "NETWORK": {
-            "HOSTNAME": "hostname",
-            "IP_ADDRESS": "ipAddress",
-            "MAC_ADDRESS": "macAddress",
+            "HOSTNAME": "netHostname",
+            "IP_ADDRESS": "netIpAddress",
+            "MAC_ADDRESS": "netMacAddress",
             "NETWORK_TABLE": "apcs_asset_network"
         },
         "NOTE": "note",
         "OPERATING_SYSTEM": {
-            "ARCH": "arch",
-            "BUILD": "build",
-            "NAME": "name",
+            "ARCH": "osArch",
+            "BUILD": "osBuild",
+            "NAME": "osName",
             "OPERATING_SYSTEM_TABLE": "apcs_asset_operating_system",
-            "VERSION": "version"
+            "VERSION": "osVersion"
         },
         "ASSET_HASH": "assetHash",
         "HW_HASH": "hwHash",
         "SEAL_NUMBER": "sealNumber",
         "STANDARD": "standard",
-        "STORAGE_TOTAL_SIZE": "storageTotalSize",
         "TAG": "tag"
     },
     "DB_EMPLOYEE": {

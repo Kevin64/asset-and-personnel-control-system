@@ -37,15 +37,61 @@ if (isset($sort) and $sort == "desc") {
 }
 
 if ($send != 1) {
-	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ") from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 0) as t1 inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . " group by t1." . $dbAssetArray["ASSET_NUMBER"] . " order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;";
+	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")
+		from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 0) as t1
+			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2
+			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3
+			inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4
+			inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
+			order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;";
 	$queryActive = mysqli_query($connection, $s) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryDiscarded = mysqli_query($connection, "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ") from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 1) as t1 inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . " group by t1." . $dbAssetArray["ASSET_NUMBER"] . " order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryDiscarded = mysqli_query($connection, "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")
+		from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 1) as t1
+			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2
+			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3
+			inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4
+			inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
+			order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
 } else {
-	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ") from " . $dbAssetArray["ASSET_TABLE"] . " as t1 inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . " where $rdCriterion like '%$search%' group by t1." . $dbAssetArray["ASSET_NUMBER"] . " order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;";
+	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")
+		from " . $dbAssetArray["ASSET_TABLE"] . " as t1
+			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbFirmwareArray["FIRMWARE_TABLE"] . " as t6 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t6." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbOperatingSystemArray["OPERATING_SYSTEM_TABLE"] . " as t7 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t7." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbProcessorArray["PROCESSOR_TABLE"] . " as t8 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t8." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbRamArray["RAM_TABLE"] . " as t9 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t9." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbStorageArray["STORAGE_TABLE"] . " as t10 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t10." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+			inner join " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . " as t11 on
+				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t11." . $dbAssetArray["ASSET_NUMBER_FK"] . "
+		where $rdCriterion like '%$search%'
+			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
+			order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;";
 	$querySearch = mysqli_query($connection, $s) or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 	$totalSearch = mysqli_num_rows($querySearch);
