@@ -18,26 +18,26 @@ while ($row = mysqli_fetch_array($query)) {
 }
 
 if (mysqli_num_rows($query) == 0) {
-	$message = "<font color=" . $colorArray["ERROR"] . ">" . $translations["AGENT_NOT_EXIST"] . "</font>";
+	$message = "<label style=color:var(--error-forecolor)>" . $translations["AGENT_NOT_EXIST"] . "</label>";
 } else {
 	if ($_SESSION["privilegeLevel"] != $privilegeLevelsArray["ADMINISTRATOR_LEVEL"]) {
 		$currentPassword = password_verify($_POST["txtCurrentPassword"], $password);
 		if ($verifyPasswordAlt) {
 			if ($password == $currentPassword) {
 				$queryChangePassword = mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["PASSWORD"] . " = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
-				$message = "<font color=" . $colorArray["SUCCESS_REGISTER_BACKGROUND"] . ">" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
+				$message = "<label style=color:var(--success-forecolor)>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</label>";
 			} else {
-				$message = "<font color=" . $colorArray["ERROR"] . ">" . $translations["OLD_PASSWORD_NOT_MATCH"] . "</font>";
+				$message = "<label style=color:var(--error-forecolor)>" . $translations["OLD_PASSWORD_NOT_MATCH"] . "</label>";
 			}
 		} else {
-			$message = "<font color=" . $colorArray["ERROR"] . ">" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
+			$message = "<label style=color:var(--error-forecolor)>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</label>";
 		}
 	} else {
 		if ($verifyPasswordAlt) {
 			$queryChangePassword = mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["PASSWORD"] . " = '$newPassword' where id = '$idUser'") or die($translations["ERROR_UPDATE_PASSWORD"] . mysqli_error($connection));
-			$message = "<font color=". $colorArray["SUCCESS_REGISTER_BACKGROUND"] . ">" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</font>";
+			$message = "<label style=color:var(--success-forecolor)>" . $translations["SUCCESS_UPDATE_PASSWORD"] . "</label>";
 		} else {
-			$message = "<font color=" . $colorArray["ERROR"] . ">" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</font>";
+			$message = "<label style=color:var(--error-forecolor)>" . $translations["TWO_PASSWORD_NOT_MATCH"] . "</label>";
 		}
 	}
 }

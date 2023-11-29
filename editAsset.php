@@ -145,9 +145,9 @@ if ($send != 1) {
 		<?php
 		if ($send == 1) {
 			if ($num_rows > 0 && $assetNumber != $oldAssetNumber) {
-				echo "<font color=" . $colorArray["ERROR"] . ">" . $translations["ASSET_ALREADY_EXIST"] . "</font><br><br>";
+				echo "<label style=color:var(--error-forecolor)>" . $translations["ASSET_ALREADY_EXIST"] . "</label><br><br>";
 			} else {
-				echo "<font color=" . $colorArray["SUCCESS_REGISTER_BACKGROUND"] . ">" . $translations["SUCCESS_UPDATE_ASSET_DATA"] . "</font><br><br>";
+				echo "<label style=color:var(--success-forecolor)>" . $translations["SUCCESS_UPDATE_ASSET_DATA"] . "</label><br><br>";
 			}
 		}
 		?>

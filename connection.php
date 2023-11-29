@@ -47,7 +47,6 @@ $entityTypesArray = $json_config_array_db["EntityTypes"];
 $employeeTypesArray = $json_config_array_db["EmployeeTypes"];
 /* ------------------------------------------------------------------------------------------------- */
 $imgArray = $json_constants_array["IMG"];
-$colorArray = $json_constants_array["COLOR"];
 /* ------------------------------------------------------------------------------------------------- */
 $dbAssetArray = $json_db_columns_array["DB_ASSET"];
 $dbOperatingSystemArray = $json_db_columns_array["DB_ASSET"]["OPERATING_SYSTEM"];

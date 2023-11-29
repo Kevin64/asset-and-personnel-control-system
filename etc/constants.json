@@ -1,10 +1,5 @@
 {
     "APCS": "Asset and Personnel Control System - APCS",
-    "COLOR": {
-        "ERROR": "red",
-        "IN_USE": "green",
-        "NOT_IN_USE": "red"
-    },
     "DASH": "-",
     "GITHUB_REPO_NAME": "asset-and-personnel-control-system",
     "GITHUB_REPO_OWNER": "Kevin64",
