@@ -115,7 +115,7 @@ ALTER TABLE `apcsdb_old`.`apcs_asset_maintenances`
 CHANGE COLUMN `previousServiceDates` `mainServiceDate` VARCHAR(10) NULL DEFAULT NULL ,
 CHANGE COLUMN `serviceType` `mainServiceType` TINYINT NULL DEFAULT NULL ,
 CHANGE COLUMN `batteryChange` `mainBatteryChange` TINYINT NULL DEFAULT NULL ,
-CHANGE COLUMN `ticketNumber` `mainTicketNumber` TINYINT NULL DEFAULT NULL ,
+CHANGE COLUMN `ticketNumber` `mainTicketNumber` INT NULL DEFAULT NULL ,
 CHANGE COLUMN `agentId` `mainAgentId` INT NULL DEFAULT NULL ;
 --------------------------------------------------------
 SET SQL_SAFE_UPDATES=0;

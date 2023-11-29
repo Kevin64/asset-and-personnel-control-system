@@ -77,6 +77,11 @@
 	padding: 0;
 }
 
+:root {
+	touch-action: pan-x pan-y;
+	height: 100%
+}
+
 #menu ul,
 #menu li,
 #menu span,
