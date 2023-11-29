@@ -25,9 +25,9 @@
             "FW_VIRTUALIZATION_TECHNOLOGY": "fwVirtualizationTechnology"
         },
         "HARDWARE": {
-            "BRAND": "hwBrand",
+            "HW_BRAND": "hwBrand",
             "HARDWARE_TABLE": "apcs_asset_hardware",
-            "MODEL": "hwModel",
+            "HW_MODEL": "hwModel",
             "PROCESSOR": {
                 "PROCESSOR_TABLE": "apcs_asset_processor",
                 "PROCESSOR_ID": "procId",
@@ -38,31 +38,31 @@
                 "PROC_CACHE": "procCache"
             },
             "RAM": {
-                "AMOUNT": "ramAmount",
-                "FREQUENCY": "ramFrequency",
-                "MANUFACTURER": "ramManufacturer",
+                "RAM_AMOUNT": "ramAmount",
+                "RAM_FREQUENCY": "ramFrequency",
+                "RAM_MANUFACTURER": "ramManufacturer",
                 "RAM_TABLE": "apcs_asset_ram",
-                "SERIAL_NUMBER": "ramSerialNumber",
-                "PART_NUMBER": "ramPartNumber",
-                "SLOT": "ramSlot",
-                "TYPE": "ramType"
+                "RAM_SERIAL_NUMBER": "ramSerialNumber",
+                "RAM_PART_NUMBER": "ramPartNumber",
+                "RAM_SLOT": "ramSlot",
+                "RAM_TYPE": "ramType"
             },
-            "SERIAL_NUMBER": "hwSerialNumber",
+            "HW_SERIAL_NUMBER": "hwSerialNumber",
             "STORAGE": {
-                "CONNECTION": "storConnection",
-                "MODEL": "storModel",
-                "SERIAL_NUMBER": "storSerialNumber",
-                "SIZE": "storSize",
-                "SMART_STATUS": "storSmartStatus",
-                "STORAGE_ID": "storId",
+                "STOR_CONNECTION": "storConnection",
+                "STOR_MODEL": "storModel",
+                "STOR_SERIAL_NUMBER": "storSerialNumber",
+                "STOR_SIZE": "storSize",
+                "STOR_SMART_STATUS": "storSmartStatus",
+                "STOR_ID": "storId",
                 "STORAGE_TABLE": "apcs_asset_storage",
-                "TYPE": "storType"
+                "STOR_TYPE": "storType"
             },
-            "TYPE": "hwType",
+            "HW_TYPE": "hwType",
             "VIDEO_CARD": {
-                "GPU_ID": "vcId",
-                "NAME": "vcName",
-                "RAM": "vcRam",
+                "VC_ID": "vcId",
+                "VC_NAME": "vcName",
+                "VC_RAM": "vcRam",
                 "VIDEO_CARD_TABLE": "apcs_asset_video_card"
             }
         },
@@ -76,12 +76,12 @@
             "LOC_ROOM_NUMBER": "locRoomNumber"
         },
         "MAINTENANCES": {
-            "AGENT_ID": "mainAgentId",
-            "BATTERY_CHANGE": "mainBatteryChange",
+            "MAIN_AGENT_ID": "mainAgentId",
+            "MAIN_BATTERY_CHANGE": "mainBatteryChange",
             "MAINTENANCE_TABLE": "apcs_asset_maintenances",
-            "SERVICE_DATE": "mainServiceDate",
-            "SERVICE_TYPE": "mainServiceType",
-            "TICKET_NUMBER": "mainTicketNumber"
+            "MAIN_SERVICE_DATE": "mainServiceDate",
+            "MAIN_SERVICE_TYPE": "mainServiceType",
+            "MAIN_TICKET_NUMBER": "mainTicketNumber"
         },
         "NETWORK": {
             "NET_HOSTNAME": "netHostname",

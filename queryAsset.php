@@ -37,7 +37,7 @@ if (isset($sort) and $sort == "desc") {
 }
 
 if ($send != 1) {
-	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")
+	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ")
 		from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 0) as t1
 			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2
 			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3
@@ -48,10 +48,10 @@ if ($send != 1) {
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
-			order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;";
+			order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc;";
 	$queryActive = mysqli_query($connection, $s) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryDiscarded = mysqli_query($connection, "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")
+	$queryDiscarded = mysqli_query($connection, "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ")
 		from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where " . $dbAssetArray["DISCARDED"] . " = 1) as t1
 			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2
 			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3
@@ -62,12 +62,12 @@ if ($send != 1) {
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
-			order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+			order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
 } else {
-	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")
+	$s = "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ")
 		from " . $dbAssetArray["ASSET_TABLE"] . " as t1
 			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2 on
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . "
@@ -91,7 +91,7 @@ if ($send != 1) {
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t11." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 		where $rdCriterion like '%$search%'
 			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
-			order by ANY_VALUE(" . $dbMaintenanceArray["SERVICE_DATE"] . ") desc;";
+			order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc;";
 	$querySearch = mysqli_query($connection, $s) or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 	$totalSearch = mysqli_num_rows($querySearch);
@@ -119,25 +119,21 @@ if ($send != 1) {
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbLocationArray["LOC_BUILDING"]) echo "selected='selected'"; ?>value="<?php echo $dbLocationArray["LOC_BUILDING"] ?>"><?php echo $translations["BUILDING"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["AD_REGISTERED"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["AD_REGISTERED"] ?>"><?php echo $translations["AD_REGISTERED"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbAssetArray["STANDARD"]) echo "selected='selected'"; ?>value="<?php echo $dbAssetArray["STANDARD"] ?>"><?php echo $translations["STANDARD"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbMaintenanceArray["SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbMaintenanceArray["SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["BRAND"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["BRAND"] ?>"><?php echo $translations["BRAND"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["MODEL"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["MODEL"] ?>"><?php echo $translations["MODEL"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["SERIAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["SERIAL_NUMBER"] ?>"><?php echo $translations["SERIAL_NUMBER"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbMaintenanceArray["MAIN_SERVICE_DATE"]) echo "selected='selected'"; ?>value="<?php echo $dbMaintenanceArray["MAIN_SERVICE_DATE"] ?>"><?php echo $translations["LAST_MAINTENANCE_DATE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["HW_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["HW_TYPE"] ?>"><?php echo $translations["HW_TYPE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["HW_BRAND"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["HW_BRAND"] ?>"><?php echo $translations["BRAND"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["HW_MODEL"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["HW_MODEL"] ?>"><?php echo $translations["MODEL"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["HW_SERIAL_NUMBER"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["HW_SERIAL_NUMBER"] ?>"><?php echo $translations["SERIAL_NUMBER"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbProcessorArray["PROC_NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbProcessorArray["PROC_NAME"] ?>"><?php echo $translations["PROCESSOR"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbRamArray["AMOUNT"]) echo "selected='selected'"; ?>value="<?php echo $dbRamArray["AMOUNT"] ?>"><?php echo $translations["RAM_AMOUNT"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbRamArray["TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbRamArray["TYPE"] ?>"><?php echo $translations["RAM_TYPE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbRamArray["FREQUENCY"]) echo "selected='selected'"; ?>value="<?php echo $dbRamArray["FREQUENCY"] ?>"><?php echo $translations["RAM_FREQUENCY"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbOperatingSystemArray["OS_NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbOperatingSystemArray["OS_NAME"] ?>"><?php echo $translations["OPERATING_SYSTEM_NAME"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbOperatingSystemArray["OS_VERSION"]) echo "selected='selected'"; ?>value="<?php echo $dbOperatingSystemArray["OS_VERSION"] ?>"><?php echo $translations["OPERATING_SYSTEM_VERSION"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbOperatingSystemArray["OS_BUILD"]) echo "selected='selected'"; ?>value="<?php echo $dbOperatingSystemArray["OS_BUILD"] ?>"><?php echo $translations["OPERATING_SYSTEM_BUILD"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbOperatingSystemArray["OS_ARCH"]) echo "selected='selected'"; ?>value="<?php echo $dbOperatingSystemArray["OS_ARCH"] ?>"><?php echo $translations["OPERATING_SYSTEM_ARCH"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbRamArray["RAM_AMOUNT"]) echo "selected='selected'"; ?>value="<?php echo $dbRamArray["RAM_AMOUNT"] ?>"><?php echo $translations["RAM"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbStorageArray["STOR_SIZE"]) echo "selected='selected'"; ?>value="<?php echo $dbStorageArray["STOR_SIZE"] ?>"><?php echo $translations["STORAGE"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbVideoCardArray["VC_NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbVideoCardArray["VC_NAME"] ?>"><?php echo $translations["VIDEO_CARD"] ?></option>
+						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbOperatingSystemArray["OS_NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbOperatingSystemArray["OS_NAME"] ?>"><?php echo $translations["OPERATING_SYSTEM"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbNetworkArray["NET_HOSTNAME"]) echo "selected='selected'"; ?>value="<?php echo $dbNetworkArray["NET_HOSTNAME"] ?>"><?php echo $translations["HOSTNAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbNetworkArray["NET_MAC_ADDRESS"]) echo "selected='selected'"; ?>value="<?php echo $dbNetworkArray["NET_MAC_ADDRESS"] ?>"><?php echo $translations["MAC_ADDRESS"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbNetworkArray["NET_IP_ADDRESS"]) echo "selected='selected'"; ?>value="<?php echo $dbNetworkArray["NET_IP_ADDRESS"] ?>"><?php echo $translations["IP_ADDRESS"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbFirmwareArray["FW_VERSION"]) echo "selected='selected'"; ?>value="<?php echo $dbFirmwareArray["FW_VERSION"] ?>"><?php echo $translations["FW_VERSION"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbHardwareArray["TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbHardwareArray["TYPE"] ?>"><?php echo $translations["HW_TYPE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbFirmwareArray["FW_TYPE"]) echo "selected='selected'"; ?>value="<?php echo $dbFirmwareArray["FW_TYPE"] ?>"><?php echo $translations["FW_TYPE"] ?></option>
-						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbVideoCardArray["NAME"]) echo "selected='selected'"; ?>value="<?php echo $dbVideoCardArray["NAME"] ?>"><?php echo $translations["VIDEO_CARD_NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbFirmwareArray["FW_MEDIA_OPERATION_MODE"]) echo "selected='selected'"; ?>value="<?php echo $dbFirmwareArray["FW_MEDIA_OPERATION_MODE"] ?>"><?php echo $translations["MEDIA_OPERATION_MODE"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbFirmwareArray["FW_SECURE_BOOT"]) echo "selected='selected'"; ?>value="<?php echo $dbFirmwareArray["FW_SECURE_BOOT"] ?>"><?php echo $translations["SECURE_BOOT"]["NAME"] ?></option>
 						<option <?php if (isset($_POST["rdCriterion"]) && $_POST["rdCriterion"] == $dbFirmwareArray["FW_VIRTUALIZATION_TECHNOLOGY"]) echo "selected='selected'"; ?>value="<?php echo $dbFirmwareArray["FW_VIRTUALIZATION_TECHNOLOGY"] ?>"><?php echo $translations["VIRTUALIZATION_TECHNOLOGY"]["NAME"] ?></option>
@@ -188,11 +184,11 @@ if ($send != 1) {
 				if (!in_array(true, $devices)) {
 				?>
 					<th><a href="?orderBy=<?php echo $dbAssetArray["STANDARD"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["STANDARD"] ?></a></th>
-					<th><a href="?orderBy=<?php echo $dbHardwareArray["BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
+					<th><a href="?orderBy=<?php echo $dbHardwareArray["HW_BRAND"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["BRAND"] ?></a></th>
 				<?php
 				}
 				?>
-				<th><a href="?orderBy=<?php echo $dbHardwareArray["MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
+				<th><a href="?orderBy=<?php echo $dbHardwareArray["HW_MODEL"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["MODEL"] ?></a></td>
 					<?php
 					if (!in_array(true, $devices)) {
 					?>
@@ -200,7 +196,7 @@ if ($send != 1) {
 			<?php
 					}
 			?>
-			<th><a href="?orderBy=<?php echo $dbMaintenanceArray["SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
+			<th><a href="?orderBy=<?php echo $dbMaintenanceArray["MAIN_SERVICE_DATE"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_LAST_MAINTENANCE_DATE"] ?></a></th>
 			</thead>
 			<tbody>
 				<?php
@@ -211,10 +207,10 @@ if ($send != 1) {
 					$building = $result["ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . ")"];
 					$roomNumber = $result["ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . ")"];
 					$standard = $result["ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . ")"];
-					$brand = $result["ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . ")"];
-					$model = $result["ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . ")"];
+					$brand = $result["ANY_VALUE(t3." . $dbHardwareArray["HW_BRAND"] . ")"];
+					$model = $result["ANY_VALUE(t3." . $dbHardwareArray["HW_MODEL"] . ")"];
 					$ipAddress = $result["ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . ")"];
-					$serviceDate = $result["ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")"];
+					$serviceDate = $result["ANY_VALUE(t5." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ")"];
 
 					$formatDate = substr($serviceDate, 0, 10);
 					$explodedDate = explode("-", $formatDate);
@@ -268,10 +264,10 @@ if ($send != 1) {
 						$building = $result["ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . ")"];
 						$roomNumber = $result["ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . ")"];
 						$standard = $result["ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . ")"];
-						$brand = $result["ANY_VALUE(t3." . $dbHardwareArray["BRAND"] . ")"];
-						$model = $result["ANY_VALUE(t3." . $dbHardwareArray["MODEL"] . ")"];
+						$brand = $result["ANY_VALUE(t3." . $dbHardwareArray["HW_BRAND"] . ")"];
+						$model = $result["ANY_VALUE(t3." . $dbHardwareArray["HW_MODEL"] . ")"];
 						$ipAddress = $result["ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . ")"];
-						$serviceDate = $result["ANY_VALUE(t5." . $dbMaintenanceArray["SERVICE_DATE"] . ")"];
+						$serviceDate = $result["ANY_VALUE(t5." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ")"];
 
 						$formatDate = substr($serviceDate, 0, 10);
 						$explodedDate = explode("-", $formatDate);

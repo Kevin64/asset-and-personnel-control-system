@@ -28,19 +28,19 @@ if ($send != 1) {
 
 	$queryAssetFirmware = mysqli_query($connection, "select " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["FW_TYPE"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["FW_VERSION"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["FW_MEDIA_OPERATION_MODE"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["FW_SECURE_BOOT"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["FW_TPM_VERSION"] . ", " . $dbFirmwareArray["FIRMWARE_TABLE"] . "." . $dbFirmwareArray["FW_VIRTUALIZATION_TECHNOLOGY"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbFirmwareArray["FIRMWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbFirmwareArray["FIRMWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["BRAND"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["MODEL"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["TYPE"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["SERIAL_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbHardwareArray["HARDWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["HW_BRAND"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["HW_MODEL"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["HW_TYPE"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["HW_SERIAL_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbHardwareArray["HARDWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROCESSOR_ID"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROC_NAME"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROC_FREQUENCY"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROC_NUMBER_OF_CORES"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROC_NUMBER_OF_THREADS"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROC_CACHE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbProcessorArray["PROCESSOR_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbProcessorArray["PROCESSOR_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["AMOUNT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["FREQUENCY"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["MANUFACTURER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["SERIAL_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["PART_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["SLOT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["TYPE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbRamArray["RAM_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbRamArray["RAM_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_AMOUNT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_FREQUENCY"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_MANUFACTURER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_SERIAL_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_PART_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_SLOT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["RAM_TYPE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbRamArray["RAM_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbRamArray["RAM_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetStorage = mysqli_query($connection, "select " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STORAGE_ID"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["TYPE"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["SIZE"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["CONNECTION"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["MODEL"] . "," . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["SERIAL_NUMBER"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["SMART_STATUS"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbStorageArray["STORAGE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbStorageArray["STORAGE_TABLE"] . ".assetNumberFK order by " . $dbStorageArray["STORAGE_ID"]) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetStorage = mysqli_query($connection, "select " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_ID"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_TYPE"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_SIZE"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_CONNECTION"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_MODEL"] . "," . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_SERIAL_NUMBER"] . ", " . $dbStorageArray["STORAGE_TABLE"] . "." . $dbStorageArray["STOR_SMART_STATUS"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbStorageArray["STORAGE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbStorageArray["STORAGE_TABLE"] . ".assetNumberFK order by " . $dbStorageArray["STOR_ID"]) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetVideoCard = mysqli_query($connection, "select " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . "." . $dbVideoCardArray["GPU_ID"] . ", " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . "." . $dbVideoCardArray["NAME"] . ", " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . "." . $dbVideoCardArray["RAM"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . ".assetNumberFK order by " . $dbVideoCardArray["GPU_ID"]) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetVideoCard = mysqli_query($connection, "select " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . "." . $dbVideoCardArray["VC_ID"] . ", " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . "." . $dbVideoCardArray["VC_NAME"] . ", " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . "." . $dbVideoCardArray["VC_RAM"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbVideoCardArray["VIDEO_CARD_TABLE"] . ".assetNumberFK order by " . $dbVideoCardArray["VC_ID"]) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryAssetLocation = mysqli_query($connection, "select " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_BUILDING"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_DELIVERED_TO_REGISTRATION_NUMBER"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_LAST_DELIVERY_DATE"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_LAST_DELIVERY_MADE_BY"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_ROOM_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbLocationArray["LOCATION_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbLocationArray["LOCATION_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetMaintenances = mysqli_query($connection, "select " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["SERVICE_DATE"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["SERVICE_TYPE"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["BATTERY_CHANGE"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["TICKET_NUMBER"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["AGENT_ID"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetMaintenances = mysqli_query($connection, "select " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["MAIN_SERVICE_TYPE"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["MAIN_BATTERY_CHANGE"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["MAIN_TICKET_NUMBER"] . ", " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . "." . $dbMaintenanceArray["MAIN_AGENT_ID"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryAssetNetwork = mysqli_query($connection, "select " . $dbNetworkArray["NETWORK_TABLE"] . "." . $dbNetworkArray["NET_MAC_ADDRESS"] . ", " . $dbNetworkArray["NETWORK_TABLE"] . "." . $dbNetworkArray["NET_IP_ADDRESS"] . ", " . $dbNetworkArray["NETWORK_TABLE"] . "." . $dbNetworkArray["NET_HOSTNAME"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbNetworkArray["NETWORK_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbNetworkArray["NETWORK_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
@@ -212,13 +212,13 @@ if ($send != 1) {
 				<tbody>
 					<?php
 					while ($resultRam = mysqli_fetch_array($queryAssetRam)) {
-						$ramSlot = $resultRam[$dbRamArray["SLOT"]];
-						$ramType = $resultRam[$dbRamArray["TYPE"]];
-						$ramAmount = $resultRam[$dbRamArray["AMOUNT"]];
-						$ramFrequency = $resultRam[$dbRamArray["FREQUENCY"]];
-						$ramManufacturer = $resultRam[$dbRamArray["MANUFACTURER"]];
-						$ramSerialNumber = $resultRam[$dbRamArray["SERIAL_NUMBER"]];
-						$ramPartNumber = $resultRam[$dbRamArray["PART_NUMBER"]];
+						$ramSlot = $resultRam[$dbRamArray["RAM_SLOT"]];
+						$ramType = $resultRam[$dbRamArray["RAM_TYPE"]];
+						$ramAmount = $resultRam[$dbRamArray["RAM_AMOUNT"]];
+						$ramFrequency = $resultRam[$dbRamArray["RAM_FREQUENCY"]];
+						$ramManufacturer = $resultRam[$dbRamArray["RAM_MANUFACTURER"]];
+						$ramSerialNumber = $resultRam[$dbRamArray["RAM_SERIAL_NUMBER"]];
+						$ramPartNumber = $resultRam[$dbRamArray["RAM_PART_NUMBER"]];
 					?>
 						<tr id=bodyTable>
 							<td>
@@ -337,9 +337,9 @@ if ($send != 1) {
 				<tbody>
 					<?php
 					while ($resultVideoCard = mysqli_fetch_array($queryAssetVideoCard)) {
-						$videoCardId = $resultVideoCard[$dbVideoCardArray["GPU_ID"]];
-						$videoCardName = $resultVideoCard[$dbVideoCardArray["NAME"]];
-						$videoCardRam = $resultVideoCard[$dbVideoCardArray["RAM"]];
+						$videoCardId = $resultVideoCard[$dbVideoCardArray["VC_ID"]];
+						$videoCardName = $resultVideoCard[$dbVideoCardArray["VC_NAME"]];
+						$videoCardRam = $resultVideoCard[$dbVideoCardArray["VC_RAM"]];
 					?>
 						<tr id=bodyTable>
 							<td>
@@ -407,13 +407,13 @@ if ($send != 1) {
 				<tbody>
 					<?php
 					while ($resultStorage = mysqli_fetch_array($queryAssetStorage)) {
-						$storageConnection = $resultStorage[$dbStorageArray["CONNECTION"]];
-						$storageModel = $resultStorage[$dbStorageArray["MODEL"]];
-						$storageSerialNumber = $resultStorage[$dbStorageArray["SERIAL_NUMBER"]];
-						$storageSize = $resultStorage[$dbStorageArray["SIZE"]];
-						$storageSmartStatus = $resultStorage[$dbStorageArray["SMART_STATUS"]];
-						$storageStorageId = $resultStorage[$dbStorageArray["STORAGE_ID"]];
-						$storageType = $resultStorage[$dbStorageArray["TYPE"]];
+						$storageConnection = $resultStorage[$dbStorageArray["STOR_CONNECTION"]];
+						$storageModel = $resultStorage[$dbStorageArray["STOR_MODEL"]];
+						$storageSerialNumber = $resultStorage[$dbStorageArray["STOR_SERIAL_NUMBER"]];
+						$storageSize = $resultStorage[$dbStorageArray["STOR_SIZE"]];
+						$storageSmartStatus = $resultStorage[$dbStorageArray["STOR_SMART_STATUS"]];
+						$storageStorageId = $resultStorage[$dbStorageArray["STOR_ID"]];
+						$storageType = $resultStorage[$dbStorageArray["STOR_TYPE"]];
 					?>
 						<tr id=bodyTable>
 							<td>
@@ -661,11 +661,11 @@ if ($send != 1) {
 			<tbody>
 				<?php
 				while ($resultMaintenances = mysqli_fetch_array($queryAssetMaintenances)) {
-					$agentId = $resultMaintenances[$dbMaintenanceArray["AGENT_ID"]];
-					$batteryChange = $resultMaintenances[$dbMaintenanceArray["BATTERY_CHANGE"]];
-					$serviceDate = $resultMaintenances[$dbMaintenanceArray["SERVICE_DATE"]];
-					$serviceType = $resultMaintenances[$dbMaintenanceArray["SERVICE_TYPE"]];
-					$ticketNumber = $resultMaintenances[$dbMaintenanceArray["TICKET_NUMBER"]];
+					$agentId = $resultMaintenances[$dbMaintenanceArray["MAIN_AGENT_ID"]];
+					$batteryChange = $resultMaintenances[$dbMaintenanceArray["MAIN_BATTERY_CHANGE"]];
+					$serviceDate = $resultMaintenances[$dbMaintenanceArray["MAIN_SERVICE_DATE"]];
+					$serviceType = $resultMaintenances[$dbMaintenanceArray["MAIN_SERVICE_TYPE"]];
+					$ticketNumber = $resultMaintenances[$dbMaintenanceArray["MAIN_TICKET_NUMBER"]];
 				?>
 					<tr id=bodyTable>
 						<td>
@@ -808,10 +808,10 @@ if ($send != 1) {
 			</tr>
 			<?php
 			while ($resultHardware = mysqli_fetch_array($queryAssetHardware)) {
-				$brand = $resultHardware[$dbHardwareArray["BRAND"]];
-				$model = $resultHardware[$dbHardwareArray["MODEL"]];
-				$serialNumber = $resultHardware[$dbHardwareArray["SERIAL_NUMBER"]];
-				$hwType = $resultHardware[$dbHardwareArray["TYPE"]];
+				$brand = $resultHardware[$dbHardwareArray["HW_BRAND"]];
+				$model = $resultHardware[$dbHardwareArray["HW_MODEL"]];
+				$serialNumber = $resultHardware[$dbHardwareArray["HW_SERIAL_NUMBER"]];
+				$hwType = $resultHardware[$dbHardwareArray["HW_TYPE"]];
 			?>
 				<tr>
 					<td id=lblFixed><?php echo $translations["HW_TYPE"] ?></td>
