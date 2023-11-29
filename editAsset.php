@@ -29,7 +29,7 @@ if ($send != 1) {
 
 	$queryAsset = mysqli_query($connection, "select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset'") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetLocation = mysqli_query($connection, "select " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["BUILDING"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LAST_DELIVERY_DATE"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LAST_DELIVERY_MADE_BY"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["ROOM_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbLocationArray["LOCATION_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbLocationArray["LOCATION_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetLocation = mysqli_query($connection, "select " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_BUILDING"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_DELIVERED_TO_REGISTRATION_NUMBER"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_LAST_DELIVERY_DATE"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_LAST_DELIVERY_MADE_BY"] . ", " . $dbLocationArray["LOCATION_TABLE"] . "." . $dbLocationArray["LOC_ROOM_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbLocationArray["LOCATION_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbLocationArray["LOCATION_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 } else {
 	$idAsset = $_POST["txtIdAsset"];
 	$assetNumber = $_POST["txtAssetNumber"];
@@ -68,8 +68,8 @@ if ($send != 1) {
 
 		$queryAssetLocation = mysqli_query($connection, "update " . $dbLocationArray["LOCATION_TABLE"] . " set " .
 			$dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtAssetNumber"] . "', " .
-			$dbLocationArray["ROOM_NUMBER"] . " = '" . $_POST["txtRoomNumber"] . "', " .
-			$dbLocationArray["BUILDING"] . " = '" . $_POST["txtBuilding"] . "'
+			$dbLocationArray["LOC_ROOM_NUMBER"] . " = '" . $_POST["txtRoomNumber"] . "', " .
+			$dbLocationArray["LOC_BUILDING"] . " = '" . $_POST["txtBuilding"] . "'
 		where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtOldAssetNumber"] . "';
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
@@ -125,8 +125,8 @@ if ($send != 1) {
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 
 		$queryAssetLocation = mysqli_query($connection, "update " . $dbLocationArray["LOCATION_TABLE"] . " set " .
-			$dbLocationArray["ROOM_NUMBER"] . " = '" . $_POST["txtRoomNumber"] . "', " .
-			$dbLocationArray["BUILDING"] . " = '" . $_POST["txtBuilding"] . "'
+			$dbLocationArray["LOC_ROOM_NUMBER"] . " = '" . $_POST["txtRoomNumber"] . "', " .
+			$dbLocationArray["LOC_BUILDING"] . " = '" . $_POST["txtBuilding"] . "'
 		where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '" . $_POST["txtAssetNumber"] . "';
 		") or die($translations["ERROR_QUERY_UPDATE"] . mysqli_error($connection));
 	}
@@ -196,11 +196,11 @@ if ($send != 1) {
 				</tr>
 				<?php
 				while ($result = mysqli_fetch_array($queryAssetLocation)) {
-					$building = $result[$dbLocationArray["BUILDING"]];
-					$roomNumber = $result[$dbLocationArray["ROOM_NUMBER"]];
-					$deliveredToRegistrationNumber = $result[$dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"]];
-					$lastDeliveryDate = $result[$dbLocationArray["LAST_DELIVERY_DATE"]];
-					$lastDeliveryMadeBy = $result[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
+					$building = $result[$dbLocationArray["LOC_BUILDING"]];
+					$roomNumber = $result[$dbLocationArray["LOC_ROOM_NUMBER"]];
+					$deliveredToRegistrationNumber = $result[$dbLocationArray["LOC_DELIVERED_TO_REGISTRATION_NUMBER"]];
+					$lastDeliveryDate = $result[$dbLocationArray["LOC_LAST_DELIVERY_DATE"]];
+					$lastDeliveryMadeBy = $result[$dbLocationArray["LOC_LAST_DELIVERY_MADE_BY"]];
 				?>
 					<tr>
 						<td id=lblFixed><?php echo $translations["BUILDING"] ?><mark id=asterisk>*</mark></td>

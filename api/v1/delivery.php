@@ -25,9 +25,9 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			$assetNumberFK = $dbAssetArray["ASSET_NUMBER_FK"];
 
 			$locationTable = $dbLocationArray["LOCATION_TABLE"];
-			$deliveredToRegistrationNumber = $dbLocationArray["DELIVERED_TO_REGISTRATION_NUMBER"];
-			$lastDeliveryMadeBy = $dbLocationArray["LAST_DELIVERY_MADE_BY"];
-			$lastDeliveryDate = $dbLocationArray["LAST_DELIVERY_DATE"];
+			$deliveredToRegistrationNumber = $dbLocationArray["LOC_DELIVERED_TO_REGISTRATION_NUMBER"];
+			$lastDeliveryMadeBy = $dbLocationArray["LOC_LAST_DELIVERY_MADE_BY"];
+			$lastDeliveryDate = $dbLocationArray["LOC_LAST_DELIVERY_DATE"];
 
 			$assetJsonSection = $newAsset;
 			$locationJsonSection = $newAsset["location"];

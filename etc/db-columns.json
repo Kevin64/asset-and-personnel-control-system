@@ -17,12 +17,12 @@
         "DISCARDED": "discarded",
         "FIRMWARE": {
             "FIRMWARE_TABLE": "apcs_asset_firmware",
-            "MEDIA_OPERATION_MODE": "fwMediaOperationMode",
-            "SECURE_BOOT": "fwSecureBoot",
-            "TPM_VERSION": "fwTpmVersion",
-            "TYPE": "fwType",
-            "VERSION": "fwVersion",
-            "VIRTUALIZATION_TECHNOLOGY": "fwVirtualizationTechnology"
+            "FW_MEDIA_OPERATION_MODE": "fwMediaOperationMode",
+            "FW_SECURE_BOOT": "fwSecureBoot",
+            "FW_TPM_VERSION": "fwTpmVersion",
+            "FW_TYPE": "fwType",
+            "FW_VERSION": "fwVersion",
+            "FW_VIRTUALIZATION_TECHNOLOGY": "fwVirtualizationTechnology"
         },
         "HARDWARE": {
             "BRAND": "hwBrand",
@@ -31,11 +31,11 @@
             "PROCESSOR": {
                 "PROCESSOR_TABLE": "apcs_asset_processor",
                 "PROCESSOR_ID": "procId",
-                "NAME": "procName",
-                "FREQUENCY": "procFrequency",
-                "NUMBER_OF_CORES": "procNumberOfCores",
-                "NUMBER_OF_THREADS": "procNumberOfThreads",
-                "CACHE": "procCache"
+                "PROC_NAME": "procName",
+                "PROC_FREQUENCY": "procFrequency",
+                "PROC_NUMBER_OF_CORES": "procNumberOfCores",
+                "PROC_NUMBER_OF_THREADS": "procNumberOfThreads",
+                "PROC_CACHE": "procCache"
             },
             "RAM": {
                 "AMOUNT": "ramAmount",
@@ -68,12 +68,12 @@
         },
         "IN_USE": "inUse",
         "LOCATION": {
-            "BUILDING": "locBuilding",
-            "DELIVERED_TO_REGISTRATION_NUMBER": "locDeliveredToRegistrationNumber",
-            "LAST_DELIVERY_DATE": "locLastDeliveryDate",
-            "LAST_DELIVERY_MADE_BY": "locLastDeliveryMadeBy",
+            "LOC_BUILDING": "locBuilding",
+            "LOC_DELIVERED_TO_REGISTRATION_NUMBER": "locDeliveredToRegistrationNumber",
+            "LOC_LAST_DELIVERY_DATE": "locLastDeliveryDate",
+            "LOC_LAST_DELIVERY_MADE_BY": "locLastDeliveryMadeBy",
             "LOCATION_TABLE": "apcs_asset_location",
-            "ROOM_NUMBER": "locRoomNumber"
+            "LOC_ROOM_NUMBER": "locRoomNumber"
         },
         "MAINTENANCES": {
             "AGENT_ID": "mainAgentId",
@@ -84,18 +84,18 @@
             "TICKET_NUMBER": "mainTicketNumber"
         },
         "NETWORK": {
-            "HOSTNAME": "netHostname",
-            "IP_ADDRESS": "netIpAddress",
-            "MAC_ADDRESS": "netMacAddress",
+            "NET_HOSTNAME": "netHostname",
+            "NET_IP_ADDRESS": "netIpAddress",
+            "NET_MAC_ADDRESS": "netMacAddress",
             "NETWORK_TABLE": "apcs_asset_network"
         },
         "NOTE": "note",
         "OPERATING_SYSTEM": {
-            "ARCH": "osArch",
-            "BUILD": "osBuild",
-            "NAME": "osName",
+            "OS_ARCH": "osArch",
+            "OS_BUILD": "osBuild",
+            "OS_NAME": "osName",
             "OPERATING_SYSTEM_TABLE": "apcs_asset_operating_system",
-            "VERSION": "osVersion"
+            "OS_VERSION": "osVersion"
         },
         "ASSET_HASH": "assetHash",
         "HW_HASH": "hwHash",
