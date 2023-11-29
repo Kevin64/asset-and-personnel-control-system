@@ -175,7 +175,7 @@ if ($send != 1) {
 					}
 				}
 				?>
-				<th><a href="?orderBy=<?php echo $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET"] ?></a></th>
+				<th><a href="?orderBy=<?php echo $dbAssetArray["ASSET_NUMBER"] ?>&sort=<?php echo $sort; ?>"><?php echo $translations["SHORT_ASSET_NUMBER"] ?></a></th>
 				<?php
 				if (!in_array(true, $devices)) {
 				?>

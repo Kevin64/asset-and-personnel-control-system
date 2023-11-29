@@ -151,6 +151,7 @@ if ($send != 1) {
 			}
 		}
 		?>
+		<label id=asteriskWarning><?php echo $translations["ASTERISK_MARK_MANDATORY"] ?> (<mark id=asterisk>*</mark>)</label>
 		<table id="formFields">
 			<?php
 			while ($result = mysqli_fetch_array($queryAsset)) {
@@ -184,7 +185,7 @@ if ($send != 1) {
 				}
 				?>
 				<tr>
-					<td id=lblFixed><?php echo $translations["ASSET_NUMBER"] ?></td>
+					<td id=lblFixed><?php echo $translations["ASSET_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdAsset value="<?php echo $idAsset; ?>">
 					<input type=hidden name=txtOldAssetNumber value="<?php echo $oldAssetNumber; ?>">
 					<td colspan=5><input type=text name=txtAssetNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NUMBER"] ?>" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
@@ -202,7 +203,7 @@ if ($send != 1) {
 					$lastDeliveryMadeBy = $result[$dbLocationArray["LAST_DELIVERY_MADE_BY"]];
 				?>
 					<tr>
-						<td id=lblFixed><?php echo $translations["BUILDING"] ?></td>
+						<td id=lblFixed><?php echo $translations["BUILDING"] ?><mark id=asterisk>*</mark></td>
 						<td colspan=5>
 							<select id="formFields" name="txtBuilding" required>
 								<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -218,14 +219,14 @@ if ($send != 1) {
 						</td>
 					</tr>
 					<tr>
-						<td id=lblFixed><?php echo $translations["ASSET_ROOM"] ?></td>
+						<td id=lblFixed><?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark></td>
 						<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_ROOM_NUMBER"] ?>" maxlength="5" required value="<?php echo $roomNumber; ?>"></td>
 					</tr>
 				<?php
 				}
 				?>
 				<tr>
-					<td id=lblFixed><?php echo $translations["IN_USE"] ?></td>
+					<td id=lblFixed><?php echo $translations["IN_USE"] ?><mark id=asterisk>*</mark></td>
 					<td>
 						<select name="txtInUse">
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -237,7 +238,7 @@ if ($send != 1) {
 				</tr>
 
 				<tr>
-					<td id=lblFixed><?php echo $translations["TAG"] ?></td>
+					<td id=lblFixed><?php echo $translations["TAG"] ?><mark id=asterisk>*</mark></td>
 					<td>
 						<select name="txtTag">
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -247,7 +248,7 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["AD_REGISTERED"] ?></td>
+					<td id=lblFixed><?php echo $translations["AD_REGISTERED"] ?><mark id=asterisk>*</mark></td>
 					<td>
 						<select name="txtAdRegistered">
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>
@@ -261,7 +262,7 @@ if ($send != 1) {
 					</td>
 				</tr>
 				<tr>
-					<td id=lblFixed><?php echo $translations["STANDARD"] ?></td>
+					<td id=lblFixed><?php echo $translations["STANDARD"] ?><mark id=asterisk>*</mark></td>
 					<td colspan=5>
 						<select name="txtStandard">
 							<option disabled selected value> <?php echo $translations["SELECT_AN_OPTION"] ?> </option>

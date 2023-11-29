@@ -99,7 +99,7 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["BRAND"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtBrand placeholder="<?php echo $translations["PLACEHOLDER_MODEL_BRAND"] ?>" required value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td><input type=text name=txtBrand placeholder="<?php echo $translations["PLACEHOLDER_MODEL_BRAND"] ?>" required value="<?php echo $brand; ?>" <?php if ($brand == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["MODEL"] ?><mark id=asterisk>*</mark></td>
@@ -117,7 +117,7 @@ if ($send != 1) {
 					<td>
 						<?php
 						?>
-						<select name=txtFwType required <?php if ($fwType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
+						<select name=txtFwType required <?php if ($fwType == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>>
 							<?php
 							foreach ($fwTypesArray as $str1 => $str2) {
 							?>
@@ -131,7 +131,7 @@ if ($send != 1) {
 				<tr>
 					<td id=lblFixed><?php echo $translations["TPM_VERSION"] ?><mark id=asterisk>*</mark></td>
 					<td>
-						<select name=txtTpmVersion required <?php if ($tpmVersion == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
+						<select name=txtTpmVersion required <?php if ($tpmVersion == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>>
 							<?php
 							foreach ($tpmTypesArray as $str1 => $str2) {
 							?>
@@ -145,7 +145,7 @@ if ($send != 1) {
 				<tr>
 					<td id=lblFixed><?php echo $translations["MEDIA_OPERATION_MODE"] ?><mark id=asterisk>*</mark></td>
 					<td>
-						<select name=txtMediaOperationMode required <?php if ($mediaOperationMode == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
+						<select name=txtMediaOperationMode required <?php if ($mediaOperationMode == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>>
 							<?php
 							foreach ($mediaOpTypesArray as $str1 => $str2) {
 							?>

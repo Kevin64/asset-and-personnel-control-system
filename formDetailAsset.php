@@ -30,7 +30,7 @@ if ($send != 1) {
 
 	$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["BRAND"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["MODEL"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["TYPE"] . ", " . $dbHardwareArray["HARDWARE_TABLE"] . "." . $dbHardwareArray["SERIAL_NUMBER"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbHardwareArray["HARDWARE_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
-	$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["CPU_ID"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NAME"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["FREQUENCY"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NUMBER_OF_CORES"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NUMBER_OF_THREADS"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["CACHE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbProcessorArray["PROCESSOR_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbProcessorArray["PROCESSOR_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+	$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["PROCESSOR_ID"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NAME"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["FREQUENCY"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NUMBER_OF_CORES"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["NUMBER_OF_THREADS"] . ", " . $dbProcessorArray["PROCESSOR_TABLE"] . "." . $dbProcessorArray["CACHE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbProcessorArray["PROCESSOR_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbProcessorArray["PROCESSOR_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["AMOUNT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["FREQUENCY"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["MANUFACTURER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["SERIAL_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["PART_NUMBER"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["SLOT"] . ", " . $dbRamArray["RAM_TABLE"] . "." . $dbRamArray["TYPE"] . " from (select * from " . $dbAssetArray["ASSET_TABLE"] . " where id = '$idAsset') as a inner join " . $dbRamArray["RAM_TABLE"] . " on a." . $dbAssetArray["ASSET_NUMBER"] . " = " . $dbRamArray["RAM_TABLE"] . ".assetNumberFK") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
@@ -102,29 +102,29 @@ if ($send != 1) {
 				<thead id=headerTable>
 					<tr>
 						<th>
-							<?php echo $translations["CPU_ID"] ?>
+							<?php echo $translations["PROCESSOR_ID"] ?>
 						</th>
 						<th>
-							<?php echo $translations["CPU_NAME"] ?>
+							<?php echo $translations["PROCESSOR_NAME"] ?>
 						</th>
 						<th>
-							<?php echo $translations["CPU_FREQUENCY"] ?>
+							<?php echo $translations["PROCESSOR_FREQUENCY"] ?>
 						</th>
 						<th>
-							<?php echo $translations["CPU_NUMBER_OF_CORES"] ?>
+							<?php echo $translations["PROCESSOR_NUMBER_OF_CORES"] ?>
 						</th>
 						<th>
-							<?php echo $translations["CPU_NUMBER_OF_THREADS"] ?>
+							<?php echo $translations["PROCESSOR_NUMBER_OF_THREADS"] ?>
 						</th>
 						<th>
-							<?php echo $translations["CPU_CACHE"] ?>
+							<?php echo $translations["PROCESSOR_CACHE"] ?>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
 					while ($resultProcessor = mysqli_fetch_array($queryAssetProcessor)) {
-						$processorId = $resultProcessor[$dbProcessorArray["CPU_ID"]];
+						$processorId = $resultProcessor[$dbProcessorArray["PROCESSOR_ID"]];
 						$processorName = $resultProcessor[$dbProcessorArray["NAME"]];
 						$processorFrequency = $resultProcessor[$dbProcessorArray["FREQUENCY"]];
 						$processorCores = $resultProcessor[$dbProcessorArray["NUMBER_OF_CORES"]];

@@ -30,7 +30,7 @@
             "MODEL": "hwModel",
             "PROCESSOR": {
                 "PROCESSOR_TABLE": "apcs_asset_processor",
-                "CPU_ID": "procId",
+                "PROCESSOR_ID": "procId",
                 "NAME": "procName",
                 "FREQUENCY": "procFrequency",
                 "NUMBER_OF_CORES": "procNumberOfCores",

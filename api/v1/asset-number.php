@@ -25,7 +25,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 
 			$queryAssetHardware = mysqli_query($connection, "select " . $dbHardwareArray["BRAND"] . "," . $dbHardwareArray["MODEL"] . "," . $dbHardwareArray["SERIAL_NUMBER"] . "," . $dbHardwareArray["TYPE"] . " from " . $dbHardwareArray["HARDWARE_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber'") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
-			$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["CPU_ID"] . "," . $dbProcessorArray["NAME"] . "," . $dbProcessorArray["FREQUENCY"] . "," . $dbProcessorArray["NUMBER_OF_CORES"] . "," . $dbProcessorArray["NUMBER_OF_THREADS"] . "," . $dbProcessorArray["CACHE"] . " from " . $dbProcessorArray["PROCESSOR_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber' order by " . $dbProcessorArray["CPU_ID"] . " asc") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
+			$queryAssetProcessor = mysqli_query($connection, "select " . $dbProcessorArray["PROCESSOR_ID"] . "," . $dbProcessorArray["NAME"] . "," . $dbProcessorArray["FREQUENCY"] . "," . $dbProcessorArray["NUMBER_OF_CORES"] . "," . $dbProcessorArray["NUMBER_OF_THREADS"] . "," . $dbProcessorArray["CACHE"] . " from " . $dbProcessorArray["PROCESSOR_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber' order by " . $dbProcessorArray["PROCESSOR_ID"] . " asc") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
 			$queryAssetRam = mysqli_query($connection, "select " . $dbRamArray["AMOUNT"] . "," . $dbRamArray["FREQUENCY"] . "," . $dbRamArray["MANUFACTURER"] . "," . $dbRamArray["TYPE"] . "," . $dbRamArray["SERIAL_NUMBER"] . "," . $dbRamArray["PART_NUMBER"] . "," . $dbRamArray["SLOT"] . " from " . $dbRamArray["RAM_TABLE"] . " where " . $dbAssetArray["ASSET_NUMBER_FK"] . " = '$assetNumber' order by " . $dbRamArray["SLOT"] . " asc") or die($translations["ERROR_QUERY"] . mysqli_error($connection));
 
@@ -139,7 +139,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) && $_SERVER["HTTP_AUTHORIZATION"] != "
 			$hwType = $dbHardwareArray["TYPE"];
 
 			$processorTable = $dbProcessorArray["PROCESSOR_TABLE"];
-			$processorId = $dbProcessorArray["CPU_ID"];
+			$processorId = $dbProcessorArray["PROCESSOR_ID"];
 			$processorName = $dbProcessorArray["NAME"];
 			$processorFrequency = $dbProcessorArray["FREQUENCY"];
 			$processorCores = $dbProcessorArray["NUMBER_OF_CORES"];

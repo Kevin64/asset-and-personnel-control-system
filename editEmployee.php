@@ -97,7 +97,7 @@ if ($send != 1) {
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_TYPE"]["NAME"] ?><mark id=asterisk>*</mark></td>
 					<td>
-						<select name=txtEmployeeType required <?php if ($employeeType == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>>
+						<select name=txtEmployeeType required <?php if ($employeeType == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>>
 							<?php
 							foreach ($employeeTypesArray as $str1 => $str2) {
 							?>
@@ -110,11 +110,11 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_NAME"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtName required value="<?php echo $employeeName; ?>" <?php if ($employeeName == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td><input type=text name=txtName required value="<?php echo $employeeName; ?>" <?php if ($employeeName == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_EMAIL"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=email name=txtEmail required value="<?php echo $employeeEmail; ?>" <?php if ($employeeEmail == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td><input type=email name=txtEmail required value="<?php echo $employeeEmail; ?>" <?php if ($employeeEmail == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_PHONE_EXTENSION"] ?></td>
@@ -122,11 +122,11 @@ if ($send != 1) {
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_PHONE_NUMBER"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtPhoneNumber minLength=11 maxLength=11 required value="<?php echo $employeePhoneNumber; ?>" <?php if ($employeePhoneNumber == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td><input type=text name=txtPhoneNumber minLength=11 maxLength=11 required value="<?php echo $employeePhoneNumber; ?>" <?php if ($employeePhoneNumber == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_SECTOR"] ?><mark id=asterisk>*</mark></td>
-					<td><input type=text name=txtSector required value="<?php echo $employeeSector; ?>" <?php if ($employeeSector == "") { ?> style="background:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>;color:<?php echo $colorArray["MISSING_DATA_FOREGROUND"] ?>" <?php } ?>></td>
+					<td><input type=text name=txtSector required value="<?php echo $employeeSector; ?>" <?php if ($employeeSector == "") { ?> style="background:var(--missing-data-background);color:var(--missing-data-foreground)" <?php } ?>></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["EMPLOYEE_ROOM"] ?></td>

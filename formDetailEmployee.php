@@ -113,7 +113,7 @@ if ($send != 1) {
 					<?php
 					if ($employeeRegistrationNumber == "" || $employeeType == null || $employeeName == "" || $employeeEmail == "" || $employeePhoneNumber == "" || $employeeSector == "") {
 					?>
-						<td colspan=3 style=color:<?php echo $colorArray["MISSING_DATA_BACKGROUND"] ?>><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
+						<td colspan=3 style=color:var(--missing-data-background)><br><?php echo "<h4>" . $translations["FILL_DATA_BEFORE_CONTINUE"] ?></br></td>
 					<?php
 					} else {
 					?>

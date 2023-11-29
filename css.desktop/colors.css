@@ -49,6 +49,8 @@
     --light-subtle-darkcolor: #2f4f4f;
     --light-table-header: rgb(25, 81, 133);
     --light-table-header-forecolor: white;
+    --missing-data-background: darkred;
+    --missing-data-foreground: white;
     --non-operational-forecolor: firebrick;
     --not-in-use-forecolor: red;
     --operational-forecolor: rgb(0, 120, 215);
