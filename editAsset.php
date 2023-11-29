@@ -188,11 +188,11 @@ if ($send != 1) {
 					<td id=lblFixed><?php echo $translations["ASSET_NUMBER"] ?><mark id=asterisk>*</mark></td>
 					<input type=hidden name=txtIdAsset value="<?php echo $idAsset; ?>">
 					<input type=hidden name=txtOldAssetNumber value="<?php echo $oldAssetNumber; ?>">
-					<td colspan=5><input type=text name=txtAssetNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NUMBER"] ?>" maxlength="6" required value="<?php echo $assetNumber; ?>"></td>
+					<td colspan=5><input type=text name=txtAssetNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_NUMBER"] ?>" maxlength=<?php echo $assetNumberDigitLimit; ?> required value="<?php echo $assetNumber; ?>"></td>
 				</tr>
 				<tr>
 					<td id=lblFixed><?php echo $translations["SEAL_NUMBER"] ?></td>
-					<td><input type="text" name="txtSealNumber" value="<?php echo $sealNumber; ?>"></td>
+					<td><input type="text" name="txtSealNumber" maxlength=<?php echo $sealNumberDigitLimit; ?> value="<?php echo $sealNumber; ?>"></td>
 				</tr>
 				<?php
 				while ($result = mysqli_fetch_array($queryAssetLocation)) {
@@ -220,7 +220,7 @@ if ($send != 1) {
 					</tr>
 					<tr>
 						<td id=lblFixed><?php echo $translations["ASSET_ROOM"] ?><mark id=asterisk>*</mark></td>
-						<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_ROOM_NUMBER"] ?>" maxlength="5" required value="<?php echo $roomNumber; ?>"></td>
+						<td colspan=5><input id="formFields" type=text name=txtRoomNumber placeholder="<?php echo $translations["PLACEHOLDER_ASSET_ROOM_NUMBER"] ?>" maxlength=<?php echo $roomNumberDigitLimit; ?> required value="<?php echo $roomNumber; ?>"></td>
 					</tr>
 				<?php
 				}

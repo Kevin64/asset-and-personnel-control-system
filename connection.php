@@ -33,6 +33,9 @@ $storageTypesArray = $json_states_and_types_array["StatesAndTypes"]["StorageType
 $connectionTypesArray = $json_states_and_types_array["StatesAndTypes"]["StorageConnectionTypes"];
 $ramTypesArray = $json_states_and_types_array["StatesAndTypes"]["RamTypes"];
 /* ------------------------------------------------------------------------------------------------- */
+$assetNumberDigitLimit = $json_parameters_array["Parameters"]["AssetNumberDigitLimit"];
+$sealNumberDigitLimit = $json_parameters_array["Parameters"]["SealNumberDigitLimit"];
+$roomNumberDigitLimit = $json_parameters_array["Parameters"]["RoomNumberDigitLimit"];
 $buildingArray = $json_parameters_array["Parameters"]["Buildings"];
 $hwTypesArray = $json_parameters_array["Parameters"]["HardwareTypes"];
 $serviceTypesArray = $json_parameters_array["Parameters"]["ServiceTypes"];
