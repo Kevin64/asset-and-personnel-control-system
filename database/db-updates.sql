@@ -1,4 +1,4 @@
-CREATE TABLE `apcsdb_old`.`apcs_asset_processor` (
+CREATE TABLE `apcsdb`.`apcs_asset_processor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `procId` TINYINT NULL DEFAULT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_processor` (
   `procCache` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_ram` (
+CREATE TABLE `apcsdb`.`apcs_asset_ram` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `ramAmount` BIGINT NULL DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_ram` (
   `ramSlot` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_operating_system` (
+CREATE TABLE `apcsdb`.`apcs_asset_operating_system` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `osName` VARCHAR(100) NULL DEFAULT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_operating_system` (
   `osArch` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-  CREATE TABLE `apcsdb_old`.`apcs_asset_firmware` (
+  CREATE TABLE `apcsdb`.`apcs_asset_firmware` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `fwType` TINYINT NULL DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_operating_system` (
   `fwTpmVersion` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_location` (
+CREATE TABLE `apcsdb`.`apcs_asset_location` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `locBuilding` TINYINT NULL DEFAULT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_location` (
   `locLastDeliveryDate` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_video_card` (
+CREATE TABLE `apcsdb`.`apcs_asset_video_card` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `vcId` TINYINT NULL DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_video_card` (
   `vcRam` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_hardware` (
+CREATE TABLE `apcsdb`.`apcs_asset_hardware` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `hwBrand` VARCHAR(100) NULL DEFAULT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_hardware` (
   `hwSerialNumber` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_network` (
+CREATE TABLE `apcsdb`.`apcs_asset_network` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `netMacAddress` VARCHAR(18) NULL DEFAULT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_network` (
   `netHostname` VARCHAR(30) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `apcsdb_old`.`apcs_asset_storage` (
+CREATE TABLE `apcsdb`.`apcs_asset_storage` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assetNumberFK` INT NULL DEFAULT NULL,
   `storId` TINYINT NULL DEFAULT NULL,
@@ -88,30 +88,30 @@ CREATE TABLE `apcsdb_old`.`apcs_asset_storage` (
   `storSmartStatus` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
 
-ALTER TABLE `apcsdb_old`.`asset` 
-RENAME TO  `apcsdb_old`.`apcs_asset` ;
+ALTER TABLE `apcsdb`.`asset` 
+RENAME TO  `apcsdb`.`apcs_asset` ;
 
-ALTER TABLE `apcsdb_old`.`agent` 
-RENAME TO  `apcsdb_old`.`apcs_agent` ;
+ALTER TABLE `apcsdb`.`agent` 
+RENAME TO  `apcsdb`.`apcs_agent` ;
 
-ALTER TABLE `apcsdb_old`.`employee` 
-RENAME TO  `apcsdb_old`.`apcs_employee` ;
+ALTER TABLE `apcsdb`.`employee` 
+RENAME TO  `apcsdb`.`apcs_employee` ;
 
-ALTER TABLE `apcsdb_old`.`model` 
-RENAME TO  `apcsdb_old`.`apcs_model` ;
+ALTER TABLE `apcsdb`.`model` 
+RENAME TO  `apcsdb`.`apcs_model` ;
 
-ALTER TABLE `apcsdb_old`.`maintenances` 
-RENAME TO  `apcsdb_old`.`apcs_asset_maintenances` ;
+ALTER TABLE `apcsdb`.`maintenances` 
+RENAME TO  `apcsdb`.`apcs_asset_maintenances` ;
 
-ALTER TABLE `apcsdb_old`.`apcs_agent` 
+ALTER TABLE `apcsdb`.`apcs_agent` 
 ADD COLUMN `name` VARCHAR(45) NULL DEFAULT NULL AFTER `password`,
 ADD COLUMN `surname` VARCHAR(45) NULL DEFAULT NULL AFTER `name`;
 
-ALTER TABLE `apcsdb_old`.`apcs_asset` 
+ALTER TABLE `apcsdb`.`apcs_asset` 
 ADD COLUMN `assetHash` VARCHAR(64) NULL DEFAULT NULL AFTER `note`,
 ADD COLUMN `hwHash` VARCHAR(64) NULL DEFAULT NULL AFTER `assethash`;
 
-ALTER TABLE `apcsdb_old`.`apcs_asset_maintenances` 
+ALTER TABLE `apcsdb`.`apcs_asset_maintenances` 
 CHANGE COLUMN `previousServiceDates` `mainServiceDate` VARCHAR(10) NULL DEFAULT NULL ,
 CHANGE COLUMN `serviceType` `mainServiceType` TINYINT NULL DEFAULT NULL ,
 CHANGE COLUMN `batteryChange` `mainBatteryChange` TINYINT NULL DEFAULT NULL ,
@@ -120,40 +120,40 @@ CHANGE COLUMN `agentId` `mainAgentId` INT NULL DEFAULT NULL ;
 --------------------------------------------------------
 SET SQL_SAFE_UPDATES=0;
 #--------------------------------------------------------------------------------------------#
-insert into apcsdb_old.apcs_asset_hardware (`assetNumberFK`,`hwBrand`,`hwModel`,`hwType`,`hwSerialNumber`) select `assetNumber`,`brand`,`model`,`hwType`,`serialNumber` from apcsdb_old.apcs_asset;
+insert into apcsdb.apcs_asset_hardware (`assetNumberFK`,`hwBrand`,`hwModel`,`hwType`,`hwSerialNumber`) select `assetNumber`,`brand`,`model`,`hwType`,`serialNumber` from apcsdb.apcs_asset;
 #--------------------------------------------------------------------------------------------#
-insert into apcsdb_old.apcs_asset_firmware (`assetNumberFK`,`fwType`,`fwVersion`,`fwMediaOperationMode`,`fwSecureBoot`,`fwVirtualizationTechnology`,`fwTpmVersion`) select `assetNumber`,`fwType`,`fwVersion`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion` from apcsdb_old.apcs_asset;
+insert into apcsdb.apcs_asset_firmware (`assetNumberFK`,`fwType`,`fwVersion`,`fwMediaOperationMode`,`fwSecureBoot`,`fwVirtualizationTechnology`,`fwTpmVersion`) select `assetNumber`,`fwType`,`fwVersion`,`mediaOperationMode`,`secureBoot`,`virtualizationTechnology`,`tpmVersion` from apcsdb.apcs_asset;
 #--------------------------------------------------------------------------------------------#
-insert into apcsdb_old.apcs_asset_location (`assetNumberFK`,`locBuilding`,`locRoomNumber`,`locDeliveredToRegistrationNumber`,`locLastDeliveryMadeBy`,`locLastDeliveryDate`) select `assetNumber`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate` from apcsdb_old.apcs_asset;
+insert into apcsdb.apcs_asset_location (`assetNumberFK`,`locBuilding`,`locRoomNumber`,`locDeliveredToRegistrationNumber`,`locLastDeliveryMadeBy`,`locLastDeliveryDate`) select `assetNumber`,`building`,`roomNumber`,`deliveredToRegistrationNumber`,`lastDeliveryMadeBy`,`lastDeliveryDate` from apcsdb.apcs_asset;
 #--------------------------------------------------------------------------------------------#
-#insert into apcsdb_old.apcs_asset_maintenances (`assetNumberFK`,`mainServiceDate`,`mainServiceType`,`mainBatteryChange`,`mainTicketNumber`,`mainAgentId`) select `assetNumberFK`,`previousServiceDates`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId` from apcsdb_old.apcs_maintenances;
+#insert into apcsdb.apcs_asset_maintenances (`assetNumberFK`,`mainServiceDate`,`mainServiceType`,`mainBatteryChange`,`mainTicketNumber`,`mainAgentId`) select `assetNumberFK`,`previousServiceDates`,`serviceType`,`batteryChange`,`ticketNumber`,`agentId` from apcsdb.apcs_maintenances;
 #--------------------------------------------------------------------------------------------#
-insert into apcsdb_old.apcs_asset_network (`assetNumberFK`,`netMacAddress`,`netIpAddress`,`netHostname`) select `assetNumber`,`macAddress`,`ipAddress`,`hostname` from apcsdb_old.apcs_asset;
+insert into apcsdb.apcs_asset_network (`assetNumberFK`,`netMacAddress`,`netIpAddress`,`netHostname`) select `assetNumber`,`macAddress`,`ipAddress`,`hostname` from apcsdb.apcs_asset;
 #--------------------------------------------------------------------------------------------#
-insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'0' FROM apcs_asset WHERE operatingSystem LIKE '%32 bits';
-insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'0' FROM apcs_asset WHERE operatingSystem LIKE '%86)';
-insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'1' FROM apcs_asset WHERE operatingSystem LIKE '%64 bits';
-insert IGNORE into apcsdb_old.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'1' FROM apcs_asset WHERE operatingSystem LIKE '%64)';
+insert IGNORE into apcsdb.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'0' FROM apcs_asset WHERE operatingSystem LIKE '%32 bits';
+insert IGNORE into apcsdb.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'0' FROM apcs_asset WHERE operatingSystem LIKE '%86)';
+insert IGNORE into apcsdb.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'1' FROM apcs_asset WHERE operatingSystem LIKE '%64 bits';
+insert IGNORE into apcsdb.apcs_asset_operating_system (`assetNumberFK`,`osName`,`osBuild`,`osVersion`,`osArch`) SELECT `assetNumber`,SUBSTRING_INDEX(`operatingSystem`, ',', 1), substring_index(substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 3),'build ', -1), ' ', 1), substring_index(SUBSTRING_INDEX(`operatingSystem`, ',', 2),'v', -1),'1' FROM apcs_asset WHERE operatingSystem LIKE '%64)';
 #--------------------------------------------------------------------------------------------#
-insert IGNORE into apcsdb_old.apcs_asset_processor (`assetNumberFK`,`procId`,`procName`,`procFrequency`,`procNumberOfCores`,`procNumberOfThreads`) SELECT `assetNumber`, '0',`processor`, cast(substring_index(SUBSTRING_INDEX(`processor`, ' MHz', 1),' ', -1) as unsigned), cast(substring_index(SUBSTRING_INDEX(`processor`, 'C/', 1),'(', -1) as unsigned), cast(substring_index(SUBSTRING_INDEX(`processor`, 'T)', 1),'/', -1) as unsigned) FROM `apcsdb_old`.`apcs_asset`;
+insert IGNORE into apcsdb.apcs_asset_processor (`assetNumberFK`,`procId`,`procName`,`procFrequency`,`procNumberOfCores`,`procNumberOfThreads`) SELECT `assetNumber`, '0',`processor`, cast(substring_index(SUBSTRING_INDEX(`processor`, ' MHz', 1),' ', -1) as unsigned), cast(substring_index(SUBSTRING_INDEX(`processor`, 'C/', 1),'(', -1) as unsigned), cast(substring_index(SUBSTRING_INDEX(`processor`, 'T)', 1),'/', -1) as unsigned) FROM `apcsdb`.`apcs_asset`;
 #--------------------------------------------------------------------------------------------#
-insert IGNORE into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`ramAmount`,`ramType`,`ramFrequency`,`ramSlot`) select `assetNumber`, substring_index(`ram`, ' ', 1), '24', substring_index(substring_index(`ram`, 'MHz', 1), ' ', -1), '0' from apcsdb_old.apcs_asset where `ram` like '%DDR3%';
-insert IGNORE into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`ramAmount`,`ramType`,`ramFrequency`,`ramSlot`) select `assetNumber`, substring_index(`ram`, ' ', 1), '22', substring_index(substring_index(`ram`, 'MHz', 1), ' ', -1), '0' from apcsdb_old.apcs_asset where `ram` like '%DDR2%';
-insert IGNORE into apcsdb_old.apcs_asset_ram (`assetNumberFK`,`ramAmount`,`ramType`,`ramFrequency`,`ramSlot`) select `assetNumber`, substring_index(`ram`, ' ', 1), '26', substring_index(substring_index(`ram`, 'MHz', 1), ' ', -1), '0' from apcsdb_old.apcs_asset where `ram` like '%DDR4%';
-update apcsdb_old.apcs_asset_ram set ramAmount = ramAmount * 1073741824;
+insert IGNORE into apcsdb.apcs_asset_ram (`assetNumberFK`,`ramAmount`,`ramType`,`ramFrequency`,`ramSlot`) select `assetNumber`, substring_index(`ram`, ' ', 1), '24', substring_index(substring_index(`ram`, 'MHz', 1), ' ', -1), '0' from apcsdb.apcs_asset where `ram` like '%DDR3%';
+insert IGNORE into apcsdb.apcs_asset_ram (`assetNumberFK`,`ramAmount`,`ramType`,`ramFrequency`,`ramSlot`) select `assetNumber`, substring_index(`ram`, ' ', 1), '22', substring_index(substring_index(`ram`, 'MHz', 1), ' ', -1), '0' from apcsdb.apcs_asset where `ram` like '%DDR2%';
+insert IGNORE into apcsdb.apcs_asset_ram (`assetNumberFK`,`ramAmount`,`ramType`,`ramFrequency`,`ramSlot`) select `assetNumber`, substring_index(`ram`, ' ', 1), '26', substring_index(substring_index(`ram`, 'MHz', 1), ' ', -1), '0' from apcsdb.apcs_asset where `ram` like '%DDR4%';
+update apcsdb.apcs_asset_ram set ramAmount = ramAmount * 1073741824;
 #--------------------------------------------------------------------------------------------#
-insert IGNORE into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`vcName`,`vcId`,`vcRam`) SELECT `assetNumber`, `videoCard`, '0', substring_index(substring_index(SUBSTRING_INDEX(`videoCard`, '%B)', 1),'(', -1), ' ', 1) FROM `apcsdb_old`.`apcs_asset` WHERE videoCard LIKE '%GB)';
-update apcsdb_old.apcs_asset_video_card set vcRam = vcRam * 1073741824 WHERE `vcName` LIKE '%GB)';
-insert IGNORE into apcsdb_old.apcs_asset_video_card (`assetNumberFK`,`vcName`,`vcId`,`vcRam`) SELECT `assetNumber`, `videoCard`, '0', substring_index(substring_index(SUBSTRING_INDEX(`videoCard`, '%B)', 1),'(', -1), ' ', 1) FROM `apcsdb_old`.`apcs_asset` WHERE videoCard LIKE '%MB)';
-update apcsdb_old.apcs_asset_video_card set vcRam = vcRam * 1048576 WHERE `vcName` LIKE '%MB)';
+insert IGNORE into apcsdb.apcs_asset_video_card (`assetNumberFK`,`vcName`,`vcId`,`vcRam`) SELECT `assetNumber`, `videoCard`, '0', substring_index(substring_index(SUBSTRING_INDEX(`videoCard`, '%B)', 1),'(', -1), ' ', 1) FROM `apcsdb`.`apcs_asset` WHERE videoCard LIKE '%GB)';
+update apcsdb.apcs_asset_video_card set vcRam = vcRam * 1073741824 WHERE `vcName` LIKE '%GB)';
+insert IGNORE into apcsdb.apcs_asset_video_card (`assetNumberFK`,`vcName`,`vcId`,`vcRam`) SELECT `assetNumber`, `videoCard`, '0', substring_index(substring_index(SUBSTRING_INDEX(`videoCard`, '%B)', 1),'(', -1), ' ', 1) FROM `apcsdb`.`apcs_asset` WHERE videoCard LIKE '%MB)';
+update apcsdb.apcs_asset_video_card set vcRam = vcRam * 1048576 WHERE `vcName` LIKE '%MB)';
 #--------------------------------------------------------------------------------------------#
-insert IGNORE into apcsdb_old.apcs_asset_storage (`assetNumberFK`,`storSize`,`storSmartStatus`,`storId`) select `assetNumber`, replace(substring_index(`storageSize`,' ', 1), ',', '.')*1000000000000.0,'0','0' from apcsdb_old.apcs_asset WHERE `storageSize` like '%,%';
-insert IGNORE into apcsdb_old.apcs_asset_storage (`assetNumberFK`,`storSize`,`storSmartStatus`,`storId`) select `assetNumber`, replace(substring_index(`storageSize`,' ', 1), ',', '.')*1000000000,'0','0' from apcsdb_old.apcs_asset WHERE `storageSize` not like '%,%' and `storageSize` not like '%1 %' and `storageSize` not like '%2 %' and `storageSize` not like '%3 %' and `storageSize` not like '%4 %';
+insert IGNORE into apcsdb.apcs_asset_storage (`assetNumberFK`,`storSize`,`storSmartStatus`,`storId`) select `assetNumber`, replace(substring_index(`storageSize`,' ', 1), ',', '.')*1000000000000.0,'0','0' from apcsdb.apcs_asset WHERE `storageSize` like '%,%';
+insert IGNORE into apcsdb.apcs_asset_storage (`assetNumberFK`,`storSize`,`storSmartStatus`,`storId`) select `assetNumber`, replace(substring_index(`storageSize`,' ', 1), ',', '.')*1000000000,'0','0' from apcsdb.apcs_asset WHERE `storageSize` not like '%,%' and `storageSize` not like '%1 %' and `storageSize` not like '%2 %' and `storageSize` not like '%3 %' and `storageSize` not like '%4 %';
 
 
 SET SQL_SAFE_UPDATES=1;
 
-ALTER TABLE `apcsdb_old`.`apcs_asset` 
+ALTER TABLE `apcsdb`.`apcs_asset` 
 DROP COLUMN `tpmVersion`,
 DROP COLUMN `virtualizationTechnology`,
 DROP COLUMN `secureBoot`,
