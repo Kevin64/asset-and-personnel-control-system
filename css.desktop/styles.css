@@ -138,9 +138,9 @@ table {
 }
 
 #section-header {
+	font-size: larger;
 	font-weight: bold;
 	text-align: center;
-	font-size: larger;
 }
 
 #h-separator {

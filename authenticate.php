@@ -26,10 +26,9 @@ if ($verifyPassword) {
 			$_SESSION["username"] = $username;
 			$_SESSION["privilegeLevel"] = $privilegeLevel;
 			mysqli_query($connection, "update " . $dbAgentArray["AGENTS_TABLE"] . " set " . $dbAgentArray["LAST_LOGIN_DATE"] . " = '$lastLoginDate' where " . $dbAgentArray["USERNAME"] . " = '$username'") or die($translations["ERROR_CHANGE_AGENT_STATUS"] . mysqli_error($connection));
-	
+
 			header("Location: index.php");
-		}
-		else {
+		} else {
 			header("Location: denied.php");
 		}
 	} else {

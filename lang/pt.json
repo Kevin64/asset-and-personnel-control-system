@@ -104,6 +104,7 @@
     "ERROR_UPDATE_PASSWORD": "Erro ao alterar senha!",
     "FILL_DATA_BEFORE_CONTINUE": "Completar dados cadastrais antes de continuar!",
     "FIRMWARE": "Firmware",
+    "FIRST_SETUP": "APCS - Criação de usuário administrador",
     "FIXED_PROCESSOR_LIST": "Lista de processadores",
     "FIXED_RAM_LIST": "Lista de módulos de RAM",
     "FIXED_STORAGE_MEDIA_LIST": "Lista de dispositivos de armazenamento fixas",

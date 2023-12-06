@@ -104,6 +104,7 @@
     "ERROR_UPDATE_PASSWORD": "Error changing password!",
     "FILL_DATA_BEFORE_CONTINUE": "Complete registration data before continuing!",
     "FIRMWARE": "Firmware",
+    "FIRST_SETUP": "APCS - Administrator user creation",
     "FIXED_PROCESSOR_LIST": "Processor list",
     "FIXED_RAM_LIST": "RAM module list",
     "FIXED_STORAGE_MEDIA_LIST": "Fixed storage devices list",

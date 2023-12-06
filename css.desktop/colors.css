@@ -27,7 +27,6 @@
     --erase-button-forecolor: red;
     --erase-button-hover-backcolor: darkred;
     --error-forecolor: red;
-    --success-forecolor: rgb(31, 170, 31);
     --in-use-forecolor: green;
     --light-asterisk-warning: darkblue;
     --light-backcolor: rgb(248, 248, 248);
@@ -58,6 +57,7 @@
     --search-button-forecolor: orange;
     --search-button-hover-backcolor: darkorange;
     --shadow-forecolor: black;
+    --success-forecolor: rgb(31, 170, 31);
     --update-available-forecolor: CornflowerBlue;
     --updated-forecolor: lime;
 }

@@ -7,5 +7,3 @@ if (isset($_SESSION) && $_SESSION != null) {
 	$release = $client->api('repo')->releases()->latest($json_constants_array["GITHUB_REPO_OWNER"], $json_constants_array["GITHUB_REPO_NAME"]);
 	$gitHubVersion = substr($release["tag_name"], 1);
 }
-
-?>

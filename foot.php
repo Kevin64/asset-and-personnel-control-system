@@ -8,17 +8,17 @@ require_once("connection.php");
 	<div id="foot-up" style="font-size:14px;display:grid;grid-template-columns: 1fr 1fr 1fr;">
 		<?php if ($orgFullName != "") { ?>
 			<div style="text-align:center">
-			<?php if ($orgURL != "") { ?><a href=<?php echo $orgURL ?> target="_blank" style="text-decoration:none;color:white"><?php } ?><?php echo $orgFullName . " " ?><?php if ($orgURL != "") { ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"><?php } ?></a>
+				<?php if ($orgURL != "") { ?><a href=<?php echo $orgURL ?> target="_blank" style="text-decoration:none;color:white"><?php } ?><?php echo $orgFullName . " " ?><?php if ($orgURL != "") { ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"><?php } ?></a>
 			</div>
 		<?php } ?>
 		<?php if ($depFullName != "") { ?>
 			<div>
-			<?php if ($depURL != "") { ?><a href=<?php echo $depURL ?> target="_blank" style="text-decoration:none;color:white"><?php } ?><?php echo $depFullName . " " ?><?php if ($depURL != "") { ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"><?php } ?></a>
+				<?php if ($depURL != "") { ?><a href=<?php echo $depURL ?> target="_blank" style="text-decoration:none;color:white"><?php } ?><?php echo $depFullName . " " ?><?php if ($depURL != "") { ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"><?php } ?></a>
 			</div>
 		<?php } ?>
 		<?php if ($subDepFullName != "") { ?>
 			<div>
-			<?php if ($subURL != "") { ?><a href=<?php echo $subURL ?> target="_blank" style="text-decoration:none;color:white"><?php } ?><?php echo $subDepFullName . " " ?><?php if ($subURL != "") { ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"><?php } ?></a>
+				<?php if ($subURL != "") { ?><a href=<?php echo $subURL ?> target="_blank" style="text-decoration:none;color:white"><?php } ?><?php echo $subDepFullName . " " ?><?php if ($subURL != "") { ?><img src="<?php echo $imgArray["OPEN_LINK"] ?>" width="13" height="13"><?php } ?></a>
 			</div>
 		<?php } ?>
 	</div>

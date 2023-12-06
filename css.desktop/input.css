@@ -5,8 +5,8 @@
 	option,
 	textarea {
 		background-color: var(--light-input-backcolor);
-		color: var(--light-input-forecolor);
 		box-shadow: 0px 0px 10px var(--light-box-shadow);
+		color: var(--light-input-forecolor);
 		transition: all .3s ease-in-out;
 	}
 
@@ -41,8 +41,8 @@
 	option,
 	textarea {
 		background-color: var(--dark-input-backcolor);
-		color: var(--dark-input-forecolor);
 		box-shadow: 0px 0px 10px var(--dark-box-shadow);
+		color: var(--dark-input-forecolor);
 		transition: all .3s ease-in-out;
 	}
 

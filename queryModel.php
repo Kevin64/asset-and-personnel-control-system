@@ -123,12 +123,12 @@ $totalRooms = mysqli_num_rows($query);
 								<td><?php echo $tpmTypesArray[$tpmVersion];
 								} else { ?>
 								<td style="background:var(--missing-data-background);color:var(--missing-data-foreground)"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
-																																									} ?></td>
+																														} ?></td>
 								<?php if (isset($tpmTypesArray[$tpmVersion])) { ?>
 									<td><?php echo $mediaOpTypesArray[$mediaOperationMode];
 									} else { ?>
 									<td style="background:var(--missing-data-background);color:var(--missing-data-foreground)"><?php echo $translations["INCOMPLETE_REGISTRATION_DATA"];
-																																										} ?></td>
+																															} ?></td>
 								<?php
 							}
 								?>

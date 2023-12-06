@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
+if (isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
 	$language = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
 	$lang_file = '/lang/' . $language . '.json';
 	$lang_file_content = file_get_contents(__DIR__ . $lang_file);
@@ -39,6 +39,8 @@ $roomNumberDigitLimit = $json_parameters_array["Parameters"]["RoomNumberDigitLim
 $buildingArray = $json_parameters_array["Parameters"]["Buildings"];
 $hwTypesArray = $json_parameters_array["Parameters"]["HardwareTypes"];
 $serviceTypesArray = $json_parameters_array["Parameters"]["ServiceTypes"];
+
+asort($buildingArray);
 /* ------------------------------------------------------------------------------------------------- */
 $orgDataArray = $json_config_array_db["OrgData"];
 $dbSettingsArray = $json_config_array_db["DbSettings"];
@@ -76,7 +78,7 @@ $email = $orgDataArray["Email"];
 $phoneNumber = $orgDataArray["Phone"];
 $location = $orgDataArray["LocationCoordinates"];
 
-$location = str_replace(",","%2C",$location);
+$location = str_replace(",", "%2C", $location);
 
 $dbUser = $dbSettingsArray["DbUser"];
 $dbpassword = $dbSettingsArray["DbPassword"];

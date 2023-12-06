@@ -47,9 +47,7 @@ $devices = array($android, $iphone, $ipad);
 	}
 	?>
 	<meta charset="utf-8">
-	<title>.:: <?php echo $translations["APCS"] ?> ::.</title>
-	<link href="<?php echo $imgArray["FAVICON_LIGHT_MODE"] ?>" rel="icon" media="(prefers-color-scheme: light)" type="image/png" />
-	<link href="<?php echo $imgArray["FAVICON_DARK_MODE"] ?>" rel="icon" media="(prefers-color-scheme: dark)" type="image/png" />
+	<title>.:: <?php echo $translations["FIRST_SETUP"] ?> ::.</title>
 </head>
 
 <body>
