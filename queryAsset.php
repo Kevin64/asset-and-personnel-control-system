@@ -28,7 +28,7 @@ if (isset($_POST["radioSearch"]))
 	$search = $_POST["radioSearch"];
 
 if ($orderBy == "")
-	$orderBy = "serviceDate";
+	$orderBy = "mainServiceDate";
 
 if (isset($sort) and $sort == "desc") {
 	$sort = "asc";
@@ -42,13 +42,13 @@ if ($send != 1) {
 			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2
 			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3
 			inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4
-			inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on
+			inner join (select distinct * from " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc) as t5 on
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
-			order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc;";
+			order by ANY_VALUE(" . $orderBy . ") " . $sort . ";";
 	$queryActive = mysqli_query($connection, $s) or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$queryDiscarded = mysqli_query($connection, "select ANY_VALUE(t1.id), ANY_VALUE(t1." . $dbAssetArray["ASSET_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["DISCARDED"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_BUILDING"] . "), ANY_VALUE(t2." . $dbLocationArray["LOC_ROOM_NUMBER"] . "), ANY_VALUE(t1." . $dbAssetArray["STANDARD"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_BRAND"] . "), ANY_VALUE(t3." . $dbHardwareArray["HW_MODEL"] . "), ANY_VALUE(t4." . $dbNetworkArray["NET_IP_ADDRESS"] . "), ANY_VALUE(t5." . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ")
@@ -56,13 +56,13 @@ if ($send != 1) {
 			inner join " . $dbLocationArray["LOCATION_TABLE"] . " as t2
 			inner join " . $dbHardwareArray["HARDWARE_TABLE"] . " as t3
 			inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4
-			inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on
+			inner join (select distinct * from " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc) as t5 on
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t2." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . " AND
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 			group by t1." . $dbAssetArray["ASSET_NUMBER"] . "
-			order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc;") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
+			order by ANY_VALUE(" . $orderBy . ") " . $sort . ";") or die($translations["ERROR_SHOW_DETAIL_ASSET"] . mysqli_error($connection));
 
 	$totalActive = mysqli_num_rows($queryActive);
 	$totalDiscarded = mysqli_num_rows($queryDiscarded);
@@ -75,7 +75,7 @@ if ($send != 1) {
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t3." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 			inner join " . $dbNetworkArray["NETWORK_TABLE"] . " as t4 on
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t4." . $dbAssetArray["ASSET_NUMBER_FK"] . "
-			inner join " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " as t5 on
+			inner join (select distinct * from " . $dbMaintenanceArray["MAINTENANCE_TABLE"] . " order by ANY_VALUE(" . $dbMaintenanceArray["MAIN_SERVICE_DATE"] . ") desc) as t5 on
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t5." . $dbAssetArray["ASSET_NUMBER_FK"] . "
 			inner join " . $dbFirmwareArray["FIRMWARE_TABLE"] . " as t6 on
 				t1." . $dbAssetArray["ASSET_NUMBER"] . " = t6." . $dbAssetArray["ASSET_NUMBER_FK"] . "
