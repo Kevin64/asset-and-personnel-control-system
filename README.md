@@ -1,6 +1,6 @@
 # Asset and Personnel Control System (APCS)
 
-The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) software for all its features to work properly.
+APCS proposes a simplified management of computers assets (hardware details and maintenance services performed) and personnel for small organizations. Developed using PHP, MySQL, HTML5, CSS3 and Javascript/jQuery. The computer asset registration part must be used in conjunction with [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) software for all its features to work properly.
 
 ## Requirements
 
@@ -11,7 +11,7 @@ The APCS system proposes a simplified management of IT assets and personnel for 
 
 ## Installation
 
-The following instructions will be using Apache as the web server in a Debian-based Linux host. After you install and configure the required software, follow the steps below.
+The following instructions will be using Apache as the web server in a Debian-based Linux host. After you install and configure the required software (PHP and MySQL), follow the steps below.
 1. Download the [latest release](https://github.com/Kevin64/asset-and-personnel-control-system/releases/latest) package into a folder (e.g. Downloads).
 2. Open the terminal and type:
 ```bash
@@ -48,7 +48,7 @@ $ sudo systemctl restart apache2
 ```bash
 $ sudo nano /var/www/apcs/etc/db-config.json
 ```
-6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The fields `HostnamePattern`, `AssetNumberDigitLimit`, `SealNumberDigitLimit`, `RoomNumberDigitLimit`, `TicketNumberDigitLimit` and `DeliveryRegistrationNumberDigitLimit` are self-explanatory and its values will be used by APCS and by [AIR](https://github.com/Kevin64/asset-information-and-registration) to apply particular business rules:
+6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The fields `HostnamePattern`, `AssetNumberDigitLimit`, `SealNumberDigitLimit`, `RoomNumberDigitLimit`, `TicketNumberDigitLimit` and `DeliveryRegistrationNumberDigitLimit` are self-explanatory and you can modify its values according to your business rules. These values will be used by APCS and by [AIR](https://github.com/Kevin64/asset-information-and-registration). More details are included in the file:
 ```bash
 $ sudo nano /var/www/apcs/etc/parameters.json
 ```
@@ -58,3 +58,5 @@ $ sudo nano /var/www/apcs/etc/parameters.json
 $ sudo rm -r /var/www/apcs/setup
 ```
 9. Your system is ready to use. Type `http://localhost/index.php` in the address bar, to start using it.
+
+<!--IMPORTANT: [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) use HTTP Basic Authentication to communicate with APCS. It is strongly recommended to use SSL certificates for encryption, specially for external use.-->
