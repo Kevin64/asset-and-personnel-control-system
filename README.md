@@ -48,7 +48,7 @@ $ sudo systemctl restart apache2
 ```bash
 $ sudo nano /var/www/apcs/etc/db-config.json
 ```
-6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The values for `HostnamePattern`, `AssetNumberDigitLimit`, `SealNumberDigitLimit`, `RoomNumberDigitLimit`, `TicketNumberDigitLimit` and `DeliveryRegistrationNumberDigitLimit` are self-explanatory and will be used by APCS and by [AIR](https://github.com/Kevin64/asset-information-and-registration) to apply particular business rules:
+6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The fields `HostnamePattern`, `AssetNumberDigitLimit`, `SealNumberDigitLimit`, `RoomNumberDigitLimit`, `TicketNumberDigitLimit` and `DeliveryRegistrationNumberDigitLimit` are self-explanatory and its values will be used by APCS and by [AIR](https://github.com/Kevin64/asset-information-and-registration) to apply particular business rules:
 ```bash
 $ sudo nano /var/www/apcs/etc/parameters.json
 ```
