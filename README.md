@@ -1,12 +1,12 @@
 # Asset and Personnel Control System (APCS)
 
-The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP 8, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with the [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) software for all its features to work properly.
+The APCS system proposes a simplified management of IT assets and personnel for small organizations. Developed using PHP, MySQL, HTML5, CSS3 and Javascript/jQuery. This system must be used in conjunction with [AIR](https://github.com/Kevin64/asset-information-and-registration) and [FOP](https://github.com/Kevin64/features-overlay-presentation) software for all its features to work properly.
 
 ## Requirements
 
 - **Host OS:** Linux or Windows
 - **Web Server:** Apache or IIS
-- **PHP version:** 8.1 (with MySQLi extension installed)
+- **PHP version:** 8.2 (with MySQLi extension installed)
 - **MySQL version:** 8.0
 
 ## Installation
@@ -48,17 +48,13 @@ $ sudo systemctl restart apache2
 ```bash
 $ sudo nano /var/www/apcs/etc/db-config.json
 ```
-6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The default values for `FirmwareTypes`, `TpmTypes`, `MediaOperationTypes`, `SecureBootStates`, `VirtualizationTechnologyStates` and `ServiceType` cover a good chunk of real world possibilities, and it is not recommended changing it, because [AIR](https://github.com/Kevin64/asset-information-and-registration) depends on these values:
+6. Modify the `parameters.json` file, entering your `Buildings` list and `HardwareTypes` list. The values for `HostnamePattern`, `AssetNumberDigitLimit`, `SealNumberDigitLimit`, `RoomNumberDigitLimit`, `TicketNumberDigitLimit` and `DeliveryRegistrationNumberDigitLimit` are self-explanatory and will be used by APCS and by [AIR](https://github.com/Kevin64/asset-information-and-registration) to apply particular business rules:
 ```bash
 $ sudo nano /var/www/apcs/etc/parameters.json
 ```
-7. Set permissions for `/var/www/apcs/output`, allowing [AIR](https://github.com/Kevin64/asset-information-and-registration) to generate JSON files:
-```bash
-$ sudo chmod 777 /var/www/apcs/output/
-```
-8. Open your browser and type `http://localhost/setup/setup.php` in the address bar, to create the first administrator user.
-9. After the admin creation, delete the `setup` folder:
+7. Open your browser and type `http://localhost/setup/setup.php` in the address bar, to create the first administrator user.
+8. After the admin creation, delete the `setup` folder:
 ```bash
 $ sudo rm -r /var/www/apcs/setup
 ```
-10. Your system is ready to use. Type `http://localhost/index.php` in the address bar, to start using it.
+9. Your system is ready to use. Type `http://localhost/index.php` in the address bar, to start using it.
