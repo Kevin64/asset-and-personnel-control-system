@@ -245,6 +245,8 @@ if ($send != 1) {
 									echo $ramTypesArray[1];
 								} else if ($ramType == "-2") {
 									echo $ramTypesArray[0];
+								} else {
+									echo $ramTypesArray[1];
 								}
 								?>
 							</td>
