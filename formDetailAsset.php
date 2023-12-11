@@ -336,6 +336,7 @@ if ($send != 1) {
 				</thead>
 				<tbody>
 					<?php
+					$videoCard = null;
 					while ($resultVideoCard = mysqli_fetch_array($queryAssetVideoCard)) {
 						$videoCardId = $resultVideoCard[$dbVideoCardArray["VC_ID"]];
 						$videoCardName = $resultVideoCard[$dbVideoCardArray["VC_NAME"]];
@@ -345,26 +346,26 @@ if ($send != 1) {
 							<td>
 								<?php
 								echo $videoCardId;
-								if ($videoCardId == "0") {
+								if ($videocard == null) {
 									$videoCard = $videoCardName;
-								}
 								?>
 							</td>
 							<td>
 								<?php
-								echo $videoCardName;
+									echo $videoCardName;
 								?>
 							</td>
 							<td>
-								<?php
-								if ($videoCardRam / 1024 / 1024 / 1024 >= 1024) {
-									echo floor($videoCardRam / 1024 / 1024 / 1024 / 1024) . " TB";
-								} else if ($videoCardRam / 1024 / 1024 / 1024 < 1024 && $videoCardRam / 1024 / 1024 / 1024 >= 1) {
-									echo floor($videoCardRam / 1024 / 1024 / 1024) . " GB";
-								} else {
-									echo floor($videoCardRam / 1024 / 1024) . " MB";
+							<?php
+									if ($videoCardRam / 1024 / 1024 / 1024 >= 1024) {
+										echo floor($videoCardRam / 1024 / 1024 / 1024 / 1024) . " TB";
+									} else if ($videoCardRam / 1024 / 1024 / 1024 < 1024 && $videoCardRam / 1024 / 1024 / 1024 >= 1) {
+										echo floor($videoCardRam / 1024 / 1024 / 1024) . " GB";
+									} else {
+										echo floor($videoCardRam / 1024 / 1024) . " MB";
+									}
 								}
-								?>
+							?>
 							</td>
 						</tr>
 					<?php
